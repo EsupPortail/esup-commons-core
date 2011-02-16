@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.esupportail</groupId>
+		<artifactId>esup-commons2-jsf-parent</artifactId>
+		<version>0.2.3-SNAPSHOT</version>
+	</parent>
+	<artifactId>esup-commons2-jsf-primeFaces</artifactId>
+	<packaging>pom</packaging>
+	<version>0.2.3-SNAPSHOT</version>
+	<name>esup-commons-jsf-primeFaces</name>
+	<url>http://maven.apache.org</url>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Technology Maven Repository</name>
+			<url>http://repository.prime.com.tr</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.esupportail</groupId>
+			<artifactId>esup-commons2-jsf</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
+</project>

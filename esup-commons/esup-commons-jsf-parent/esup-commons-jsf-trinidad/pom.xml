@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.esupportail</groupId>
+		<artifactId>esup-commons2-jsf-parent</artifactId>
+		<version>0.2.3-SNAPSHOT</version>
+	</parent>
+	<groupId>org.esupportail</groupId>
+	<artifactId>esup-commons2-jsf-trinidad</artifactId>
+	<packaging>pom</packaging>
+	<version>0.3.0-SNAPSHOT</version>
+	<name>esup-commons2-jsf-trinidad</name>
+	<description>Artifact pour esup-commons-jsf-trinidad
+	</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.myfaces.trinidad
+			</groupId>
+			<artifactId>trinidad-impl</artifactId>
+			<version>1.2.14</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.core</groupId>
+			<artifactId>myfaces-impl</artifactId>
+			<version>1.2.9</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.myfaces.shared</groupId>
+			<artifactId>myfaces-shared-tomahawk</artifactId>
+			<version>4.0.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+</project>
