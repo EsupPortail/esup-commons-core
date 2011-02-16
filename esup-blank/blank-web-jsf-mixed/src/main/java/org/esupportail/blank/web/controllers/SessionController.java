@@ -192,6 +192,7 @@ public class SessionController implements Serializable, InitializingBean {
 						}
 					}
 				}
+				return currentUser;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
