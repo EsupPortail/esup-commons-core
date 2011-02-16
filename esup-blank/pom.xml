@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.esupportail</groupId>
+	<artifactId>esup-blank</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>esup-blank</name>
+	<description>An Blank Application with JSF 1.2 and Trinidad librairy</description>
+	<repositories>
+		<repository>
+			<id>esup-snapshots</id>
+			<url>https://mvn.esup-portail.org/content/repositories/snapshots</url>
+			<snapshots>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>esup</id>
+			<url>https://mvn.esup-portail.org/content/repositories/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+			</releases>
+		</repository>
+	</repositories>
+	<modules>
+		<module>blank-web-jsf-mixed</module>
+		<module>blank-domain-beans</module>
+		<module>blank-domain-services</module>
+	</modules>
+</project>
