@@ -23,6 +23,7 @@ public class User implements Serializable {
 	/**
 	 * For Sorting.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Comparator<User> ORDER_DISPLAYNAME = new Comparator() {
 		public int compare(Object o1, Object o2) {
 			return ((User) o1).getDisplayName().compareTo(
