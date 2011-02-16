@@ -9,10 +9,10 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
-	<artifactId>example-web-jsf-mobi</artifactId>
+	<artifactId>example-web-jsf-mobile</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>example-web-jsf-mobi</name>
+	<name>example-web-jsf-mobile</name>
 	<url>http://maven.apache.org</url>
 	<repositories>
 		<repository>
