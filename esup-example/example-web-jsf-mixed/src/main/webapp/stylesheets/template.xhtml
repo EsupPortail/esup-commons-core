@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:e="http://commons.esup-portail.org">
+<ui:composition template="/stylesheets/simpleTemplate.xhtml">
+	<ui:define name="allContent">
+		<t:div id="principalContent" styleClass="app-tabs">
+			<h:form id="tabForm" style="margin:0; padding:0;">
+				<ui:repeat value="#{treatmentController.treatments}" var="m">
+					<h:commandLink action="#{treatmentController.action}"
+						styleClass="app-tab-inactive" immediate="true"
+						rendered="#{m != treatmentController.treatmentCurrent}"
+						value="#{m.label}">
+						<f:setPropertyActionListener value="#{m}"
+							target="#{treatmentController.treatmentCurrent}" />
+					</h:commandLink>
+					<t:outputText styleClass="app-tab-active"
+						rendered="#{m == treatmentController.treatmentCurrent}"
+						value="#{m.label}" />
+				</ui:repeat>
+			</h:form>
+			<t:div styleClass="app-tab-content">
+				<t:htmlTag value="br" />
+				<ui:insert name="content" />
+			</t:div>
+		</t:div>
+		<t:div style="clear:both;" />
+	</ui:define>
+</ui:composition>
+</html>

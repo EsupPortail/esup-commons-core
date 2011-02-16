@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>esup-example</artifactId>
+		<groupId>org.esupportail</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>org.esupportail</groupId>
+	<artifactId>example-web-jsf-servlet</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>example-web-jsf-servlet</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.esupportail</groupId>
+			<artifactId>example-web-jsf-shared</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.esupportail</groupId>
+			<artifactId>esup-commons2-web</artifactId>
+			<version>${esupcommons.version}</version>
+		</dependency>
+	</dependencies>
+	<properties>
+		<deploy.type>servlet</deploy.type>
+		<cas.url>https://sso-cas.univ-rennes1.fr</cas.url>
+		<tomcat.host>localhost</tomcat.host>
+		<tomcat.port.string>:8080</tomcat.port.string>
+		<log.level>INFO</log.level>
+		<log.output>stdout</log.output>
+		<log.file>/tmp/esup-blank.log</log.file>
+		<cache.path>/tmp/esup-blank</cache.path>
+	</properties>
+</project>

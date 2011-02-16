@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+<f:view locale="#{sessionController.locale}">
+	<t:htmlTag value="head">
+		<title><h:outputText value="#{applicationService.name}" /></title>
+		<ui:repeat value="#{tagsConfigurator.stylesheets}" var="path">
+			<t:stylesheet path="#{path}" />
+		</ui:repeat>
+		<ui:repeat value="#{tagsConfigurator.scripts}" var="path">
+			<script type="text/javascript" src="#{path}" />
+		</ui:repeat>
+	</t:htmlTag>
+	<t:htmlTag value="body" styleClass="fl-theme-app">
+		<ui:include src="_include/_header.xhtml" />
+		<t:div id="welcomepages">
+			<t:div id="navigationHeader" styleClass="app-pagebar">
+				<h:form id="nav_header" styleClass="app-form" />
+			</t:div>
+			<t:div styleClass="app-body">
+				<t:div styleClass="app-navigation">
+				</t:div>
+				<t:div styleClass="app-content">
+					<t:htmlTag value="br" />
+					<ui:insert name="allContent" />
+				</t:div>
+				<t:div style="clear:both;" />
+			</t:div>
+			<t:div id="navigationFooter"
+				styleClass="fl-container-flex app-pagebar">
+				<h:form id="nav_footer" styleClass="app-form" />
+			</t:div>
+		</t:div>
+		<t:div styleClass="app-footer">
+			<h:outputText value="#{applicationService.name} " />
+			<h:outputText value="v#{applicationService.version} - " />
+			<h:outputText value="#{applicationService.copyright}" />
+		</t:div>
+	</t:htmlTag>
+</f:view>
+
+</html>
