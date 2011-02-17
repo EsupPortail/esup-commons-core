@@ -26,7 +26,6 @@
 		</property>
 		<property name="logLevel" value="${exceptionHandling.logLevel}" />
 		<property name="cacheManager" ref="cacheManager" />
-		<property name="cacheName" value="" />
 	</bean>
 	
 
