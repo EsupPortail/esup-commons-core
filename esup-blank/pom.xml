@@ -46,6 +46,7 @@
 		<module>blank-domain-services</module>
 		<module>blank-web-jsf-mixed</module>
 		<module>blank-web-jsf-servlet</module>
+		<module>blank-web-jsf-mobile</module>
 	</modules>
 	<build>
 		<defaultGoal>javadoc:javadoc</defaultGoal>
