@@ -11,8 +11,6 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<maven.compiler.source>1.5</maven.compiler.source>
-		<maven.compiler.target>1.5</maven.compiler.target>
 		<misc.version>0.1.0</misc.version>
 		<portlet.name>EsupBlankPortlet</portlet.name>
 	</properties>
