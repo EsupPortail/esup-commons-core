@@ -24,23 +24,6 @@
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	<aop:config>
-		<aop:pointcut id="daoMethods"
-			expression="execution(* org.esupportail.*.dao.JPADaoServiceImpl.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoMethods" />
-	</aop:config>
-
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="*" propagation="SUPPORTS" read-only="true"/>
-		</tx:attributes>
-	</tx:advice>
-	
-
-
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>

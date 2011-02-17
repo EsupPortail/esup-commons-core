@@ -7,24 +7,16 @@
 
 	<bean id="authenticator" lazy-init="true"
 		class="org.esupportail.example.services.authentication.AuthenticatorImpl">
-		<!-- 
 		<property name="authenticationService" ref="${auth.bean}" />
-		 -->
-		<property name="authenticationService" ref="OfflineFixedUserAuthenticationService" />
 	</bean>
 
-	<bean id="servletAuthenticationService" lazy-init="true"
+	<bean id="casAuthenticationService" lazy-init="true"
 		class="org.esupportail.commons.services.authentication.CasFilterAuthenticationService">
-	</bean>
-
-	<bean id="portletAuthenticationService" lazy-init="true"
-		class="org.esupportail.commons.services.authentication.CasifiedPortalAuthenticationService">
-		<property name="uidPortalAttribute" value="${auth.portal.uidAttribute}" />
 	</bean>
 
 	<bean id="OfflineFixedUserAuthenticationService"
 		class="org.esupportail.commons.services.authentication.OfflineFixedUserAuthenticationService">
-		<property name="authId" value="bourges" />
+		<property name="authId" value="loginUserOffline" />
 		<property name="authType" value="cas" />
 	</bean>
 

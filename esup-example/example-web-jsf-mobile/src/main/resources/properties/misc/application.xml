@@ -24,7 +24,7 @@
     		developers. This bean should implement interface 
     		org.esupportail.commons.services.application.ApplicationService.
     	</description>
-    	<property name="name" value="esup-example">
+    	<property name="name" value="esup-example-mobile">
 	    	<description>
 	    		The name of the application.
 	    	</description>
