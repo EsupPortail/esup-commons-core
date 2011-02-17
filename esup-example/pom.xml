@@ -87,9 +87,12 @@
 				<version>2.8</version>
 				<configuration>
 					<useProjectReferences>true</useProjectReferences>
-					<!-- PROBLEME SIGNE = DANS URL <additionalConfig> <file> <name>.checkstyle</name> 
-						<url>http://sourcesup.cru.fr/cgi/viewvc.cgi/trunk/esup-commons/utils/checkstyle/checkstyle.xml?root=esup-commons&view=co</url> 
-						</file> </additionalConfig> -->
+					<additionalConfig>
+						<file>
+							<name>.checkstyle</name>
+							<url>http://subversion.cru.fr/esup-commons/utils/checkstyle/checkstyle.xml</url>
+						</file>
+					</additionalConfig>
 					<additionalProjectFacets>
 						<jst.jsf>1.2</jst.jsf>
 					</additionalProjectFacets>
