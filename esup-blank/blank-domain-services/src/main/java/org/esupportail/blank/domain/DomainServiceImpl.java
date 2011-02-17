@@ -12,7 +12,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @author Yves Deschamps (Université de Lille 1) - 2010
+ * @author Yves Deschamps (Universitï¿½ de Lille 1) - 2010
  * 
  */
 public class DomainServiceImpl implements DomainService, InitializingBean {
@@ -22,11 +22,13 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 */
 	private static final long serialVersionUID = 5562208937407153456L;
 
-	@SuppressWarnings("unused")
+	/**
+	 * 
+	 */
 	private final Logger logger = new LoggerImpl(this.getClass());
 
-	// En l'absence de Dao et de Ldap, on constitue ici une liste... limitée de
-	// fait à l'utilisateur courant.
+	// En l'absence de Dao et de Ldap, on constitue ici une liste... limitï¿½e de
+	// fait ï¿½ l'utilisateur courant.
 	private List<User> users;
 
 	/**
@@ -58,7 +60,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		if (user == null) {
 			user = new User();
 			user.setId(uid);
-			// On crée l'utilisateur, son nom complet prend la valeur de l'Uid.
+			// On crï¿½e l'utilisateur, son nom complet prend la valeur de l'Uid.
 			user.setDisplayName(uid);
 			user.setLanguage("fr");
 			user.setAccessibilityMode("default");

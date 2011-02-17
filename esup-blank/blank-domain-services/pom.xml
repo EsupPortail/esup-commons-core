@@ -16,14 +16,12 @@
   		<artifactId>blank-domain-beans</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<type>jar</type>
-  		<scope>compile</scope>
   	</dependency>
   	<dependency>
   		<groupId>org.esupportail</groupId>
   		<artifactId>esup-commons2-auth</artifactId>
   		<version>0.2.2</version>
   		<type>jar</type>
-  		<scope>compile</scope>
   	</dependency>
   </dependencies>
 </project>
