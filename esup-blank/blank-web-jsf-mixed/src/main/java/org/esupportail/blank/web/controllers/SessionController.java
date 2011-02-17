@@ -51,8 +51,6 @@ public class SessionController extends AbstractDomainAwareBean implements
 
 	private String fromAction;
 
-	// private DomainService domainService;
-
 	private Authenticator authenticator;
 
 	private boolean modeDetected;
