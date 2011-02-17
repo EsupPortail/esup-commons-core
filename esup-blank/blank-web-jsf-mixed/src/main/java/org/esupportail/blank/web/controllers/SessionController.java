@@ -13,18 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.myfaces.trinidad.util.ExternalContextUtils;
-import org.esupportail.blank.domain.DomainService;
 import org.esupportail.blank.domain.beans.User;
 import org.esupportail.blank.services.auth.Authenticator;
-import org.esupportail.commons.services.i18n.I18nUtils;
+import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.strings.StringUtils;
+import org.esupportail.commons.web.controllers.ExceptionController;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author Yves Deschamps (Université de Lille 1) - 2010
  * 
  */
-public class SessionController implements Serializable, InitializingBean {
+public class SessionController extends AbstractDomainAwareBean implements
+		Serializable, InitializingBean {
 
 	/**
 	 * For Serialize.
@@ -32,6 +33,15 @@ public class SessionController implements Serializable, InitializingBean {
 	private static final long serialVersionUID = 6725001881639400299L;
 
 	private final Logger logger = Logger.getLogger(this.getClass());
+
+	/**
+	 * The exception controller (called when logging in/out).
+	 */
+	private ExceptionController exceptionController;
+
+	public void setExceptionController(ExceptionController exceptionController) {
+		this.exceptionController = exceptionController;
+	}
 
 	private String version;
 
@@ -41,7 +51,7 @@ public class SessionController implements Serializable, InitializingBean {
 
 	private String fromAction;
 
-	private DomainService domainService;
+	// private DomainService domainService;
 
 	private Authenticator authenticator;
 
@@ -50,10 +60,6 @@ public class SessionController implements Serializable, InitializingBean {
 	private boolean portletMode;
 
 	private String lastUserUid;
-
-	private String defaultLocale;
-
-	private String locale = defaultLocale;
 
 	private String accessibilityMode = "default";
 
@@ -70,36 +76,23 @@ public class SessionController implements Serializable, InitializingBean {
 	}
 
 	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+	 * @see org.esupportail.example.web.controllers.AbstractDomainAwareBean#afterPropertiesSetInternal()
 	 */
-	public void afterPropertiesSet() throws Exception {
-		String[] args = {"", this.getClass().getName()};
-		if (this.version == null) {
-			args[0] = "version";
-		}
-		if (this.site == null) {
-			args[0] = "site";
-		}
-		if (this.domainService == null) {
-			args[0] = "domainService";
-		}
-		if (this.authenticator == null) {
-			args[0] = "authenticator";
-		}
-		if (this.defaultLocale == null) {
-			args[0] = "defaultLocale";
-		}
-		if (this.casLogoutUrl == null) {
-			args[0] = "casLogoutUrl";
-		}
-		if (!args[0].equals("")) {
-			throw new Exception(I18nUtils.createI18nService()
-					.getString("CONFIG_EXCEPTION.TITLE", args));
-
-		}
+	@Override
+	public void afterPropertiesSet() {
+		Assert.notNull(this.exceptionController,
+				"property exceptionController of class "
+						+ this.getClass().getName() + " can not be null");
+		Assert.notNull(this.authenticator, "property authenticator of class "
+				+ this.getClass().getName() + " can not be null");
+		Assert.notNull(this.version, "property version of class "
+				+ this.getClass().getName() + " can not be null");
+		Assert.notNull(this.site, "property site of class "
+				+ this.getClass().getName() + " can not be null");
 	}
 
 	/**
+	 * 
 	 * @return the version
 	 */
 	public String getVersion() {
@@ -148,15 +141,14 @@ public class SessionController implements Serializable, InitializingBean {
 		this.reset();
 	}
 
-	private void reset() {
-		action = null;
-		fromAction = null;
-	}
+	/*
+	 * private void reset() { action = null; fromAction = null; }
+	 */
 
 	/**
 	 * @return the current user, null if guest.
-	 * @throws Exception 
-	 * @throws Exception 
+	 * @throws Exception
+	 * @throws Exception
 	 */
 	public User getCurrentUser() {
 		if (isPortletMode()) {
@@ -171,7 +163,7 @@ public class SessionController implements Serializable, InitializingBean {
 					lastUserUid = uid;
 				}
 			}
-			return domainService.getUser(uid);
+			return getDomainService().getUser(uid);
 		}
 		User authUser;
 		try {
@@ -180,7 +172,7 @@ public class SessionController implements Serializable, InitializingBean {
 			if (authUser != null) {
 				// for updating
 				String uid = authUser.getId();
-				currentUser = domainService.getUser(uid);
+				currentUser = getDomainService().getUser(uid);
 				if (currentUser != null) {
 					if (lastUserUid == null) {
 						lastUserUid = uid;
@@ -201,12 +193,11 @@ public class SessionController implements Serializable, InitializingBean {
 		return null;
 	}
 
-	/**
-	 * @param domainService
-	 *            the domainService to set
-	 */
-	public void setDomainService(DomainService domainService) {
-		this.domainService = domainService;
+	@Override
+	public void reset() {
+		action = null;
+		fromAction = null;
+		super.reset();
 	}
 
 	/**
@@ -249,7 +240,7 @@ public class SessionController implements Serializable, InitializingBean {
 
 	/**
 	 * @return true if login button is enable.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean isLoginEnable() throws Exception {
 		if (isPortletMode()) {
@@ -260,7 +251,7 @@ public class SessionController implements Serializable, InitializingBean {
 
 	/**
 	 * @return true if login button is enable.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public boolean isLogoutEnable() throws Exception {
 		if (isPortletMode()) {
@@ -271,21 +262,21 @@ public class SessionController implements Serializable, InitializingBean {
 
 	/**
 	 * @return nothing and make logout.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public String logoutAction() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		HttpServletRequest request = (HttpServletRequest) externalContext
 				.getRequest();
-		String preReturnUrl = request.getRequestURL().toString().replaceFirst(
-				"/stylesheets/[^/]*$", "");
+		String preReturnUrl = request.getRequestURL().toString()
+				.replaceFirst("/stylesheets/[^/]*$", "");
 		int index = preReturnUrl.lastIndexOf("/");
 		String returnUrl = preReturnUrl.substring(0, index + 1).concat(
 				"welcome.jsf");
 		String forwardUrl;
-		forwardUrl = String.format(casLogoutUrl, StringUtils
-				.utf8UrlEncode(returnUrl));
+		forwardUrl = String.format(casLogoutUrl,
+				StringUtils.utf8UrlEncode(returnUrl));
 		request.getSession().invalidate();
 		request.getSession(true);
 		try {
@@ -318,52 +309,27 @@ public class SessionController implements Serializable, InitializingBean {
 	}
 
 	/**
-	 * @param defaultLocale
-	 *            the defaultLocale to set
-	 */
-	public void setDefaultLocale(String defaultLocale) {
-		this.defaultLocale = defaultLocale;
-	}
-
-	/**
-	 * @return the locale of the current user or defaultLocale if not
-	 *         authenticated.
-	 * @throws Exception 
-	 */
-	public String getLocale() throws Exception {
-		User currentUser = getCurrentUser();
-		if (currentUser == null) {
-			if (locale == null) {
-				locale = defaultLocale;
-			}
-			return locale;
-		}
-		return currentUser.getLanguage();
-	}
-
-	/**
 	 * @param locale
 	 *            the locale to set
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public void setLocale(String locale) {
+	public void setLocale(Locale locale) {
+		resetSessionLocale();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (context != null) {
-			context.getViewRoot().setLocale(new Locale(locale));
+			context.getViewRoot().setLocale(locale);
 		}
 		User currentUser = getCurrentUser();
-		if (currentUser == null) {
-			this.locale = locale;
-		} else {
-			getCurrentUser().setLanguage(locale);
+		if (currentUser != null) {
+			getCurrentUser().setLanguage(locale.getLanguage());
 		}
 	}
 
 	/**
 	 * @return the accessibility mode of the current user or default if not
 	 *         authenticated.
-	 * @throws Exception 
-	 * @throws Exception 
+	 * @throws Exception
+	 * @throws Exception
 	 */
 	public String getAccessibilityMode() throws Exception {
 		User currentUser = getCurrentUser();
@@ -376,8 +342,8 @@ public class SessionController implements Serializable, InitializingBean {
 	/**
 	 * @param accessibilityMode
 	 *            the accessibilityMode to set
-	 * @throws Exception 
-	 * @throws Exception 
+	 * @throws Exception
+	 * @throws Exception
 	 */
 	public void setAccessibilityMode(String accessibilityMode) throws Exception {
 		User currentUser = getCurrentUser();

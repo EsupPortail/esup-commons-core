@@ -11,23 +11,44 @@
 	-->
 
 	<bean id="sessionController" class="org.esupportail.blank.web.controllers.SessionController"
-		scope="session">
-		<property name="authenticator" ref="authenticator" />
+		parent="abstractDomainAwareBean" scope="session">
+		<property name="exceptionController" ref="exceptionController">
+			<description>The exception controller.</description>
+		</property>
+		<property name="authenticator" ref="authenticator">
+			<description>The authenticator service.</description>
+		</property>
 		<property name="version" value="${misc.version}" />
 		<property name="site" value="nothing" />
-		<property name="domainService" ref="domainService" />
-		<property name="casLogoutUrl" value="${cas.url}/logout?service=%s" />
-        <property name="defaultLocale" value="fr" />
+		<property name="casLogoutUrl" value="${cas.url}/logout?service=%s">
+			<description>The CAS logout URL.</description>
+		</property>
 	</bean>
 
 	<bean id="preferencesController"
 		class="org.esupportail.blank.web.controllers.PreferencesController"
-		scope="session">
-		<property name="domainService" ref="domainService" />
+		parent="abstractContextAwareController"  scope="session">
 	</bean>
 
 	<bean id="helpController" class="org.esupportail.blank.web.controllers.HelpController"
 		scope="session">
 	</bean>
 
+	<bean id="abstractContextAwareController" abstract="true"
+		parent="abstractDomainAwareBean" scope="session">
+		<description>
+			An abstract bean to factorize the declaration of beans of
+			which class inherits from AbstractContextAwareController.
+		</description>
+		<property name="sessionController" ref="sessionController">
+			<description>The session controller.</description>
+		</property>
+	</bean>
+
+	<bean id="exceptionController"
+		class="org.esupportail.commons.web.controllers.ExceptionController"
+		scope="session">
+		<description>A bean to manage exception reports.</description>
+	</bean>
+	
 </beans>

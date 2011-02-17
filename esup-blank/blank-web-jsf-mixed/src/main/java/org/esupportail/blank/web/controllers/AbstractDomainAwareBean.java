@@ -2,6 +2,8 @@ package org.esupportail.blank.web.controllers;
 
 import java.util.Locale;
 
+import javax.faces.context.FacesContext;
+
 import org.esupportail.blank.domain.DomainService;
 import org.esupportail.blank.domain.beans.User;
 import org.esupportail.commons.beans.AbstractJsfMessagesAwareBean;
@@ -44,7 +46,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
 	@Override
-	public final void afterPropertiesSet() {
+	public void afterPropertiesSet() {
 		super.afterPropertiesSet(); 
 		Assert.notNull(this.domainService, 
 				"property domainService of class " + this.getClass().getName() + " can not be null");
@@ -63,8 +65,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	 * @see org.esupportail.commons.web.controllers.Resettable#reset()
 	 */
 	public void reset() {
-		// nothing to reset
-		
+		// nothing to reset		
 	}
 
 	/**
@@ -88,7 +89,8 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 			if (logger.isDebugEnabled()) {
 				logger.debug("no current user, return null");
 			}
-			return null;
+			System.out.println("------------> " + FacesContext.getCurrentInstance().getViewRoot().getLocale());
+			return FacesContext.getCurrentInstance().getViewRoot().getLocale();			
 		}
 		String lang = currentUser.getLanguage();
 		if (lang == null) {

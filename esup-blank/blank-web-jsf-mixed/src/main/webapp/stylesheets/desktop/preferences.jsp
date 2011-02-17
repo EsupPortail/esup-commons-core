@@ -8,7 +8,7 @@
         <tr:form>
             <tr:spacer height="20px" />
             <tr:selectOneChoice label="#{msgs['PREFERENCES.LANGUAGE.LABEL']}: "
-                value="#{sessionController.locale}">
+                value="#{sessionController.locale}" converter="#{localeConverter}">
                 <f:selectItems value="#{preferencesController.localeItems}" />
             </tr:selectOneChoice>
             <tr:spacer height="20px" />

@@ -29,7 +29,12 @@
 		<param-name>javax.faces.CONFIG_FILES</param-name>
 		<param-value>/WEB-INF/navigation-rules.xml</param-value>
 	</context-param>
-	
+
+	<context-param>
+		<param-name>org.apache.myfaces.ERROR_HANDLER</param-name>
+		<param-value>org.esupportail.commons.exceptions.ExceptionHandler</param-value>
+	</context-param>
+
 	<!-- Trinidad -->
     <!-- Trinidad also supports an optimized strategy for caching some view state 
 		at an application level, which significantly improves scalability. However, 
