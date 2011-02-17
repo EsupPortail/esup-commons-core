@@ -9,7 +9,8 @@
  */
 package org.esupportail.example.web.beans;
 
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.esupportail.commons.web.controllers.Resettable;
 
@@ -26,11 +27,13 @@ public class UserBean implements Resettable {
 	/**
 	 * Id of the user.
 	 */
+	@NotNull
 	private String id;
 	
     /**
 	 * Display Name of the user.
 	 */
+	@Size(max = 10, min = 1)
     private String displayName;
 	
 	/*

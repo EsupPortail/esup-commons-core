@@ -35,6 +35,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${javax.servlet.version}</version>

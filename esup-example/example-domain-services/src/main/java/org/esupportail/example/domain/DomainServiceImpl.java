@@ -52,178 +52,50 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	/**
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		logger.debug("in afterPropertiesSet");
 		Assert.notNull(this.daoService, 
 				"property daoService of class " + this.getClass().getName() + " can not be null");
-//		Assert.notNull(this.ldapUserService, 
-//				"property ldapUserService of class " + this.getClass().getName() + " can not be null");
-//		Assert.hasText(this.displayNameLdapAttribute, 
-//				"property displayNameLdapAttribute of class " + this.getClass().getName() 
-//				+ " can not be null");
 	}
 
 	//////////////////////////////////////////////////////////////
 	// User
 	//////////////////////////////////////////////////////////////
 
-	/**
-	 * Set the information of a user from a ldapUser.
-	 * @param user 
-	 * @param ldapUser 
-	 * @return true if the user was updated.
-	 */
-//	private boolean setUserInfo(
-//			final User user, 
-//			final LdapUser ldapUser) {
-//		String displayName = null;
-//		List<String> displayNameLdapAttributes = ldapUser.getAttributes().get(displayNameLdapAttribute);
-//		if (displayNameLdapAttributes != null) {
-//			displayName = displayNameLdapAttributes.get(0);
-//		}
-//		if (displayName == null) {
-//			displayName = user.getId();
-//		}
-//		if (displayName.equals(user.getDisplayName())) {
-//			return false;
-//		}
-//		user.setDisplayName(displayName);
-//		return true;
-//	}
-
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#updateUserInfo(org.esupportail.blank.domain.beans.User)
-	 */
-//	public void updateUserInfo(final User user) {
-//		if (setUserInfo(user, ldapUserService.getLdapUser(user.getId()))) {
-//			updateUser(user);
-//		}
-//	}
-
-	/**
-	 * If the user is not found in the database, try to create it from a LDAP search.
-	 * @see org.esupportail.blank.domain.DomainService#getUser(java.lang.String)
-	 */
-//	public User getUser(final String id) throws UserNotFoundException {
-//		User user = daoService.getUser(id);
-//		if (user == null) {
-//			LdapUser ldapUser = this.ldapUserService.getLdapUser(id);
-//			user = new User();
-//			user.setId(ldapUser.getId());
-//			setUserInfo(user, ldapUser);
-//			daoService.addUser(user);
-//			logger.info("user '" + user.getId() + "' has been added to the database");
-//		}
-//		return user;
-//	}
 
 	/**
 	 * @see org.esupportail.example.domain.DomainService#getUsers()
 	 */
+	@Override
 	public List<User> getUsers() {
 		return this.daoService.getUsers();
 	}
 
+
 	/**
-	 * @see org.esupportail.example.domain.DomainService#updateUser(org.esupportail.example.domain.beans.User)
+	 * @see org.esupportail.example.domain.DomainService#getUser(java.lang.String)
 	 */
-	public void updateUser(final User user) {
-		this.daoService.updateUser(user);
+	@Override
+	public User getUser(String id) throws UserNotFoundException {
+		return null;
 	}
 
 	/**
-	 * @see org.esupportail.example.domain.DomainService#addAdmin(org.esupportail.example.domain.beans.User)
+	 * @see org.esupportail.example.domain.DomainService#deleteUser(org.esupportail.example.domain.beans.User)
 	 */
-	public void addAdmin(
-			final User user) {
-		user.setAdmin(true);
-		updateUser(user);
+	@Override
+	public void deleteUser(User user) {
+		daoService.deleteUser(user);
 	}
 
 	/**
-	 * @see org.esupportail.example.domain.DomainService#deleteAdmin(org.esupportail.example.domain.beans.User)
+	 * @see org.esupportail.example.domain.DomainService#addUser(org.esupportail.example.domain.beans.User)
 	 */
-	public void deleteAdmin(
-			final User user) {
-		user.setAdmin(false);
-		updateUser(user);
+	@Override
+	public void addUser(User user) {
+		daoService.addUser(user);
 	}
-	
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#getAdminPaginator()
-	 */
-//	public Paginator<User> getAdminPaginator() {
-//		return this.daoService.getAdminPaginator();
-//	}
-
-	//////////////////////////////////////////////////////////////
-	// VersionManager
-	//////////////////////////////////////////////////////////////
-
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#getDatabaseVersion()
-	 */
-//	public Version getDatabaseVersion() throws ConfigException {
-//		VersionManager versionManager = daoService.getVersionManager();
-//		if (versionManager == null) {
-//			return null;
-//		}
-//		return new Version(versionManager.getVersion());
-//	}
-
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#setDatabaseVersion(java.lang.String)
-	 */
-//	public void setDatabaseVersion(final String version) {
-//		if (logger.isDebugEnabled()) {
-//			logger.debug("setting database version to '" + version + "'...");
-//		}
-//		VersionManager versionManager = daoService.getVersionManager();
-//		versionManager.setVersion(version);
-//		daoService.updateVersionManager(versionManager);
-//		if (logger.isDebugEnabled()) {
-//			logger.debug("database version set to '" + version + "'.");
-//		}
-//	}
-
-
-	//////////////////////////////////////////////////////////////
-	// Authorizations
-	//////////////////////////////////////////////////////////////
-
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#userCanViewAdmins(org.esupportail.blank.domain.beans.User)
-	 */
-//	public boolean userCanViewAdmins(final User user) {
-//		if (user == null) {
-//			return false;
-//		}
-//		return user.getAdmin();
-//	}
-
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#userCanAddAdmin(org.esupportail.blank.domain.beans.User)
-	 */
-//	public boolean userCanAddAdmin(final User user) {
-//		if (user == null) {
-//			return false;
-//		}
-//		return user.getAdmin();
-//	}
-
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#userCanDeleteAdmin(
-	 * org.esupportail.blank.domain.beans.User, org.esupportail.blank.domain.beans.User)
-	 */
-//	public boolean userCanDeleteAdmin(final User user, final User admin) {
-//		if (user == null) {
-//			return false;
-//		}
-//		if (!user.getAdmin()) {
-//			return false;
-//		}
-//		return !user.equals(admin);
-//	}
 
 	//////////////////////////////////////////////////////////////
 	// Misc
@@ -236,38 +108,10 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		this.daoService = daoService;
 	}
 
+	
 
-	public void deleteUser(User user) {
-		daoService.deleteUser(user);
-	}
 
-	public void addUser(User user) {
-		User tmp = daoService.getUser(user.getId());
-		if (tmp == null) { 
-			// user does not already exists in database
-			daoService.addUser(user);			
-		}
-		else {
-			user.setInformations(tmp.getInformations());
-			daoService.updateUser(user);
-		}
-	}
+	
 
-	@Override
-	public User getUser(String id) throws UserNotFoundException {
-		return null;
-	}
-
-	@Override
-	public void updateUserInfo(User user) {
-		
-	}
-
-	/**
-	 * @param ldapUserService the ldapUserService to set
-	 */
-//	public void setLdapUserService(final LdapUserService ldapUserService) {
-//		this.ldapUserService = ldapUserService;
-//	}
 
 }

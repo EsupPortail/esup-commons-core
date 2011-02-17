@@ -32,30 +32,6 @@ public interface DomainService extends Serializable {
 	List<User> getUsers();
 
 	/**
-	 * Update a user.
-	 * @param user
-	 */
-	void updateUser(User user);
-
-	/**
-	 * Update a user's information (retrieved from the LDAP directory for instance).
-	 * @param user
-	 */
-	void updateUserInfo(User user);
-	
-	/**
-	 * Add an administrator.
-	 * @param user
-	 */
-	void addAdmin(User user);
-
-	/**
-	 * Delete an administrator.
-	 * @param user
-	 */
-	void deleteAdmin(User user);
-
-	/**
 	 * Delete an user.
 	 * @param user
 	 */

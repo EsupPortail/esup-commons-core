@@ -75,6 +75,7 @@ public class SimpleController  extends AbstractContextAwareController {
 	/**
 	 * @see org.esupportail.example.web.controllers.AbstractContextAwareController#afterPropertiesSetInternal()
 	 */
+	@Override
 	public void afterPropertiesSetInternal() {
 		super.afterPropertiesSetInternal();
 	}
