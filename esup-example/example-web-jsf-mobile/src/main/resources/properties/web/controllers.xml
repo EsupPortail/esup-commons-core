@@ -16,7 +16,6 @@
 		parent="abstractContextAwareController" scope="request">
 		<description>A bean to manage the welcome page.</description>
 		<property name="userPaginator" ref="userPaginator" />
-		<property name="urlGenerator" ref="${urlGeneration.bean}" />
 		<property name="userToUpdate" ref="userBean"/>
 	</bean>
 	
