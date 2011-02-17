@@ -28,6 +28,8 @@
 		</repository>
 	</repositories>
 	<modules>
+		<module>blank-dao</module>
+		<module>blank-utils</module>
 		<module>blank-web-jsf-mixed</module>
 		<module>blank-domain-beans</module>
 		<module>blank-domain-services</module>
