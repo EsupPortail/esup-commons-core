@@ -24,23 +24,6 @@
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	<aop:config>
-		<aop:pointcut id="daoMethods"
-			expression="execution(* org.esupportail.*.dao.JPADaoServiceImpl.*(..))" />
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoMethods" />
-	</aop:config>
-
-	<tx:advice id="txAdvice" transaction-manager="txManager">
-		<tx:attributes>
-			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="update*" propagation="REQUIRED" />
-			<tx:method name="*" propagation="SUPPORTS" read-only="true"/>
-		</tx:attributes>
-	</tx:advice>
-	
-
-
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
@@ -55,13 +38,13 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
 		<property name="maxActive" value="100" />
 		<property name="maxIdle" value="30" />
 		<property name="maxWait" value="100" />
-		<property name="url" value="jdbc:hsqldb:file:exampleDatabase" />
-		<property name="username" value="sa" />
-		<property name="password" value="" />
+		<property name="url" value="${hibernate.connection.jdbc.url}" />
+		<property name="username" value="${hibernate.connection.jdbc.username}" />
+		<property name="password" value="${hibernate.connection.jdbc.password}" />
 	</bean>
 
 	<bean id="jpaVendorAdapter"
