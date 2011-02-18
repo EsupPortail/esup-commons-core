@@ -14,22 +14,6 @@
 		<misc.version>0.1.0</misc.version>
 		<portlet.name>EsupBlankPortlet</portlet.name>
 	</properties>
-	<build>
-		<defaultGoal>javadoc:javadoc</defaultGoal>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<minmemory>128m</minmemory>
-					<maxmemory>512m</maxmemory>
-					<goal>javadoc:javadoc</goal>
-					<reportOutputDirectory>docs/javadoc</reportOutputDirectory>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	<profiles>
 		<profile>
 			<id>servletDevelopment</id>
