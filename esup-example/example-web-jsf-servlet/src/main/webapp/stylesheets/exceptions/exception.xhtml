@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:e="http://commons.esup-portail.org"
-	template="/stylesheets/template.xhtml">
-	<ui:define name="allContent">
+	template="/stylesheets/simpleTemplate.xhtml">
+	<ui:define name="content">
 		<e:section value="ERROR" />
-		<t:htmlTag value="hr" />
+		<hr/>
 		<h:outputText id="exceptionName"
 			value="#{exceptionController.exceptionName}" />
-		<t:htmlTag value="hr" />
+		<hr/>
 		<h:outputText id="exceptionMessage"
 			value="#{exceptionController.exceptionMessage}" />
-		<t:htmlTag value="hr" />
+		<hr/>
 		<e:subSection value="TRACE" />
 		<h:outputText value="#{exceptionController.exceptionShortStackTrace }" />
-		<t:htmlTag value="hr" />
+		<hr/>
 		<h:form>
-			<h:commandButton value="#{msgs['_.BUTTON.BACK_WELCOME']}"
+			<p:commandButton value="#{msgs['_.BUTTON.BACK_WELCOME']}"
 				action="#{exceptionController.restart}" />
 		</h:form>
 	</ui:define>

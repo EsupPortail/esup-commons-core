@@ -21,28 +21,25 @@
 				rendered="#{paginator.firstPageNumber != paginator.lastPageNumber}">
 				<t:htmlTag value="li"
 					rendered="#{paginator.currentPage != paginator.firstPageNumber}">
-					<h:commandButton value="#{msgs['_.BUTTON.PREVIOUS']}"
-						 immediate="true"
-						action="#{paginator.gotoPreviousPage}" >
-						
-					</h:commandButton>
+					<p:commandLink value="#{msgs['_.BUTTON.PREVIOUS']}"
+						 immediate="true" update="#{reRender}"
+						action="#{paginator.gotoPreviousPage}" />
 				</t:htmlTag>
 				<t:panelGroup rendered="#{not empty paginator.firstPagesNumber}">
 					<ui:repeat value="#{paginator.firstPagesNumber}" var="numPage">
 						<t:htmlTag value="li"
 							rendered="#{paginator.currentPage != numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true"
-								>
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}">
 								
 								<f:setPropertyActionListener value="#{numPage}"
 									target="#{paginator.currentPage}" />
-							</h:commandButton>
+							</p:commandLink>
 						</t:htmlTag>
 						<t:htmlTag value="li" styleClass="currentpage"
 							rendered="#{paginator.currentPage == numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
-							</h:commandButton>
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}"/>
 						</t:htmlTag>
 					</ui:repeat>
 					<t:htmlTag value="li"
@@ -51,23 +48,24 @@
 							styleClass="#{tagsConfigurator.textStyleClass}" />
 					</t:htmlTag>
 					<t:htmlTag value="li">
-						<h:commandButton value="#{paginator.lastPageNumber + 1}"
+						<p:commandLink value="#{paginator.lastPageNumber + 1}"
+							update="#{reRender}"
 							immediate="true" >
 							<f:setPropertyActionListener value="#{paginator.lastPageNumber}"
 								target="#{paginator.currentPage}" />
-						</h:commandButton>
+						</p:commandLink>
 					</t:htmlTag>
 				</t:panelGroup>
 
 
 				<t:panelGroup rendered="#{not empty paginator.lastPagesNumber}">
 					<t:htmlTag value="li">
-						<h:commandButton value="#{paginator.firstPageNumber + 1}"
+						<p:commandLink value="#{paginator.firstPageNumber + 1}"
+							update="#{reRender}"
 							immediate="true" >
-							
 							<f:setPropertyActionListener value="#{paginator.firstPageNumber}"
 								target="#{paginator.currentPage}" />
-						</h:commandButton>
+						</p:commandLink>
 					</t:htmlTag>
 					<t:htmlTag value="li"
 						style="border:none;background-color:transparent;">
@@ -77,28 +75,27 @@
 					<ui:repeat value="#{paginator.lastPagesNumber}" var="numPage">
 						<t:htmlTag value="li"
 							rendered="#{paginator.currentPage != numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}">
 								<f:setPropertyActionListener value="#{numPage}"
 									target="#{paginator.currentPage}" />
-							</h:commandButton>
+							</p:commandLink>
 						</t:htmlTag>
 						<t:htmlTag value="li" styleClass="currentpage"
 							rendered="#{paginator.currentPage == numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
-							</h:commandButton>
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}"/>
 						</t:htmlTag>
 					</ui:repeat>
 				</t:panelGroup>
 
 				<t:panelGroup rendered="#{not empty paginator.middlePagesNumber}">
 					<t:htmlTag value="li">
-						<h:commandButton value="#{paginator.firstPageNumber + 1}">
-							
+						<p:commandLink value="#{paginator.firstPageNumber + 1}"
+							update="#{reRender}">
 							<f:setPropertyActionListener value="#{paginator.firstPageNumber}"
 								target="#{paginator.currentPage}" />
-						</h:commandButton>
+						</p:commandLink>
 					</t:htmlTag>
 					<t:htmlTag value="li"
 						style="border:none;background-color:transparent;">
@@ -108,17 +105,16 @@
 					<ui:repeat value="#{paginator.middlePagesNumber}" var="numPage">
 						<t:htmlTag value="li"
 							rendered="#{paginator.currentPage != numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}">
 								<f:setPropertyActionListener value="#{numPage}"
 									target="#{paginator.currentPage}" />
-							</h:commandButton>
+							</p:commandLink>
 						</t:htmlTag>
 						<t:htmlTag value="li" styleClass="currentpage"
 							rendered="#{paginator.currentPage == numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
-							</h:commandButton>
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}"/>
 						</t:htmlTag>
 					</ui:repeat>
 					<t:htmlTag value="li"
@@ -127,28 +123,27 @@
 							styleClass="#{tagsConfigurator.textStyleClass}" />
 					</t:htmlTag>
 					<t:htmlTag value="li">
-						<h:commandButton value="#{paginator.lastPageNumber + 1}">
-							
+						<p:commandLink value="#{paginator.lastPageNumber + 1}"
+							update="#{reRender}">
 							<f:setPropertyActionListener value="#{paginator.lastPageNumber}"
 								target="#{paginator.currentPage}" />
-						</h:commandButton>
+						</p:commandLink>
 					</t:htmlTag>
 				</t:panelGroup>
 				<t:panelGroup rendered="#{not empty paginator.nearPages}">
 					<ui:repeat value="#{paginator.nearPages}" var="numPage">
 						<t:htmlTag value="li"
 							rendered="#{paginator.currentPage != numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}">
 								<f:setPropertyActionListener value="#{numPage}"
 									target="#{paginator.currentPage}" />
-							</h:commandButton>
+							</p:commandLink>
 						</t:htmlTag>
 						<t:htmlTag value="li" styleClass="currentpage"
 							rendered="#{paginator.currentPage == numPage}">
-							<h:commandButton value="#{numPage + 1}" immediate="true">
-								
-							</h:commandButton>
+							<p:commandLink value="#{numPage + 1}" immediate="true"
+								update="#{reRender}"/>
 						</t:htmlTag>
 					</ui:repeat>
 				</t:panelGroup>
@@ -156,10 +151,9 @@
 
 				<t:htmlTag value="li"
 					rendered="#{paginator.currentPage != paginator.lastPageNumber}">
-					<h:commandButton value="#{msgs['_.BUTTON.NEXT']}" immediate="true"
-						action="#{paginator.gotoNextPage}" >
-						
-					</h:commandButton>
+					<p:commandLink value="#{msgs['_.BUTTON.NEXT']}" immediate="true"
+						action="#{paginator.gotoNextPage}" 
+						update="#{reRender}"/>
 				</t:htmlTag>
 
 			</t:htmlTag>

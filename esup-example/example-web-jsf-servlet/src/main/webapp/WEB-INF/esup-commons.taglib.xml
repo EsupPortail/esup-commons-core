@@ -35,14 +35,6 @@
 	</tag>
 	<tag>
 		<tag-name>paginator</tag-name>
-		<source>jsf/components/paginator.xhtml</source>
-	</tag>
-	<tag>
-		<tag-name>tabs</tag-name>
-		<source>jsf/components/tabs.xhtml</source>
-	</tag>
-	<tag>
-		<tag-name>tab</tag-name>
-		<source>jsf/components/tab.xhtml</source>
+		<source>jsf/components/paginatorAjax.xhtml</source>
 	</tag>
 </facelet-taglib>

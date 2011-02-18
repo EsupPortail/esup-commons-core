@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
 	xmlns:e="http://commons.esup-portail.org"
-	template="/stylesheets/simpleTemplate.xhtml">
-	<ui:define name="allContent">
+	template="/stylesheets/template.xhtml">
+	<ui:define name="content">
 		<e:section value="#{msgs['DEEPLINKING_DEMO.TITLE']}" />
-		<t:htmlTag value="br" />
-		<t:htmlTag value="hr" />
-		<t:htmlTag value="br" />
+		<br />
+		<hr />
+		<br />
 		<h:outputText value="#{msgs['DEEPLINKING_DEMO.NAME.EXPLAIN']}" />
-		<t:htmlTag value="br" />
+		<br />
 		<h:outputLabel value="#{msgs['DEEPLINKING_DEMO.NAME']}" for="outtext" />
 		<h:outputText id="outtext" value="#{welcomeController.name}" />
 		<h:form>
-			<h:commandButton value="#{msgs['_.BUTTON.BACK_WELCOME']}"
+			<p:commandButton value="#{msgs['_.BUTTON.BACK_WELCOME']}"
 				action="#{exceptionController.restart}" />
 		</h:form>
 	</ui:define>

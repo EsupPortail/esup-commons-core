@@ -9,24 +9,24 @@
 	template="/stylesheets/template.xhtml">
 	<ui:define name="content">
 		<e:section value="#{msgs['DEEPLINKING_DEMO.TITLE']}" />
-		<t:htmlTag value="br" />
+		<br />
 		<h:outputText value="#{msgs['DEEPLINKING_DEMO.DESCRIPTION']}"
 			escape="false" />
-		<t:htmlTag value="br" />
-		<t:htmlTag value="hr" />
-		<t:htmlTag value="br" />
+		<br />
+		<hr />
+		<br />
 		<e:subSection value="#{msgs['DEEPLINKING_DEMO.GENERATE_URL']}" />
-		<t:htmlTag value="br" />
+		<br />
 		<h:outputText
 			value="#{msgs['DEEPLINKING_DEMO.GENERATE_URL.PARAM_NAME']}" />
 		<h:outputLink value="#{welcomeController.urlTest1}">
 			<h:outputText value="#{welcomeController.urlTest1}" />
 		</h:outputLink>
-		<t:htmlTag value="br" />
-		<t:htmlTag value="hr" />
-		<t:htmlTag value="br" />
+		<br />
+		<hr />
+		<br />
 		<e:subSection value="#{msgs['DEEPLINKING_DEMO.GENERATE_URL']}" />
-		<t:htmlTag value="br" />
+		<br />
 		<h:outputText
 			value="#{msgs['DEEPLINKING_DEMO.GENERATE_URL.PARAM_NAME2']}" />
 		<h:outputLink value="#{welcomeController.urlTest2}">
