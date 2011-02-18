@@ -271,7 +271,7 @@ public class SessionController extends AbstractDomainAwareBean implements
 				.replaceFirst("/stylesheets/[^/]*$", "");
 		int index = preReturnUrl.lastIndexOf("/");
 		String returnUrl = preReturnUrl.substring(0, index + 1).concat(
-				"welcome.jsf");
+				"welcome.xhtml");
 		String forwardUrl;
 		forwardUrl = String.format(casLogoutUrl,
 				StringUtils.utf8UrlEncode(returnUrl));
