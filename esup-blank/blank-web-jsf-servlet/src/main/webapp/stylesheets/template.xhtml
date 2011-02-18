@@ -22,17 +22,11 @@
 		<div id="body">
 			<div class="app-body">
 				<ui:insert name="navigation" />
-				
 				<div class="app-content"><br />
 				<ui:insert name="content" /></div>
 				<div style="clear: both;" />
 			</div>
 		</div>
-		<t:div styleClass="app-footer">
-			<h:outputText value="#{applicationService.name} " />
-			<h:outputText value="v#{applicationService.version} - " />
-			<h:outputText value="#{applicationService.copyright}" />
-		</t:div>
 	</h:body>
 </f:view>
 

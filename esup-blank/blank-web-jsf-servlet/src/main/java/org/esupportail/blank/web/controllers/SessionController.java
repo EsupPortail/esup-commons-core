@@ -41,11 +41,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	private Authenticator authenticator;
 	
 	/**
-	 * true to print login/logout button in servlet mode.
-	 */
-	private boolean printLoginLogoutButtons = true;
-
-	/**
 	 * The CAS logout URL.
 	 */
 	private String casLogoutUrl;
@@ -90,28 +85,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	}
 
 	/**
-	 * @return true if the login button should be printed. 
-	 * @throws Exception 
-	 */
-	public boolean isPrintLogin() throws Exception {
-		if (!printLoginLogoutButtons) {
-			return false;
-		}
-		return ContextUtils.isServlet() && getCurrentUser() == null;
-	}
-	
-	/**
-	 * @return true if the logout button should be printed. 
-	 * @throws Exception 
-	 */
-	public boolean isPrintLogout() throws Exception {
-		if (!printLoginLogoutButtons) {
-			return false;
-		}
-		return ContextUtils.isServlet() && getCurrentUser() != null;
-	}
-	
-	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -119,12 +92,7 @@ public class SessionController extends AbstractDomainAwareBean {
 		return getClass().getName() + "#" + hashCode();
 	}
 
-	/**
-	 * @param authenticator the authenticator to set
-	 */
-	public void setAuthenticator(final Authenticator authenticator) {
-		this.authenticator = authenticator;
-	}
+	
 
 	/**
 	 * JSF callback.
@@ -176,12 +144,12 @@ public class SessionController extends AbstractDomainAwareBean {
 	}
 
 	/**
-	 * @param printLoginLogoutButtons the printLoginLogoutButtons to set
+	 * @param authenticator the authenticator to set
 	 */
-	public void setPrintLoginLogoutButtons(final boolean printLoginLogoutButtons) {
-		this.printLoginLogoutButtons = printLoginLogoutButtons;
+	public void setAuthenticator(final Authenticator authenticator) {
+		this.authenticator = authenticator;
 	}
-
+	
 	/**
 	 * @return the casLogoutUrl
 	 */
