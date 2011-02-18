@@ -9,7 +9,7 @@
 	<navigation-rule>
 		<navigation-case>
 			<from-outcome>desktopWelcome</from-outcome>
-			<to-view-id>/stylesheets/desktop/welcome.jsp</to-view-id>
+			<to-view-id>/stylesheets/desktop/welcome.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
@@ -17,28 +17,28 @@
 		<from-view-id>/stylesheets/desktop/*</from-view-id>
 		<navigation-case>
 			<from-outcome>welcome</from-outcome>
-			<to-view-id>/stylesheets/desktop/welcome.jsp</to-view-id>
+			<to-view-id>/stylesheets/desktop/welcome.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/stylesheets/desktop/*</from-view-id>
 		<navigation-case>
 			<from-outcome>preferences</from-outcome>
-			<to-view-id>/stylesheets/desktop/preferences.jsp</to-view-id>
+			<to-view-id>/stylesheets/desktop/preferences.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/stylesheets/desktop/*</from-view-id>
 		<navigation-case>
 			<from-outcome>about</from-outcome>
-			<to-view-id>/stylesheets/desktop/about.jsp</to-view-id>
+			<to-view-id>/stylesheets/desktop/about.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/stylesheets/desktop/*</from-view-id>
 		<navigation-case>
 			<from-outcome>help</from-outcome>
-			<to-view-id>/stylesheets/desktop/help.jsp</to-view-id>
+			<to-view-id>/stylesheets/desktop/help.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -46,7 +46,7 @@
 	<navigation-rule>
 		<navigation-case>
 			<from-outcome>mobileWelcome</from-outcome>
-			<to-view-id>/stylesheets/mobile/welcome.jsp</to-view-id>
+			<to-view-id>/stylesheets/mobile/welcome.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 	</navigation-rule>
@@ -54,28 +54,28 @@
 		<from-view-id>/stylesheets/mobile/*</from-view-id>
 		<navigation-case>
 			<from-outcome>welcome</from-outcome>
-			<to-view-id>/stylesheets/mobile/welcome.jsp</to-view-id>
+			<to-view-id>/stylesheets/mobile/welcome.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/stylesheets/mobile/*</from-view-id>
 		<navigation-case>
 			<from-outcome>preferences</from-outcome>
-			<to-view-id>/stylesheets/mobile/preferences.jsp</to-view-id>
+			<to-view-id>/stylesheets/mobile/preferences.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/stylesheets/mobile/*</from-view-id>
 		<navigation-case>
 			<from-outcome>about</from-outcome>
-			<to-view-id>/stylesheets/mobile/about.jsp</to-view-id>
+			<to-view-id>/stylesheets/mobile/about.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/stylesheets/mobile/*</from-view-id>
 		<navigation-case>
 			<from-outcome>help</from-outcome>
-			<to-view-id>/stylesheets/mobile/help.jsp</to-view-id>
+			<to-view-id>/stylesheets/mobile/help.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

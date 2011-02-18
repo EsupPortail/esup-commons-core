@@ -1,12 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
-<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
-<%@ taglib uri="http://myfaces.apache.org/trinidad" prefix="tr"%>
-
-<f:view locale="#{sessionController.locale}">
-    <tr:document title="#{msgs['BLANK.TEXT']}">
-        <jsp:include page="inc_facet.jsp" />
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tr="http://myfaces.apache.org/trinidad" template="template.xhtml">
+	<ui:define name="content">
         <tr:form>
-            <jsp:include page="inc_header.jsp" />
             <div class="panelBase"><tr:panelCaptionGroup
                 rendered="#{not empty sessionController.currentUser}">
                 <div class="row"><tr:outputText styleClass="labelText"
@@ -42,5 +39,5 @@
                     rendered="#{not sessionController.portletMode}" /></div>
             </tr:panelCaptionGroup></div>
         </tr:form>
-    </tr:document>
-</f:view>
+	</ui:define>
+</ui:composition>

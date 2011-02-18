@@ -1,0 +1,41 @@
+<tr:form xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tr="http://myfaces.apache.org/trinidad" id="navigation">
+	<tr:navigationPane hint="bar" shortDesc="#{msgs['MENU.SHORTDESC']}">
+		<tr:commandNavigationItem text="#{msgs['WELCOME.TEXT']}"
+			action="welcome"
+			disabled="#{empty sessionController.action
+            or sessionController.action=='welcome'}">
+			<f:setPropertyActionListener value="welcome"
+				target="#{sessionController.action}" />
+		</tr:commandNavigationItem>
+		<tr:commandNavigationItem text="#{msgs['PREFERENCES.TEXT']}"
+			action="preferences"
+			disabled="#{not empty sessionController.action
+            and sessionController.action=='preferences'}">
+			<f:setPropertyActionListener value="preferences"
+				target="#{sessionController.action}" />
+		</tr:commandNavigationItem>
+		<tr:commandNavigationItem text="#{msgs['ABOUT.TEXT']}" action="about"
+			disabled="#{not empty sessionController.action
+            and sessionController.action=='about'}">
+			<f:setPropertyActionListener value="about"
+				target="#{sessionController.action}" />
+		</tr:commandNavigationItem>
+		<tr:commandNavigationItem text="#{msgs['HELP.TEXT']}" action="help"
+			disabled="#{not empty sessionController.action
+            and sessionController.action=='help'}">
+			<f:setPropertyActionListener value="help"
+				target="#{sessionController.action}" />
+		</tr:commandNavigationItem>
+		<tr:commandNavigationItem text="#{msgs['LOGIN.TEXT']}"
+			destination="/stylesheets/protected/login.jsf"
+			rendered="#{sessionController.loginEnable}" />
+		<tr:commandNavigationItem text="#{msgs['LOGOUT.TEXT']}"
+			action="#{sessionController.logoutAction}" immediate="true"
+			rendered="#{sessionController.logoutEnable}" />
+		<tr:commandNavigationItem text="#{msgs['MOBILE.TEXT']}"
+			action="mobileWelcome" immediate="true"
+			rendered="#{not sessionController.portletMode}" />
+	</tr:navigationPane>
+</tr:form>

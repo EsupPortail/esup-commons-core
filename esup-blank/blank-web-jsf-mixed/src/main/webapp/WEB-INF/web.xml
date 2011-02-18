@@ -18,7 +18,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.jsf</url-pattern>
+		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>faces</servlet-name>
@@ -143,7 +143,7 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>/stylesheets/home.xhtml</welcome-file>
 	</welcome-file-list>
 	<error-page>
 		<error-code>500</error-code>
@@ -162,4 +162,16 @@
 		</auth-constraint>
 	</security-constraint>
 
+	<!-- FaceletViewHandler configuration -->
+	<context-param>
+		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
+		<param-value>com.sun.facelets.FaceletViewHandler</param-value>
+	</context-param>
+
+	<!-- Use documents saved as *.xhtml for Facelets -->
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param> 
+	
 </web-app>

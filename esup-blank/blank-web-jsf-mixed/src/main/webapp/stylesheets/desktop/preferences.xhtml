@@ -1,10 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
-<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
-<%@ taglib uri="http://myfaces.apache.org/trinidad" prefix="tr"%>
-
-<f:view locale="#{sessionController.locale}">
-    <tr:document title="#{msgs['BLANK.TEXT']}">
-        <jsp:include page="inc_navigation.jsp" />
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:tr="http://myfaces.apache.org/trinidad" template="template.xhtml">
+	<ui:define name="content">
         <tr:form>
             <tr:spacer height="20px" />
             <tr:selectOneChoice label="#{msgs['PREFERENCES.LANGUAGE.LABEL']}: "
@@ -23,5 +21,5 @@
         <tr:spacer height="20px" />
         <tr:outputDocument value="#{msgs['PREFERENCES.ACCESSIBILITY.SCREENREADER.TEXT']}"
             rendered="#{sessionController.accessibilityMode=='screenReader'}" />
-    </tr:document>
-</f:view>
+	</ui:define>
+</ui:composition>

@@ -1,1 +1,0 @@
-<% String context = request.getContextPath(); response.sendRedirect(context + "/stylesheets/home.jsf"); %>

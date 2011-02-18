@@ -89,7 +89,6 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 			if (logger.isDebugEnabled()) {
 				logger.debug("no current user, return null");
 			}
-			System.out.println("------------> " + FacesContext.getCurrentInstance().getViewRoot().getLocale());
 			return FacesContext.getCurrentInstance().getViewRoot().getLocale();			
 		}
 		String lang = currentUser.getLanguage();
