@@ -150,18 +150,6 @@
 		<location>/errordisplay.jsp</location>
 	</error-page>
 
-	<!-- security -->
-	<security-constraint>
-		<display-name>Prevent access to raw JSP pages that are for JSF pages.</display-name>
-		<web-resource-collection>
-			<web-resource-name>Raw-JSF-JSP-Pages</web-resource-name>
-			<url-pattern>*.jsp</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<description>No roles, so no direct access</description>
-		</auth-constraint>
-	</security-constraint>
-
 	<!-- FaceletViewHandler configuration -->
 	<context-param>
 		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
@@ -169,9 +157,9 @@
 	</context-param>
 
 	<!-- Use documents saved as *.xhtml for Facelets -->
-	<context-param>
-		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
-		<param-value>.xhtml</param-value>
+	<context-param> 
+	<param-name>javax.faces.DEFAULT_SUFFIX</param-name> 
+		<param-value>.xhtml</param-value> 
 	</context-param> 
-	
+
 </web-app>
