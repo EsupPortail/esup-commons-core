@@ -11,7 +11,7 @@
 	<ui:define name="navigation">
 		<p:menubar>
 			<p:submenu icon="ui-icon ui-icon-info" >
-				<p:menuitem value="About This Blank" url="#" onclick="info.show();"></p:menuitem>
+				<p:menuitem value="#{msgs['BLANK.MENU']}" url="#" onclick="info.show();"></p:menuitem>
 			</p:submenu>
 
 			<p:submenu label="Finder">
@@ -31,23 +31,23 @@
 	<ui:define name="content">
 
 		<p:growl showDetail="true"/>
-		<p:dialog header="About This Blank application" draggable="true"
-			widgetVar="info" showEffect="fade" hideEffect="fade" width="400">
+		<p:dialog header="#{msgs['BLANK.MENU.TITLE']}" draggable="true"
+			widgetVar="info" showEffect="fade" hideEffect="fade" width="450">
 			<h:form>
 				<h:panelGrid columns="1" style="width:100%;text-align:center;">
 					<p:graphicImage value="/media/images/esup.png" />
 					<h:outputText value="#{applicationService.name}"
 						style="font-size:16px" />
-					<h:outputText value="Version #{applicationService.version}" />
+					<h:outputText value="#{msgs['ABOUT.VERSION']} #{applicationService.version}" />
 					<h:outputText value="#{applicationService.copyright}" />
 				</h:panelGrid>
 				<br/>
 				<h:panelGrid columns="2">
-					<h:outputText value="Auteur" style="font-weight:bold" />
-					<h:outputText value="Leproust Cédric" />
+					<h:outputText value="#{msgs['ABOUT.AUTHOR']} : " style="font-weight:bold" />
+					<h:outputText value="#{msgs['ABOUT.AUTHOR.NAME']}" />
 
-					<h:outputText value="Consortium" style="font-weight:bold" />
-					<h:outputText value="Esup portail" />
+					<h:outputText value="#{msgs['ABOUT.SOCIETY']} : " style="font-weight:bold" />
+					<h:outputText value="#{msgs['ABOUT.SOCIETY.NAME']}" />
 
 				</h:panelGrid>
 
@@ -55,30 +55,32 @@
 		</p:dialog>
 
 		<p:dialog header="#{applicationService.name}" modal="true"
-			showEffect="fade" resizable="false" visible="true" width="400"
+			showEffect="fade" resizable="false" visible="true" width="500"
 			widgetVar="welcome">
 			<h:outputText value="#{msgs['BLANK.WELCOME']}" />
 		</p:dialog>
 		
 		<p:dialog header="Demo" 
 			showEffect="fade" resizable="true" 
-			widgetVar="demo">
-			<h:outputText value="Ces menus sont disponibles que pour une démonstration." />
+			widgetVar="demo" width="600">
+			<h:outputText value="Ces menus ne sont disponibles que pour une démonstration." />
 		</p:dialog>
 
 		<p:dock>
-			<p:menuitem label="Finder" icon="/media/images/finder.png" url="#"
+			<p:menuitem icon="/media/images/finder.png" url="#"
 				onclick="info.show();" />
-			<p:menuitem label="Terminal" icon="/media/images/terminal.png"
+			<p:menuitem icon="/media/images/terminal.png"
 				url="#" onclick="welcome.show();" />
 		</p:dock>
 		<script type="text/javascript">
 	jQuery(function() {
+		var title = '#{msgs['BLANK.INFORMATION']}';
+		var describe = '#{msgs['BLANK.INFORMATION.DESCRIBE']}';
 		jQuery.gritter
 				.add({
-					title : 'Software Update',
-					text : 'New version of iTunes is available',
-					image : '/blank-web-jsf-servlet/javax.faces.resource/growl/assets/info.png.xhtml?ln=primefaces&amp;v=2.2'
+					title : title,
+					text : describe,
+					image : '/javax.faces.resource/growl/assets/info.png.xhtml?ln=primefaces&amp;v=2.2'
 				});
 	});
 </script>
