@@ -61,9 +61,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 		// override this method
 	}
 	
-	/**
-	 * @see org.esupportail.commons.web.controllers.Resettable#reset()
-	 */
+	@Override
 	public void reset() {
 		// nothing to reset		
 	}

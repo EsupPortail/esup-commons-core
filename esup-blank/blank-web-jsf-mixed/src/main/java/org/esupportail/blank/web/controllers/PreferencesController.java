@@ -24,10 +24,14 @@ public class PreferencesController extends AbstractContextAwareController {
 	 */
 	private static final long serialVersionUID = -4133220816313990369L;
 
+	/**
+	 * An items list for locals.
+	 */
 	private List<SelectItem> localeItems;
 
-	private String languageSelected;
-
+	/**
+	 * An items list for accessibility.
+	 */
 	private List<SelectItem> accessibilityModeItems;
 
 	/**
@@ -57,43 +61,6 @@ public class PreferencesController extends AbstractContextAwareController {
 	}
 
 	/**
-	 * @return the languageSelected
-	 */
-	public String getLanguageSelected() {
-		return languageSelected;
-	}
-
-	/**
-	 * @param languageSelected
-	 *            the languageSelected to set
-	 */
-	public void setLanguageSelected(String languageSelected) {
-		this.languageSelected = languageSelected;
-	}
-
-	/**
-	 * @return null.
-	 */
-	public String setLocaleAction() {
-		setLocale(languageSelected);
-		return null;
-	}
-
-	/**
-	 * Change the locale for all views and in the domain service.
-	 * 
-	 * @param locale
-	 *            the locale to set
-	 */
-	public void setLocale(String locale) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		if (context != null) {
-			context.getViewRoot().setLocale(new Locale(locale));
-		}
-		getCurrentUser().setLanguage(locale);
-	}
-
-	/**
 	 * @return the accessibilityModeItems
 	 */
 	public List<SelectItem> getAccessibilityModeItems() {
@@ -108,6 +75,11 @@ public class PreferencesController extends AbstractContextAwareController {
 				.createI18nService().getString(
 						"PREFERENCES.ACCESSIBILITY.SCREENREADER")));
 		return accessibilityModeItems;
+	}
+	
+	@Override
+	public void reset() {
+		super.reset(); 
 	}
 
 }

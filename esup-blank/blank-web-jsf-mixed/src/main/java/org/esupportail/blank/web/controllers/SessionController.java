@@ -4,7 +4,6 @@
 package org.esupportail.blank.web.controllers;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Locale;
 
 import javax.faces.context.ExternalContext;
@@ -18,20 +17,21 @@ import org.esupportail.blank.services.auth.Authenticator;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.web.controllers.ExceptionController;
-import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author Yves Deschamps (Université de Lille 1) - 2010
  * 
  */
-public class SessionController extends AbstractDomainAwareBean implements
-		Serializable, InitializingBean {
+public class SessionController extends AbstractDomainAwareBean {
 
 	/**
 	 * For Serialize.
 	 */
 	private static final long serialVersionUID = 6725001881639400299L;
 
+	/**
+	 * For Logging.
+	 */
 	private final Logger logger = Logger.getLogger(this.getClass());
 
 	/**
@@ -39,27 +39,57 @@ public class SessionController extends AbstractDomainAwareBean implements
 	 */
 	private ExceptionController exceptionController;
 
+	/**
+	 * @param exceptionController
+	 */
 	public void setExceptionController(ExceptionController exceptionController) {
 		this.exceptionController = exceptionController;
 	}
 
+	/**
+	 * The application version.
+	 */
 	private String version;
 
+	/**
+	 * The application site.
+	 */
 	private String site;
 
+	/**
+	 * The current action from menu. 
+	 */
 	private String action;
 
+	/**
+	 * The from form current action.
+	 */
 	private String fromAction;
 
+	/**
+	 * The authenticator.
+	 */
 	private Authenticator authenticator;
 
+	/**
+	 * The detected mode (desktop or mobile).
+	 */
 	private boolean modeDetected;
 
+	/**
+	 * True if we are in portlet mode.
+	 */
 	private boolean portletMode;
 
-	private String lastUserUid;
-
+	/**
+	 * The accessibility mode.
+	 */
 	private String accessibilityMode = "default";
+
+	/**
+	 * The selected language.
+	 */
+	private String languageSelected;
 
 	/**
 	 * The CAS logout URL.
@@ -73,9 +103,6 @@ public class SessionController extends AbstractDomainAwareBean implements
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.example.web.controllers.AbstractDomainAwareBean#afterPropertiesSetInternal()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		Assert.notNull(this.exceptionController,
@@ -135,32 +162,11 @@ public class SessionController extends AbstractDomainAwareBean implements
 		this.action = action;
 	}
 
-	private void resetControllers() {
-		this.reset();
-	}
-
-	/*
-	 * private void reset() { action = null; fromAction = null; }
-	 */
-
-	/**
-	 * @return the current user, null if guest.
-	 * @throws Exception
-	 * @throws Exception
-	 */
+	@Override
 	public User getCurrentUser() {
 		if (isPortletMode()) {
 			FacesContext fc = FacesContext.getCurrentInstance();
 			String uid = fc.getExternalContext().getRemoteUser();
-			if (lastUserUid == null) {
-				lastUserUid = uid;
-			} else {
-				if (!lastUserUid.equals(uid)) {
-					// uid change
-					resetControllers();
-					lastUserUid = uid;
-				}
-			}
 			return getDomainService().getUser(uid);
 		}
 		User authUser;
@@ -171,17 +177,6 @@ public class SessionController extends AbstractDomainAwareBean implements
 				// for updating
 				String uid = authUser.getId();
 				currentUser = getDomainService().getUser(uid);
-				if (currentUser != null) {
-					if (lastUserUid == null) {
-						lastUserUid = uid;
-					} else {
-						if (!lastUserUid.equals(uid)) {
-							// uid change
-							resetControllers();
-							lastUserUid = uid;
-						}
-					}
-				}
 				return currentUser;
 			}
 		} catch (Exception e) {
@@ -193,9 +188,9 @@ public class SessionController extends AbstractDomainAwareBean implements
 
 	@Override
 	public void reset() {
+		super.reset();
 		action = null;
 		fromAction = null;
-		super.reset();
 	}
 
 	/**
@@ -260,7 +255,6 @@ public class SessionController extends AbstractDomainAwareBean implements
 
 	/**
 	 * @return nothing and make logout.
-	 * @throws Exception
 	 */
 	public String logoutAction() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -307,9 +301,16 @@ public class SessionController extends AbstractDomainAwareBean implements
 	}
 
 	/**
+	 * @return null.
+	 */
+	public String setLocaleAction() {
+		setLocale(new Locale(languageSelected));
+		return null;
+	}
+
+	/**
 	 * @param locale
 	 *            the locale to set
-	 * @throws Exception
 	 */
 	public void setLocale(Locale locale) {
 		resetSessionLocale();
@@ -351,5 +352,20 @@ public class SessionController extends AbstractDomainAwareBean implements
 			getCurrentUser().setAccessibilityMode(accessibilityMode);
 		}
 	}
+	
+	/**
+	 * @return the languageSelected
+	 */
+	public String getLanguageSelected() {
+		return languageSelected;
+	}
 
+	/**
+	 * @param languageSelected
+	 *            the languageSelected to set
+	 */
+	public void setLanguageSelected(String languageSelected) {
+		this.languageSelected = languageSelected;
+	}
+	
 }

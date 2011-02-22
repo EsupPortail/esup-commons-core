@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <bean id="authenticator" lazy-init="true"
-        class="org.esupportail.blank.services.auth.AuthenticatorImpl">
+        class="org.esupportail.blank.services.auth.AuthenticatorImpl"> 
         <property name="authenticationService" ref="${auth.bean}" />
     </bean>
 

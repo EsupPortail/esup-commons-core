@@ -30,9 +30,6 @@ public abstract class AbstractContextAwareController extends AbstractDomainAware
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.example.web.controllers.AbstractDomainAwareBean#afterPropertiesSetInternal()
-	 */
 	@Override
 	public void afterPropertiesSetInternal() {
 		Assert.notNull(this.sessionController, "property sessionController of class " 
@@ -53,9 +50,6 @@ public abstract class AbstractContextAwareController extends AbstractDomainAware
 		return sessionController;
 	}
 
-	/**
-	 * @see org.esupportail.example.web.controllers.AbstractDomainAwareBean#getCurrentUser()
-	 */
 	@Override
 	protected User getCurrentUser() {
 		try {

@@ -13,10 +13,10 @@
 				horizontalGridVisible="false">
 				<tr:column inlineStyle="padding:0 !important;">
 					<tr:panelGroupLayout layout="vertical" styleClass="listing">
-						<tr:commandLink action="#{preferencesController.setLocaleAction}"
+						<tr:commandLink action="#{sessionController.setLocaleAction}"
 							inlineStyle="text-decoration:none;">
 							<f:setPropertyActionListener value="#{language.value}"
-								target="#{preferencesController.languageSelected}" />
+								target="#{sessionController.languageSelected}" />
 							<h:graphicImage value="/media/images/accept.png"
 								style="float:left;border:0;margin-right:10px;"
 								alt="#{language.label}" title="#{language.label}"

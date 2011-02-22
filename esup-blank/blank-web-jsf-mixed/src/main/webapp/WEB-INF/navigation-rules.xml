@@ -10,7 +10,7 @@
 		<navigation-case>
 			<from-outcome>desktopWelcome</from-outcome>
 			<to-view-id>/stylesheets/desktop/welcome.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -41,13 +41,21 @@
 			<to-view-id>/stylesheets/desktop/help.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/stylesheets/desktop/*</from-view-id>
+		<navigation-case>
+			<from-outcome>applicationRestarted</from-outcome>
+			<to-view-id>/stylesheets/desktop/welcome.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 	<!-- mobile navigation -->
 	<navigation-rule>
 		<navigation-case>
 			<from-outcome>mobileWelcome</from-outcome>
 			<to-view-id>/stylesheets/mobile/welcome.xhtml</to-view-id>
-			<redirect/>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -76,6 +84,24 @@
 		<navigation-case>
 			<from-outcome>help</from-outcome>
 			<to-view-id>/stylesheets/mobile/help.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/stylesheets/mobile/*</from-view-id>
+		<navigation-case>
+			<from-outcome>applicationRestarted</from-outcome>
+			<to-view-id>/stylesheets/mobile/welcome.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Exceptions -->
+	<navigation-rule>
+		<description>Gestion des exceptions</description>
+		<navigation-case>
+			<from-outcome>go_exception</from-outcome>
+			<to-view-id>/stylesheets/exceptions/exception.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 

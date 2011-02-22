@@ -144,12 +144,12 @@
 	</session-config>
 	<welcome-file-list>
 		<welcome-file>/stylesheets/home.xhtml</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list> 
 	<error-page>
 		<error-code>500</error-code>
 		<location>/errordisplay.jsp</location>
 	</error-page>
-
+	
 	<!-- FaceletViewHandler configuration -->
 	<context-param>
 		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
