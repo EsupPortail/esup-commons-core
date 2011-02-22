@@ -20,10 +20,6 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>faces</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-	</servlet>
 
 	<context-param>
 		<param-name>javax.faces.CONFIG_FILES</param-name>
@@ -71,7 +67,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>trinidad</filter-name>
-		<servlet-name>faces</servlet-name>
+		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping>
 
 	<!-- resource loader servlet -->
