@@ -21,6 +21,13 @@
 			<url>http://repository.prime.com.tr</url>
 			<layout>default</layout>
 		</repository>
+		<repository>
+			<id>jboss</id>
+			<name>Jboss Repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+		</repository>
+		
 	</repositories>
 	<build>
 		<defaultGoal>install</defaultGoal>
@@ -32,6 +39,113 @@
 		</resources>
 		<plugins>
 			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>task1</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								 <delete dir="${basedir}/target/serverzip/"/>
+								 <delete dir="${basedir}/target/installer/"/>
+								 <delete dir="${basedir}/target/exe/"/>
+								 <delete file="${basedir}/target/${project.build.finalName}-server.zip"/>
+								 <delete file="${basedir}/target/${project.build.finalName}-quickstart.jar"/>
+								 <delete file="${basedir}/target/${project.build.finalName}-quickstart.exe"/>
+								<copy todir="${basedir}/target/serverzip/data">
+									<fileset dir="${basedir}/src/main/datarelease/">
+										<include name="**/*" />
+									</fileset>
+								</copy>
+								<copy file="${basedir}/target/${project.build.finalName}.war"
+									tofile="${basedir}/target/serverzip/example-web-jsf-servlet.war" />
+									
+								<copy todir="${basedir}/target/installer/data">
+									<fileset dir="${basedir}/src/main/datarelease/">
+										<include name="**/*" />
+									</fileset>
+								</copy>
+								<copy todir="${basedir}/target/installer/lisezmoi">
+									<fileset dir="${basedir}/src/main/installer/custom/">
+										<include name="**/*" />
+									</fileset>
+								</copy>
+								<copy file="${basedir}/target/${project.build.finalName}.war"
+									tofile="${basedir}/target/installer/example-web-jsf-servlet.war" />
+								<copy todir="${basedir}/target/installer">
+									<fileset dir="${basedir}/src/main/installer/config/jar/">
+										<include name="**/*" />
+									</fileset>
+								</copy>
+								<unzip
+									src="${basedir}/src/main/util/utils/tomcat/apache-tomcat-6.0.29.zip"
+									dest="${basedir}/target/installer" />
+								<copy
+									file="${basedir}/target/installer/apache-tomcat-6.0.29/bin/tomcat6w.exe"
+									tofile="${basedir}/target/installer/apache-tomcat-6.0.29/bin/TomcatExamplew.exe" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>task2</id>
+						<phase>verify</phase>
+						<configuration>
+							<tasks>
+								<copy todir="${basedir}/target/exe" overwrite="yes">
+									<fileset
+										file="${basedir}/target/${project.build.finalName}-quickstart.jar" />
+								</copy>
+
+								<copy todir="${basedir}/target/exe" overwrite="yes">
+									<fileset dir="${basedir}/src/main/installer/config/exe/build">
+										<exclude name=".svn" />
+									</fileset>
+								</copy>
+
+								<replace file="${basedir}/target/exe/launcher.ini"
+									token="@@@app.dist@@@" value="${project.build.finalName}" />
+
+								<exec executable="${zip.location}"
+									dir="${basedir}/target/exe" failonerror="true"
+									resolveExecutable="true">
+									<arg value="a" />
+									<arg value="-mx=0" />
+									<arg value="files.7z" />
+									<arg value="*" />
+								</exec>
+
+								<concat
+									destfile="${basedir}/target/${project.build.finalName}-quickstart.exe"
+									binary="true">
+									<fileset file="${basedir}/src/main/installer/config/exe/7zS.sfx" />
+									<fileset file="${basedir}/src/main/installer/config/exe/config.txt" />
+									<fileset file="${basedir}/target/exe/files.7z" />
+								</concat>
+
+								<exec executable="${basedir}/src/main/util/utils/7zip/7za.exe"
+									dir="${basedir}/target/serverzip" failonerror="true"
+									resolveExecutable="true">
+									<arg value="a" />
+									<arg value="-mx=0" />
+									<arg value="${basedir}/target/${project.build.finalName}-server.zip" />
+									<arg value="*" />
+								</exec>
+								 <delete dir="${basedir}/target/serverzip/"/>
+								 <delete dir="${basedir}/target/installer/"/>
+								 <delete dir="${basedir}/target/exe/"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
+			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.26</version>
@@ -40,6 +154,30 @@
 					<jettyEnvXml>${basedir}/src/main/config/jetty-env.xml</jettyEnvXml>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.izpack</groupId>
+				<artifactId>izpack-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>izpack</goal>
+						</goals>
+						<configuration>
+							<izpackBasedir>target/installer</izpackBasedir>
+							<installerFile>${project.build.directory}/${project.build.finalName}-quickstart.jar</installerFile>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.izpack</groupId>
+						<artifactId>izpack-standalone-compiler</artifactId>
+						<version>${your.standalone-compiler.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			
 		</plugins>
 	</build>
 	<dependencies>
@@ -63,5 +201,8 @@
 		<log.output>stdout</log.output>
 		<log.file>/tmp/esup-blank.log</log.file>
 		<cache.path>/tmp/esup-example/cache</cache.path>
+		<your.standalone-compiler.version>4.3.2</your.standalone-compiler.version>
+		<zip.location>${basedir}/src/main/util/utils/7zip/7za.exe</zip.location>
+		
 	</properties>
 </project>
