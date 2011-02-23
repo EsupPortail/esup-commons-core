@@ -57,7 +57,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	private String site;
 
 	/**
-	 * The current action from menu. 
+	 * The current action from menu.
 	 */
 	private String action;
 
@@ -324,6 +324,15 @@ public class SessionController extends AbstractDomainAwareBean {
 		}
 	}
 
+	public Locale getLocale() {
+		Locale locale = new Locale("fr");
+		FacesContext context = FacesContext.getCurrentInstance();
+		if (context != null) {
+			locale = context.getViewRoot().getLocale();
+		}
+		return locale;
+	}
+
 	/**
 	 * @return the accessibility mode of the current user or default if not
 	 *         authenticated.
@@ -352,11 +361,16 @@ public class SessionController extends AbstractDomainAwareBean {
 			getCurrentUser().setAccessibilityMode(accessibilityMode);
 		}
 	}
-	
+
 	/**
-	 * @return the languageSelected
+	 * @return the selected language
 	 */
 	public String getLanguageSelected() {
+		if (languageSelected == null) {
+			FacesContext fc = FacesContext.getCurrentInstance();
+			languageSelected = fc.getApplication().getDefaultLocale().toString();
+
+		}
 		return languageSelected;
 	}
 
@@ -367,5 +381,5 @@ public class SessionController extends AbstractDomainAwareBean {
 	public void setLanguageSelected(String languageSelected) {
 		this.languageSelected = languageSelected;
 	}
-	
+
 }
