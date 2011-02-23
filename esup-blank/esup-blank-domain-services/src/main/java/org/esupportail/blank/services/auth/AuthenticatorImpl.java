@@ -16,7 +16,7 @@ import org.esupportail.commons.utils.ContextUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @author Yves Deschamps (Universite de Lille 1) - 2010
+ * @author Yves Deschamps (Université de Lille 1) - 2010
  * 
  */
 public class AuthenticatorImpl implements Serializable, InitializingBean,
@@ -58,9 +58,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (this.authenticationService == null) {
 			String[] args = { "authenticationService",
@@ -70,10 +68,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 		}
 	}
 
-	/**
-	 * @throws Exception 
-	 * @see org.esupportail.blank.services.auth.Authenticator#getUser()
-	 */
+	@Override
 	public User getUser() throws Exception {
 		try {
 			AuthInfo authInfo = (AuthInfo) ContextUtils
