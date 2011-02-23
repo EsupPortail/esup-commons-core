@@ -337,10 +337,8 @@ public class SessionController extends AbstractDomainAwareBean {
 	/**
 	 * @return the accessibility mode of the current user or default if not
 	 *         authenticated.
-	 * @throws Exception
-	 * @throws Exception
 	 */
-	public String getAccessibilityMode() throws Exception {
+	public String getAccessibilityMode() {
 		User currentUser = getCurrentUser();
 		if (currentUser == null) {
 			return accessibilityMode;
