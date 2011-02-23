@@ -12,7 +12,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @author Yves Deschamps (Universit� de Lille 1) - 2010
+ * @author Yves Deschamps (Universite de Lille 1) - 2010
  * 
  */
 public class DomainServiceImpl implements DomainService, InitializingBean {
@@ -23,12 +23,15 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	private static final long serialVersionUID = 5562208937407153456L;
 
 	/**
-	 * 
+	 * For Logging.
 	 */
+	@SuppressWarnings("unused")
 	private final Logger logger = new LoggerImpl(this.getClass());
 
-	// En l'absence de Dao et de Ldap, on constitue ici une liste... limit�e de
-	// fait � l'utilisateur courant.
+	/**
+	 * En l'absence de Dao et de Ldap, on constitue ici une liste... limitee de
+	 * fait a l'utilisateur courant.
+	 */
 	private List<User> users;
 
 	/**
@@ -39,16 +42,12 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		users = new ArrayList<User>();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		// nothing to do yet.
 	}
 
-	/**
-	 * @see org.esupportail.blank.domain.DomainService#getUser(java.lang.String)
-	 */
+	@Override
 	public User getUser(String uid) {
 		User user = null;
 		for (User userInList : users) {
@@ -60,7 +59,8 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		if (user == null) {
 			user = new User();
 			user.setId(uid);
-			// On cr�e l'utilisateur, son nom complet prend la valeur de l'Uid.
+			// On cree l'utilisateur, son nom complet prend la valeur de
+			// l'Uid.
 			user.setDisplayName(uid);
 			user.setLanguage("fr");
 			user.setAccessibilityMode("default");
