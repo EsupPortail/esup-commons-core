@@ -324,6 +324,7 @@ public class SessionController extends AbstractDomainAwareBean {
 		}
 	}
 
+	@Override
 	public Locale getLocale() {
 		Locale locale = new Locale("fr");
 		FacesContext context = FacesContext.getCurrentInstance();
