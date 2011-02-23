@@ -25,6 +25,7 @@ public class User implements Serializable {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static Comparator<User> ORDER_DISPLAYNAME = new Comparator() {
+		@Override
 		public int compare(Object o1, Object o2) {
 			return ((User) o1).getDisplayName().compareTo(
 					((User) o2).getDisplayName());
@@ -63,9 +64,7 @@ public class User implements Serializable {
 		super();
 	}
 
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -76,16 +75,12 @@ public class User implements Serializable {
 		return id.equals(((User) obj).getId());
 	}
 
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
+	@Override
 	public int hashCode() {
 		return super.hashCode();
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
+	@Override
 	public String toString() {
 		return "User#" + hashCode() + "[id=[" + id + "], displayName=["
 				+ displayName + "], admin=[" + admin + "], language=["
@@ -184,8 +179,7 @@ public class User implements Serializable {
 		if (accessibilityMode.equals("inaccessible"))
 			return I18nUtils.createI18nService().getString(
 					"PREFERENCES.ACCESSIBILITY.INACCESSIBLE");
-		else
-			return I18nUtils.createI18nService().getString(
-					"PREFERENCES.ACCESSIBILITY.SCREENREADER");
+		return I18nUtils.createI18nService().getString(
+				"PREFERENCES.ACCESSIBILITY.SCREENREADER");
 	}
 }
