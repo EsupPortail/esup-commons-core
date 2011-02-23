@@ -94,12 +94,6 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-	<!-- if you want to disable the behaviour completely -->
-	<context-param>
-		<param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
-		<param-value>false</param-value>
-	</context-param>
-
 	<!-- for sso-cas -->
 	<filter>
 		<filter-name>CAS Authentication Filter</filter-name>

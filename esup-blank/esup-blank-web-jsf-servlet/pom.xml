@@ -11,7 +11,7 @@
 	<packaging>war</packaging>
 	<version>0.2.3-SNAPSHOT</version>
 	<name>esup-blank-web-jsf-servlet</name>
-	<description>couche d'accès aux données</description>
+	<description>couche d'acces aux donnees</description>
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<resources>
@@ -57,6 +57,6 @@
 		<log.level>INFO</log.level>
 		<log.output>stdout</log.output>
 		<log.file>/tmp/esup-blank.log</log.file>
-		<cache.path>/tmp/esup-example/cache</cache.path>
+		<cache.path>/tmp/esup-blank/cache</cache.path>
 	</properties>
 </project>

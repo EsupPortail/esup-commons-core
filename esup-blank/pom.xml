@@ -76,15 +76,15 @@
 				<version>2.8</version>
 				<configuration>
 					<useProjectReferences>true</useProjectReferences>
-					<!--<additionalConfig>
+					<additionalConfig>
 						<file>
 							<name>.checkstyle</name>
 							<url>http://subversion.cru.fr/esup-commons/utils/checkstyle/checkstyle.xml</url>
 						</file>
 					</additionalConfig>
-			--><additionalProjectFacets>
-				<jst.jstl>2.0</jst.jstl>
-			</additionalProjectFacets>
+					<additionalProjectFacets>
+						<jst.jstl>2.0</jst.jstl>
+					</additionalProjectFacets>
 					<additionalProjectnatures>
 						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
 					</additionalProjectnatures>
