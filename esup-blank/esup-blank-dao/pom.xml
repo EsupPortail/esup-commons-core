@@ -4,12 +4,12 @@
 	<parent>
 		<artifactId>esup-blank</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.2.3-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
-	<artifactId>blank-dao</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>blank-dao</name>
+	<artifactId>esup-blank-dao</artifactId>
+	<version>0.2.3-SNAPSHOT</version>
+	<name>esup-blank-dao</name>
 	<description>couche d'accès aux données</description>
 	<dependencies>
 		<dependency>
@@ -19,8 +19,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.esupportail</groupId>
-			<artifactId>blank-domain-beans</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>esup-blank-domain-beans</artifactId>
+			<version>0.2.3-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

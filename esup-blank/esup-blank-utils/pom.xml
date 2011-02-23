@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>esup-blank</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.2.3-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
-	<artifactId>blank-utils</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>blank-utils</name>
+	<artifactId>esup-blank-utils</artifactId>
+	<version>0.2.3-SNAPSHOT</version>
+	<name>esup-blank-utils</name>
 	<description>couche utilitaire</description>
 </project>

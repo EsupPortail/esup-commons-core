@@ -3,18 +3,18 @@
   <parent>
     <artifactId>esup-blank</artifactId>
     <groupId>org.esupportail</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.2.3-SNAPSHOT</version>
   </parent>
   <groupId>org.esupportail</groupId>
-  <artifactId>blank-domain-services</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>blank-domain-services</name>
+  <artifactId>esup-blank-domain-services</artifactId>
+  <version>0.2.3-SNAPSHOT</version>
+  <name>esup-blank-domain-services</name>
   <description>Domain Interface and Impl</description>
   <dependencies>
   	<dependency>
   		<groupId>org.esupportail</groupId>
-  		<artifactId>blank-domain-beans</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
+  		<artifactId>esup-blank-domain-beans</artifactId>
+  		<version>0.2.3-SNAPSHOT</version>
   		<type>jar</type>
   	</dependency>
   	<dependency>

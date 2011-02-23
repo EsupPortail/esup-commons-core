@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-blank</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>esup-blank</name>
 	<description>An Blank Application to start your project</description>
@@ -40,14 +40,14 @@
 		</snapshotRepository>
 	</distributionManagement>
 	<modules>
-		<module>blank-dao</module>
-		<module>blank-utils</module>
-		<module>blank-domain-beans</module>
-		<module>blank-domain-services</module>
-		<module>blank-web-jsf-mixed</module>
-		<module>blank-web-jsf-servlet</module>
-		<module>blank-web-jsf-mobile</module>
-		<module>blank-web-jsf-portlet</module>
+		<module>esup-blank-dao</module>
+		<module>esup-blank-utils</module>
+		<module>esup-blank-domain-beans</module>
+		<module>esup-blank-domain-services</module>
+		<module>esup-blank-web-jsf-mixed</module>
+		<module>esup-blank-web-jsf-servlet</module>
+		<module>esup-blank-web-jsf-mobile</module>
+		<module>esup-blank-web-jsf-portlet</module>
 	</modules>
 	<build>
 		<defaultGoal>install</defaultGoal>

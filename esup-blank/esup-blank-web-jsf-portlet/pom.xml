@@ -4,13 +4,13 @@
 	<parent>
 		<artifactId>esup-blank</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.2.3-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
-	<artifactId>blank-web-jsf-portlet</artifactId>
+	<artifactId>esup-blank-web-jsf-portlet</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>blank-web-jsf-portlet</name>
+	<version>0.2.3-SNAPSHOT</version>
+	<name>esup-blank-web-jsf-portlet</name>
 	<description></description>
 	<build>
 		<defaultGoal>install</defaultGoal>
@@ -29,8 +29,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.esupportail</groupId>
-			<artifactId>blank-domain-services</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>esup-blank-domain-services</artifactId>
+			<version>0.2.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.esupportail</groupId>
