@@ -599,6 +599,7 @@ label {
     color: inherit !important;
     box-sizing: border-box !important;
     webkit-box-sizing: border-box !important;
+    font-size:12pt;
 }
 
 .centerMessageLink {

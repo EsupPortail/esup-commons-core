@@ -20,9 +20,14 @@
 							<h:graphicImage value="/media/images/accept.png"
 								style="float:left;border:0;margin-right:10px;"
 								alt="#{language.label}" title="#{language.label}"
-								rendered="#{sessionController.locale==language.value}" />
+								rendered="#{language.value==sessionController.languageSelected}" />
 							<tr:outputText value="#{language.label}"
-								styleClass="centerMessageLink" />
+								styleClass="centerMessageLink"
+								rendered="#{language.value!=sessionController.languageSelected}" />
+							<tr:outputText
+								value="#{language.label}"
+								styleClass="centerMessageText"
+								rendered="#{language.value==sessionController.languageSelected}" />
 						</tr:commandLink>
 					</tr:panelGroupLayout>
 				</tr:column>

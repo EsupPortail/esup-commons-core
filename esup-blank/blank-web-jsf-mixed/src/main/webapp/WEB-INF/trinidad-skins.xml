@@ -26,4 +26,12 @@
         </style-sheet-name>
     </skin>
 
+	<skin>
+		<id>blackBerryPortlet</id>
+		<family>blackBerryFamily</family>
+		<render-kit-id>portlet</render-kit-id>
+		<style-sheet-name>media/blackBerry/blackBerryPortlet.css
+		</style-sheet-name>
+	</skin>
+
 </skins>
