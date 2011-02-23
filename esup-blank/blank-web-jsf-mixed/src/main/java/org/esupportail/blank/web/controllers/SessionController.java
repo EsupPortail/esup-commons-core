@@ -278,7 +278,7 @@ public class SessionController extends AbstractDomainAwareBean {
 			e.printStackTrace();
 		}
 		facesContext.responseComplete();
-		// Il convient de désactiver les éléments d'identification et de
+		// Il convient de desactiver les elements d'identification et de
 		// navigation
 		action = "welcome";
 		return null;
