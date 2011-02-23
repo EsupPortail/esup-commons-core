@@ -47,6 +47,7 @@
 		<module>blank-web-jsf-mixed</module>
 		<module>blank-web-jsf-servlet</module>
 		<module>blank-web-jsf-mobile</module>
+		<module>blank-web-jsf-portlet</module>
 	</modules>
 	<build>
 		<defaultGoal>install</defaultGoal>

@@ -14,7 +14,7 @@ import org.esupportail.commons.services.i18n.I18nUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @author Yves Deschamps (Université de Lille 1) - 2010
+ * @author Yves Deschamps (Universite de Lille 1) - 2010
  * 
  */
 public class AgentUtil implements Serializable, InitializingBean {

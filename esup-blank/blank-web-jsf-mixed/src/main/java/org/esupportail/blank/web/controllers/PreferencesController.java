@@ -14,7 +14,7 @@ import javax.faces.model.SelectItem;
 import org.esupportail.commons.services.i18n.I18nUtils;
 
 /**
- * @author Yves Deschamps (Université de Lille 1) - 2010
+ * @author Yves Deschamps (Universite de Lille 1) - 2010
  * 
  */
 public class PreferencesController extends AbstractContextAwareController {

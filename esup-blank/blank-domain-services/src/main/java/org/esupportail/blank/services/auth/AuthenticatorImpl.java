@@ -16,7 +16,7 @@ import org.esupportail.commons.utils.ContextUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * @author Yves Deschamps (Université de Lille 1) - 2010
+ * @author Yves Deschamps (Universite de Lille 1) - 2010
  * 
  */
 public class AuthenticatorImpl implements Serializable, InitializingBean,

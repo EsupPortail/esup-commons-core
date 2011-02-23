@@ -19,7 +19,7 @@ import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.web.controllers.ExceptionController;
 
 /**
- * @author Yves Deschamps (Université de Lille 1) - 2010
+ * @author Yves Deschamps (Universite de Lille 1) - 2010
  * 
  */
 public class SessionController extends AbstractDomainAwareBean {
