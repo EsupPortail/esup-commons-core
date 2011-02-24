@@ -15,6 +15,8 @@
 		<property name="exceptionViews">
 			<map>
 				<entry key="java.lang.Exception" value="go_exception" />
+				<entry key="java.lang.NullPointerException" value="go_exception" />
+				<entry key="javax.el.ELException" value="go_exception" />
 				<entry key="java.lang.OutOfMemoryError" value="go_outOfMemory_exception" />
 			</map>
 		</property>
