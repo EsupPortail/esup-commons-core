@@ -97,7 +97,7 @@
 	<!-- if you want to disable the behaviour completely -->
  	<context-param>
  		<param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
-		<param-value>false</param-value>
+		<param-value>true</param-value>
 	</context-param>
 
 	<!-- if you are using myfaces + facelets don't forget to do this -->

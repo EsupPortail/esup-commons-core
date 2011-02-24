@@ -2,8 +2,22 @@
 
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="/stylesheets/template.xhtml">
+	template="template.xhtml">
 	<ui:define name="content">
-		<h1>Test Exception</h1>
+		<h1>ERROR</h1>
+		<hr/>
+		<h:outputText id="exceptionName"
+			value="#{exceptionController.exceptionName}" />
+		<hr/>
+		<h:outputText id="exceptionMessage"
+			value="#{exceptionController.exceptionMessage}" />
+		<hr/>
+		<h1>TRACE</h1>
+		<h:outputText value="#{exceptionController.exceptionShortStackTrace }" />
+		<hr/>
+		<h:form>
+			<h:commandButton value="#{msgs['_.BUTTON.BACK_WELCOME']}"
+				action="#{exceptionController.restart}" />
+		</h:form>
 	</ui:define>
 </ui:composition>
