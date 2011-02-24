@@ -25,7 +25,7 @@
 		<param-name>javax.faces.CONFIG_FILES</param-name>
 		<param-value>/WEB-INF/navigation-rules.xml</param-value>
 	</context-param>
-
+	
 	<context-param>
 		<param-name>org.apache.myfaces.ERROR_HANDLER</param-name>
 		<param-value>org.esupportail.commons.exceptions.ExceptionHandler</param-value>
@@ -94,6 +94,18 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
+	<!-- if you want to disable the behaviour completely -->
+ 	<context-param>
+ 		<param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<!-- if you are using myfaces + facelets don't forget to do this -->
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
 	<!-- for sso-cas -->
 	<filter>
 		<filter-name>CAS Authentication Filter</filter-name>
@@ -134,12 +146,12 @@
 	</session-config>
 	<welcome-file-list>
 		<welcome-file>stylesheets/home.xhtml</welcome-file>
-	</welcome-file-list> 
+	</welcome-file-list>
 	<error-page>
 		<error-code>500</error-code>
 		<location>/errordisplay.jsp</location>
 	</error-page>
-	
+
 	<!-- FaceletViewHandler configuration -->
 	<context-param>
 		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
@@ -147,9 +159,9 @@
 	</context-param>
 
 	<!-- Use documents saved as *.xhtml for Facelets -->
-	<context-param> 
-	<param-name>javax.faces.DEFAULT_SUFFIX</param-name> 
-		<param-value>.xhtml</param-value> 
-	</context-param> 
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
 
 </web-app>
