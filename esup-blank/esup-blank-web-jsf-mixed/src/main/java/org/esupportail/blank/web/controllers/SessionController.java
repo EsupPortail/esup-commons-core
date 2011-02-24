@@ -107,6 +107,8 @@ public class SessionController extends AbstractDomainAwareBean {
 				+ this.getClass().getName() + " can not be null");
 		Assert.notNull(this.site, "property site of class "
 				+ this.getClass().getName() + " can not be null");
+		Assert.notNull(this.casLogoutUrl, "property casLogoutUrl of class "
+				+ this.getClass().getName() + " can not be null");
 	}
 
 	/**
