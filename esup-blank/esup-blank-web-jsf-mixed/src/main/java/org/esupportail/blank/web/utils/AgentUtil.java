@@ -24,12 +24,24 @@ public class AgentUtil implements Serializable, InitializingBean {
 	 */
 	private static final long serialVersionUID = -1259495940256943174L;
 
+	/**
+	 * For logging.
+	 */
 	private final Logger logger = Logger.getLogger(this.getClass());
 
+	/**
+	 * The phone family.
+	 */
 	private String phoneFamily;
 
+	/**
+	 * The skins.
+	 */
 	private Map<String, String> skins;
 
+	/**
+	 * True if mobile.
+	 */
 	private boolean mobile;
 
 	/**
@@ -39,9 +51,7 @@ public class AgentUtil implements Serializable, InitializingBean {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (this.skins == null) {
 			String[] args = { "skins", this.getClass().getName() };
