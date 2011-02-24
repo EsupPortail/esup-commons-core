@@ -80,9 +80,4 @@ public class PreferencesController extends AbstractContextAwareController {
 		return accessibilityModeItems;
 	}
 	
-	@Override
-	public void reset() {
-		super.reset(); 
-	}
-
 }
