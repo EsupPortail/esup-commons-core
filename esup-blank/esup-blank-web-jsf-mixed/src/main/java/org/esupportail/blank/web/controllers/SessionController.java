@@ -35,16 +35,9 @@ public class SessionController extends AbstractDomainAwareBean {
 	private final Logger logger = Logger.getLogger(this.getClass());
 
 	/**
-	 * The exception controller (called when logging in/out).
+	 * The exception controller.
 	 */
 	private ExceptionController exceptionController;
-
-	/**
-	 * @param exceptionController
-	 */
-	public void setExceptionController(ExceptionController exceptionController) {
-		this.exceptionController = exceptionController;
-	}
 
 	/**
 	 * The application version.
@@ -379,6 +372,13 @@ public class SessionController extends AbstractDomainAwareBean {
 	 */
 	public void setLanguageSelected(String languageSelected) {
 		this.languageSelected = languageSelected;
+	}
+
+	/**
+	 * @param exceptionController
+	 */
+	public void setExceptionController(ExceptionController exceptionController) {
+		this.exceptionController = exceptionController;
 	}
 
 }
