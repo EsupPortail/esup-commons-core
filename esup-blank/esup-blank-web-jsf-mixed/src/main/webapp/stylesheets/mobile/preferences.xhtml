@@ -7,10 +7,8 @@
 			<div class="panelBase"><tr:panelCaptionGroup>
 				<div class="row"><tr:outputText styleClass="centerMessageText"
 					value="#{msgs['PREFERENCES.LANGUAGE.LABEL']}" /></div>
-
 				<tr:iterator value="#{preferencesController.localeItems}"
 					var="language" varStatus="row">
-
 					<div class="row"><tr:commandLink
 						action="#{sessionController.setLocaleAction}"
 						inlineStyle="text-decoration:none;">
@@ -28,7 +26,6 @@
 							rendered="#{language.value==sessionController.languageSelected}" />
 					</tr:commandLink></div>
 				</tr:iterator>
-
 			</tr:panelCaptionGroup></div>
 		</tr:form>
 	</ui:define>

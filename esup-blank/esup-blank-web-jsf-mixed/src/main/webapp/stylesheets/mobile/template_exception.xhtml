@@ -5,23 +5,7 @@
 	<tr:document title="#{msgs['BLANK.TEXT']}">
 		<ui:include src="facet.xhtml" />
 		<ui:include src="menu.xhtml" />
-		<tr:form id="exceptionDetails">
-			<div class="panelBase"><tr:panelCaptionGroup>
-				<div class="row"><tr:outputText styleClass="centerMessageText"
-					value="#{msgs['EXCEPTION.TITLE']}" /></div>
-				<div class="row"><tr:commandLink
-					text="#{msgs['EXCEPTION.TEXT.SHOW_DETAILS']}"
-					action="#{sessionController.showExceptionDetailsAction}"
-					styleClass="centerMessageLink"
-					rendered="#{not sessionController.showExceptionDetails}" /> <tr:commandLink
-					text="#{msgs['EXCEPTION.TEXT.HIDE_DETAILS']}"
-					action="#{sessionController.hideExceptionDetailsAction}"
-					styleClass="centerMessageLink"
-					rendered="#{sessionController.showExceptionDetails}" /></div>
-			</tr:panelCaptionGroup></div>
-		</tr:form>
-		<ui:insert name="exceptionDetailsButtons" />
-		<ui:insert name="exceptionForm" />
+		<ui:insert name="exceptionButtons" />
 		<ui:insert name="exceptionDetailsPanel" />
 	</tr:document>
 </f:view>

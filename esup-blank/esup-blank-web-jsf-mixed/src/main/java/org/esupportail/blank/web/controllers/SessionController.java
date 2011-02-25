@@ -399,7 +399,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * @return navigation.
 	 */
 	public String showExceptionDetailsAction() {
-		System.err.println("showExceptionDetailsAction");
 		this.showExceptionDetails = true;
 		return null;
 	}
@@ -408,7 +407,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * @return navigation.
 	 */
 	public String hideExceptionDetailsAction() {
-		System.err.println("hideExceptionDetailsAction");
 		this.showExceptionDetails = false;
 		return null;
 	}

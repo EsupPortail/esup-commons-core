@@ -1,9 +1,10 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:tr="http://myfaces.apache.org/trinidad" template="template_exception.xhtml">
-	<ui:define name="exceptionDetailsButtons">
-        <tr:spacer height="20px" />
-		<tr:form id="exceptionDetails">
+	xmlns:tr="http://myfaces.apache.org/trinidad"
+	template="template_exception.xhtml">
+	<ui:define name="exceptionButtons">
+		<tr:spacer height="20px" />
+		<tr:form id="exceptionButtons">
 			<tr:commandButton text="#{msgs['EXCEPTION.TEXT.SHOW_DETAILS']}"
 				id="showDetails"
 				action="#{sessionController.showExceptionDetailsAction}"
@@ -12,34 +13,56 @@
 				id="hideDetails"
 				action="#{sessionController.hideExceptionDetailsAction}"
 				rendered="#{sessionController.showExceptionDetails}" />
-		</tr:form>
-	</ui:define>
-	<ui:define name="exceptionForm">
-        <tr:spacer height="20px" />
-		<tr:form id="exceptionForm">
+			<tr:spacer height="20px" />
 			<tr:commandButton text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
-				id="restart"
-				action="#{exceptionController.restart}" />
+				id="restart" action="#{exceptionController.restart}" />
 		</tr:form>
 	</ui:define>
-
-	<!--  
-	<ui:define name="content">
-		<h1>ERROR</h1>
-		<hr/>
-		<h:outputText id="exceptionName"
-			value="#{exceptionController.exceptionName}" />
-		<hr/>
-		<h:outputText id="exceptionMessage"
-			value="#{exceptionController.exceptionMessage}" />
-		<hr/>
-		<h1>TRACE</h1>
-		<h:outputText value="#{exceptionController.exceptionShortStackTrace }" />
-		<hr/>
-		<h:form>
-			<h:commandButton value="#{msgs['_.BUTTON.BACK_WELCOME']}"
-				action="#{exceptionController.restart}" />
-		</h:form>
+	<ui:define name="exceptionDetailsPanel">
+		<tr:panelFormLayout rows="5" maxColumns="1" labelWidth="140"
+			rendered="#{sessionController.showExceptionDetails}">
+			<tr:spacer height="20px" />
+			<tr:inputText id="applicationName"
+				label="#{msgs['EXCEPTION.INFORMATION.APPLICATION']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.APPLICATION']}"
+				value="#{exceptionController.applicationName}" columns="20"
+				readOnly="true" />
+			<tr:inputText id="applicationVersion"
+				label="#{msgs['EXCEPTION.INFORMATION.VERSION']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.VERSION']}"
+				value="#{exceptionController.applicationVersion}" columns="20"
+				readOnly="true" />
+			<tr:inputText id="server"
+				label="#{msgs['EXCEPTION.INFORMATION.SERVER']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.SERVER']}"
+				value="#{exceptionController.server}" columns="20" readOnly="true" />
+			<tr:inputText id="date"
+				label="#{msgs['EXCEPTION.INFORMATION.DATE']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.DATE']}"
+				value="#{exceptionController.date}" columns="20" readOnly="true" />
+			<tr:inputText id="userId"
+				label="#{msgs['EXCEPTION.INFORMATION.USER_ID']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.USER_ID']}"
+				value="#{sessionController.currentUser.displayName}" columns="20"
+				readOnly="true"
+				rendered="#{not empty sessionController.currentUser}" />
+			<tr:inputText id="userIdNull"
+				label="#{msgs['EXCEPTION.INFORMATION.USER_ID']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.USER_ID']}"
+				value="#{msgs['EXCEPTION.INFORMATION.USER_ID.UNKNOWN']}"
+				columns="20" readOnly="true"
+				rendered="#{empty sessionController.currentUser}" />
+			<tr:inputText id="portal"
+				label="#{msgs['EXCEPTION.INFORMATION.PORTAL']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.PORTAL']}"
+				value="#{exceptionController.portal} #{msgs['EXCEPTION.INFORMATION.PORTAL.QUICK_START']}"
+				columns="20" readOnly="true"
+				rendered="#{exceptionController.portal != null}" />
+			<tr:inputText id="portalNull"
+				label="#{msgs['EXCEPTION.INFORMATION.PORTAL']}:"
+				shortDesc="#{msgs['EXCEPTION.INFORMATION.PORTAL']}"
+				value="#{msgs['EXCEPTION.INFORMATION.PORTAL.UNKNOWN']}" columns="20"
+				readOnly="true" rendered="#{exceptionController.portal == null}" />
+		</tr:panelFormLayout>
 	</ui:define>
-	-->
 </ui:composition>

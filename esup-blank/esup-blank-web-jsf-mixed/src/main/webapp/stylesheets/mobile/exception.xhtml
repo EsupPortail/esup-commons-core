@@ -3,8 +3,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:tr="http://myfaces.apache.org/trinidad"
 	template="template_exception.xhtml">
-	<ui:define name="exceptionDetailsButtons">
-		<tr:form id="exceptionDetails">
+	<ui:define name="exceptionButtons">
+		<tr:form id="exceptionButtons">
 			<div class="panelBase"><tr:panelCaptionGroup>
 				<div class="row"><tr:outputText styleClass="centerMessageText"
 					value="#{msgs['EXCEPTION.TITLE']}" /></div>
@@ -17,15 +17,10 @@
 					action="#{sessionController.hideExceptionDetailsAction}"
 					styleClass="centerMessageLink"
 					rendered="#{sessionController.showExceptionDetails}" /></div>
-			</tr:panelCaptionGroup></div>
-		</tr:form>
-	</ui:define>
-	<ui:define name="exceptionForm">
-		<tr:form id="exceptionForm">
-			<div class="panelBase"><tr:panelCaptionGroup>
-				<div class="row"><tr:commandButton
-					text="#{msgs['EXCEPTION.BUTTON.RESTART']}" id="restart"
-					action="#{exceptionController.restart}" /></div>
+				<div class="row"><tr:commandLink
+					text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
+					action="#{exceptionController.restart}"
+					styleClass="centerMessageLink" /></div>
 			</tr:panelCaptionGroup></div>
 		</tr:form>
 	</ui:define>

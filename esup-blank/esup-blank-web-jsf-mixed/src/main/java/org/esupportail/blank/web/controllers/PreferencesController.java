@@ -50,7 +50,7 @@ public class PreferencesController extends AbstractContextAwareController {
 			/*
 			Iterator<Locale> iter = FacesContext.getCurrentInstance()
 					.getApplication().getSupportedLocales();
-					*/
+			*/		
 			Iterator<Locale> iter = null;
 			while (iter.hasNext()) {
 				Locale locale = iter.next();
