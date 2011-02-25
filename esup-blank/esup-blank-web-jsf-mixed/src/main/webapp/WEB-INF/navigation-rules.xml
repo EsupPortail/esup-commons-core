@@ -89,15 +89,35 @@
 	
 	<!-- Exceptions -->
 	<navigation-rule>
-		<description>Gestion des exceptions</description>
+		<description>Gestion des exceptions depuis desktop</description>
+		<from-view-id>/stylesheets/desktop/*</from-view-id>
 		<navigation-case>
 			<from-outcome>go_exception</from-outcome>
-			<to-view-id>/stylesheets/exceptions/exception.xhtml</to-view-id>
+			<to-view-id>/stylesheets/desktop/exception.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/stylesheets/exceptions/*</from-view-id>
+		<description>Gestion des exceptions depuis mobile</description>
+		<from-view-id>/stylesheets/mobile/*</from-view-id>
+		<navigation-case>
+			<from-outcome>go_exception</from-outcome>
+			<to-view-id>/stylesheets/mobile/exception.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<description>Restart depuis desktop</description>
+		<from-view-id>/stylesheets/desktop/exception.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>applicationRestarted</from-outcome>
+			<to-view-id>/stylesheets/home.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<description>Restart depuis mobile</description>
+		<from-view-id>/stylesheets/mobile/exception.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>applicationRestarted</from-outcome>
 			<to-view-id>/stylesheets/home.xhtml</to-view-id>
