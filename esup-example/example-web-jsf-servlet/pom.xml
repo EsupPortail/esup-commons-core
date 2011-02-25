@@ -83,7 +83,14 @@
 									dest="${basedir}/target/installer" />
 								<copy
 									file="${basedir}/target/installer/apache-tomcat-6.0.29/bin/tomcat6w.exe"
-									tofile="${basedir}/target/installer/apache-tomcat-6.0.29/bin/TomcatExamplew.exe" />
+									tofile="${basedir}/target/installer/apache-tomcat-6.0.29/bin/Tomcat${izpack.application.name}w.exe" />
+								<replace file="${basedir}/target/installer/install.xml"
+									token="@@@app.dist.name@@@" value="${izpack.application.name}" />
+								<replace file="${basedir}/target/installer/shortcutSpec.xml"
+									token="@@@app.dist.name@@@" value="${izpack.application.name}" />
+								<replace file="${basedir}/target/installer/targetPanelDirWindows.txt"
+									token="@@@app.dist.name@@@" value="${izpack.application.name}" />
+								
 							</tasks>
 						</configuration>
 						<goals>
@@ -203,6 +210,7 @@
 		<cache.path>/tmp/esup-example/cache</cache.path>
 		<your.standalone-compiler.version>4.3.2</your.standalone-compiler.version>
 		<zip.location>${basedir}/src/main/util/utils/7zip/7za.exe</zip.location>
+		<izpack.application.name>Example</izpack.application.name>
 		
 	</properties>
 </project>
