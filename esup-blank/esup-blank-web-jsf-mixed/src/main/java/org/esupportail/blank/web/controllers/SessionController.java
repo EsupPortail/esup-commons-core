@@ -88,6 +88,11 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * The CAS logout URL.
 	 */
 	private String casLogoutUrl;
+	
+	/**
+	 * The show exception details state.
+	 */
+	private boolean showExceptionDetails;
 
 	/**
 	 * Constructor.
@@ -383,4 +388,29 @@ public class SessionController extends AbstractDomainAwareBean {
 		this.exceptionController = exceptionController;
 	}
 
+	/**
+	 * @return the show exception details state.
+	 */
+	public boolean isShowExceptionDetails() {
+		return showExceptionDetails;
+	}
+	
+	/**
+	 * @return navigation.
+	 */
+	public String showExceptionDetailsAction() {
+		System.err.println("showExceptionDetailsAction");
+		this.showExceptionDetails = true;
+		return null;
+	}
+
+	/**
+	 * @return navigation.
+	 */
+	public String hideExceptionDetailsAction() {
+		System.err.println("hideExceptionDetailsAction");
+		this.showExceptionDetails = false;
+		return null;
+	}
+	
 }
