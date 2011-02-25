@@ -7,12 +7,15 @@ package org.esupportail.example.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.jws.WebService;
+
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.example.domain.beans.User;
 
 /**
  * The domain service interface.
  */
+@WebService
 public interface DomainService extends Serializable {
 
 	//////////////////////////////////////////////////////////////

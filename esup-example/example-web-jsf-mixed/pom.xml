@@ -59,7 +59,7 @@
 		<deploy.type>portlet</deploy.type>
 		<log.level>INFO</log.level>
 		<log.output>stdout</log.output>
-		<log.file>/tmp/esup-blank.log</log.file>
-		<cache.path>/tmp/esup-blank</cache.path>
+		<log.file>/tmp/blank.log</log.file>
+		<cache.path>/tmp/blank</cache.path>
 	</properties>
 </project>

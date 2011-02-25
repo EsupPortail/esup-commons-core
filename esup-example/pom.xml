@@ -17,6 +17,7 @@
 		<module>example-web-jsf-servlet</module>
 		<module>example-web-jsf-mixed</module>
 		<module>example-web-jsf-mobile</module>
+		<module>example-web-jsf-portlet</module>
 		<module>example-web-springmvc-portlet</module>
 	</modules>
 	<repositories>

@@ -90,7 +90,7 @@
     			Warning: this tag is ignored for portlet installations.
     		</description>
     		<list>
-    			<value>style/esup.css</value>
+    			<value>http://styles.univ-rennes1.fr/skins/universality/rennes1/rennes1.css</value>
     		</list>
     	</property>
     	<property name="documentBodyStyleClass" value="fl-theme-app" >

@@ -63,7 +63,7 @@
 		<tomcat.port.string>:8080</tomcat.port.string>
 		<log.level>INFO</log.level>
 		<log.output>stdout</log.output>
-		<log.file>/tmp/esup-blank.log</log.file>
-		<cache.path>/tmp/esup-blank</cache.path>
+		<log.file>/tmp/esup-example/</log.file>
+		<cache.path>/tmp/esup-example/cache</cache.path>
 	</properties>
 </project>
