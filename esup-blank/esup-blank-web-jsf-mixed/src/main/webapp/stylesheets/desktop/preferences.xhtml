@@ -16,7 +16,7 @@
             </tr:selectOneChoice>
             <tr:spacer height="20px" />
             <tr:commandButton text="#{msgs['SUBMIT.TEXT']}" id="changePreferences"
-                action="preferences" />
+                action="#{sessionController.hideExceptionsDetails}" />
         </tr:form>
         <tr:spacer height="20px" />
         <tr:outputDocument value="#{msgs['PREFERENCES.ACCESSIBILITY.SCREENREADER.TEXT']}"

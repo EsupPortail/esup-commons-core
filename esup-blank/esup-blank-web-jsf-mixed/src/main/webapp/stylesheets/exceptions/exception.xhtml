@@ -1,8 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	template="template.xhtml">
+	xmlns:tr="http://myfaces.apache.org/trinidad" template="template.xhtml">
+	<ui:define name="exceptionDetailsButtons">
+        <tr:spacer height="20px" />
+		<tr:form id="exceptionDetails">
+			<tr:commandButton text="#{msgs['EXCEPTION.TEXT.SHOW_DETAILS']}"
+				id="showDetails"
+				action="#{sessionController.showExceptionDetailsAction}"
+				rendered="#{not sessionController.showExceptionDetails}" />
+			<tr:commandButton text="#{msgs['EXCEPTION.TEXT.HIDE_DETAILS']}"
+				id="hideDetails"
+				action="#{sessionController.hideExceptionDetailsAction}"
+				rendered="#{sessionController.showExceptionDetails}" />
+		</tr:form>
+	</ui:define>
+	<ui:define name="exceptionForm">
+        <tr:spacer height="20px" />
+		<tr:form id="exceptionForm">
+			<tr:commandButton text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
+				id="restart"
+				action="#{exceptionController.restart}" />
+		</tr:form>
+	</ui:define>
+
+	<!--  
 	<ui:define name="content">
 		<h1>ERROR</h1>
 		<hr/>
@@ -20,4 +41,5 @@
 				action="#{exceptionController.restart}" />
 		</h:form>
 	</ui:define>
+	-->
 </ui:composition>
