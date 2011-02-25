@@ -4,7 +4,7 @@
                 location="applications"/>
   <shortcut
     name="Example Apache Tomcat"
-    target="$INSTALL_PATH\apache-tomcat-6.0.29\bin\TomcatExamplew.exe"
+    target="$INSTALL_PATH\apache-tomcat-6.0.29\bin\Tomcat@@@app.dist.name@@@w.exe"
     description="Gestion du Serveur Applicatif"
     iconFile="%SystemRoot%\system32\SHELL32.dll"
     iconIndex="21"     

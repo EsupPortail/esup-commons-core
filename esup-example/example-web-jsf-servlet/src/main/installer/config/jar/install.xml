@@ -7,7 +7,7 @@
         The meaning of the tags should be natural ...
     -->
     <info>
-        <appname>Example</appname>
+        <appname>@@@app.dist.name@@@</appname>
         <appversion>Demonstration</appversion>
         <authors>
 	  		<author name="Université Européenne de Bretagne (UEB)" email="Example_admin@cru.fr"/>
@@ -15,9 +15,6 @@
         <url>http://www.esup-portail.org</url>
 	<javaversion>1.5</javaversion>
     </info>
-    <variables>
-  		<variable name="app-version" value=""/>
-	</variables>
     
     <!-- 
         The gui preferences indication.
@@ -83,13 +80,13 @@
 	    <executable targetfile="$INSTALL_PATH/apache-tomcat-6.0.29/bin/service.bat" os="windows" stage="postinstall" keep="true">
 	      <args>
 		<arg value ="install"/>
-		<arg value ="TomcatExample$app-version"/>
+		<arg value ="Tomcat@@@app.dist.name@@@"/>
 	      </args>
 	    </executable>
 	    <executable targetfile="$INSTALL_PATH/apache-tomcat-6.0.29/bin/service.bat" os="windows" stage="uninstall" keep="true">
 	      <args>
 		<arg value="remove"/>
-		<arg value ="TomcatExample$app-version"/>
+		<arg value ="Tomcat@@@app.dist.name@@@"/>
 	      </args>
 	    </executable>
         </pack>

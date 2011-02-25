@@ -1,1 +1,1 @@
-C:\Example$app-version
+C:\@@@app.dist.name@@@
