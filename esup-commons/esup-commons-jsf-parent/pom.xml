@@ -18,8 +18,8 @@
 		<module>esup-commons-jsf-richFaces</module>
 		<module>esup-commons-jsf-exception</module>
 		<module>esup-commons-jsf-portlet</module>
-		<module>esup-commons-jsf2</module>
-		<module>esup-commons-jsf2-exception</module>
+		<module>esup-commons2-jsf2</module>
+		<module>esup-commons2-jsf2-exception</module>
 	</modules>
 	<dependencies>
 		<dependency>
