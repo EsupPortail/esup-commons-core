@@ -4,6 +4,32 @@
 	xmlns:tr="http://myfaces.apache.org/trinidad"
 	template="template_exception.xhtml">
 	<ui:define name="content">
+		<tr:form>
+			<tr:commandButton text="exception"
+				action="#{sessionController.exceptionAction}" immediate="true"
+				id="blank_exception" inlineStyle="display:none;"
+				rendered="#{not empty sessionController.action and sessionController.action != 'exception'}">
+				<f:setPropertyActionListener target="#{sessionController.action}"
+					value="exception" />
+			</tr:commandButton>
+		</tr:form>
+		<script type="text/javascript">
+            var buttons = new Array();
+            buttons = document.getElementsByTagName('button');      
+            for (i = 0; i &#x3c; buttons.length; i++) {
+                var name = buttons.item(i).id; 
+                if (name.indexOf('blank_exception') != -1) {
+					buttons.item(i).click();;
+                } 
+            }   
+            inputs = document.getElementsByTagName('input');  
+            for (i = 0; i &#x3c; inputs.length; i++) {
+                name = inputs.item(i).id; 
+                if (name.indexOf('blank_exception') != -1) {
+                	inputs.item(i).click();;
+                }
+            }    
+        </script>
 		<tr:form id="exceptionButtons">
 			<div class="panelBase"><tr:panelCaptionGroup>
 				<div class="row"><tr:outputText styleClass="centerMessageText"
