@@ -104,6 +104,7 @@
 				label="#{msgs['EXCEPTION.EXCEPTION.MESSAGE']}:"
 				shortDesc="#{msgs['EXCEPTION.EXCEPTION.MESSAGE']}"
 				value="#{exceptionController.exceptionMessage}" readOnly="true"
+				rows="2" columns="100"
 				rendered="#{not empty exceptionController.exceptionMessage}" />
 			<tr:iterator value="#{exceptionController.exceptionShortStackTrace}"
 				var="trace" varStatus="row">

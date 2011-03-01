@@ -3,24 +3,24 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:tr="http://myfaces.apache.org/trinidad"
 	template="template_exception.xhtml">
-	<ui:define name="exceptionButtons">
+	<ui:define name="content">
 		<tr:form id="exceptionButtons">
 			<div class="panelBase"><tr:panelCaptionGroup>
 				<div class="row"><tr:outputText styleClass="centerMessageText"
 					value="#{msgs['EXCEPTION.TITLE']}" /></div>
-				<div class="row"><tr:commandLink
-					text="#{msgs['EXCEPTION.TEXT.SHOW_DETAILS']}"
-					action="#{sessionController.showExceptionDetailsAction}"
-					styleClass="centerMessageLink"
-					rendered="#{not sessionController.showExceptionDetails}" /> <tr:commandLink
-					text="#{msgs['EXCEPTION.TEXT.HIDE_DETAILS']}"
-					action="#{sessionController.hideExceptionDetailsAction}"
-					styleClass="centerMessageLink"
-					rendered="#{sessionController.showExceptionDetails}" /></div>
-				<div class="row"><tr:commandLink
-					text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
-					action="#{exceptionController.restart}"
-					styleClass="centerMessageLink" /></div>
+				<tr:panelGroupLayout
+					rendered="#{not empty exceptionController.recipientEmail}">
+					<div class="row"><tr:outputText
+						styleClass="centerMessageText"
+						value="#{msgs['EXCEPTION.TEXT.BOTTOM']}: #{exceptionController.recipientEmail}"></tr:outputText></div>
+				</tr:panelGroupLayout>
+				<tr:panelGroupLayout
+					rendered="#{exceptionController.exceptionName != 'NullPointerException'}">
+					<div class="row"><tr:commandLink
+						text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
+						action="#{exceptionController.restart}"
+						styleClass="centerMessageLink" /></div>
+				</tr:panelGroupLayout>
 			</tr:panelCaptionGroup></div>
 		</tr:form>
 	</ui:define>

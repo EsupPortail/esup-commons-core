@@ -47,11 +47,8 @@ public class PreferencesController extends AbstractContextAwareController {
 	public List<SelectItem> getLocaleItems() {
 		if (localeItems == null) {
 			localeItems = new ArrayList<SelectItem>();
-			/*
 			Iterator<Locale> iter = FacesContext.getCurrentInstance()
 					.getApplication().getSupportedLocales();
-			*/		
-			Iterator<Locale> iter = null;
 			while (iter.hasNext()) {
 				Locale locale = iter.next();
 				StringBuffer buf = new StringBuffer(
@@ -78,6 +75,10 @@ public class PreferencesController extends AbstractContextAwareController {
 				.createI18nService().getString(
 						"PREFERENCES.ACCESSIBILITY.SCREENREADER")));
 		return accessibilityModeItems;
+	}
+	
+	public void reset() {
+		super.reset();
 	}
 	
 }
