@@ -17,6 +17,7 @@ import org.esupportail.blank.services.auth.Authenticator;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.web.controllers.ExceptionController;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Yves Deschamps (Universite de Lille 1) - 2010
@@ -88,7 +89,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * The CAS logout URL.
 	 */
 	private String casLogoutUrl;
-	
+
 	/**
 	 * The show exception details state.
 	 */
@@ -191,6 +192,7 @@ public class SessionController extends AbstractDomainAwareBean {
 		super.reset();
 		action = null;
 		fromAction = null;
+		languageSelected = null;
 	}
 
 	/**
@@ -367,7 +369,8 @@ public class SessionController extends AbstractDomainAwareBean {
 	public String getLanguageSelected() {
 		if (languageSelected == null) {
 			FacesContext fc = FacesContext.getCurrentInstance();
-			languageSelected = fc.getApplication().getDefaultLocale().toString();
+			languageSelected = fc.getApplication().getDefaultLocale()
+					.toString();
 
 		}
 		return languageSelected;
@@ -394,7 +397,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	public boolean isShowExceptionDetails() {
 		return showExceptionDetails;
 	}
-	
+
 	/**
 	 * @return navigation.
 	 */
@@ -409,6 +412,12 @@ public class SessionController extends AbstractDomainAwareBean {
 	public String hideExceptionDetailsAction() {
 		this.showExceptionDetails = false;
 		return null;
+	}
+
+	public String restartSessionAction() {
+		((HttpSession) FacesContext.getCurrentInstance()
+				   .getExternalContext().getSession(false)).invalidate();		
+		return "applicationRestarted";
 	}
 	
 }

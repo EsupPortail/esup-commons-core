@@ -49,6 +49,7 @@ public class PreferencesController extends AbstractContextAwareController {
 			localeItems = new ArrayList<SelectItem>();
 			Iterator<Locale> iter = FacesContext.getCurrentInstance()
 					.getApplication().getSupportedLocales();
+			iter = null;
 			while (iter.hasNext()) {
 				Locale locale = iter.next();
 				StringBuffer buf = new StringBuffer(
@@ -79,6 +80,8 @@ public class PreferencesController extends AbstractContextAwareController {
 	
 	public void reset() {
 		super.reset();
+		accessibilityModeItems = null;
+		localeItems = null;
 	}
 	
 }
