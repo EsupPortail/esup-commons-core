@@ -92,7 +92,7 @@
 		<description>Gestion des exceptions depuis desktop</description>
 		<from-view-id>/stylesheets/desktop/*</from-view-id>
 		<navigation-case>
-			<from-outcome>go_exception</from-outcome>
+			<from-outcome>exception</from-outcome>
 			<to-view-id>/stylesheets/desktop/exception.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
@@ -101,7 +101,7 @@
 		<description>Gestion des exceptions depuis mobile</description>
 		<from-view-id>/stylesheets/mobile/*</from-view-id>
 		<navigation-case>
-			<from-outcome>go_exception</from-outcome>
+			<from-outcome>exception</from-outcome>
 			<to-view-id>/stylesheets/mobile/exception.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>

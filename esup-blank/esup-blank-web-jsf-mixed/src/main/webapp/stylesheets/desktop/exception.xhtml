@@ -16,8 +16,7 @@
 				rendered="#{sessionController.showExceptionDetails}" />
 			<tr:spacer height="20px" />
 			<tr:commandButton text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
-				id="restart" action="#{exceptionController.restart}"
-				rendered="#{exceptionController.exceptionName != 'NullPointerException'}" />
+				id="restart" action="#{exceptionController.restart}" />
 		</tr:form>
 	</ui:define>
 	<ui:define name="exceptionDetailsPanel">

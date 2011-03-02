@@ -3,7 +3,7 @@
 	<tr:panelHeader styleClass="toolbar" text="#{msgs['M_BLANK.TEXT']}">
 		<tr:commandLink styleClass="backButton" text="#{msgs['BACK.TEXT']}"
 			action="welcome"
-			rendered="#{not empty sessionController.action and sessionController.action!='welcome' and sessionController.action!='exception'}">
+			rendered="#{(not empty sessionController.action and sessionController.action!='welcome') and empty exceptionController.exceptionName}">
 			<f:setPropertyActionListener value="welcome"
 				target="#{sessionController.action}" />
 		</tr:commandLink>
@@ -13,8 +13,7 @@
             and sessionController.action!='welcome' 
             and sessionController.action!='preferences' 
             and sessionController.action!='about' 
-            and sessionController.action!='help'
-            and sessionController.action!='exception'}">
+            and sessionController.action!='help'}">
 			<f:setPropertyActionListener value="welcome"
 				target="#{sessionController.action}" />
 		</tr:commandLink>

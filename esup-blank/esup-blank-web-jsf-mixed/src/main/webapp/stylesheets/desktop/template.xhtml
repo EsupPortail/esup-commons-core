@@ -3,7 +3,15 @@
 	xmlns:tr="http://myfaces.apache.org/trinidad"
 	locale="#{sessionController.locale}">
 	<tr:document title="#{msgs['BLANK.TEXT']}">
-		<ui:include src="menu.xhtml" />
-		<ui:insert name="content" />
+		<tr:group rendered="#{empty exceptionController.exceptionName}">
+			<ui:include src="menu.xhtml" />
+			<ui:insert name="content" />
+		</tr:group>
+		<tr:group rendered="#{not empty exceptionController.exceptionName}">
+			<tr:form id="exceptionButtons">
+			<tr:commandButton text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
+				id="restart" action="#{exceptionController.restart}" />
+			</tr:form>
+		</tr:group>
 	</tr:document>
 </f:view>

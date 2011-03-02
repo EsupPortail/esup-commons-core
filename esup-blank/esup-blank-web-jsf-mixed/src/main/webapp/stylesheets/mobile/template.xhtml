@@ -4,7 +4,21 @@
 	locale="#{sessionController.locale}">
 	<tr:document title="#{msgs['BLANK.TEXT']}">
 		<ui:include src="facet.xhtml" />
-		<ui:include src="menu.xhtml" />
-		<ui:insert name="content" />
+		<tr:group rendered="#{empty exceptionController.exceptionName}">
+			<ui:include src="menu.xhtml" />
+			<ui:insert name="content" />
+		</tr:group>
+		<tr:group rendered="#{not empty exceptionController.exceptionName}">
+			<tr:form id="exceptionButtons">
+				<div class="panelBase"><tr:panelCaptionGroup>
+					<tr:panelGroupLayout>
+						<div class="row"><tr:commandLink
+							text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
+							action="#{exceptionController.restart}"
+							styleClass="centerMessageLink" /></div>
+					</tr:panelGroupLayout>
+				</tr:panelCaptionGroup></div>
+			</tr:form>
+		</tr:group>
 	</tr:document>
 </f:view>
