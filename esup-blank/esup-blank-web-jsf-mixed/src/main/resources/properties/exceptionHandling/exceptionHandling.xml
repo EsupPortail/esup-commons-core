@@ -14,10 +14,10 @@
 		<property name="recipientEmail" value="${exceptionHandling.email}" />
 		<property name="exceptionViews">
 			<map>
-				<entry key="java.lang.Exception" value="go_exception" />
-				<entry key="java.lang.NullPointerException" value="go_exception" />
-				<entry key="javax.el.ELException" value="go_exception" />
-				<entry key="java.lang.OutOfMemoryError" value="go_exception" />
+				<entry key="java.lang.Exception" value="exception" />
+				<entry key="java.lang.NullPointerException" value="exception" />
+				<entry key="javax.el.ELException" value="exception" />
+				<entry key="java.lang.OutOfMemoryError" value="exception" />
 			</map>
 		</property>
 		<property name="logLevel" value="${exceptionHandling.logLevel}" />

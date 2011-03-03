@@ -1,17 +1,22 @@
+/**
+ * ESUP-Portail Blank Application - Copyright (c) 2010 ESUP-Portail consortium.
+ */
 package org.esupportail.blank.jsf.mixed.exceptions;
 
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
-import javax.portlet.PortletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.myfaces.trinidad.util.ExternalContextUtils;
+import org.esupportail.blank.web.controllers.ExceptionController;
 import org.esupportail.commons.services.exceptionHandling.ExceptionService;
 import org.esupportail.commons.services.exceptionHandling.ExceptionUtils;
+import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.ContextUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.portlet.context.PortletRequestAttributes;
 
+/**
+ * @author Yves Deschamps (Universite de Lille 1) - 2010
+ * 
+ */
 public class ExceptionHandler {
 
 	/**
@@ -28,7 +33,13 @@ public class ExceptionHandler {
 		super();
 	}
 
+	/**
+	 * @param context
+	 * @param ex
+	 */
 	public void handleException(final FacesContext context, final Exception ex) {
+		System.err.println("-------------------------- Exception Handling ----------------------------");
+		/*
 		FacesContext fc = FacesContext.getCurrentInstance();
 		boolean portletMode = ExternalContextUtils.isPortlet(fc
 				.getExternalContext());
@@ -58,6 +69,11 @@ public class ExceptionHandler {
 				retrieveAttributes.requestCompleted();
 			}
 		}
+		*/
+		
+		ExceptionController exceptionController = (ExceptionController) BeanUtils.getBean("exceptionController");
+		exceptionController.setException(true);
+		
 		ExceptionUtils.markExceptionCaught();
 		ExceptionService exceptionService = null;
 		exceptionService = ExceptionUtils.catchException(ex);
@@ -65,6 +81,7 @@ public class ExceptionHandler {
 		NavigationHandler navigation = context.getApplication()
 				.getNavigationHandler();
 		navigation.handleNavigation(context, "", exceptionService.getExceptionView());
+		
 	}
 	
 }

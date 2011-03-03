@@ -28,7 +28,7 @@
 	
 	<context-param>
 		<param-name>org.apache.myfaces.ERROR_HANDLER</param-name>
-		<param-value>org.esupportail.commons.exceptions.ExceptionHandler</param-value>
+		<param-value>org.esupportail.blank.jsf.mixed.exceptions.ExceptionHandler</param-value>
 	</context-param>
 
 	<!-- Trinidad -->

@@ -4,11 +4,11 @@
 	locale="#{sessionController.locale}">
 	<tr:document title="#{msgs['BLANK.TEXT']}">
 		<ui:include src="facet.xhtml" />
-		<tr:group rendered="#{empty exceptionController.exceptionName}">
+		<tr:group rendered="#{not exceptionController.exception}">
 			<ui:include src="menu.xhtml" />
 			<ui:insert name="content" />
 		</tr:group>
-		<tr:group rendered="#{not empty exceptionController.exceptionName}">
+		<tr:group rendered="#{exceptionController.exception}">
 			<tr:form id="exceptionButtons">
 				<div class="panelBase"><tr:panelCaptionGroup>
 					<tr:panelGroupLayout>

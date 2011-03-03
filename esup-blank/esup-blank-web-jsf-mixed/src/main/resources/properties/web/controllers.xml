@@ -39,7 +39,7 @@
 	</bean>
 
 	<bean id="exceptionController"
-		class="org.esupportail.commons.web.controllers.ExceptionController"
+		class="org.esupportail.blank.web.controllers.ExceptionController"
 		scope="session">
 		<description>A bean to manage exception reports.</description>
 	</bean>

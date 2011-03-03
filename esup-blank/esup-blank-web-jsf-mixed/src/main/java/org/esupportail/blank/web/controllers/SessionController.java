@@ -17,7 +17,6 @@ import org.esupportail.blank.services.auth.Authenticator;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.web.controllers.ExceptionController;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Yves Deschamps (Universite de Lille 1) - 2010
@@ -94,7 +93,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * The show exception details state.
 	 */
 	private boolean showExceptionDetails;
-
+	
 	/**
 	 * Constructor.
 	 */
@@ -414,10 +413,13 @@ public class SessionController extends AbstractDomainAwareBean {
 		return null;
 	}
 
-	public String restartSessionAction() {
-		((HttpSession) FacesContext.getCurrentInstance()
-				   .getExternalContext().getSession(false)).invalidate();		
-		return "applicationRestarted";
+	/**
+	 * @return an Url (with the good host, port and context...).
+	 */
+	public String getServletUrl() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		return facesContext.getExternalContext().getRequestContextPath()
+				+ "/stylesheets/home.xhtml";
 	}
 	
 }
