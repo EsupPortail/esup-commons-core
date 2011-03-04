@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>esup-commons2-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.2.3</version>
+		<version>0.2.4-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-mobile</artifactId>
-	<version>0.2.3</version>
+	<version>0.2.4-SNAPSHOT</version>
 	<name>esup-commons-mobile</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
