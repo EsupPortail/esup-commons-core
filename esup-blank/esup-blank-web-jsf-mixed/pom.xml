@@ -23,7 +23,7 @@
 				<tomcat.port.string>:8080</tomcat.port.string>
 			</properties>
 			<activation>
-			    <activeByDefault>true</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 				<property>
 					<name>servletDevelopment</name>
 					<value>true</value>
@@ -293,6 +293,12 @@
 			<groupId>javax.portlet</groupId>
 			<artifactId>portlet-api</artifactId>
 			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>el-api</artifactId>
+			<version>6.0.24</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
