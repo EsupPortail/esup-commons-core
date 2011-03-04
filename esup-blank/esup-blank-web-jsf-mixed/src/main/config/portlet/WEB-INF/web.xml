@@ -103,7 +103,7 @@
 	<!-- if you are using myfaces + facelets don't forget to do this -->
 	<context-param>
 		<param-name>facelets.DEVELOPMENT</param-name>
-		<param-value>false</param-value>
+		<param-value>true</param-value>
 	</context-param>
 
 	<!-- for sso-cas -->
@@ -155,7 +155,7 @@
 	<!-- FaceletViewHandler configuration -->
 	<context-param>
 		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
-		<param-value>com.sun.facelets.FaceletViewHandler</param-value>
+		<param-value>org.esupportail.blank.web.jsf.mixed.FaceletRedirectionViewHandler</param-value>
 	</context-param>
 
 	<!-- Use documents saved as *.xhtml for Facelets -->
