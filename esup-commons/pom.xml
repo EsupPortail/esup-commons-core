@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.3-SNAPSHOT</version>
+	<version>0.2.3</version>
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
-		<connection>scm:svn:https://subversion.cru.fr/esup-commons/branches/esup-commons-maven/esup-commons/</connection>
-		<developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/branches/esup-commons-maven/esup-commons/</developerConnection>
-		<url>https://sourcesup.cru.fr/scm/?group_id=244</url>
+		<connection>scm:svn:https://subversion.cru.fr/esup-commons/tags/commons2-0.2.3</connection>
+		<developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/tags/commons2-0.2.3</developerConnection>
+		<url>scm:svn:https://subversion.cru.fr/esup-commons/tags/commons2-0.2.3</url>
 	</scm>
 	<modules>
 		<module>esup-commons-core</module>

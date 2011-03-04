@@ -3,11 +3,11 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.2.3-SNAPSHOT</version>
+		<version>0.2.3</version>
 	</parent>
 	<artifactId>esup-commons2-jsf-richFaces</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.3-SNAPSHOT</version>
+	<version>0.2.3</version>
 	<name>esup-commons-jsf-richFaces</name>
 	<url>http://maven.apache.org</url>
 	<repositories>
