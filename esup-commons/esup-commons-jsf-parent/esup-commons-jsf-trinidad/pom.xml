@@ -9,7 +9,7 @@
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-jsf-trinidad</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.0-SNAPSHOT</version>
+	<version>0.2.3-SNAPSHOT</version>
 	<name>esup-commons2-jsf-trinidad</name>
 	<description>Artifact pour esup-commons-jsf-trinidad
 	</description>
