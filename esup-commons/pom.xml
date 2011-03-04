@@ -9,8 +9,8 @@
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
-		<connection>scm:svn:https://subversion.cru.fr/esup-commons/branches/esup-commons-maven/esup-commons/</connection>
-		<developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/branches/esup-commons-maven/esup-commons/</developerConnection>
+		<connection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-commons/</connection>
+		<developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-commons/</developerConnection>
 		<url>https://sourcesup.cru.fr/scm/?group_id=244</url>
 	</scm>
 	<modules>
