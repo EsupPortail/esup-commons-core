@@ -314,7 +314,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	 *            the locale to set
 	 */
 	public void setLocale(Locale locale) {
-		resetSessionLocale();
+		// resetSessionLocale();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (context != null) {
 			context.getViewRoot().setLocale(locale);
@@ -325,7 +325,6 @@ public class SessionController extends AbstractDomainAwareBean {
 		}
 	}
 
-	@Override
 	public Locale getLocale() {
 		Locale locale = new Locale("fr");
 		FacesContext context = FacesContext.getCurrentInstance();

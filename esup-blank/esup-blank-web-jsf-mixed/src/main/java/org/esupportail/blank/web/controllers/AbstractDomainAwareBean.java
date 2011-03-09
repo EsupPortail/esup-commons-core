@@ -1,9 +1,5 @@
 package org.esupportail.blank.web.controllers;
 
-import java.util.Locale;
-
-import javax.faces.context.FacesContext;
-
 import org.esupportail.blank.domain.DomainService;
 import org.esupportail.blank.domain.beans.User;
 import org.esupportail.commons.beans.AbstractJsfMessagesAwareBean;
@@ -28,6 +24,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	/**
 	 * A logger.
 	 */
+	@SuppressWarnings("unused")
 	private final Logger logger = new LoggerImpl(this.getClass());
 	
 	/**
@@ -42,9 +39,6 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet(); 
@@ -75,37 +69,7 @@ public abstract class AbstractDomainAwareBean extends AbstractJsfMessagesAwareBe
 	}
 
 	/**
-	 * @return the current user's locale.
-	 */
-	@Override
-	public Locale getCurrentUserLocale() {
-		if (logger.isDebugEnabled()) {
-			logger.debug(this.getClass().getName() + ".getCurrentUserLocale()");
-		}
-		User currentUser = getCurrentUser();
-		if (currentUser == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("no current user, return null");
-			}
-			return FacesContext.getCurrentInstance().getViewRoot().getLocale();			
-		}
-		String lang = currentUser.getLanguage();
-		if (lang == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("language not set for user '" + currentUser.getId() 
-						+ "', return null");
-			}
-			return null;
-		}
-		Locale locale = new Locale(lang);
-		if (logger.isDebugEnabled()) {
-			logger.debug("language for user '" + currentUser.getId() + "' is '" + locale + "'");
-		}
-		return locale;
-	}
-	
-	/**
-	 * @param domainService the domainService to set
+	 * @param domainService
 	 */
 	public void setDomainService(final DomainService domainService) {
 		this.domainService = domainService;

@@ -3,10 +3,9 @@
  */
 package org.esupportail.blank.web.controllers;
 
-import org.esupportail.commons.services.exceptionHandling.ExceptionService;
-
 import java.util.Map;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
@@ -37,23 +36,43 @@ public class ExceptionController extends
 	private final Logger logger = Logger.getLogger(this.getClass());
 
 	/**
-	 * The name of the session attribute set to prevent from infite redirections.
+	 * True if we are in portlet mode.
 	 */
-	private boolean exception;
-
-	/**
-	 * @return the exceptionService that was stored in session when the
-	 *         exception was thrown.
-	 */
-	private ExceptionService getExceptionService() {
-		return ExceptionUtils.getMarkedExceptionService();
-	}
+	private boolean portletMode;
 
 	/**
 	 * Constructors.
 	 */
 	public ExceptionController() {
 		super();
+	}
+
+	/**
+	 * The detected mode (desktop or mobile).
+	 */
+	private boolean modeDetected;
+
+	/**
+	 * @return true if portlet mode.
+	 */
+	public boolean isPortletMode() {
+		if (!modeDetected) {
+			modeDetected = true;
+			if (logger.isDebugEnabled()) {
+				logger.debug("Mode detected in Application");
+			}
+			FacesContext fc = FacesContext.getCurrentInstance();
+			portletMode = ExternalContextUtils.isPortlet(fc
+					.getExternalContext());
+			if (logger.isDebugEnabled()) {
+				if (portletMode) {
+					logger.debug("Portlet mode detected");
+				} else {
+					logger.debug("Servlet mode detected");
+				}
+			}
+		}
+		return portletMode;
 	}
 
 	@Override
@@ -79,19 +98,28 @@ public class ExceptionController extends
 				logger.debug("bean [" + name + "] was reset.");
 			}
 		}
-		((HttpSession) FacesContext.getCurrentInstance().getExternalContext()
-				.getSession(false)).invalidate();
-		ExceptionUtils.unmarkExceptionCaught();
-		exception = false;
+		if (!isPortletMode()) {
+			// it is always this case !
+			ExceptionUtils.unmarkExceptionCaught();
+			((HttpSession) FacesContext.getCurrentInstance()
+					.getExternalContext().getSession(false)).invalidate();
+		}
 		return "applicationRestarted";
 	}
 
+	/**
+	 * @return true if an exception have been detected.
+	 */
 	public boolean isException() {
-		return exception;
-	}
-
-	public void setException(boolean exception) {
-		this.exception = exception;		
+		if (isPortletMode()) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			PortletRequest request = (PortletRequest) externalContext
+					.getRequest();
+			ContextUtils.bindRequestAndContext(request,
+					(PortletContext) externalContext.getContext());
+		}
+		return ExceptionUtils.getMarkedExceptionService() != null;
 	}
 
 }
