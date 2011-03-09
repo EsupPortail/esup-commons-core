@@ -26,11 +26,6 @@
 		<param-value>/WEB-INF/navigation-rules.xml</param-value>
 	</context-param>
 	
-	<context-param>
-		<param-name>org.apache.myfaces.ERROR_HANDLER</param-name>
-		<param-value>org.esupportail.blank.jsf.mixed.exceptions.ExceptionHandler</param-value>
-	</context-param>
-
 	<!-- Trinidad -->
     <!-- Trinidad also supports an optimized strategy for caching some view state 
 		at an application level, which significantly improves scalability. However, 
@@ -94,16 +89,15 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-	<!-- if you want to disable the behaviour completely -->
- 	<context-param>
- 		<param-name>org.apache.myfaces.ERROR_HANDLING</param-name>
-		<param-value>true</param-value>
-	</context-param>
-
-	<!-- if you are using myfaces + facelets don't forget to do this -->
 	<context-param>
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
+	</context-param>
+
+	<!-- FaceletViewHandler configuration -->
+	<context-param>
+		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
+		<param-value>org.esupportail.blank.jsf.FaceletServletOrPortletViewHandler</param-value>
 	</context-param>
 
 	<!-- for sso-cas -->
@@ -147,16 +141,12 @@
 	<welcome-file-list>
 		<welcome-file>stylesheets/home.xhtml</welcome-file>
 	</welcome-file-list>
+
+	<!-- Internal server error -->
 	<error-page>
 		<error-code>500</error-code>
 		<location>/errordisplay.jsp</location>
 	</error-page>
-
-	<!-- FaceletViewHandler configuration -->
-	<context-param>
-		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
-		<param-value>org.esupportail.blank.web.jsf.mixed.FaceletRedirectionViewHandler</param-value>
-	</context-param>
 
 	<!-- Use documents saved as *.xhtml for Facelets -->
 	<context-param>
