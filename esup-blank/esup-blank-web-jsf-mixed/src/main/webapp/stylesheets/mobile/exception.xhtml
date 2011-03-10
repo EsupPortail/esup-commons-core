@@ -14,7 +14,7 @@
 						styleClass="centerMessageText"
 						value="#{msgs['EXCEPTION.TEXT.BOTTOM']}: #{exceptionController.recipientEmail}"></tr:outputText></div>
 				</tr:panelGroupLayout>
-				<tr:panelGroupLayout>
+				<tr:panelGroupLayout rendered="#{not exceptionController.portletMode}">
 					<div class="row"><tr:commandLink
 						text="#{msgs['EXCEPTION.BUTTON.RESTART']}"
 						action="#{exceptionController.restart}"

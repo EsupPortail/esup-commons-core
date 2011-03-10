@@ -1,5 +1,6 @@
 <tr:form xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:tr="http://myfaces.apache.org/trinidad" id="navigation">
 	<tr:navigationPane hint="bar" shortDesc="#{msgs['MENU.SHORTDESC']}">
 		<tr:commandNavigationItem text="#{msgs['WELCOME.TEXT']}"
@@ -37,5 +38,13 @@
 		<tr:commandNavigationItem text="#{msgs['MOBILE.TEXT']}"
 			action="mobileWelcome" immediate="true"
 			rendered="#{not sessionController.portletMode}" />
+		<tr:commandNavigationItem text=""
+			immediate="true" rendered="#{sessionController.portletMode}">
+			<h:outputLink value="#{sessionController.servletUrl}" target="_popup"
+				title="#{msgs['SERVLET.TEXT']}">
+				<tr:outputText value="#{msgs['SERVLET.TEXT']}"
+					styleClass="centerMessageLink" />
+			</h:outputLink>
+		</tr:commandNavigationItem>
 	</tr:navigationPane>
 </tr:form>
