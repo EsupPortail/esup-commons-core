@@ -12,7 +12,7 @@
 	
 
 	<bean id="sessionController"
-		class="org.esupportail.example.e.web.controllers.SessionController"
+		class="org.esupportail.example.web.controllers.SessionController"
 		parent="abstractDomainAwareBean" scope="session">
 		<description>
 			A bean to store the context of the application.
