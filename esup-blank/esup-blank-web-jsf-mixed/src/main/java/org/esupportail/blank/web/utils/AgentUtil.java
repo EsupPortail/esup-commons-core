@@ -9,7 +9,8 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
-import org.apache.log4j.Logger;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.i18n.I18nUtils;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -27,7 +28,7 @@ public class AgentUtil implements Serializable, InitializingBean {
 	/**
 	 * For logging.
 	 */
-	private final Logger logger = Logger.getLogger(this.getClass());
+	private final Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * The phone family.

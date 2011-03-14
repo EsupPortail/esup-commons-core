@@ -20,7 +20,8 @@ import javax.portlet.PortletRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.faces.Bridge;
 
-import org.apache.log4j.Logger;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.exceptionHandling.ExceptionService;
 import org.esupportail.commons.services.exceptionHandling.ExceptionUtils;
 import org.esupportail.commons.utils.ContextUtils;
@@ -36,7 +37,7 @@ public class FaceletServletOrPortletViewHandler extends FaceletViewHandler {
 	/**
 	 * A logger.
 	 */
-	private Logger logger = Logger.getLogger(this.getClass());
+	private Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * @param parent

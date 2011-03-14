@@ -11,7 +11,8 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.apache.myfaces.trinidad.util.ExternalContextUtils;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.exceptionHandling.ExceptionUtils;
@@ -33,7 +34,7 @@ public class ExceptionController extends
 	/**
 	 * For Logging.
 	 */
-	private final Logger logger = Logger.getLogger(this.getClass());
+	private final Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * True if we are in portlet mode.

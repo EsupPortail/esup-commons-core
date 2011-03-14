@@ -10,7 +10,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.apache.myfaces.trinidad.util.ExternalContextUtils;
 import org.esupportail.blank.domain.beans.User;
 import org.esupportail.blank.services.auth.Authenticator;
@@ -32,7 +33,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	/**
 	 * For Logging.
 	 */
-	private final Logger logger = Logger.getLogger(this.getClass());
+	private final Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * The exception controller.
@@ -93,7 +94,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * The show exception details state.
 	 */
 	private boolean showExceptionDetails;
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -420,5 +421,5 @@ public class SessionController extends AbstractDomainAwareBean {
 		return facesContext.getExternalContext().getRequestContextPath()
 				+ "/stylesheets/home.xhtml";
 	}
-	
+
 }
