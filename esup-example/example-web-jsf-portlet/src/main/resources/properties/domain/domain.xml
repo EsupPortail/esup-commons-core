@@ -37,6 +37,6 @@
 	
 	<!-- BEGIN NOT TO OTHER ESTABLISHMENT --> 
 	<jaxws:client id="domainService" serviceClass="org.esupportail.example.domain.DomainService"
-		address="http://localhos:8085/example-web-jsf-servlet/cxf/DomainService" />
+		address="http://localhost:8085/cxf/DomainService" />
 	
 </beans>
