@@ -17,6 +17,7 @@
 	      		<value>file:${application.config.location}</value>
 			</list>
 		</property>
+	    <property name = "ignoreResourceNotFound" value="true" />
 	</bean>
 	<bean id="app_context" class="org.esupportail.commons.context.ApplicationContextHolder"/>
 	
