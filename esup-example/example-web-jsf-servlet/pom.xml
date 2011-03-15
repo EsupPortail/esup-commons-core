@@ -67,14 +67,14 @@
 									</fileset>
 								</copy>
 								<copy todir="${basedir}/target/installer/lisezmoi">
-									<fileset dir="${basedir}/src/main/installer/custom/">
+									<fileset dir="${basedir}/src/main/izpack/custom/">
 										<include name="**/*" />
 									</fileset>
 								</copy>
 								<copy file="${basedir}/target/${project.build.finalName}.war"
 									tofile="${basedir}/target/installer/example-web-jsf-servlet.war" />
 								<copy todir="${basedir}/target/installer">
-									<fileset dir="${basedir}/src/main/installer/config/jar/">
+									<fileset dir="${basedir}/src/main/izpack/config/jar/">
 										<include name="**/*" />
 									</fileset>
 								</copy>
@@ -108,7 +108,7 @@
 								</copy>
 
 								<copy todir="${basedir}/target/exe" overwrite="yes">
-									<fileset dir="${basedir}/src/main/installer/config/exe/build">
+									<fileset dir="${basedir}/src/main/izpack/config/exe/build">
 										<exclude name=".svn" />
 									</fileset>
 								</copy>
@@ -128,8 +128,8 @@
 								<concat
 									destfile="${basedir}/target/${project.build.finalName}-quickstart.exe"
 									binary="true">
-									<fileset file="${basedir}/src/main/installer/config/exe/7zS.sfx" />
-									<fileset file="${basedir}/src/main/installer/config/exe/config.txt" />
+									<fileset file="${basedir}/src/main/izpack/config/exe/7zS.sfx" />
+									<fileset file="${basedir}/src/main/izpack/config/exe/config.txt" />
 									<fileset file="${basedir}/target/exe/files.7z" />
 								</concat>
 
