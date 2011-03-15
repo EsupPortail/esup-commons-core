@@ -1,5 +1,0 @@
-;!@Install@!UTF-8!
-Title="Example"
-BeginPrompt="Voulez-vous installer Example ?"
-RunProgram="launcher.exe"
-;!@InstallEnd@!
