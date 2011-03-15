@@ -40,24 +40,4 @@
      <createForPack name="Example"/>
    </shortcut>
 
-   <shortcut
-     name="Uninstaller"
-     programGroup="yes"
-     desktop="yes"
-     applications="no"
-     startMenu="no"
-     startup="no"
-     target="/usr/lib/java/bin/java"
-     commandLine="-jar
-     &amp;quot;$INSTALL_PATH/Uninstaller/uninstaller.jar&amp;quot;"
-     initialState="noShow"
-     iconFile="trashcan_full"
-     iconIndex="0"
-     workingDirectory=""
-     type="Application"
-     encoding="UTF-8"
-     description="Example uninstaller">
-     <createForPack name="Example" />
-   </shortcut>
-
 </shortcuts>
