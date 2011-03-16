@@ -12,6 +12,7 @@ import org.esupportail.commons.services.authentication.info.AuthInfo;
 import org.esupportail.commons.services.i18n.I18nUtils;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -60,12 +61,8 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.authenticationService == null) {
-			String[] args = { "authenticationService",
-					this.getClass().getName() };
-			throw new Exception(I18nUtils.createI18nService().getString(
-					"CONFIG_EXCEPTION.TITLE", args));
-		}
+		Assert.notNull(authenticationService, "property authenticationService of class "
+				+ this.getClass().getName() + " can not be null");
 	}
 
 	@Override
