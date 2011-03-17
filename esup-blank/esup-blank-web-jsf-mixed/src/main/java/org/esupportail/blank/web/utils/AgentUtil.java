@@ -54,11 +54,8 @@ public class AgentUtil implements Serializable, InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (this.skins == null) {
-			String[] args = { "skins", this.getClass().getName() };
-			throw new Exception(I18nUtils.createI18nService().getString(
-					"CONFIG_EXCEPTION.TITLE", args));
-		}
+		Assert.notNull(skins, "property skins of class "
+				+ this.getClass().getName() + " can not be null");
 	}
 
 	/**
