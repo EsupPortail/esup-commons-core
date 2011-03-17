@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.services.i18n.I18nUtils;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
