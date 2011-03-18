@@ -94,7 +94,16 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 */
 	@Override
 	public void addUser(User user) {
-		daoService.addUser(user);
+		User tmp = daoService.getUser(user.getId());
+		if (tmp == null) { 
+			// user does not already exists in database
+			daoService.addUser(user);			
+		}
+		else {
+			user.setInformations(tmp.getInformations());
+			daoService.updateUser(user);
+		}
+		
 	}
 
 	//////////////////////////////////////////////////////////////
