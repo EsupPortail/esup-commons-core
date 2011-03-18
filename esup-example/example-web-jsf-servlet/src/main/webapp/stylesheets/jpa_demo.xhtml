@@ -13,7 +13,7 @@
 		<e:subSection value="#{msgs['JPA_DEMO.TITLE.ADD_USER']}" />
 		<t:htmlTag value="br" />
 		<h:form id="formAddUser">
-			
+
 			<!-- Exemple component facelet cf WEB-INF/jsf/components/rowInput.xhtml -->
 			<e:ul styleClass="fl-controls-left fl-container-700">
 				<e:rowInput id="uid" label="uid :" size="30" maxlength="50"
@@ -70,7 +70,7 @@
 					<p:commandButton value="delete" update="growl,formAddUser,myform3"
 						action="#{welcomeController.deleteUser}" >
 						<f:setPropertyActionListener value="#{user}"
-							target="#{welcomeController.deletableUser}" />
+							target="#{welcomeController.userToDelete}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
