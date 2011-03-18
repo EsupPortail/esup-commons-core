@@ -53,7 +53,7 @@ public class JpaUtils {
 	 */
 	public static void exposeEntityManager(PortletRequest request) {
 		//use code form doFilterInternal of Spring OpenEntityManagerInViewFilter	
-		EntityManagerFactory emf = ApplicationContextHolder.getContext().getBean(DEFAULT_PERSISTENCE_MANAGER_FACTORY_BEAN_NAME, EntityManagerFactory.class);
+		EntityManagerFactory emf = getEntityManagerFactory();
 		request.setAttribute(REQUEST_JPA_ENTITY_MANAGER_ATTRIBUTE, emf);
 		Boolean participate = false;
 
@@ -71,6 +71,13 @@ public class JpaUtils {
 			}
 		}
 		request.setAttribute(REQUEST_JPA_PARTICIPATE_ATTRIBUTE, participate);
+	}
+
+	/**
+	 * @return EntityManagerFactory registered in Spring configuration
+	 */
+	private static EntityManagerFactory getEntityManagerFactory() {
+		return ApplicationContextHolder.getContext().getBean(DEFAULT_PERSISTENCE_MANAGER_FACTORY_BEAN_NAME, EntityManagerFactory.class);
 	}
 	
 	/**

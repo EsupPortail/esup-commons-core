@@ -12,6 +12,7 @@ import javax.portlet.PortletRequest;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.ContextUtils;
+import org.esupportail.commons.utils.JpaUtils;
 
 /**
  * @author bourges
@@ -19,7 +20,7 @@ import org.esupportail.commons.utils.ContextUtils;
  * PortletPhaseListener est indispensable en mode portlet pour remplacer org.springframework.web.context.request.RequestContextListener
  *
  */
-public class PortletPhaseListener implements PhaseListener {
+public class PortletPhaseListenerWithJPA implements PhaseListener {
 
 	private static final long serialVersionUID = 6056033610786238561L;
 
@@ -37,6 +38,7 @@ public class PortletPhaseListener implements PhaseListener {
 			FacesContext context = event.getFacesContext();
 			PortletRequest request = (PortletRequest) context.getExternalContext().getRequest();
 			ContextUtils.exposeRequest(request);
+			JpaUtils.exposeEntityManager(request);
 		}
 	}
 
@@ -49,6 +51,7 @@ public class PortletPhaseListener implements PhaseListener {
 		if (event.getPhaseId().equals(PhaseId.RENDER_RESPONSE) || context.getResponseComplete()
 				|| (!event.getPhaseId().equals(PhaseId.RESTORE_VIEW) && context.getRenderResponse())) {
 			PortletRequest request = (PortletRequest) context.getExternalContext().getRequest();
+			JpaUtils.unexposeEntityManager(request);
 			ContextUtils.unexposeRequest(request);
 		}
 	}
