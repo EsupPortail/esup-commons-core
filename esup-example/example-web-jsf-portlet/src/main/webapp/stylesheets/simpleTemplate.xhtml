@@ -6,28 +6,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:e="http://commons.esup-portail.org">
 	<f:view locale="#{sessionController.locale}">
-		<ui:repeat value="#{tagsConfigurator.stylesheets}" var="path">
-			<t:stylesheet path="#{path}" />
-		</ui:repeat>
 		<t:htmlTag value="div" styleClass="fl-theme-app">
 			<t:div id="welcomepages">
-				<t:div id="navigationHeader" styleClass="app-pagebar">
-					<h:form id="nav_header" styleClass="app-form">
-					</h:form>
-				</t:div>
 				<t:div styleClass="app-body">
-					<t:div styleClass="app-navigation">
-					</t:div>
 					<t:div styleClass="app-content">
 						<t:htmlTag value="br" />
-						<ui:insert name="allContent" />
+						<ui:insert name="content" />
 					</t:div>
-					<t:div style="clear:both;" />
-				</t:div>
-				<t:div id="navigationFooter"
-					styleClass="fl-container-flex app-pagebar">
-					<h:form id="nav_footer" styleClass="app-form">
-					</h:form>
 				</t:div>
 			</t:div>
 			<t:div styleClass="app-footer">

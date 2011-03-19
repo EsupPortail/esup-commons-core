@@ -27,6 +27,12 @@
 			<description>The authenticator service.</description>
 		</property>
 	</bean>
+	
+	<bean id="simpleController"
+		class="org.esupportail.example.web.controllers.SimpleController"
+		parent="abstractContextAwareController" scope="request">
+		<description>A bean to manage the welcome page.</description>
+	</bean>	
 
 	<bean id="abstractContextAwareController" abstract="true"
 		parent="abstractDomainAwareBean" scope="session">

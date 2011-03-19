@@ -23,6 +23,7 @@
 	</application>
 	<lifecycle>
 		<phase-listener>org.esupportail.commons.jsf.PortletPhaseListener</phase-listener>
+		<!-- <phase-listener>org.esupportail.commons.jsf.PortletPhaseListenerWithJPA</phase-listener> -->
 		<phase-listener>org.esupportail.commons.jsf.ResourceBundlePhaseListener</phase-listener>
 	</lifecycle>
 </faces-config>
