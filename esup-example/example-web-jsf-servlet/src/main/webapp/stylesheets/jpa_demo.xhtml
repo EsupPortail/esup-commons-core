@@ -23,7 +23,7 @@
 			</e:ul>
 			<hr/>
 			<br />
-			<p:commandButton value="add" action="#{welcomeController.addUser}" update="growl,formAddUser,myform3"/>
+			<p:commandButton value="add" action="#{welcomeController.addUser}" update="growl,@form,myform3"/>
 			<p:commandButton value="cancel" action="#{userBean.reset}" update="formAddUser"/>
 		</h:form>
 		<br/>
@@ -67,7 +67,7 @@
 					<f:facet name="header">
 						<h:outputText value="Action" />
 					</f:facet>
-					<p:commandButton value="delete" update="growl,formAddUser,myform3"
+					<p:commandButton value="delete" update="@form,growl,formAddUser"
 						action="#{welcomeController.deleteUser}" >
 						<f:setPropertyActionListener value="#{user}"
 							target="#{welcomeController.userToDelete}" />

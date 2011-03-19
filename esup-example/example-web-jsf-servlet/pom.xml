@@ -38,6 +38,7 @@
 			</resource>
 		</resources>
 		<plugins>
+<!-- 
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.4</version>
@@ -152,6 +153,7 @@
 					</execution>
 				</executions>
 			</plugin>		
+ -->		
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
@@ -161,6 +163,7 @@
 					<jettyEnvXml>${basedir}/src/main/config/jetty-env.xml</jettyEnvXml>
 				</configuration>
 			</plugin>
+<!-- 
 			<plugin>
 				<groupId>org.codehaus.izpack</groupId>
 				<artifactId>izpack-maven-plugin</artifactId>
@@ -184,7 +187,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			
+ -->						
 		</plugins>
 	</build>
 	<dependencies>

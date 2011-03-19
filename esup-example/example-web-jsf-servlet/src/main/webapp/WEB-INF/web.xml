@@ -132,6 +132,11 @@
 		<servlet-name>CXFServlet</servlet-name>
 		<url-pattern>/cxf/*</url-pattern>
 	</servlet-mapping>
+	<filter-mapping>
+		<filter-name>Hibernate Filter</filter-name>
+		<servlet-name>CXFServlet</servlet-name>
+	</filter-mapping>
+	
 	
 	
 	<welcome-file-list>

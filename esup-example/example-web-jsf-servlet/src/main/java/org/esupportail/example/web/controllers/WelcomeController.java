@@ -234,6 +234,8 @@ public class WelcomeController  extends AbstractContextAwareController {
 		u.setId(userToUpdate.getId());
 		u.setDisplayName(userToUpdate.getDisplayName());
 		getDomainService().deleteUser(u);
+		userPaginator.forceReload();
+		addInfoMessage(null, "INFO.DELETE.SUCCESS");
 	}
 
 	/**
