@@ -163,10 +163,11 @@
 					<jettyEnvXml>${basedir}/src/main/config/jetty-env.xml</jettyEnvXml>
 				</configuration>
 			</plugin>
-<!-- 
+ 
 			<plugin>
 				<groupId>org.codehaus.izpack</groupId>
 				<artifactId>izpack-maven-plugin</artifactId>
+				<version>1.0-alpha-5</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -187,7 +188,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
- -->						
+				
 		</plugins>
 	</build>
 	<dependencies>
