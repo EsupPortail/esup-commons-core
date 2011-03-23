@@ -15,8 +15,8 @@
 		class="org.esupportail.commons.context.ApplicationContextHolder" />
 
 	<import resource="auth/auth.xml" />
-	<import resource="exceptionHandling/exceptionHandling.xml" />
 	<import resource="domain/domain.xml" />
+	<import resource="exceptionHandling/exceptionHandling.xml" />
 	<import resource="i18n/i18n.xml" />
 	<import resource="misc/abstractBeans.xml" />
 	<import resource="misc/application.xml" />
