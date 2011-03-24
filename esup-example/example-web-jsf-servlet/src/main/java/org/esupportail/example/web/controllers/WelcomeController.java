@@ -283,8 +283,11 @@ public class WelcomeController  extends AbstractContextAwareController {
 	 * @return
 	 */
 	public String getCurrentUserId() {
-		return getCurrentUser().getId();
-	}
+        if (getCurrentUser()!=null)
+            return getCurrentUser().getId();
+        else
+            return null;
+    }
 
 	
 	/*
