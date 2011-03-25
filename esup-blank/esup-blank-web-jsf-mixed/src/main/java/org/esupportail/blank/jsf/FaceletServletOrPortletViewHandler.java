@@ -246,7 +246,7 @@ public class FaceletServletOrPortletViewHandler extends FaceletViewHandler {
 		}
 		NavigationHandler navigation = context.getApplication()
 				.getNavigationHandler();
-		navigation.handleNavigation(context, "", "exception");
+		navigation.handleNavigation(context, "", exceptionService.getExceptionView());
 	}
 
 }

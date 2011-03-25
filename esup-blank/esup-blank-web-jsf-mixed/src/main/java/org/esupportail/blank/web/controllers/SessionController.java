@@ -351,7 +351,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * @param accessibilityMode
 	 *            the accessibilityMode to set
 	 * @throws Exception
-	 * @throws Exception
 	 */
 	public void setAccessibilityMode(String accessibilityMode) throws Exception {
 		User currentUser = getCurrentUser();
