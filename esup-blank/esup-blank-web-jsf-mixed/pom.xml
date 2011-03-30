@@ -255,6 +255,18 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.portlet</groupId>
+			<artifactId>portlet-api</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>el-api</artifactId>
+			<version>6.0.24</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-commons2-jsf-trinidad</artifactId>
 			<version>0.3.0-SNAPSHOT</version>
@@ -294,18 +306,6 @@
 			<version>1.0.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.portlet</groupId>
-			<artifactId>portlet-api</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>el-api</artifactId>
-			<version>6.0.24</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
