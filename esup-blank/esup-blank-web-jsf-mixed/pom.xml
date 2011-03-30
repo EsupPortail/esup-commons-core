@@ -73,13 +73,15 @@
 							<scanTargetPatterns>
 								<scanTargetPattern>
 									<directory>src/main/webapp/WEB-INF</directory>
-									<excludes>
-										<exclude>**/*.jsp</exclude>
-										<exclude>**/*.xhtml</exclude>
-									</excludes>
 									<includes>
 										<include>**/*.properties</include>
 										<include>**/*.xml</include>
+									</includes>
+								</scanTargetPattern>
+								<scanTargetPattern>
+									<directory>src/main/webapp/stylesheets</directory>
+									<includes>
+										<include>**/*.xhtml</include>
 									</includes>
 								</scanTargetPattern>
 							</scanTargetPatterns>
