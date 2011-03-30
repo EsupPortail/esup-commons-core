@@ -211,7 +211,7 @@ public class FaceletServletOrPortletViewHandler extends FaceletViewHandler {
 			 * itself is updated in the future and has an error
 			 */
 			if (logger.isDebugEnabled()) {
-				logger.debug("------------------- boucle -------------------");
+				logger.debug("------------------- prevent boucle -------------------");
 			}
 			super.handleRenderException(context, ex);
 			return;
