@@ -285,14 +285,14 @@
 		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-commons2-exceptionHandling</artifactId>
-			<version>0.2.2</version>
+			<version>0.2.3</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency> 
 		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-commons2-jsf-exception</artifactId>
-			<version>0.2.2</version>
+			<version>0.2.3</version>
 			<type>jar</type>
 			<scope>compile</scope>
 			<exclusions>
