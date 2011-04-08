@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-blank-domain-services</artifactId>
-			<version>${esupcommons.version}</version>
+			<version>0.2.3-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
