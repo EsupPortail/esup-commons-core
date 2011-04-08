@@ -51,20 +51,13 @@
 			<version>1.5.3</version>
 		</dependency>
 
-        <!-- ===== Runtime Dependencies ================================== -->
-
-
-        <!-- ===== Provided Dependencies ================================== -->
-
-        <!-- Needed for taglib reference -->
-
-        <!-- ===== Test Dependencies ====================================== -->
 
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.esupportail</groupId>
 			<artifactId>esup-blank-domain-services</artifactId>
