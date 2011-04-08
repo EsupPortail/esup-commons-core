@@ -1,0 +1,49 @@
+.exception-details {
+text-align: left;
+display: none;
+margin: 0;
+padding: 0;
+}
+
+
+#menu {
+margin: 20px 20%;
+padding: 10px;
+}
+
+#menu li { 
+display: inline ; 
+padding: 10px 20px;
+background: #dee;
+border: 2px groove #080;
+border-radius: 10px;
+-moz-border-radius: 10px;
+}
+
+#menu li:hover { 
+background: #afa;
+}
+
+h1 {
+clear:both; 
+padding:20px 0 20px 25px; 
+background:#666; 
+color:#fff; 
+} 
+
+
+h2 {
+padding:20px 0 20px 25px; 
+background:#eee; 
+color:#4949; 
+border: 2px groove #080;
+} 
+
+#hellopart{
+margin-left: 30px;
+padding:20px 0 20px 25px; 
+background:#fafafa; 
+color:#4949; 
+border: 2px groove #080;
+} 
+
