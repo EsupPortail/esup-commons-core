@@ -7,12 +7,12 @@
   
   <!-- JQUERY -->
   <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-  <script type="text/javascript" src="js/esup-blank.js"></script>
+  <script type="text/javascript" src="js/blank.js"></script>
   
   <!-- Framework CSS -->
   <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">
-  <link rel="stylesheet" href="css/esup-blank.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="css/blank.css" type="text/css" media="screen, projection">
 
 </head>
 
