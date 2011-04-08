@@ -49,6 +49,7 @@
 		<module>esup-blank-web-jsf-mobile</module>
 		<module>esup-blank-web-jsf-portlet</module>
 		<module>esup-blank-web-springmvc-servlet</module>
+		<module>esup-blank-web-springmvc-portlet</module>
 	</modules>
 	<build>
 		<defaultGoal>install</defaultGoal>
