@@ -36,6 +36,11 @@
 			<type>pom</type>
 		</dependency>
 		<dependency>
+			<groupId>org.esupportail</groupId>
+			<artifactId>esup-commons2-ldap</artifactId>
+			<version>${esupcommons.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<version>2.0</version>
