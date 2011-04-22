@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>esup-blank</artifactId>
-		<groupId>org.esupportail</groupId>
+		<groupId>org.esupportail.blank</groupId>
 		<version>0.2.3-SNAPSHOT</version>
 	</parent>
-	<groupId>org.esupportail</groupId>
+	<groupId>org.esupportail.blank</groupId>
 	<artifactId>esup-blank-web-jsf-servlet</artifactId>
 	<packaging>war</packaging>
 	<version>0.2.3-SNAPSHOT</version>
@@ -52,7 +52,7 @@
 			<version>4.0.2.GA</version>
 		</dependency>
 		<dependency>
-			<groupId>org.esupportail</groupId>
+			<groupId>org.esupportail.blank</groupId>
 			<artifactId>esup-blank-domain-services</artifactId>
 			<version>0.2.3-SNAPSHOT</version>
 		</dependency>

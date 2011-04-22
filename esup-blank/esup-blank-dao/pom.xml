@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>esup-blank</artifactId>
-		<groupId>org.esupportail</groupId>
+		<groupId>org.esupportail.blank</groupId>
 		<version>0.2.3-SNAPSHOT</version>
 	</parent>
-	<groupId>org.esupportail</groupId>
+	<groupId>org.esupportail.blank</groupId>
 	<artifactId>esup-blank-dao</artifactId>
 	<version>0.2.3-SNAPSHOT</version>
 	<name>esup-blank-dao</name>
@@ -18,7 +18,7 @@
 			<version>${esupcommons.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.esupportail</groupId>
+			<groupId>org.esupportail.blank</groupId>
 			<artifactId>esup-blank-domain-beans</artifactId>
 			<version>0.2.3-SNAPSHOT</version>
 		</dependency>

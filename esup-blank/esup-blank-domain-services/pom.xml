@@ -2,17 +2,17 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>esup-blank</artifactId>
-    <groupId>org.esupportail</groupId>
+    <groupId>org.esupportail.blank</groupId>
     <version>0.2.3-SNAPSHOT</version>
   </parent>
-  <groupId>org.esupportail</groupId>
+  <groupId>org.esupportail.blank</groupId>
   <artifactId>esup-blank-domain-services</artifactId>
   <version>0.2.3-SNAPSHOT</version>
   <name>esup-blank-domain-services</name>
   <description>Domain Interface and Impl</description>
   <dependencies>
   	<dependency>
-  		<groupId>org.esupportail</groupId>
+  		<groupId>org.esupportail.blank</groupId>
   		<artifactId>esup-blank-domain-beans</artifactId>
   		<version>0.2.3-SNAPSHOT</version>
   		<type>jar</type>
@@ -20,7 +20,7 @@
   	<dependency>
   		<groupId>org.esupportail</groupId>
   		<artifactId>esup-commons2-auth</artifactId>
-  		<version>0.2.2</version>
+  		<version>${esupcommons.version}</version>
   		<type>jar</type>
   	</dependency>
   </dependencies>
