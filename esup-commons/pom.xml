@@ -4,13 +4,13 @@
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.4-SNAPSHOT</version>
+	<version>0.2.4</version>
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
-		<connection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-commons/</connection>
-		<developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-commons/</developerConnection>
-		<url>https://sourcesup.cru.fr/scm/?group_id=244</url>
+		<connection>scm:svn:https://subversion.cru.fr/esup-commons/tags/commons2-0.2.4</connection>
+		<developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/tags/commons2-0.2.4</developerConnection>
+		<url>scm:svn:https://subversion.cru.fr/esup-commons/tags/commons2-0.2.4</url>
 	</scm>
 	<modules>
 		<module>esup-commons-core</module>

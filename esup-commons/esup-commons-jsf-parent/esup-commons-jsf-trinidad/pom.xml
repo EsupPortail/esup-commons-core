@@ -3,12 +3,12 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.2.4-SNAPSHOT</version>
+		<version>0.2.4</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-jsf-trinidad</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.4-SNAPSHOT</version>
+	<version>0.2.4</version>
 	<name>esup-commons2-jsf-trinidad</name>
 	<description>Artifact pour esup-commons-jsf-trinidad
 	</description>
