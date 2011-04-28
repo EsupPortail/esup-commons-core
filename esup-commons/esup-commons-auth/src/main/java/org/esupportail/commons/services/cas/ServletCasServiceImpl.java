@@ -3,15 +3,10 @@
  */
 package org.esupportail.commons.services.cas;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-
 import org.esupportail.commons.utils.ContextUtils;
+import org.jasig.cas.client.util.AbstractCasFilter;
+import org.jasig.cas.client.validation.Assertion;
 import org.springframework.beans.factory.InitializingBean;
-
-//import edu.yale.its.tp.cas.client.CASReceipt;
-//import edu.yale.its.tp.cas.client.filter.CASFilter;
-//import edu.yale.its.tp.cas.proxy.ProxyTicketReceptor;
 
 /** 
  * The implementation of CasService for setvlet.
@@ -41,19 +36,9 @@ public class ServletCasServiceImpl implements InitializingBean, CasService {
 	 * @see org.esupportail.commons.services.cas.CasService#getProxyTicket(java.lang.String)
 	 */
 	public String getProxyTicket(final String targetService) throws CasException {
-//		CASReceipt receipt = (CASReceipt) ContextUtils.getSessionAttribute(CASFilter.CAS_FILTER_RECEIPT);
-//		String pgtIou = receipt.getPgtIou();
-//		if (pgtIou == null) {
-//			throw new CasException("pgtIou is null. Check your CAS proxy configuration.");
-//		}
-//		try {
-//			String url = URLEncoder.encode(targetService, "UTF-8"); 
-//			return ProxyTicketReceptor.getProxyTicket(pgtIou, url);
-//		} catch (IOException e) {
-//			throw new CasException("Unable to contact CAS serveur.", e);
-//		}
-		//TODO RBV2: Implement getProxyTicket
-		throw new CasException("getProxyTicket() not yet implemented");
+		Assertion assertion = (Assertion) ContextUtils.getGlobalSessionAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+		String ret = assertion.getPrincipal().getProxyTicketFor(targetService);
+		return ret;
 	}
 
 	/**

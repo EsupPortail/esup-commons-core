@@ -3,10 +3,7 @@
  */
 package org.esupportail.commons.services.authentication;
 
-
-
 import org.esupportail.commons.utils.ContextUtils;
-import org.esupportail.commons.utils.HttpUtils;
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 
