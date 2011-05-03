@@ -3,6 +3,8 @@
 	xmlns:tr="http://myfaces.apache.org/trinidad"
 	locale="#{sessionController.locale}">
 	<tr:document title="#{msgs['BLANK.TEXT']}">
+	<!-- div class for portlet css -->
+	<div class="trinidad12">
 		<tr:group rendered="#{not exceptionController.exception}">
 			<ui:include src="menu.xhtml" />
 			<ui:insert name="content" />
@@ -13,5 +15,6 @@
 				id="restart" action="#{exceptionController.restart}" />
 			</tr:form>
 		</tr:group>
+	</div>
 	</tr:document>
 </f:view>
