@@ -12,7 +12,7 @@
               /stylesheets/desktop/welcome.xhtml -->
 		<init-param>
 			<name>javax.portlet.faces.defaultViewId.view</name>
-			<value>/stylesheets/home.jsp</value>
+			<value>/stylesheets/home.xhtml</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

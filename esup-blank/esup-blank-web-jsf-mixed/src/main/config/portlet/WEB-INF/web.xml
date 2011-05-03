@@ -159,11 +159,6 @@
 		<servlet-name>esup-blank-${misc.version}</servlet-name>
 		<servlet-class>org.apache.pluto.core.PortletServlet</servlet-class>
 		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>org.apache.portals.bridges.portletfilter.FilterPortlet
-            </param-value>
-		</init-param>
-		<init-param>
 			<param-name>portlet-guid</param-name>
 			<param-value>esup-blank-${misc.version}.${portlet.name}</param-value>
 		</init-param>
