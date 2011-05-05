@@ -11,17 +11,39 @@
 	<packaging>war</packaging>
 	<name>esup-blank-web-jsf-mixed</name>
 	<version>0.2.3-SNAPSHOT</version>
+	<build>
+		<defaultGoal>javadoc:javadoc</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<minmemory>128m</minmemory>
+					<maxmemory>512m</maxmemory>
+					<goal>javadoc:javadoc</goal>
+					<reportOutputDirectory>docs/javadoc</reportOutputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration></configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<properties>
 		<misc.version>0.1.0</misc.version>
 		<portlet.name>EsupBlankPortlet</portlet.name>
 	</properties>
 	<profiles>
 		<profile>
-			<id>servletDevelopment</id>
+			<id>Development</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 				<property>
-					<name>servletDevelopment</name>
+					<name>Development</name>
 					<value>true</value>
 				</property>
 			</activation>
@@ -92,10 +114,10 @@
 			</build>
 		</profile>
 		<profile>
-			<id>portletDevelopment</id>
+			<id>Production</id>
 			<activation>
 				<property>
-					<name>portletDevelopment</name>
+					<name>Production</name>
 					<value>true</value>
 				</property>
 			</activation>
@@ -104,50 +126,6 @@
 					<filter>src/main/resources/properties/defaults.properties</filter>
 					<filter>src/main/resources/properties/config.properties</filter>
 				</filters>
-				<resources>
-					<resource>
-						<directory>src/main/java</directory>
-						<includes>
-							<include>**/*.java</include>
-						</includes>
-					</resource>
-					<resource>
-						<directory>src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-				<defaultGoal>package</defaultGoal>
-				<plugins>
-					<plugin>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.1</version>
-						<configuration>
-							<webResources>
-								<resource>
-									<filtering>true</filtering>
-									<directory>src/main/config/portlet</directory>
-									<includes>
-										<include>WEB-INF/web.xml</include>
-										<include>WEB-INF/portlet.xml</include>
-									</includes>
-								</resource>
-							</webResources>
-							<warName>esup-blank-portlet-${misc.version}</warName>
-							<outputDirectory>portletDevelopment</outputDirectory>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>servletProduction</id>
-			<activation>
-				<property>
-					<name>servletProduction</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
 				<resources>
 					<resource>
 						<directory>src/main/java</directory>
@@ -171,56 +149,11 @@
 									<directory>src/main/webapp</directory>
 									<includes>
 										<include>WEB-INF/web.xml</include>
-									</includes>
-								</resource>
-							</webResources>
-							<warName>esup-blank-servlet-${misc.version}</warName>
-							<outputDirectory>servletProduction</outputDirectory>
-							<packagingExcludes>**/config.properties</packagingExcludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>portletProduction</id>
-			<activation>
-				<property>
-					<name>portletProduction</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<resources>
-					<resource>
-						<directory>src/main/java</directory>
-						<includes>
-							<include>**/*.java</include>
-						</includes>
-					</resource>
-					<resource>
-						<directory>src/main/resources</directory>
-					</resource>
-				</resources>
-				<defaultGoal>package</defaultGoal>
-				<plugins>
-					<plugin>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.1</version>
-						<configuration>
-							<webResources>
-								<resource>
-									<filtering>true</filtering>
-									<directory>src/main/config/portlet</directory>
-									<includes>
-										<include>WEB-INF/web.xml</include>
 										<include>WEB-INF/portlet.xml</include>
 									</includes>
 								</resource>
 							</webResources>
-							<warName>esup-blank-portlet-${misc.version}</warName>
-							<outputDirectory>portletProduction</outputDirectory>
-							<packagingExcludes>**/config.properties</packagingExcludes>
+							<warName>esup-blank-${misc.version}</warName>
 						</configuration>
 					</plugin>
 				</plugins>
