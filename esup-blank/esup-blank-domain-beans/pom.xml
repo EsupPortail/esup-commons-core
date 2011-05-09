@@ -10,7 +10,7 @@
 	<artifactId>esup-blank-domain-beans</artifactId>
 	<version>0.2.3-SNAPSHOT</version>
 	<name>esup-blank-domain-beans</name>
-	<description>The busness object</description>
+	<description>The business object</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.esupportail</groupId>
