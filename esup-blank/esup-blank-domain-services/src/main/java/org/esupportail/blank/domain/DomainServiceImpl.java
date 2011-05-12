@@ -63,7 +63,6 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 			// l'Uid.
 			user.setDisplayName(uid);
 			user.setLanguage("fr");
-			user.setAccessibilityMode("default");
 			users.add(user);
 		}
 		return user;
