@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
 
-import org.esupportail.commons.services.i18n.I18nUtils;
-
 /**
  * The class that represent users.
  */
@@ -53,11 +51,6 @@ public class User implements Serializable {
 	private String language;
 
 	/**
-	 * The prefered accessibility mode.
-	 */
-	private String accessibilityMode;
-
-	/**
 	 * Bean constructor.
 	 */
 	public User() {
@@ -84,7 +77,7 @@ public class User implements Serializable {
 	public String toString() {
 		return "User#" + hashCode() + "[id=[" + id + "], displayName=["
 				+ displayName + "], admin=[" + admin + "], language=["
-				+ language + "], accessibility=[" + accessibilityMode + "]]";
+				+ language + "]]";
 	}
 
 	/**
@@ -130,7 +123,6 @@ public class User implements Serializable {
 	public boolean isAdmin() {
 		return this.admin;
 	}
-
 	/**
 	 * @return the language
 	 */
@@ -154,32 +146,4 @@ public class User implements Serializable {
 		return locale.getDisplayLanguage(locale);
 	}
 
-	/**
-	 * @return the accessibilityMode
-	 */
-	public String getAccessibilityMode() {
-		return accessibilityMode;
-	}
-
-	/**
-	 * @param accessibilityMode
-	 *            the accessibilityMode to set
-	 */
-	public void setAccessibilityMode(String accessibilityMode) {
-		this.accessibilityMode = accessibilityMode;
-	}
-
-	/**
-	 * @return the user display accessibility mode
-	 */
-	public String getDisplayAccessibilityMode() {
-		if (accessibilityMode.equals("default"))
-			return I18nUtils.createI18nService().getString(
-					"PREFERENCES.ACCESSIBILITY.DEFAULT");
-		if (accessibilityMode.equals("inaccessible"))
-			return I18nUtils.createI18nService().getString(
-					"PREFERENCES.ACCESSIBILITY.INACCESSIBLE");
-		return I18nUtils.createI18nService().getString(
-				"PREFERENCES.ACCESSIBILITY.SCREENREADER");
-	}
 }
