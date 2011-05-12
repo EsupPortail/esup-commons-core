@@ -17,6 +17,7 @@
 
 	<lifecycle>
 		<phase-listener>org.esupportail.commons.jsf.ResourceBundlePhaseListener</phase-listener>
+		<phase-listener>org.esupportail.commons.jsf.ServletOrPortletPhaseListener</phase-listener>
 	</lifecycle>
 
 </faces-config>

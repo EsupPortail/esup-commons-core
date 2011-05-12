@@ -10,6 +10,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.esupportail.commons.exceptions.UserNotFoundException;
+import org.esupportail.commons.services.i18n.I18nUtils;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.apache.myfaces.trinidad.util.ExternalContextUtils;
@@ -81,11 +83,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	private String accessibilityMode = "default";
 
 	/**
-	 * The selected language.
-	 */
-	private String languageSelected;
-
-	/**
 	 * The CAS logout URL.
 	 */
 	private String casLogoutUrl;
@@ -94,6 +91,11 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * The show exception details state.
 	 */
 	private boolean showExceptionDetails;
+
+	/**
+	 * The current User.
+	 */
+	private User currentUser;
 
 	/**
 	 * Constructor.
@@ -168,16 +170,39 @@ public class SessionController extends AbstractDomainAwareBean {
 		if (isPortletMode()) {
 			FacesContext fc = FacesContext.getCurrentInstance();
 			String uid = fc.getExternalContext().getRemoteUser();
-			return getDomainService().getUser(uid);
+			if (currentUser != null && currentUser.getId().equals(uid)) {
+				return currentUser;
+			}
+			try {
+				currentUser = getDomainService().getUser(uid);
+			} catch (UserNotFoundException e) {
+				currentUser = new User();
+				currentUser.setId(uid);
+				currentUser.setDisplayName(I18nUtils.createI18nService().getString(e
+						.getMessage()));
+				currentUser.setAdmin(false);
+			}
+			return currentUser;
 		}
 		User authUser;
 		try {
 			authUser = authenticator.getUser();
-			User currentUser = null;
 			if (authUser != null) {
+				if (currentUser != null
+						&& currentUser.getId().equals(authUser.getId())) {
+					return currentUser;
+				}
 				// for updating
 				String uid = authUser.getId();
-				currentUser = getDomainService().getUser(uid);
+				try {
+					currentUser = getDomainService().getUser(uid);
+				} catch (UserNotFoundException e) {
+					currentUser = new User();
+					currentUser.setId(uid);
+					currentUser.setDisplayName(I18nUtils.createI18nService().getString(e
+							.getMessage()));
+					currentUser.setAdmin(false);
+				}
 				return currentUser;
 			}
 		} catch (Exception e) {
@@ -192,7 +217,7 @@ public class SessionController extends AbstractDomainAwareBean {
 		super.reset();
 		action = null;
 		fromAction = null;
-		languageSelected = null;
+		currentUser = null;
 	}
 
 	/**
@@ -303,29 +328,17 @@ public class SessionController extends AbstractDomainAwareBean {
 	}
 
 	/**
-	 * @return null.
-	 */
-	public String setLocaleAction() {
-		setLocale(new Locale(languageSelected));
-		return null;
-	}
-
-	/**
 	 * @param locale
 	 *            the locale to set
 	 */
 	public void setLocale(Locale locale) {
-		// resetSessionLocale();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (context != null) {
 			context.getViewRoot().setLocale(locale);
 		}
-		User currentUser = getCurrentUser();
-		if (currentUser != null) {
-			getCurrentUser().setLanguage(locale.getLanguage());
-		}
 	}
 
+	@Override
 	public Locale getLocale() {
 		Locale locale = new Locale("fr");
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -340,46 +353,15 @@ public class SessionController extends AbstractDomainAwareBean {
 	 *         authenticated.
 	 */
 	public String getAccessibilityMode() {
-		User currentUser = getCurrentUser();
-		if (currentUser == null) {
-			return accessibilityMode;
-		}
-		return currentUser.getAccessibilityMode();
+		return accessibilityMode;
 	}
 
 	/**
 	 * @param accessibilityMode
-	 *            the accessibilityMode to set
-	 * @throws Exception
+	 *            The accessibilityMode to set
 	 */
-	public void setAccessibilityMode(String accessibilityMode) throws Exception {
-		User currentUser = getCurrentUser();
-		if (currentUser == null) {
-			this.accessibilityMode = accessibilityMode;
-		} else {
-			getCurrentUser().setAccessibilityMode(accessibilityMode);
-		}
-	}
-
-	/**
-	 * @return the selected language
-	 */
-	public String getLanguageSelected() {
-		if (languageSelected == null) {
-			FacesContext fc = FacesContext.getCurrentInstance();
-			languageSelected = fc.getApplication().getDefaultLocale()
-					.toString();
-
-		}
-		return languageSelected;
-	}
-
-	/**
-	 * @param languageSelected
-	 *            the languageSelected to set
-	 */
-	public void setLanguageSelected(String languageSelected) {
-		this.languageSelected = languageSelected;
+	public void setAccessibilityMode(String accessibilityMode) {
+		this.accessibilityMode = accessibilityMode;
 	}
 
 	/**
@@ -419,6 +401,30 @@ public class SessionController extends AbstractDomainAwareBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		return facesContext.getExternalContext().getRequestContextPath()
 				+ "/stylesheets/home.xhtml";
+	}
+
+	/**
+	 * @return display accessibility mode.
+	 */
+	public String getDisplayAccessibilityMode() {
+		if (accessibilityMode.equals("default"))
+			return I18nUtils.createI18nService().getString(
+					"PREFERENCES.ACCESSIBILITY.DEFAULT");
+		if (accessibilityMode.equals("inaccessible"))
+			return I18nUtils.createI18nService().getString(
+					"PREFERENCES.ACCESSIBILITY.INACCESSIBLE");
+		return I18nUtils.createI18nService().getString(
+				"PREFERENCES.ACCESSIBILITY.SCREENREADER");
+
+	}
+
+	/**
+	 * @return language.
+	 */
+	public String getDisplayLanguage() {
+		Locale locale = getLocale();
+		StringBuffer buf = new StringBuffer(locale.getDisplayLanguage(locale));
+		return buf.toString();
 	}
 
 }

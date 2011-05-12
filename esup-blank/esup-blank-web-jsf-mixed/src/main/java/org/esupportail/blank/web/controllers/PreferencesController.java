@@ -53,12 +53,12 @@ public class PreferencesController extends AbstractContextAwareController {
 				Locale locale = iter.next();
 				StringBuffer buf = new StringBuffer(
 						locale.getDisplayLanguage(locale));
-				localeItems.add(new SelectItem(locale, buf
-						.toString()));
+				localeItems.add(new SelectItem(locale, buf.toString()));
 			}
 		}
 		return localeItems;
 	}
+
 
 	/**
 	 * @return the accessibilityModeItems
