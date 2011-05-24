@@ -3,11 +3,11 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-dao-parent</artifactId>
-		<version>0.2.5-SNAPSHOT</version>
+		<version>0.2.5</version>
 	</parent>
 	<artifactId>esup-commons2-hibernate</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.5-SNAPSHOT</version>
+	<version>0.2.5</version>
 	<name>esup-commons-hibernate</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
