@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>esup-commons2-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.2.5</version>
+		<version>0.2.6-SNAPSHOT</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-annotations</artifactId>
-	<version>0.2.5</version>
+	<version>0.2.6-SNAPSHOT</version>
 	<name>esup-commons-annotations</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
