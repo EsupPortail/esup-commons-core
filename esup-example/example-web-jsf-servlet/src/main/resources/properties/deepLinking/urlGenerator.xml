@@ -18,7 +18,7 @@
         id="servletUrlGenerator"
         class="org.esupportail.commons.services.urlGeneration.ServletUrlGeneratorImpl"
         lazy-init="true"
-        >
+        >  
         <property name="casUrl" value="${cas.url}" />
         <property name="casLoginUrl" value="${urlGeneration.casLoginUrl}" />
         <property name="servletCasLoginUrl" value="${urlGeneration.casLoginUrl}" />
