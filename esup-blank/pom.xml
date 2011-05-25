@@ -126,7 +126,7 @@
         </plugins>
     </build>
     <properties>
-        <esupcommons.version>0.2.4</esupcommons.version>
+        <esupcommons.version>0.2.5</esupcommons.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
