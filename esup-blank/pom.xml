@@ -2,13 +2,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.esupportail.blank</groupId>
     <artifactId>esup-blank</artifactId>
-    <version>0.2.4</version>
+    <version>0.2.5-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>An Blank Application to start your project</description>
     <scm>
-        <connection>scm:svn:https://subversion.cru.fr/esup-commons/tags/blank-0.2.4</connection>
-        <developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/tags/blank-0.2.4</developerConnection>
-        <url>scm:svn:https://subversion.cru.fr/esup-commons/tags/blank-0.2.4</url>
+        <connection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-blank/</connection>
+        <developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-blank/</developerConnection>
+        <url>https://sourcesup.cru.fr/scm/?group_id=244</url>
     </scm>
     <repositories>
         <repository>
