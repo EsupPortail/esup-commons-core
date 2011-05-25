@@ -13,7 +13,7 @@
 
 	<bean id="welcomeController"
 		class="org.esupportail.example.web.controllers.WelcomeController"
-		parent="abstractContextAwareController" scope="request">
+		parent="abstractContextAwareController" scope="session">
 		<description>A bean to manage the welcome page.</description>
 		<property name="userPaginator" ref="userPaginator" />
 		<property name="urlGenerator" ref="servletUrlGenerator" />

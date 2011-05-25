@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -51,7 +52,7 @@ public class User implements Serializable {
      * information recorded during database insert 
      * used in esup-example to illustrate open session in view mechanism
      */
-    @OneToMany(cascade={CascadeType.ALL})
+    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER)
     private List<Information> informations;
     
 	/**

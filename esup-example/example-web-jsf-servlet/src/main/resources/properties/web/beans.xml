@@ -23,7 +23,7 @@
 	
 	
 	<bean id="userBean" class="org.esupportail.example.web.beans.UserBean"
-		scope="request" />
+		scope="session" />
 	
 
 </beans>
