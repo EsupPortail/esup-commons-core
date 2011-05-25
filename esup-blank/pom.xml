@@ -6,6 +6,11 @@
     <version>0.2.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>An Blank Application to start your project</description>
+    <scm>
+        <connection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-blank/</connection>
+        <developerConnection>scm:svn:https://subversion.cru.fr/esup-commons/trunk/esup-blank/</developerConnection>
+        <url>https://sourcesup.cru.fr/scm/?group_id=244</url>
+    </scm>
     <repositories>
         <repository>
             <id>esup-snapshots</id>
@@ -53,6 +58,15 @@
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <tagBase>https://subversion.cru.fr/esup-commons/tags</tagBase>
+                   <goals></goals>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
