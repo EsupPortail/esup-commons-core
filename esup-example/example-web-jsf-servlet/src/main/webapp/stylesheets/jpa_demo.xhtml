@@ -23,7 +23,10 @@
 			</e:ul>
 			<hr/>
 			<br />
-			<p:commandButton value="add" action="#{welcomeController.addUser}" update="growl,@form,myform3"/>
+			<p:commandButton value="add" action="#{welcomeController.addUser}" update="growl,@form,myform3">
+				<f:setPropertyActionListener value="#{userBean}"
+							target="#{welcomeController.userToUpdate}" />
+			</p:commandButton>
 			<p:commandButton value="cancel" action="#{userBean.reset}" update="formAddUser"/>
 		</h:form>
 		<br/>
