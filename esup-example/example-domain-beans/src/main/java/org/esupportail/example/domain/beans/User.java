@@ -52,7 +52,7 @@ public class User implements Serializable {
      * information recorded during database insert 
      * used in esup-example to illustrate open session in view mechanism
      */
-    @OneToMany(cascade={CascadeType.ALL},fetch=FetchType.EAGER)
+    @OneToMany(cascade={CascadeType.ALL})
     private List<Information> informations;
     
 	/**

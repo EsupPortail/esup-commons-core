@@ -298,6 +298,7 @@ public class WelcomeController  extends AbstractContextAwareController {
 	 */
 	
 	public List<User> getUsers() {
+		userPaginator.forceReload();
 		return userPaginator.getVisibleItems();
 	}
 
