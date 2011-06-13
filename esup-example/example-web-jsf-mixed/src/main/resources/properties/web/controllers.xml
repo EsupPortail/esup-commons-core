@@ -9,45 +9,19 @@
 		used by the web interface. It should not be modified but by the developers. 
 		This file is referenced by /properties/applicationContext.xml. -->
 
-	
-
-	<bean id="welcomeController"
-		class="org.esupportail.example.web.controllers.WelcomeController"
-		parent="abstractContextAwareController" scope="request">
-		<description>A bean to manage the welcome page.</description>
-		<property name="userPaginator" ref="userPaginator" />
-		<property name="urlGenerator" ref="${urlGeneration.bean}" />
-		<property name="userToUpdate" ref="userBean"/>
-	</bean>
-	
-	<bean id="simpleController"
-		class="org.esupportail.example.web.controllers.SimpleController"
-		parent="abstractContextAwareController" scope="request">
-		<description>A bean to manage the welcome page.</description>
-	</bean>
-
-
-	<bean id="treatmentController"
-		class="org.esupportail.example.web.controllers.TreatmentController"
-		parent="abstractContextAwareController" scope="session">
-	</bean>
-
-
-
 	<bean id="sessionController"
 		class="org.esupportail.example.web.controllers.SessionController"
 		parent="abstractDomainAwareBean" scope="session">
-		<description>
-			A bean to store the context of the application.
-		</description>
+		<property name="authenticator" ref="authenticator">
+			<description>The authenticator service.</description>
+		</property>
 		<property name="exceptionController" ref="exceptionController">
 			<description>The exception controller.</description>
 		</property>
+		<property name="version" value="${misc.version}" />
+		<property name="site" value="nothing" />
 		<property name="casLogoutUrl" value="${cas.url}/logout?service=%s">
 			<description>The CAS logout URL.</description>
-		</property>
-		<property name="authenticator" ref="authenticator">
-			<description>The authenticator service.</description>
 		</property>
 	</bean>
 
@@ -63,9 +37,14 @@
 	</bean>
 
 	<bean id="exceptionController"
-		class="org.esupportail.commons.web.controllers.ExceptionController"
+		class="org.esupportail.example.web.controllers.ExceptionController"
 		scope="session">
 		<description>A bean to manage exception reports.</description>
+	</bean>
+
+	<bean id="preferencesController"
+		class="org.esupportail.example.web.controllers.PreferencesController"
+		parent="abstractContextAwareController" scope="session">
 	</bean>
 
 

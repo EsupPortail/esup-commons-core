@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- /properties/jsf/application.xml The configuration file of Java Server 
-	Faces that gives the main configuration of the application . This file is 
-	referenced by /webapp/WEB-INF/web.xml. It should not be modified but by the 
-	developers. -->
 
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,19 +6,17 @@
 	version="1.2">
 
 	<application>
-		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<default-render-kit-id>org.apache.myfaces.trinidad.core</default-render-kit-id>
 		<locale-config>
 			<default-locale>fr</default-locale>
+			<supported-locale>fr</supported-locale>
 			<supported-locale>en</supported-locale>
 		</locale-config>
-		<message-bundle>properties.i18n.bundles.JsfMessages</message-bundle>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+			<resource-bundle>
+			<base-name>org.esupportail.example.web.jsf.ResourceBundle</base-name>
+			<var>msgs</var>
+		</resource-bundle>
 	</application>
 
-	<lifecycle>
-		<phase-listener>org.esupportail.commons.jsf.PortletPhaseListener</phase-listener>
-		<phase-listener>org.esupportail.commons.jsf.DeepLinkingPhaseListener</phase-listener>
-		<phase-listener>org.esupportail.commons.jsf.MessagesPhaseListener</phase-listener>
-		<phase-listener>org.esupportail.commons.jsf.ResourceBundlePhaseListener</phase-listener>
-	</lifecycle>
 </faces-config>

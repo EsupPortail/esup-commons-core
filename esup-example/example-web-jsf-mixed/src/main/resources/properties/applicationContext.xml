@@ -32,6 +32,5 @@
 	<import resource="misc/abstractBeans.xml" />
 	<import resource="misc/application.xml" />
 	<import resource="tags/tags.xml" />
-	<import resource="web/beans.xml" />
 	<import resource="web/controllers.xml" />
 </beans>
