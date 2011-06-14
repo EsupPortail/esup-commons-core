@@ -483,7 +483,6 @@ public class SessionController extends AbstractDomainAwareBean {
 	public String setLocaleAction(ActionEvent event) {
 		UIParameter component = (UIParameter) event.getComponent().findComponent("language");
 		String languageString = component.getValue().toString();
-		System.out.println("languageString: " + languageString);
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (context != null) {
 			context.getViewRoot().setLocale(new Locale(languageString));
