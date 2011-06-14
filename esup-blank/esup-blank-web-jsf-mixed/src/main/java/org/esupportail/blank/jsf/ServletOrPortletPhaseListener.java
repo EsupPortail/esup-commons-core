@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Directory Application - Copyright (c) 2011 ESUP-Portail consortium.
  */
-package org.esupportail.annuaire2.web.jsf;
+package org.esupportail.blank.jsf;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
