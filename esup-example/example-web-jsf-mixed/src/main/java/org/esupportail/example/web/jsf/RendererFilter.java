@@ -63,8 +63,6 @@ public class RendererFilter implements Filter {
 		// Capture the content for this request
 		ContentCaptureServletResponse capContent = new ContentCaptureServletResponse(
 				response);
-		// Change the nature of the response
-		capContent.setHeader("Content-Type", "application/pdf");
 		// The name page
 		String referer = request.getHeader("Referer");
 		if (referer == null || "".equals(referer)) {
@@ -104,10 +102,12 @@ public class RendererFilter implements Filter {
 				+ ":" + request.getServerPort() + request.getContextPath()
 				+ "/";
 		String self = baseURL.substring(0, baseURL.lastIndexOf("/") + 1);
-		renderer.setDocument(xhtmlContent, self);
+		renderer.setDocument(xhtmlContent,  self);
 		renderer.layout();
 		OutputStream browserStream;
-			browserStream = response.getOutputStream();
+		// Change the nature of the response
+		response.setHeader("Content-Type", "application/pdf");
+		browserStream = response.getOutputStream();
 		try {
 			renderer.createPDF(browserStream);
 		} catch (DocumentException e) {

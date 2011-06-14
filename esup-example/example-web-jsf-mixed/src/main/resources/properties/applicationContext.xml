@@ -33,4 +33,16 @@
 	<import resource="misc/application.xml" />
 	<import resource="tags/tags.xml" />
 	<import resource="web/controllers.xml" />
+	
+	<bean id="agentUtil" class="org.esupportail.example.web.utils.AgentUtil" scope="session">
+        <property name="skins">
+            <map>
+                <entry key="iPhone" value="iphoneFamily" />
+                <entry key="Pre" value="iphoneFamily" />
+                <entry key="Android" value="iphoneFamily" />
+                <entry key="BlackBerry" value="blackBerryFamily" />
+            </map>
+        </property>
+    </bean>
+    
 </beans>

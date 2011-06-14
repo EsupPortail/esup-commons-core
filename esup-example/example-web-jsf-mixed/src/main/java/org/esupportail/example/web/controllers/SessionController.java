@@ -6,8 +6,10 @@ package org.esupportail.example.web.controllers;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.faces.component.UIParameter;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
 
 import org.esupportail.commons.exceptions.UserNotFoundException;
@@ -472,6 +474,21 @@ public class SessionController extends AbstractDomainAwareBean {
 		Locale locale = getLocale();
 		StringBuffer buf = new StringBuffer(locale.getDisplayLanguage(locale));
 		return buf.toString();
+	}
+
+	/**
+	 * @param event
+	 * @return null;
+	 */
+	public String setLocaleAction(ActionEvent event) {
+		UIParameter component = (UIParameter) event.getComponent().findComponent("language");
+		String languageString = component.getValue().toString();
+		System.out.println("languageString: " + languageString);
+		FacesContext context = FacesContext.getCurrentInstance();
+		if (context != null) {
+			context.getViewRoot().setLocale(new Locale(languageString));
+		}
+		return null;
 	}
 
 }
