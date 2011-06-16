@@ -19,9 +19,10 @@
 	</bean>
 	<bean id="app_context" class="org.esupportail.commons.context.ApplicationContextHolder"/>
 	
-	<import resource="auth/auth.xml" />
+	<import resource="classpath*:META-INF/esup-blank-domain-services-auth.xml" />
+	<import resource="classpath*:META-INF/esup-blank-domain-services-domain.xml" />
+
 	<import resource="exceptionHandling/exceptionHandling.xml" />
-	<import resource="domain/domain.xml" />
 	<import resource="cache/cache.xml"/>
 	<import resource="i18n/i18n.xml" />
 	<import resource="smtp/smtp.xml" />
