@@ -13,11 +13,10 @@
 			<supported-locale>en</supported-locale>
 		</locale-config>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<resource-bundle>
+			<base-name>org.esupportail.blank.jsf.ResourceBundle</base-name>
+			<var>msgs</var>
+		</resource-bundle>
 	</application>
-
-	<lifecycle>
-		<phase-listener>org.esupportail.commons.jsf.ResourceBundlePhaseListener</phase-listener>
-		<phase-listener>org.esupportail.commons.jsf.ServletOrPortletPhaseListener</phase-listener>
-	</lifecycle>
 
 </faces-config>

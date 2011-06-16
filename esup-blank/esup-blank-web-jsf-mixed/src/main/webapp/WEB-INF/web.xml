@@ -102,7 +102,7 @@
 	<!-- FaceletViewHandler configuration -->
 	<context-param>
 		<param-name>org.apache.myfaces.trinidad.ALTERNATE_VIEW_HANDLER</param-name>
-		<param-value>org.esupportail.blank.jsf.FaceletServletOrPortletViewHandler</param-value>
+		<param-value>org.esupportail.commons.jsf.FaceletServletOrPortletViewHandler</param-value>
 	</context-param>
 
 	<!-- for sso-cas -->

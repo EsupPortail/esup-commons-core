@@ -98,7 +98,7 @@ public class SessionController extends AbstractDomainAwareBean {
 	 * The current User.
 	 */
 	private User currentUser;
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -180,8 +180,8 @@ public class SessionController extends AbstractDomainAwareBean {
 			} catch (UserNotFoundException e) {
 				currentUser = new User();
 				currentUser.setId(uid);
-				currentUser.setDisplayName(I18nUtils.createI18nService().getString(e
-						.getMessage()));
+				currentUser.setDisplayName(I18nUtils.createI18nService()
+						.getString(e.getMessage()));
 				currentUser.setAdmin(false);
 			}
 			return currentUser;
@@ -201,8 +201,8 @@ public class SessionController extends AbstractDomainAwareBean {
 				} catch (UserNotFoundException e) {
 					currentUser = new User();
 					currentUser.setId(uid);
-					currentUser.setDisplayName(I18nUtils.createI18nService().getString(e
-							.getMessage()));
+					currentUser.setDisplayName(I18nUtils.createI18nService()
+							.getString(e.getMessage()));
 					currentUser.setAdmin(false);
 				}
 				return currentUser;
@@ -428,13 +428,14 @@ public class SessionController extends AbstractDomainAwareBean {
 		StringBuffer buf = new StringBuffer(locale.getDisplayLanguage(locale));
 		return buf.toString();
 	}
-	
+
 	/**
 	 * @param event
 	 * @return null;
 	 */
 	public String setLocaleAction(ActionEvent event) {
-		UIParameter component = (UIParameter) event.getComponent().findComponent("language");
+		UIParameter component = (UIParameter) event.getComponent()
+				.findComponent("language");
 		String languageString = component.getValue().toString();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (context != null) {
