@@ -17,11 +17,6 @@
 					<f:selectItems
 						value="#{preferencesController.accessibilityModeItems}" />
 				</tr:selectOneChoice>
-				<tr:spacer height="20px" />
-				<tr:selectOneChoice label="#{msgs['PREFERENCES.PRINT.LABEL']}: "
-					value="#{sessionController.printFormat}">
-					<f:selectItems value="#{preferencesController.printFormatItems}" />
-				</tr:selectOneChoice>
 			</tr:panelFormLayout>
 			<tr:spacer height="20px" />
 			<tr:commandButton text="#{msgs['SUBMIT.TEXT']} "
