@@ -18,13 +18,4 @@ public interface CasService extends Serializable {
 	 */
 	String getProxyTicket(String targetService) throws CasException;
 	
-	/**
-	 * validate the ticket (ST or PT) to get a PGT. This method is 
-	 * automatically called when retrieving the first PT for a remote
-	 * service, but it can be called manually to prevent from the
-	 * peremption of the ticket passed to the application.  
-	 * @throws CasException 
-	 */
-	void validate() throws CasException;
-	
 }

@@ -3,15 +3,15 @@
  */
 package org.esupportail.commons.services.cas;
 
-import org.esupportail.commons.utils.HttpUtils;
-import org.springframework.beans.factory.InitializingBean;
+import java.util.Map;
 
+import org.esupportail.commons.utils.ContextUtils;
 
 /** 
  * The implementation of CasService for portlets. The PGT is supposed 
  * to be passed to the portlet as a preferences attribute.
  */
-public class PortletCasServiceImpl extends AbstractCasService implements InitializingBean {
+public class PortletCasServiceImpl implements CasService {
 	
 	/**
 	 * The serialization id.
@@ -19,39 +19,12 @@ public class PortletCasServiceImpl extends AbstractCasService implements Initial
 	private static final long serialVersionUID = 7540349970957963666L;
 
 	/**
-	 * The default preferences attribute used to pass the PT to the portlet. 
+	 * @see org.esupportail.commons.services.cas.AbstractCasService#getProxyTicket(java.lang.String)
 	 */
-	private static final String DEFAULT_CAS_PROXY_TICKET_PREF = "casProxyTicket";
-	
-	/**
-	 * The preferences attribute used to pass the PT to the portlet. 
-	 */
-	private String casProxyTicketPref;
-
-	/**
-	 * Bean constructor.
-	 */
-	public PortletCasServiceImpl() {
-		super();
+	public String getProxyTicket(String targetService) throws CasException {
+		Map<String,String> userInfo = (Map<String,String>) ContextUtils.getGlobalSessionAttribute("javax.portlet.userinfo");
+		String proxyTicket = userInfo.get("casProxyTicket");
+		return proxyTicket;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.cas.AbstractCasService#afterPropertiesSet()
-	 */
-	@Override
-	public void afterPropertiesSet() {
-		super.afterPropertiesSet();
-		if (casProxyTicketPref == null) {
-			casProxyTicketPref = DEFAULT_CAS_PROXY_TICKET_PREF;
-		}
-	}
-	
-	/**
-	 * @return the PGT.
-	 */
-	@Override
-	protected String getServiceTicket() {
-		return HttpUtils.getPortalPref(casProxyTicketPref);
-	}
-	
 }
