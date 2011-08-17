@@ -4,7 +4,6 @@
 package org.esupportail.commons.jsf;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
@@ -13,10 +12,11 @@ import javax.faces.event.PhaseListener;
 
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.commons.exceptions.NoRequestBoundException;
+import org.esupportail.commons.services.i18n.I18nService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.ContextUtils;
-import org.esupportail.commons.web.jsf.tags.config.TagsConfigurator;
 
 /**
  * @author cleprous
@@ -74,10 +74,10 @@ public class ResourceBundlePhaseListener implements PhaseListener {
 
 			if (locale != null
 					&& context.getExternalContext().getRequestMap().get(DEFAULT_STRINGVAR) == null) {
-				TagsConfigurator tagsConfigurator = TagsConfigurator.getInstance();
+				I18nService i18nService = (I18nService) BeanUtils.getBean("i18nService");
 				context.getExternalContext().getRequestMap().put(
 						DEFAULT_STRINGVAR,
-						tagsConfigurator.getStrings(locale));
+						i18nService.getStrings(locale));
 			}
 		} catch (NoRequestBoundException e) {
 			//do nothing

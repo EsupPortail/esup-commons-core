@@ -19,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * @deprecated
  * A bean to configure extended tags.
  */
 public class TagsConfigurator extends AbstractApplicationAwareBean {
