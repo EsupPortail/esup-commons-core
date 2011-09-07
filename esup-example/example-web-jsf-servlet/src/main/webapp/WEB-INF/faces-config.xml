@@ -10,8 +10,7 @@
 	version="2.0">
 
 	<application>
-
-		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<el-resolver>org.esupportail.commons.jsf.ResourceBundleFacesELResolver</el-resolver>
 		<locale-config>
 			<default-locale>fr</default-locale>
 			<supported-locale>fr</supported-locale>
@@ -25,6 +24,5 @@
 	</factory>
 	<lifecycle>
 		<phase-listener>org.esupportail.commons.jsf.DeepLinkingPhaseListener</phase-listener>
-		<phase-listener>org.esupportail.commons.jsf.ResourceBundlePhaseListener</phase-listener>
 	</lifecycle>
 </faces-config>
