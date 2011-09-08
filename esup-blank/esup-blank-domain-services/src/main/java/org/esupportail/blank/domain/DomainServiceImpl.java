@@ -51,14 +51,14 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public User getUser(String uid) {
 		User user = null;
 		for (User userInList : users) {
-			if (userInList.getId().equals(uid)) {
+			if (userInList.getLogin().equals(uid)) {
 				user = userInList;
 				break;
 			}
 		}
 		if (user == null) {
 			user = new User();
-			user.setId(uid);
+			user.setLogin(uid);
 			// On cree l'utilisateur, son nom complet prend la valeur de
 			// l'Uid.
 			user.setDisplayName(uid);

@@ -93,7 +93,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 					logger.debug("Shibboleth authentication");
 				}
 				User user = new User();
-				user.setId(authInfo.getId());
+				user.setLogin(authInfo.getId());
 
 				storeToSession(authInfo, user);
 				return user;
@@ -103,7 +103,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean,
 					logger.debug("CAS authentication");
 				}
 				User user = new User();
-				user.setId(authInfo.getId());
+				user.setLogin(authInfo.getId());
 				storeToSession(authInfo, user);
 				return user;
 			}

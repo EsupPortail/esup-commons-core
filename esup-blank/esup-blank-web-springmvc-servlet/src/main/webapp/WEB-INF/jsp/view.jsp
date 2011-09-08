@@ -4,14 +4,14 @@
 
 <hr/>
 <h2 class="alt">
-  ${user.id} !
+  ${user.login} !
 </h2>
 
 <hr/>
 
 <div class="span-7 colborder">
 
-  <p id="helloPart"><spring:message code="view.helloString" arguments="${user.id}"/></p>
+  <p id="helloPart"><spring:message code="view.helloString" arguments="${user.login}"/></p>
   
 </div>
 

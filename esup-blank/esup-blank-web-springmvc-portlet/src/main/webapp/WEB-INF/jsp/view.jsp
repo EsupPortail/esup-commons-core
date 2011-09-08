@@ -13,7 +13,7 @@
   <div class="portlet-section-body">
 
 	<ul>
-    	<li><spring:message code="view.helloString" arguments="${userFromEC2.id}"/></li>
+    	<li><spring:message code="view.helloString" arguments="${userFromEC2.login}"/></li>
     	<li><spring:message code="view.helloString" arguments="${usernamePref}"/></li>
     	<li><spring:message code="view.helloString" arguments="${remoteUser}"/></li>
 	</ul>

@@ -33,7 +33,7 @@ public class User implements Serializable {
 	/**
 	 * Id of the user.
 	 */
-	private String id;
+	private String login;
 
 	/**
 	 * Display Name of the user.
@@ -65,7 +65,7 @@ public class User implements Serializable {
 		if (!(obj instanceof User)) {
 			return false;
 		}
-		return id.equals(((User) obj).getId());
+		return login.equals(((User) obj).getLogin());
 	}
 
 	@Override
@@ -75,23 +75,23 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User#" + hashCode() + "[id=[" + id + "], displayName=["
+		return "User#" + hashCode() + "[login=[" + login + "], displayName=["
 				+ displayName + "], admin=[" + admin + "], language=["
 				+ language + "]]";
 	}
 
 	/**
-	 * @return the id of the user.
+	 * @return the login of the user.
 	 */
-	public String getId() {
-		return id;
+	public String getLogin() {
+		return login;
 	}
 
 	/**
-	 * @param id
+	 * @param login
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	/**
