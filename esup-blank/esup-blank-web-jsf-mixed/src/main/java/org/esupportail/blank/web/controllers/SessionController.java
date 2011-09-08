@@ -172,14 +172,14 @@ public class SessionController extends AbstractDomainAwareBean {
 		if (isPortletMode()) {
 			FacesContext fc = FacesContext.getCurrentInstance();
 			String uid = fc.getExternalContext().getRemoteUser();
-			if (currentUser != null && currentUser.getId().equals(uid)) {
+			if (currentUser != null && currentUser.getLogin().equals(uid)) {
 				return currentUser;
 			}
 			try {
 				currentUser = getDomainService().getUser(uid);
 			} catch (UserNotFoundException e) {
 				currentUser = new User();
-				currentUser.setId(uid);
+				currentUser.setLogin(uid);
 				currentUser.setDisplayName(I18nUtils.createI18nService()
 						.getString(e.getMessage()));
 				currentUser.setAdmin(false);
@@ -191,16 +191,16 @@ public class SessionController extends AbstractDomainAwareBean {
 			authUser = authenticator.getUser();
 			if (authUser != null) {
 				if (currentUser != null
-						&& currentUser.getId().equals(authUser.getId())) {
+						&& currentUser.getLogin().equals(authUser.getLogin())) {
 					return currentUser;
 				}
 				// for updating
-				String uid = authUser.getId();
+				String uid = authUser.getLogin();
 				try {
 					currentUser = getDomainService().getUser(uid);
 				} catch (UserNotFoundException e) {
 					currentUser = new User();
-					currentUser.setId(uid);
+					currentUser.setLogin(uid);
 					currentUser.setDisplayName(I18nUtils.createI18nService()
 							.getString(e.getMessage()));
 					currentUser.setAdmin(false);
