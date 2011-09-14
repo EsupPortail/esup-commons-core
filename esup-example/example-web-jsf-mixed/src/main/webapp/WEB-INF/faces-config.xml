@@ -12,11 +12,7 @@
 			<supported-locale>fr</supported-locale>
 			<supported-locale>en</supported-locale>
 		</locale-config>
-		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-			<resource-bundle>
-			<base-name>org.esupportail.example.web.jsf.ResourceBundle</base-name>
-			<var>msgs</var>
-		</resource-bundle>
+		<el-resolver>org.esupportail.commons.jsf.ResourceBundleFacesELResolver</el-resolver>
 	</application>
 
 </faces-config>

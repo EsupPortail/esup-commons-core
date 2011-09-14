@@ -93,7 +93,7 @@
 		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
 		<init-param>
 			<param-name>casServerLoginUrl</param-name>
-			<param-value>https://cas.univ.fr/cas/login</param-value>
+			<param-value>https://sso-cas.univ-rennes1.fr/login</param-value>
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
@@ -110,7 +110,7 @@
 		<filter-class>org.jasig.cas.client.validation.Cas10TicketValidationFilter</filter-class>
 		<init-param>
 			<param-name>casServerUrlPrefix</param-name>
-			<param-value>https://cas.univ.fr/cas</param-value>
+			<param-value>https://sso-cas.univ-rennes1.fr</param-value>
 		</init-param>
 		<init-param>
 			<param-name>serverName</param-name>
