@@ -16,6 +16,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * A class to bind a beanFocatry to the current thread and retrieve beans.
+ * @deprecated
  */
 public class BeanUtils {   
 	
