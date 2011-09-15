@@ -69,7 +69,7 @@
 				<version>2.2.1</version>
 				<configuration>
                     <tagBase>https://subversion.cru.fr/esup-commons/tags</tagBase>
-                    <tagNameFormat>v2-@{project.version}/@{project.artifactId}</tagNameFormat>					
+                    <tagNameFormat>V2-@{project.version}/@{project.artifactId}</tagNameFormat>					
 					<goals>deploy</goals>
 				</configuration>
 			</plugin>
