@@ -68,7 +68,6 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-					<tagBase>https://subversion.cru.fr/esup-commons/tags/V2-@{project.version}</tagBase>
 					<goals>deploy</goals>
 				</configuration>
 			</plugin>
