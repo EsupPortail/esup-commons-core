@@ -124,7 +124,7 @@
 		</plugins>
 	</build>
 	<properties>
-		<esupcommons.version>0.2.7-SNAPSHOT</esupcommons.version>
+		<esupcommons.version>0.2.8-SNAPSHOT</esupcommons.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 </project>

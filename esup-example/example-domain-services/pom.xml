@@ -37,6 +37,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.esupportail</groupId>
+			<artifactId>esup-commons2-rs-cxf</artifactId>
+			<version>${esupcommons.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.esupportail</groupId>
 			<artifactId>esup-commons2-ldap</artifactId>
 			<version>${esupcommons.version}</version>
 			<exclusions>

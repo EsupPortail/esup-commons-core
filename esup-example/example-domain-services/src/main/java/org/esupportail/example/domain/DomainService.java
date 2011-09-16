@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.example.domain.beans.User;
@@ -16,6 +20,8 @@ import org.esupportail.example.domain.beans.User;
  * The domain service interface.
  */
 @WebService
+@Path("/domainService/")
+@Produces("application/json")
 public interface DomainService extends Serializable {
 
 	//////////////////////////////////////////////////////////////
@@ -27,11 +33,15 @@ public interface DomainService extends Serializable {
 	 * @return the User instance that corresponds to an id.
 	 * @throws UserNotFoundException
 	 */
-	User getUser(String id) throws UserNotFoundException;
+	@GET
+	@Path("/users/{id}")
+	User getUser(@PathParam("id") String id) throws UserNotFoundException;
 
 	/**
 	 * @return the list of all the users.
 	 */
+	@GET
+	@Path("/users")
 	List<User> getUsers();
 
 	/**

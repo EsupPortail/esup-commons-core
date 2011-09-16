@@ -78,7 +78,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 */
 	@Override
 	public User getUser(String id) throws UserNotFoundException {
-		return null;
+		return this.daoService.getUser(id);
 	}
 
 	/**
