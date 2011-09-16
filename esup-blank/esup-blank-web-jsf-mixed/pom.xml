@@ -145,7 +145,7 @@
                                     </includes>
                                 </resource>
                             </webResources>
-                            <warName>esup-blank-${misc.version}</warName>
+                            <warName>${project.parent.artifactId}</warName>
                         </configuration>
                     </plugin>
                 </plugins>

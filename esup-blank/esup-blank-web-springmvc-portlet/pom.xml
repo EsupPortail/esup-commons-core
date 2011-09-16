@@ -9,6 +9,26 @@
     <groupId>org.esupportail.blank</groupId>
     <artifactId>esup-blank-web-springmvc-portlet</artifactId>
     <packaging>war</packaging>
+    <build>
+    	<plugins>
+	    	<plugin>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <version>2.1</version>
+		        <configuration>
+		        	<webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>WEB-INF/portlet.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+		            <warName>${project.parent.artifactId}</warName>
+		        </configuration>
+		    </plugin>
+	    </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.esupportail</groupId>
@@ -77,4 +97,7 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+    <properties>
+        <portlet.name>${project.artifactId}</portlet.name>
+    </properties>
 </project>

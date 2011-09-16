@@ -9,6 +9,17 @@
     <groupId>org.esupportail.blank</groupId>
     <artifactId>esup-blank-web-springmvc-servlet</artifactId>
     <packaging>war</packaging>
+    <build>
+    	<plugins>
+	    	<plugin>
+		        <artifactId>maven-war-plugin</artifactId>
+		        <version>2.1</version>
+		        <configuration>
+		            <warName>${project.parent.artifactId}</warName>
+		        </configuration>
+		    </plugin>
+	    </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>org.esupportail</groupId>

@@ -7,7 +7,7 @@
                         http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
 
     <portlet>
-        <portlet-name>esup-blank-web-springmvc-portlet</portlet-name>
+        <portlet-name>${portlet.name}</portlet-name>
         <display-name xml:lang="fr">esup-blank-web-springmvc-portlet</display-name>
         <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
         <init-param>
@@ -16,7 +16,7 @@
         </init-param>
         <expiration-cache>0</expiration-cache>
         <supports>
-            <mime-type>text/html</mime-type> 
+            <mime-type>text/html</mime-type>
             <portlet-mode>VIEW</portlet-mode>
             <portlet-mode>EDIT</portlet-mode>
             <portlet-mode>HELP</portlet-mode>
@@ -29,14 +29,14 @@
             <short-title>esup-blank-web-springmvc-portlet</short-title>
             <keywords>esup-blank-web-springmvc-portlet</keywords>
         </portlet-info>
-        
+
         <portlet-preferences>
             <preference>
                 <name>usernamepref</name>
                 <value>PortletWorld</value>
             </preference>
         </portlet-preferences>
-    
+
     </portlet>
 
 </portlet-app>
