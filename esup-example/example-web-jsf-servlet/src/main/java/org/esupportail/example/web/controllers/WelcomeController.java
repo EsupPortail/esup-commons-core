@@ -8,11 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.urlGeneration.UrlGenerator;
 import org.esupportail.commons.utils.Assert;
+import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.example.domain.beans.User;
 import org.esupportail.example.web.beans.UserBean;
 import org.esupportail.example.web.beans.UserPaginator;
@@ -193,6 +197,18 @@ public class WelcomeController  extends AbstractContextAwareController {
 		param.put("name2", "cleprous");
 		url = urlGenerator.guestUrl(param);
 		return url;
+	}
+	
+	public String getRestURL() {
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		StringBuffer url = new StringBuffer();
+		url.append(context.getRequestScheme());
+		url.append("://");
+		url.append(context.getRequestServerName());
+		url.append(":");
+		url.append(context.getRequestServerPort());
+		url.append("/cxf/rest/domainService/users");
+		return url.toString();
 	}
 	
 
