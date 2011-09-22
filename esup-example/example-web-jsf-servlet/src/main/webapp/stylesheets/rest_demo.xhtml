@@ -26,23 +26,33 @@
 		<br />
 		<div id="users" />
 		<script>
-//<![CDATA[
-(function($) {
-	$(document).ready(function() {
-		$.getJSON("#{welcomeController.restURL}",
-				  function(data) {
-					var html = "<ul>";
- 				    $.each(data, function(i,item){
- 				    	html += "<li>" + item.displayName + "</li>";
-				    });
-					html += "</ul>";
- 				    $(html).appendTo("#users");
- 				  });	
-	});	
-})(jQuery);
-//]]>
+			//<![CDATA[
+			(function($) {
+				$(document).ready(function() {
+					$.getJSON("#{welcomeController.restURL}", function(data) {
+						var html = "<ul>";
+						$.each(data, function(i, item) {
+							html += "<li>" + item.displayName + "</li>";
+						});
+						html += "</ul>";
+						$(html).appendTo("#users");
+					});
+				});
+			})(jQuery);
+			//]]>
 		</script>
-
+		<br />
+		<hr />
+		<br />
+		<e:subSection value="#{msgs['REST_DEMO.RESTTEMPLATE_REST']}" />
+		<br />
+		<h:form>
+			<p:dataList var="user" value="#{welcomeController.restUsers}">
+				<p:column>
+					<h:outputText value="#{user.displayName}" />
+				</p:column>
+			</p:dataList>
+		</h:form>
 	</ui:define>
 </ui:composition>
 

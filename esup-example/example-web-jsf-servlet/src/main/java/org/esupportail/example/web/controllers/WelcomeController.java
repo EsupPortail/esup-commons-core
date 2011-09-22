@@ -4,6 +4,7 @@
  */
 package org.esupportail.example.web.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.esupportail.example.domain.beans.User;
 import org.esupportail.example.web.beans.UserBean;
 import org.esupportail.example.web.beans.UserPaginator;
 import org.esupportail.example.web.utils.NavigationRulesConst;
+import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -281,7 +283,6 @@ public class WelcomeController  extends AbstractContextAwareController {
 		addInfoMessage(null, "INFO.ENTER.SUCCESS");
 	}
 
-
 	/* **********************************
 	 * END TO DEMO JPA
 	 ************************************ */
@@ -294,7 +295,6 @@ public class WelcomeController  extends AbstractContextAwareController {
 		return name;
 	}	
 
-
 	/**
 	 * @return
 	 */
@@ -304,7 +304,6 @@ public class WelcomeController  extends AbstractContextAwareController {
         else
             return null;
     }
-
 	
 	/*
 	 ******************* ACCESSORS ******************** */
@@ -325,8 +324,6 @@ public class WelcomeController  extends AbstractContextAwareController {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
-
 
 	/**
 	 * @return the userPaginator
@@ -362,6 +359,12 @@ public class WelcomeController  extends AbstractContextAwareController {
 	 */
 	public void setUserToUpdate(final UserBean userToUpdate) {
 		this.userToUpdate = userToUpdate;
+	}
+	
+	public List<User> getRestUsers() {
+		RestTemplate template = new RestTemplate();
+		List<User> ret = template.getForObject(getRestURL(), List.class);
+		return ret;
 	}
 
 
