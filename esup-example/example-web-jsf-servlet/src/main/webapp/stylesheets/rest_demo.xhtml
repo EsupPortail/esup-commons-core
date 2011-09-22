@@ -48,9 +48,7 @@
 		<br />
 		<h:form>
 			<p:dataList var="user" value="#{welcomeController.restUsers}">
-				<p:column>
-					<h:outputText value="#{user.displayName}" />
-				</p:column>
+				#{user.displayName}"
 			</p:dataList>
 		</h:form>
 	</ui:define>
