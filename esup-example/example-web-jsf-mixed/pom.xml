@@ -7,8 +7,8 @@
 		<groupId>org.esupportail</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>org.esupportail.example</groupId>
-	<artifactId>esup-example-web-jsf-mixed</artifactId>
+	<groupId>org.esupportail</groupId>
+	<artifactId>example-web-jsf-mixed</artifactId>
 	<packaging>war</packaging>
 	<build>
 		<defaultGoal>javadoc:javadoc</defaultGoal>
