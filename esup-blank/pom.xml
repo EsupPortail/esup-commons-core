@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.esupportail.blank</groupId>
     <artifactId>esup-blank</artifactId>
-    <version>0.2.7-SNAPSHOT</version>
+    <version>0.2.8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>An Blank Application to start your project</description>
     <scm>
@@ -125,7 +125,7 @@
         </plugins>
     </build>
     <properties>
-        <esupcommons.version>0.2.7</esupcommons.version>
+        <esupcommons.version>0.2.8-SNAPSHOT</esupcommons.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
