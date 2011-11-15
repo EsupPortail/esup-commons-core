@@ -443,5 +443,14 @@ public class SessionController extends AbstractDomainAwareBean {
 		}
 		return null;
 	}
+	
+	/**
+	 * @param event
+	 * @return null;
+	 */
+	public String login(ActionEvent event) {
+		this.action = null;
+		return null;
+	}
 
 }

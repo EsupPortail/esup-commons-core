@@ -1,11 +1,13 @@
 <f:view xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:tr="http://myfaces.apache.org/trinidad">
-    <tr:document>
-        <tr:form id="blank_switch_mobile">
-            <tr:commandButton text="mobile" action="mobileWelcome" immediate="true"
-                id="blank_welcome_mobile" inlineStyle="display:none;" />
-        </tr:form>
-        <script type="text/javascript">
+	<tr:document>
+		<tr:form id="blank_switch_mobile">
+			<tr:commandButton text="mobile" action="mobileWelcome"
+				immediate="true" id="blank_welcome_mobile"
+				inlineStyle="display:none;"
+				actionListener="#{sessionController.login}" />
+		</tr:form>
+		<script type="text/javascript">
             var buttons = new Array();
             buttons = document.getElementsByTagName('button');             
             for (i = 0; i &#x3c; buttons.length; i++) {
@@ -15,5 +17,5 @@
                 }
             }   
         </script>
-    </tr:document>
+	</tr:document>
 </f:view>
