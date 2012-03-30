@@ -12,7 +12,7 @@
 	<application>
 
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<!--  <view-handler>com.sun.facelets.FaceletViewHandler</view-handler>  -->
 		<locale-config>
 			<default-locale>fr</default-locale>
 			<supported-locale>fr</supported-locale>
