@@ -39,5 +39,7 @@
 	
 	<jaxws:client id="domainService" serviceClass="org.esupportail.example.domain.DomainService"
 		address="http://localhost:8085/cxf/DomainService" />
+		
+	<bean id="calendarBean" class="org.esupportail.example.bean.CalendarBean"></bean>
 	
 </beans>

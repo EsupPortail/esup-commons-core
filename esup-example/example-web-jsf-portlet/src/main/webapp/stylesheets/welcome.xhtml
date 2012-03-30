@@ -2,16 +2,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:t="http://myfaces.apache.org/tomahawk"      
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:e="http://commons.esup-portail.org">
-      <ui:composition template="/stylesheets/template.xhtml">
-		<ui:define name="content">
-			<h:outputText>TTTTT</h:outputText>
-		</ui:define>
-	</ui:composition>
-      
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:e="http://commons.esup-portail.org">
+<ui:composition template="/stylesheets/simpleTemplate.xhtml">
+	<ui:define name="content">
+		<h:outputText>TTTTT</h:outputText>
+		<h:form id="form">
+			<h3>Inline</h3>
+			<p:calendar value="#{calendarBean.date1}" mode="inline"
+				id="inlineCal" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+
 </html>
