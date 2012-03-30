@@ -15,6 +15,15 @@
 			<h3>Inline</h3>
 			<p:calendar value="#{calendarBean.date1}" mode="inline"
 				id="inlineCal" />
+			<h:panelGrid columns="4" cellpadding="5">
+				<h:outputLabel for="name" value="Name:" style="font-weight:bold" />
+
+				<p:inputText id="name" value="#{pprBean.firstname}" />
+
+				<p:commandButton value="Submit" update="display" />
+
+				<h:outputText value="#{pprBean.firstname}" id="display" />
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>
