@@ -12,34 +12,29 @@ package org.esupportail.example.dao;
 import junit.framework.Assert;
 
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * @author cleprous
  *
  */
+@ContextConfiguration(locations="/properties/applicationContext.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class DaoServiceTest {
-
 	
-	/*
-	 *************************** PROPERTIES ******************************** */
-
-	/*
-	 *************************** INIT ************************************** */
-
-	/**
-	 * Constructors.
-	 */
-	public DaoServiceTest() {
-		super();
-	}
-	
-	/*
-	 *************************** METHODS *********************************** */
-
-	/*
-	 *************************** ACCESSORS ********************************* */
-	
+//	DaoService daoService;
+//
+//	/**
+//	 * @param ldapUserService the ldapUserService to set
+//	 */
+//	@Autowired
+//	public void setLdapUserService(DaoService daoService) {
+//		this.daoService = daoService;
+//	}
+//	
 	/**
 	 * test getUsers().
 	 */
