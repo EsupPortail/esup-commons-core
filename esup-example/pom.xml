@@ -10,6 +10,7 @@
 	<url>http://maven.apache.org</url>
 	<modules>
 		<module>example-dao</module>
+		<module>example-batch</module>
 		<module>example-domain-services</module>
 		<module>example-domain-beans</module>
 		<module>example-utils</module>
