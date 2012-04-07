@@ -1,0 +1,3 @@
+regarder spring batch
+
+comme le generate DDL est lancer à la création de l'emf regarder commnent créer des emf différents (org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor ?) 
