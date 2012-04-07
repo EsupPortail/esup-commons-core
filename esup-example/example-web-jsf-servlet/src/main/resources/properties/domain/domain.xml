@@ -56,4 +56,12 @@
 		class="org.esupportail.commons.domain.PaginatorDomainServiceImpl">
 		<property name="hibernateDaoService" ref="daoService" />
 	</bean>
+
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+	<!-- Voir la dépendence requise pour éviter le java.lang.NoClassDefFoundError: org/apache/commons/httpclient/HttpMethodBase
+		<property name="requestFactory">
+			<bean class="org.springframework.http.client.CommonsClientHttpRequestFactory" />
+		</property>
+	 -->
+	</bean>
 </beans>

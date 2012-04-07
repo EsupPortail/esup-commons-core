@@ -88,6 +88,7 @@
 		<filter-name>Hibernate Filter</filter-name>
 		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping>
+<!-- 
 	<filter>
 		<filter-name>CAS Authentication Filter</filter-name>
 		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
@@ -102,7 +103,6 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CAS Authentication Filter</filter-name>
-		<!-- <url-pattern>/stylesheets/cas.xhtml</url-pattern> -->
 		<url-pattern>/stylesheets/*</url-pattern>
 	</filter-mapping>
 	<filter>
@@ -119,9 +119,9 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CAS Validation Filter</filter-name>
-		<!-- <url-pattern>/stylesheets/cas.xhtml</url-pattern> -->
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+ -->	
 	
 	<!-- CXF -->
 	<servlet>

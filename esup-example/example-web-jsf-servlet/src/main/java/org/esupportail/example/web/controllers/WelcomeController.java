@@ -4,7 +4,6 @@
  */
 package org.esupportail.example.web.controllers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.urlGeneration.UrlGenerator;
 import org.esupportail.commons.utils.Assert;
-import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.example.domain.beans.User;
 import org.esupportail.example.web.beans.UserBean;
 import org.esupportail.example.web.beans.UserPaginator;
@@ -64,7 +62,11 @@ public class WelcomeController  extends AbstractContextAwareController {
 	 */
 	private UrlGenerator urlGenerator;
 	
-
+	/**
+	 * Spring RestTemplate
+	 */
+	private RestTemplate restTemplate;
+	
 	/*
 	 ******************* INIT ******************** */
 
@@ -104,6 +106,8 @@ public class WelcomeController  extends AbstractContextAwareController {
 		Assert.notNull(this.urlGenerator, "property urlGenerator of class " 
 				+ this.getClass().getName() + " can not be null");
 		Assert.notNull(this.userToUpdate, "property userToUpdate of class " 
+				+ this.getClass().getName() + " can not be null");
+		Assert.notNull(this.restTemplate, "property restTemplate of class " 
 				+ this.getClass().getName() + " can not be null");
 		userPaginator.forceReload();
 	}
@@ -305,6 +309,12 @@ public class WelcomeController  extends AbstractContextAwareController {
             return null;
     }
 	
+	public List<User> getRestUsers() {
+		@SuppressWarnings("unchecked")
+		List<User> ret = restTemplate.getForObject(getRestURL(), List.class);
+		return ret;
+	}	
+	
 	/*
 	 ******************* ACCESSORS ******************** */
 
@@ -360,12 +370,19 @@ public class WelcomeController  extends AbstractContextAwareController {
 	public void setUserToUpdate(final UserBean userToUpdate) {
 		this.userToUpdate = userToUpdate;
 	}
-	
-	public List<User> getRestUsers() {
-		RestTemplate template = new RestTemplate();
-		List<User> ret = template.getForObject(getRestURL(), List.class);
-		return ret;
+
+	/**
+	 * @return the restTemplate
+	 */
+	public RestTemplate getRestTemplate() {
+		return restTemplate;
 	}
 
+	/**
+	 * @param restTemplate the restTemplate to set
+	 */
+	public void setRestTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
 
 }

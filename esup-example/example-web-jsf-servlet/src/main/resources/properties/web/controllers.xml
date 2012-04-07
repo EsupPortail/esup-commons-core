@@ -18,6 +18,7 @@
 		<property name="userPaginator" ref="userPaginator" />
 		<property name="urlGenerator" ref="servletUrlGenerator" />
 		<property name="userToUpdate" ref="userBean"/>
+		<property name="restTemplate" ref="restTemplate"/>
 	</bean>
 	
 	<bean id="simpleController"
