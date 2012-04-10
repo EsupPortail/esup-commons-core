@@ -49,28 +49,19 @@ public class ExceptionController extends
 	}
 
 	/**
-	 * The detected mode (desktop or mobile).
-	 */
-	private boolean modeDetected;
-
-	/**
 	 * @return true if portlet mode.
 	 */
-	public boolean isPortletMode() {
-		if (!modeDetected) {
-			modeDetected = true;
-			if (logger.isDebugEnabled()) {
-				logger.debug("Mode detected in Application");
-			}
-			FacesContext fc = FacesContext.getCurrentInstance();
-			portletMode = ExternalContextUtils.isPortlet(fc
-					.getExternalContext());
-			if (logger.isDebugEnabled()) {
-				if (portletMode) {
-					logger.debug("Portlet mode detected");
-				} else {
-					logger.debug("Servlet mode detected");
-				}
+	private boolean isPortletMode() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Mode detected in Application");
+		}
+		FacesContext fc = FacesContext.getCurrentInstance();
+		portletMode = ExternalContextUtils.isPortlet(fc.getExternalContext());
+		if (logger.isDebugEnabled()) {
+			if (portletMode) {
+				logger.debug("Portlet mode detected");
+			} else {
+				logger.debug("Servlet mode detected");
 			}
 		}
 		return portletMode;
