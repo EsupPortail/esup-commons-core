@@ -89,6 +89,18 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
+	<filter>
+		<filter-name>requestContextFilter</filter-name>
+		<filter-class>org.springframework.web.filter.RequestContextFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>requestContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+
 	<context-param>
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
@@ -146,6 +158,11 @@
 	<welcome-file-list>
 		<welcome-file>stylesheets/home.xhtml</welcome-file>
 	</welcome-file-list>
+	<context-param>
+		<!-- Pour éviter ViewExpiredException, dans une utilisation en portlet, avec le portletBridge de Myfaces, laisser à false -->
+		<param-name>facelets.BUILD_BEFORE_RESTORE</param-name>
+		<param-value>false</param-value>
+	</context-param>
 
 	<!-- Internal server error -->
 	<error-page>
