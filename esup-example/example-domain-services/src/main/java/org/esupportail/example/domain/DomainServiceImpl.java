@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
+import org.esupportail.commons.services.application.Version;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.example.dao.DaoService;
 import org.esupportail.example.domain.beans.User;
+import org.esupportail.example.domain.beans.VersionManager;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -63,7 +65,6 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	// User
 	//////////////////////////////////////////////////////////////
 
-
 	/**
 	 * @see org.esupportail.example.domain.DomainService#getUsers()
 	 */
@@ -107,6 +108,31 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 
 	//////////////////////////////////////////////////////////////
+	// Version
+	//////////////////////////////////////////////////////////////
+
+	/**
+	 * @see org.esupportail.example.domain.DomainService#getDatabaseVersion()
+	 */
+	@Override
+	public Version getDatabaseVersion() {
+		VersionManager versionManager = daoService.getVersionManager();
+		Version version = new Version(versionManager.getVersion());
+		return version;
+	}
+
+	/**
+	 * @see org.esupportail.example.domain.DomainService#updateDatabaseVersion(java.lang.String)
+	 */
+	@Override
+	public void updateDatabaseVersion(String versionNumber) {
+		VersionManager versionManager =  new VersionManager();
+		versionManager.setVersion(versionNumber);
+		daoService.deleteVersionManager();
+		daoService.addVersionManager(versionManager);
+	}
+
+	//////////////////////////////////////////////////////////////
 	// Misc
 	//////////////////////////////////////////////////////////////
 
@@ -116,11 +142,5 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public void setDaoService(final DaoService daoService) {
 		this.daoService = daoService;
 	}
-
-	
-
-
-	
-
 
 }

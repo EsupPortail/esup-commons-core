@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.esupportail.commons.exceptions.UserNotFoundException;
+import org.esupportail.commons.services.application.Version;
 import org.esupportail.example.domain.beans.User;
 
 /**
@@ -56,6 +57,16 @@ public interface DomainService extends Serializable {
 	 */
 	void addUser(User user);
 
-	
+	/**
+	 * Get the application version stored in database
+	 * @return the current version stored in database
+	 */
+	Version getDatabaseVersion();
+
+	/**
+	 * Persit the application version in database
+	 * @param version
+	 */
+	void updateDatabaseVersion(String version);
 
 }

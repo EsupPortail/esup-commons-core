@@ -19,6 +19,11 @@
 			<artifactId>example-dao</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.esupportail</groupId>
+			<artifactId>example-domain-services</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 		<!-- Note RB : Je ne comprends pas pourquoi j'ai du l'ajouter pour que les tests passent
 		normalement il est inclut dans les dépendences  -->
 		<dependency>

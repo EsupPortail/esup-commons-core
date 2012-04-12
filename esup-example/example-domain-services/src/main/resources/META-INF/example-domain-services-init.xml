@@ -17,7 +17,8 @@
 		class="org.esupportail.example.services.application.VersionningServiceImpl"
 		parent="abstractDomainAwareBean"
 		>
-		<property name="firstAdministratorId" value="${init.firstAdministratorId}" />
+<!-- 		<property name="firstAdministratorId" value="${init.firstAdministratorId}" /> -->
+			<property name="domainService" ref="domainService" />
 	</bean>
 
 </beans>

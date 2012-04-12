@@ -7,7 +7,9 @@ package org.esupportail.example.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.esupportail.commons.services.application.Version;
 import org.esupportail.example.domain.beans.User;
+import org.esupportail.example.domain.beans.VersionManager;
 
 /**
  * The DAO service interface.
@@ -46,5 +48,27 @@ public interface DaoService extends Serializable {
 	 * @param user
 	 */
 	void updateUser(User user);
+
+	//////////////////////////////////////////////////////////////
+	// Version
+	//////////////////////////////////////////////////////////////
+
+	/**
+	 * Get application version
+	 * @return Version
+	 */
+	VersionManager getVersionManager();
+
+	/**
+	 * Set application version
+	 * @param version
+	 */
+	void addVersionManager(VersionManager versionManager);
+
+	/**
+	 * remove application version
+	 * @param version
+	 */
+	void deleteVersionManager();
 
 }

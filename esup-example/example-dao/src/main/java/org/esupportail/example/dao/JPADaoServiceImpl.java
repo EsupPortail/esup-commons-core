@@ -15,8 +15,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.esupportail.commons.dao.AbstractGenericJPADaoService;
+import org.esupportail.commons.services.application.Version;
 import org.esupportail.example.domain.beans.Information;
 import org.esupportail.example.domain.beans.User;
+import org.esupportail.example.domain.beans.VersionManager;
+import org.springframework.core.enums.LetterCodedLabeledEnum;
 
 /**
  * The Hiberate implementation of the DAO service.
@@ -128,11 +131,32 @@ public class JPADaoServiceImpl extends AbstractGenericJPADaoService implements D
         Date date = new Date();
         return dateFormat.format(date);
     }
-	
-
 
 	//////////////////////////////////////////////////////////////
-	// misc
+	// version
 	//////////////////////////////////////////////////////////////
+
+	@Override
+	public VersionManager getVersionManager() {
+		Query q = entityManager.createQuery("SELECT versionManager FROM VersionManager versionManager");
+		@SuppressWarnings("unchecked")
+		List<VersionManager> list = (List<VersionManager>)q.getResultList();
+		if (!list.isEmpty()) {
+			return list.get(0);			
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void addVersionManager(VersionManager versionManager) {
+		entityManager.persist(versionManager);
+	}
+
+	@Override
+	public void deleteVersionManager() {
+		Query q = entityManager.createQuery("DELETE FROM VersionManager");
+		q.executeUpdate();
+	}
 
 }

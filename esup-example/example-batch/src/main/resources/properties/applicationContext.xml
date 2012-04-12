@@ -20,5 +20,10 @@
 	
 	<bean id="app_context" class="org.esupportail.commons.context.ApplicationContextHolder"/>
 	
+	<import resource="classpath*:META-INF/example-domain-services-init.xml" />	
+	<import resource="classpath*:META-INF/example-domain-services-domain.xml" />
+	<import resource="classpath*:META-INF/example-domain-services-abstractBeans.xml" />
+	<import resource="classpath*:META-INF/example-domain-services-application.xml" />
+	<import resource="classpath*:META-INF/example-domain-services-i18n.xml" />
 	<import resource="classpath*:META-INF/example-dao-dao.xml" />
 </beans>

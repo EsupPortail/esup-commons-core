@@ -83,6 +83,4 @@
 		</description>
 	</bean>
 
-	<bean id="initDbService" class="org.esupportail.example.dao.JPAInitDbService" />
-
 </beans>
