@@ -37,7 +37,6 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	/**
 	 * {@link LdapUserService}.
 	 */
-//	private LdapUserService ldapUserService;
 
 	/**
 	 * A logger.

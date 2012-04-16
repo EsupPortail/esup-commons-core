@@ -21,6 +21,16 @@
 		</tx:attributes>
 	</tx:advice>
 
+	<aop:config>
+		<aop:pointcut id="txMethods"
+			expression="within(org.esupportail.*.domain.DomainServiceImpl) 
+						&amp;&amp; (execution(* add*(..)) || execution(* delete*(..)) || execution(* update*(..)))
+						&amp;&amp; !execution(* *DatabaseVersion(..))" /> 
+		<aop:aspect id="checkDbVersion" ref="versionningService">
+			<aop:before pointcut-ref="txMethods" method="checkVersion" />
+		</aop:aspect>
+	</aop:config>
+
 	<bean id="domainService" class="org.esupportail.example.domain.DomainServiceImpl">
 		<property name="daoService" ref="daoService" />
 	</bean>

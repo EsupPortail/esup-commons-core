@@ -61,6 +61,13 @@ public class VersionningServiceImpl extends AbstractApplicationAwareBean impleme
 
 
 	/**
+	 * @see org.esupportail.commons.services.application.VersionningService#checkVersion()
+	 */
+	public void checkVersion() {
+		checkVersion(true, false);
+	};
+	
+	/**
 	 * @see org.esupportail.commons.services.application.VersionningService#checkVersion(boolean, boolean)
 	 */
 	public void checkVersion(
@@ -226,10 +233,10 @@ public class VersionningServiceImpl extends AbstractApplicationAwareBean impleme
 	 */	
 	private void printOlderThanMessage(final String version) {
 		log.info(new StringBuffer("database version (")
-				.append(getDomainService().getDatabaseVersion())
-				.append(") is older than ")
-				.append(version)
-				.append(", upgrading..."));
+		.append(getDomainService().getDatabaseVersion())
+		.append(") is older than ")
+		.append(version)
+		.append(", upgrading..."));
 	}
 
 	/**
