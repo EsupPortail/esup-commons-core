@@ -51,6 +51,14 @@ public class Version {
 		} 
 		throw new VersionException("invalid version number [" + versionString + "]");
 	}
+
+	/**
+	 * Constructor (needed by jaxws).
+	 * @throws VersionException 
+	 */
+	public Version() {
+		super();
+	}
 	
 	/**
 	 * @see java.lang.Object#equals(java.lang.Object)

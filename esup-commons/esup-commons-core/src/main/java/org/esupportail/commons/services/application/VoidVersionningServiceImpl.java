@@ -48,4 +48,8 @@ public class VoidVersionningServiceImpl implements VersionningService {
 		return false;
 	}
 
+	public void checkVersion() throws VersionException {
+		// TODO Auto-generated method stub
+	}
+
 }

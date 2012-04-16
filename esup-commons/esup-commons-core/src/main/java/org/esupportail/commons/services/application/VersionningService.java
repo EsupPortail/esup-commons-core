@@ -27,6 +27,12 @@ public interface VersionningService extends Serializable {
 			final boolean printLatestVersion) throws VersionException;
 	
 	/**
+	 * check the database version, silently upgrade if possible.
+	 * @throws VersionException 
+	 */
+	void checkVersion() throws VersionException;
+	
+	/**
 	 * Upgrade the database.
 	 * @return true if the method should be called again, false otherwise.
 	 */
