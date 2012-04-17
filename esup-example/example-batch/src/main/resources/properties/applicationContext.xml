@@ -13,7 +13,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:/properties/defaults.properties</value>
-				<value>classpath:/properties/config.properties</value>
+				<value>file:${conf}</value>
 			</list>
 		</property>
 	</bean>

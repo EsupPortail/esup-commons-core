@@ -5,7 +5,6 @@ package org.esupportail.example.batch;
 
 import java.util.Properties;
 
-import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.application.VersionningService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
@@ -27,10 +26,11 @@ public class Launcher {
 	 * Print the syntax and exit.
 	 */
 	private static void syntax() {
-		throw new IllegalArgumentException(
-				"syntax: " + Launcher.class.getSimpleName() + " <options>"
-				+ "\nwhere option can be:");
-		//TODO
+		System.out.print(
+				"syntax: " + Launcher.class.getSimpleName() + " <options>\n" +
+				"where option can be:\n" +
+				"- init-db\n" +
+				"- upgrade-db\n");
 	}
 
 	/**
