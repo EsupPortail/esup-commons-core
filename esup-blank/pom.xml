@@ -43,6 +43,7 @@
         </snapshotRepository>
     </distributionManagement>
     <modules>
+        <module>esup-blank-batch</module>
         <module>esup-blank-dao</module>
         <module>esup-blank-utils</module>
         <module>esup-blank-domain-beans</module>
