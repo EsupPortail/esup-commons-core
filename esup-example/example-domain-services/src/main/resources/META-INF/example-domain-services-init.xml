@@ -18,7 +18,7 @@
 		parent="abstractDomainAwareBean"
 		>
 <!-- 		<property name="firstAdministratorId" value="${init.firstAdministratorId}" /> -->
-			<property name="domainService" ref="domainService" />
+<!-- 			<property name="domainService" ref="domainService" /> -->
 	</bean>
 
 </beans>
