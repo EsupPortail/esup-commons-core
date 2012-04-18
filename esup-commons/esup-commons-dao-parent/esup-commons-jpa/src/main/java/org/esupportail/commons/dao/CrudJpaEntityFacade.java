@@ -7,12 +7,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.OptimisticLockException;
-
-import org.hibernate.StaleStateException;
-
-import fr.univlille1.paperless.domain.beans.Administrateur;
-
 /**
  * @author Yves Deschamps. Interface for CRUD JPA
  * @param <T>
