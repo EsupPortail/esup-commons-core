@@ -87,7 +87,7 @@ public class CrudJpaEntityFacadeImpl<T> implements CrudJpaEntityFacade<T> {
 	@Override
 	public int getCount() {
 		Query query = entityManager.createQuery("SELECT COUNT(*) FROM "
-				+ entityClass.getSimpleName() + " entity");
+				+ entityClass.getName() + " entity");
 		Number result = (Number) query.getSingleResult();
 		return result.intValue();
 	}
