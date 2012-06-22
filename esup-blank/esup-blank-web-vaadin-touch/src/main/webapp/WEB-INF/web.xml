@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>Vaadin Web Application</display-name>
+	<context-param>
+		<description>Vaadin production mode</description>
+		<param-name>productionMode</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<!-- Two servlets are implemented, one for anonymous mode, one for authenticated mode -->
+	
+	<servlet>
+		<servlet-name>Vaadin Application Servlet</servlet-name>
+		<servlet-class>com.vaadin.addon.touchkit.server.TouchKitApplicationServlet</servlet-class>
+		<init-param>
+			<description>Vaadin application class to start in anonymous mode</description>
+			<param-name>application</param-name>
+			<param-value>org.esupportail.blank.touch.Application</param-value>
+		</init-param>
+		<init-param>
+			<description>Application widgetset</description>
+			<param-name>widgetset</param-name>
+			<param-value>org.esupportail.blank.touch.widgetset.AppWidgetSet</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Vaadin Application Servlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Authenticated Vaadin Application Servlet</servlet-name>
+		<servlet-class>com.vaadin.addon.touchkit.server.TouchKitApplicationServlet</servlet-class>
+		<init-param>
+			<description>Vaadin application class to start in anonymous mode</description>
+			<param-name>application</param-name>
+			<param-value>org.esupportail.blank.touch.ProtectedApplication</param-value>
+		</init-param>
+		<init-param>
+			<description>Application widgetset</description>
+			<param-name>widgetset</param-name>
+			<param-value>org.esupportail.blank.touch.widgetset.AppWidgetSet</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Authenticated Vaadin Application Servlet</servlet-name>
+		<url-pattern>/protected/*</url-pattern>
+	</servlet-mapping> 
+
+	<!-- Configure these is you need "fallback" application or non supported 
+		browsers -->
+	<!-- <init-param> <description> Vaadin fallback application class to start</description> 
+		<param-name>fallbackApplication</param-name> <param-value>com.vornitologist.VornitologistFallbackApplication</param-value> 
+		</init-param> <init-param> <description> Application widgetset</description> 
+		<param-name>fallbackWidgetset</param-name> <param-value>com.vaadin.terminal.gwt.DefaultWidgetSet</param-value> 
+		</init-param> -->
+
+	<!-- for Spring -->
+	<context-param>
+		<description>The location of the main configuration file of the
+            Spring framework.</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/properties/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener> 
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<!-- for sso-cas --> 
+	<filter>
+		<filter-name>CAS Authentication Filter</filter-name>
+		<filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+		<init-param>
+			<param-name>casServerLoginUrl</param-name>
+			<param-value>${cas.url}/login</param-value>
+		</init-param>
+		<init-param>
+			<param-name>serverName</param-name>
+			<param-value>http://${tomcat.host}${tomcat.port.string}</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>CAS Validation Filter</filter-name>
+		<filter-class>org.jasig.cas.client.validation.Cas10TicketValidationFilter</filter-class>
+		<init-param>
+			<param-name>casServerUrlPrefix</param-name>
+			<param-value>${cas.url}</param-value>
+		</init-param>
+		<init-param>
+			<param-name>serverName</param-name>
+			<param-value>http://${tomcat.host}${tomcat.port.string}</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CAS Authentication Filter</filter-name>
+		<url-pattern>/protected/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS Validation Filter</filter-name>
+		<url-pattern>/protected/*</url-pattern>
+	</filter-mapping>
+
+</web-app>
