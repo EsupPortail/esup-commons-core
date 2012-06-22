@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- /properties/web/controllers.xml This file declares the visual beans 
+		used by the web interface. It should not be modified but by the developers. 
+		This file is referenced by /properties/applicationContext.xml. -->
+
+	<bean id="welcomeViewController" class="org.esupportail.blank.touch.ui.WelcomeViewController"
+		scope="session">
+		<property name="version" value="${misc.version}" />
+		<property name="casLogoutUrl" value="${cas.url}/logout?service=http://${tomcat.host}${tomcat.port.string}">
+			<description>The CAS logout URL.</description>
+		</property>
+	</bean>
+
+	<bean id="webViewController" class="org.esupportail.blank.touch.ui.WebViewController"
+		scope="session">
+		<property name="url" value="${misc.url}" />
+	</bean>
+
+	<bean id="mapViewController" class="org.esupportail.blank.touch.ui.MapViewController"
+		scope="session">
+	</bean>
+
+	<bean id="mapTargetViewController" class="org.esupportail.blank.touch.ui.MapTargetViewController"
+		scope="session">
+		<property name="longitudesLatitudesMap">
+			<description>Les longitudes et latitudes des batiments du campus.
+				Obtenues depuis www.getlation.com. Format WKT.
+			</description>
+			<map>
+				<entry key="Campus" value="POINT(3.1420791149139404 50.60927300831441)" />
+				<entry key="A1" value="POINT(3.1406521797180176 50.613323937665754)" />
+				<entry key="A2" value="POINT(3.1415748596191406 50.61335797761093)" />
+				<entry key="A3" value="POINT(3.1403517723083496 50.608285754182276)" />
+				<entry key="A4" value="POINT(3.1395846605300903 50.6071895373918)" />
+				<entry key="A5" value="POINT(3.139493465423584 50.60667205972245)" />
+				<entry key="A6" value="POINT(3.1386566162109375 50.608319797773085)" />
+				<entry key="B5" value="POINT(3.133630156517029 50.605369829222276)" />
+				<entry key="B6" value="POINT(3.133428990840912 50.605011496729105)" />
+				<entry key="C1" value="POINT(3.1433022022247314 50.61053938673237)" />
+				<entry key="C3" value="POINT(3.1434309482574463 50.61117256315848)" />
+				<entry key="C4" value="POINT(3.1443214416503906 50.61125426272176)" />
+				<entry key="C5" value="POINT(3.144865930080414 50.610382793398614)" />
+				<entry key="C6" value="POINT(3.1460434198379517 50.61046449433342)" />
+				<entry key="C7" value="POINT(3.145732283592224 50.60991811663355)" />
+				<entry key="C8" value="POINT(3.144557476043701 50.61070959628656)" />
+				<entry key="C9" value="POINT(3.14383864402771 50.6098585423574)" />
+				<entry key="C10" value="POINT(3.1443268060684204 50.6103027944291)" />
+				<entry key="C11" value="POINT(3.1445789337158203 50.60982449987999)" />
+				<entry key="C12" value="POINT(3.1462472677230835 50.610035562842754)" />
+				<entry key="DESS" value="POINT(3.1338393688201904 50.610811721723486)" />
+				<entry key="LIM" value="POINT(3.1446003913879395 50.61094108029202)" />
+				<entry key="M1" value="POINT(3.138892650604248 50.60898704717978)" />
+				<entry key="M2" value="POINT(3.1380075216293335 50.60901087734073)" />
+				<entry key="M3" value="POINT(3.1378573179244995 50.609480669477534)" />
+				<entry key="M4" value="POINT(3.1369614601135254 50.60925939115693)" />
+				<entry key="M5" value="POINT(3.1363391876220703 50.60953854209742)" />
+				<entry key="P1" value="POINT(3.141016960144043 50.610546195126346)" />
+				<entry key="P2" value="POINT(3.1394022703170776 50.61048491954496)" />
+				<entry key="P3" value="POINT(3.139193058013916 50.61127468759041)" />
+				<entry key="P4" value="POINT(3.1396275758743286 50.6109308677864)" />
+				<entry key="P5" value="POINT(3.140566349029541 50.611410853154794)" />
+				<entry key="P7" value="POINT(3.140046000480652 50.61172062834554)" />
+				<entry key="SH1" value="POINT(3.1429696083068848 50.6115742513118)" />
+				<entry key="SH2" value="POINT(3.1426262855529785 50.61049513214739)" />
+				<entry key="SH3" value="POINT(3.143559694290161 50.61011726438056)" />
+				<entry key="SN1" value="POINT(3.1439030170440674 50.60823128438577)" />
+				<entry key="SN2" value="POINT(3.144310712814331 50.6087181059553)" />
+				<entry key="SN3" value="POINT(3.144766688346863 50.60799297828458)" />
+				<entry key="SN4" value="POINT(3.1455767154693604 50.60835384133924)" />
+				<entry key="SN5" value="POINT(3.145981729030609 50.60818532544591)" />
+			</map>
+		</property>
+		<property name="TypesMap">
+			<description>La destination des bâtiments.
+			</description>
+			<map>
+				<entry key="Campus" value="Bibliothèque" />
+				<entry key="A1" value="Administration" />
+				<entry key="A2" value="Administration" />
+				<entry key="A3" value="Administration" />
+				<entry key="A4" value="Administration" />
+				<entry key="A5" value="Administration" />
+				<entry key="A6" value="Administration" />
+				<entry key="B5" value="Enseignement" />
+				<entry key="B6" value="Enseignement" />
+				<entry key="C1" value="Enseignement" />
+				<entry key="C3" value="Enseignement" />
+				<entry key="C4" value="Enseignement" />
+				<entry key="C5" value="Enseignement" />
+				<entry key="C6" value="Enseignement" />
+				<entry key="C7" value="Enseignement" />
+				<entry key="C8" value="Enseignement" />
+				<entry key="C9" value="Enseignement" />
+				<entry key="C10" value="Enseignement" />
+				<entry key="C11" value="Enseignement" />
+				<entry key="C12" value="Enseignement" />
+				<entry key="DESS" value="Enseignement" />
+				<entry key="LIM" value="Enseignement" />
+				<entry key="M1" value="Enseignement" />
+				<entry key="M2" value="Enseignement" />
+				<entry key="M3" value="Enseignement" />
+				<entry key="M4" value="Enseignement" />
+				<entry key="M5" value="Enseignement" />
+				<entry key="P1" value="Enseignement" />
+				<entry key="P2" value="Enseignement" />
+				<entry key="P3" value="Enseignement" />
+				<entry key="P4" value="Enseignement" />
+				<entry key="P5" value="Enseignement" />
+				<entry key="P7" value="Enseignement" />
+				<entry key="SH1" value="Enseignement" />
+				<entry key="SH2" value="Enseignement" />
+				<entry key="SH3" value="Enseignement" />
+				<entry key="SN1" value="Enseignement" />
+				<entry key="SN2" value="Enseignement" />
+				<entry key="SN3" value="Enseignement" />
+				<entry key="SN4" value="Enseignement" />
+				<entry key="SN5" value="Enseignement" />
+			</map>
+		</property>
+	</bean>
+	
+</beans>
