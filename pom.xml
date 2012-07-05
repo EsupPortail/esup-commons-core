@@ -67,6 +67,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
+                    <tagNameFormat>V2-@{project.version}</tagNameFormat>
 					<goals>deploy</goals>
 				</configuration>
 			</plugin>
