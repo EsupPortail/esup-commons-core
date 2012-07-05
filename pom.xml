@@ -4,7 +4,7 @@
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.9</version>
+	<version>0.2.10-SNAPSHOT</version>
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
