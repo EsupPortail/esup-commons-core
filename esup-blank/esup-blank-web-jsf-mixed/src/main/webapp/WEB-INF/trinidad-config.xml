@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<trinidad-config xmlns="http://myfaces.apache.org/trinidad/config">
-	<!-- Enable debug output -->
-	<debug-output>true</debug-output>
-	<accessibility-mode>#{sessionController.accessibilityMode}</accessibility-mode>
-	<skin-family>#{agentUtil.phoneFamily}</skin-family>
-</trinidad-config>
