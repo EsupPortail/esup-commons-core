@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>esup-commons2-dao-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.2.9-SNAPSHOT</version>
+		<version>0.2.9</version>
 	</parent>
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-jpa</artifactId>
-	<version>0.2.9-SNAPSHOT</version>
+	<version>0.2.9</version>
 	<packaging>jar</packaging>
 	<name>esup-commons-jpa</name>
 	<url>http://maven.apache.org</url>

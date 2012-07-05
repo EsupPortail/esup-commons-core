@@ -3,11 +3,11 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-parent</artifactId>
-		<version>0.2.9-SNAPSHOT</version>
+		<version>0.2.9</version>
 	</parent>
 	<artifactId>esup-commons2-core</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.9-SNAPSHOT</version>
+	<version>0.2.9</version>
 	<name>esup-commons-core</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

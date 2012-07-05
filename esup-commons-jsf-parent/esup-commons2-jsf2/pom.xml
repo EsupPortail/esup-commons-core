@@ -3,11 +3,11 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.2.9-SNAPSHOT</version>
+		<version>0.2.9</version>
 	</parent>
 	<artifactId>esup-commons2-jsf2</artifactId>
 	<packaging>jar</packaging>
-	<version>0.2.9-SNAPSHOT</version>
+	<version>0.2.9</version>
 	<name>esup-commons-jsf2</name>
 	<url>http://maven.apache.org</url>
 	<build>
