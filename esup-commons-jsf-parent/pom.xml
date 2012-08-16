@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.esupportail</groupId>
+		<artifactId>esup-commons2-parent</artifactId>
+		<version>0.3.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>esup-commons2-jsf-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>0.3.1-SNAPSHOT</version>
+	<name>esup-commons-jsf-parent</name>
+	<url>http://maven.apache.org</url>
+	<modules>
+		<module>esup-commons-jsf</module>
+		<module>esup-commons-jsf-primeFaces</module>
+		<module>esup-commons-jsf-trinidad</module>
+		<module>esup-commons-jsf-exception</module>
+		<module>esup-commons-jsf-portlet</module>
+		<module>esup-commons2-jsf2</module>
+		<module>esup-commons2-jsf2-exception</module>
+	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>org.esupportail</groupId>
+			<artifactId>esup-commons2-web</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>
