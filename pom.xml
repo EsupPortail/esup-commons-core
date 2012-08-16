@@ -8,7 +8,7 @@
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
-		<developerConnection>scm:git:ssh://git@github.com/EsupPortail/esup-commons-core</developerConnection>
+		<developerConnection>scm:git:ssh://git@github.com/raymondBourges/esup-commons-core</developerConnection>
 		<url>https://sourcesup.cru.fr/scm/?group_id=244</url>
 	</scm>
 	<modules>
