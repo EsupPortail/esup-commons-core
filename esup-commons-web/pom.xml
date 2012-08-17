@@ -6,11 +6,8 @@
 		<groupId>org.esupportail</groupId>
 		<version>0.3.1-SNAPSHOT</version>
 	</parent>
-	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-web</artifactId>
-	<version>0.3.1-SNAPSHOT</version>
 	<name>esup-commons-web</name>
-	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -20,7 +17,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.esupportail</groupId>
