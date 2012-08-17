@@ -5,13 +5,8 @@
         <artifactId>esup-commons2-jsf-parent</artifactId>
         <version>0.3.1-SNAPSHOT</version>
     </parent>
-    <groupId>org.esupportail</groupId>
     <artifactId>esup-commons2-jsf-trinidad</artifactId>
-    <packaging>jar</packaging>
-    <version>0.3.1-SNAPSHOT</version>
     <name>esup-commons2-jsf-trinidad</name>
-    <description>Artifact pour esup-commons-jsf-trinidad
-    </description>
     <dependencies>
         <dependency>
             <groupId>javax.portlet</groupId>
@@ -29,43 +24,31 @@
             <groupId>org.apache.myfaces.trinidad</groupId>
             <artifactId>trinidad-impl</artifactId>
             <version>1.2.14</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.myfaces.core</groupId>
             <artifactId>myfaces-impl</artifactId>
             <version>1.2.9</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>1.1.2</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.myfaces.shared</groupId>
             <artifactId>myfaces-shared-tomahawk</artifactId>
             <version>4.0.2</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.myfaces.portlet-bridge</groupId>
             <artifactId>portlet-bridge-impl</artifactId>
             <version>1.0.0</version>
-            <type>jar</type>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.esupportail</groupId>
             <artifactId>esup-commons2-jsf-exception</artifactId>
             <version>${project.version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <artifactId>tomahawk12</artifactId>

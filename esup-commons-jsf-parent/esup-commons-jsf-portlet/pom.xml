@@ -6,10 +6,7 @@
 		<version>0.3.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>esup-commons2-jsf-portlet</artifactId>
-	<packaging>jar</packaging>
-	<version>0.3.1-SNAPSHOT</version>
 	<name>esup-commons-jsf-portlet</name>
-	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>org.esupportail</groupId>
