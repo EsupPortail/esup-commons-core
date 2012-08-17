@@ -7,14 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Name;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.ModificationItem;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.ldap.UncategorizedLdapException;
 import org.springframework.ldap.core.DirContextAdapter;

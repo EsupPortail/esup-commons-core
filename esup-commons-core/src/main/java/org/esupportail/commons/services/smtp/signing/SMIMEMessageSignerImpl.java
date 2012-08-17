@@ -3,21 +3,16 @@
  */
 package org.esupportail.commons.services.smtp.signing;
 
-import java.io.FileInputStream;
 import java.io.Serializable;
 import java.security.Key;
 
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-//TODO CL V2 : je n'ai pas trouve le jar correspondant à ces classes
-//import net.suberic.crypto.EncryptionKeyManager;
-//import net.suberic.crypto.EncryptionManager;
-//import net.suberic.crypto.EncryptionUtils;
-
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.SmtpServer;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**

@@ -10,7 +10,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
 import org.apache.myfaces.context.servlet.FacesContextImpl;
-import org.apache.myfaces.context.servlet.ServletFacesContextImpl;
 
 /**
  * A serializable servlet faces context implementation.

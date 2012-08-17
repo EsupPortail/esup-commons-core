@@ -3,8 +3,6 @@
  */
 package org.esupportail.commons.dao;
 
-import org.esupportail.commons.utils.Assert;
-
 /**
  * A Hibernate paginator that uses a fixed query.
  * @param <E> the class of the results

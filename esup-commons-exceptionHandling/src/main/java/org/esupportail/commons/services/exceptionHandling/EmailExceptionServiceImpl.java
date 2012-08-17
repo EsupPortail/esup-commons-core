@@ -19,7 +19,6 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.SmtpService;
 import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.commons.utils.SystemUtils;
-import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.utils.strings.StringUtilsWeb;
 
 /**
