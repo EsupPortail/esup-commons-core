@@ -327,9 +327,7 @@ public class ExceptionController implements InitializingBean, Serializable {
 	/**
 	 * @param resettableNames the resettableNames to set
 	 */
-	public void setResettableNames(
-			@SuppressWarnings("unused")
-			final List<String> resettableNames) {
+	public void setResettableNames(final List<String> resettableNames) {
 		throw new UnsupportedOperationException("property resettableNames is obsolete");
 	}
 

@@ -106,7 +106,6 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	 * @param a
 	 * @return Div
 	 */
-	@SuppressWarnings("unchecked")
 	private Div makePages(final Div divPagination,
 					final Paginator pagi, 
 					final HtmlTag ul1, final Application a) {

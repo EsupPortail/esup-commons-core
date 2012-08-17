@@ -128,7 +128,6 @@ public abstract class Assert {
 	 * @param collection the collection to check
 	 * @param message the exception message to use if the assertion fails
 	 */
-	@SuppressWarnings("unchecked")
 	public static void notEmpty(final Collection collection, final String message) {
 		if (CollectionUtils.isEmpty(collection)) {
 			throw new ConfigException(message);
@@ -142,7 +141,6 @@ public abstract class Assert {
 	 * @param map the map to check
 	 * @param message the exception message to use if the assertion fails
 	 */
-	@SuppressWarnings("unchecked")
 	public static void notEmpty(final Map map, final String message) {
 		if (CollectionUtils.isEmpty(map)) {
 			throw new ConfigException(message);
@@ -160,7 +158,6 @@ public abstract class Assert {
 	 * ok when prepended to it.
 	 * @see Class#isInstance
 	 */
-	@SuppressWarnings("unchecked")
 	public static void isInstanceOf(final Class clazz, final Object obj, final String message) {
 		Assert.notNull(clazz, "The clazz to perform the instanceof assertion cannot be null");
 		if (obj == null) {
@@ -184,7 +181,6 @@ public abstract class Assert {
 	 * normally end in a ": " or ". " so that the function generate message looks
 	 * ok when prepended to it.
 	 */
-	@SuppressWarnings("unchecked")
 	public static void isAssignable(final Class superType, final Class subType, final String message) {
 		Assert.notNull(superType, "superType cannot be null");
 		Assert.notNull(subType, "subType cannot be null");

@@ -67,9 +67,7 @@ public class OfflineLdapUserServiceImpl extends AbstractLdapService implements L
 	/**
 	 * @see org.esupportail.commons.services.ldap.LdapUserService#getLdapUsersFromToken(java.lang.String)
 	 */
-	public List<LdapUser> getLdapUsersFromToken(
-			@SuppressWarnings("unused")
-			final String token) throws LdapException {
+	public List<LdapUser> getLdapUsersFromToken(final String token) throws LdapException {
 		throw new UnsupportedOperationException(
 				"class [" + getClass().getSimpleName() + "] does not support LDAP searches.");
 	}
@@ -77,9 +75,7 @@ public class OfflineLdapUserServiceImpl extends AbstractLdapService implements L
 	/**
 	 * @see org.esupportail.commons.services.ldap.LdapUserService#getLdapUsersFromFilter(java.lang.String)
 	 */
-	public List<LdapUser> getLdapUsersFromFilter(
-			@SuppressWarnings("unused")
-			final String filterExpr) throws LdapException {
+	public List<LdapUser> getLdapUsersFromFilter(final String filterExpr) throws LdapException {
 		throw new UnsupportedOperationException(
 				"class [" + getClass().getSimpleName() + "] does not support LDAP searches.");
 	}
@@ -87,9 +83,7 @@ public class OfflineLdapUserServiceImpl extends AbstractLdapService implements L
 	/**
 	 * @see org.esupportail.commons.services.ldap.LdapUserService#testLdapFilter(java.lang.String)
 	 */
-	public String testLdapFilter(
-			@SuppressWarnings("unused")
-			final String filterExpr) throws LdapException {
+	public String testLdapFilter(final String filterExpr) throws LdapException {
 		throw new UnsupportedOperationException(
 				"class [" + getClass().getSimpleName() + "] does not support LDAP filter testing.");
 	}
@@ -112,11 +106,7 @@ public class OfflineLdapUserServiceImpl extends AbstractLdapService implements L
 	 * @see org.esupportail.commons.services.ldap.LdapUserService#userMatchesFilter(
 	 * java.lang.String, java.lang.String)
 	 */
-	public boolean userMatchesFilter(
-			@SuppressWarnings("unused")
-			final String id, 
-			@SuppressWarnings("unused")
-			final String filterExpr) throws LdapException {
+	public boolean userMatchesFilter(final String id, final String filterExpr) throws LdapException {
 		throw new UnsupportedOperationException(
 				"class [" + getClass().getSimpleName() + "] does not support LDAP filter matching.");
 	}

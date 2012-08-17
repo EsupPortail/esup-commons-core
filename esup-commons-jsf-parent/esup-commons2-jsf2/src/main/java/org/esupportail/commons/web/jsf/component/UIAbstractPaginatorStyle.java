@@ -231,7 +231,6 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	 * @param a
 	 * @return Div
 	 */
-	@SuppressWarnings("unchecked")
 	protected Div makeDivNbItems(final Application a) {
 		Div divNbItems = (Div) a.createComponent(Div.COMPONENT_TYPE);
 		divNbItems.setParent(this);
@@ -285,9 +284,7 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	 * @param a
 	 * @return Div
 	 */
-	protected Div makeDivPages(
-			@SuppressWarnings("unused")
-			final Application a) {
+	protected Div makeDivPages(final Application a) {
 		return null;
 	}
 	
@@ -296,7 +293,6 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	 * @param a
 	 * @return Div
 	 */
-	@SuppressWarnings("unchecked")
 	protected Div makeDivNbItemsByPage(final Application a) {
 		Div divNbItemsByPage = (Div) a.createComponent(Div.COMPONENT_TYPE);
 		divNbItemsByPage.setParent(this);
@@ -346,7 +342,6 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	/**
 	 * @see javax.faces.component.UIComponentBase#encodeChildren(javax.faces.context.FacesContext)
 	 */
-	
 	public void encodeChildren(final FacesContext context) throws IOException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Entered encodeChildren for client-Id: ");
@@ -364,7 +359,6 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	/**
 	 * @see org.apache.myfaces.component.html.ext.HtmlDataTable#encodeEnd(javax.faces.context.FacesContext)
 	 */
-	
 	public void encodeEnd(final FacesContext arg0) throws IOException {
 		super.encodeEnd(arg0);
 	}
@@ -372,7 +366,6 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	/**
 	 * @see javax.faces.component.UIComponent#getFamily()
 	 */
-	
 	public String getFamily() {
 		return COMPONENT_FAMILY;
 	}

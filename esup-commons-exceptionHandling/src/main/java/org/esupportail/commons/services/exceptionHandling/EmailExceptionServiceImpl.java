@@ -63,7 +63,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	/**
 	 * The exceptions that will generate no email.
 	 */
-	@SuppressWarnings("unchecked")
 	private List<Class> noEmailExceptions;
 
 	/**
@@ -79,7 +78,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	 * @param develEmail 
 	 * @param logLevel 
 	 */
-	@SuppressWarnings("unchecked")
 	public EmailExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,

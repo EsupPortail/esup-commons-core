@@ -158,7 +158,6 @@ implements ExceptionService {
 	/**
 	 * The views to redirect to.
 	 */
-	@SuppressWarnings("unchecked")
 	private Map<Class, String> exceptionViews;
 	
 	/**
@@ -179,7 +178,6 @@ implements ExceptionService {
 	 * @param authenticationService 
 	 * @param logLevel 
 	 */
-	@SuppressWarnings("unchecked")
 	public SimpleExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
@@ -625,7 +623,6 @@ implements ExceptionService {
 	/**
 	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getExceptionView()
 	 */
-	@SuppressWarnings("unchecked")
 	public String getExceptionView() {
 		if (throwable != null) {
 			for (Class clazz : exceptionViews.keySet()) {

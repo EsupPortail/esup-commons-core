@@ -29,7 +29,7 @@ abstract class AbstractLdapService implements BasicLdapService {
 	/**
 	 * @see org.esupportail.commons.services.ldap.BasicLdapService#getStatistics(java.util.Locale)
 	 */
-	public List<String> getStatistics(@SuppressWarnings("unused") final Locale locale) {
+	public List<String> getStatistics(final Locale locale) {
 		throw unsupportedExcepion;
 	}
 
