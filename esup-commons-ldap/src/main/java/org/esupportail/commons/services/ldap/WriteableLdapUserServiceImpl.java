@@ -6,6 +6,8 @@ package org.esupportail.commons.services.ldap;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.ehcache.CacheManager;
+
 import javax.naming.Name;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.BasicAttribute;
@@ -72,6 +74,11 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	 * The names of the attributes to update.
 	 */
 	private List<String> attributes;
+    
+	/**
+	 * The CacheManager to invalidate when writing to LDAP to ensure coherence
+	 */
+	private CacheManager cacheManager;
 	
 	/**
 	 * Bean constructor.
@@ -100,6 +107,10 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		if (!attributes.contains(idAttribute)) {
 			attributes.add(idAttribute);
 		}
+		if (cacheManager == null) {
+			logger.info("property cacheManager is not set. This is not a problem if you do not use a LDAP cache. Otherwise this cache will be incoherent after using updateLdapUser()");
+		}
+
 	}
 
 	/** Modify an LDAP user using Spring LdapContextSource.
@@ -119,6 +130,9 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			mapToContext(ldapUser, context);
 			logger.info("Update of LDAP user :" + dn + " : " + ldapUser);
 			ldapTemplate.modifyAttributes(dn, context.getModificationItems());
+
+			// ensure LDAP cache 
+			invalidateLdapCache();
 			
 		} catch (UncategorizedLdapException e) {
 			if (e.getCause() instanceof javax.naming.AuthenticationException) {
@@ -132,6 +146,18 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 					"Couldn't get modification items for '" + dn + "'", e);
 		}
 		
+	}
+
+	public void invalidateLdapCache() {
+		if (cacheManager != null) {
+			net.sf.ehcache.Cache cache = cacheManager.getCache(org.esupportail.commons.services.ldap.CachingLdapEntityServiceImpl.class.getName());
+			if (cache != null)
+				cache.removeAll();
+			else
+				logger.error("could not find cacheManager");
+		} else {
+			logger.debug("no LDAP cacheManager to warn");
+		}
 	}
 	
 	/** Create an LDAP user using Spring LdapContextSource.
@@ -280,6 +306,13 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	 */
 	public void setAttributes(final List<String> attributes) {
 		this.attributes = attributes;
+	}
+
+	/**
+	 * @param cacheManager the cacheManager to set
+	 */
+	public void setCacheManager(final CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
 	}
 
 	/**
