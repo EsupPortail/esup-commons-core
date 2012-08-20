@@ -10,13 +10,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.sf.ehcache.CacheManager;
-
 import javax.naming.Name;
-import javax.naming.directory.Attribute;
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.ModificationItem;
+
+import net.sf.ehcache.CacheManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.esupportail.commons.exceptions.UserNotFoundException;
@@ -82,9 +78,14 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	private List<String> attributes;
     
 	/**
-	 * The CacheManager to invalidate when writing to LDAP to ensure coherence
+	 * The cacheManager to invalidate when writing to LDAP to ensure coherence
 	 */
 	private CacheManager cacheManager;
+
+	/**
+	 * The name of cache managed by cacheManager
+	 */
+	private String cacheName;
 	
 	/**
 	 * Bean constructor.
@@ -114,7 +115,14 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			attributes.add(idAttribute);
 		}
 		if (cacheManager == null) {
-			logger.info("property cacheManager is not set. This is not a problem if you do not use a LDAP cache. Otherwise this cache will be incoherent after using updateLdapUser()");
+			logger.info("Property cacheManager is not set. This is not a problem if you do not use a LDAP cache. Otherwise this cache will be incoherent after using updateLdapUser()");
+		}
+		else {
+			if (cacheName == null) {
+				cacheName = org.esupportail.commons.services.ldap.CachingLdapEntityServiceImpl.class.getName();
+				logger.info("Property cacheName is not set. So default (" + cacheName +
+					") is used. This is not a problem if you do not specify a specific cacheName in ldapService Bean.");				
+			}
 		}
 
 	}
@@ -274,7 +282,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 
 	public void invalidateLdapCache() {
 		if (cacheManager != null) {
-			net.sf.ehcache.Cache cache = cacheManager.getCache(org.esupportail.commons.services.ldap.CachingLdapEntityServiceImpl.class.getName());
+			net.sf.ehcache.Cache cache = cacheManager.getCache(cacheName);
 			if (cache != null)
 				cache.removeAll();
 			else
