@@ -474,5 +474,19 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	public void setIdAuth(final String idAuth) {
 		this.idAuth = idAuth;
 	}
+
+	/**
+	 * @return the cacheName
+	 */
+	public String getCacheName() {
+		return cacheName;
+	}
+
+	/**
+	 * @param cacheName the cacheName to set
+	 */
+	public void setCacheName(String cacheName) {
+		this.cacheName = cacheName;
+	}
 	
 }
