@@ -4,7 +4,11 @@
 package org.esupportail.commons.services.ldap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import net.sf.ehcache.CacheManager;
 
@@ -14,6 +18,7 @@ import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 
+import org.apache.commons.lang.StringUtils;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
@@ -146,6 +151,54 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 					"Couldn't get modification items for '" + dn + "'", e);
 		}
 		
+	}
+	
+	/**
+	 * Set or clear a user specified attribute.
+	 * It handles the attribute etiquette: 
+	 * - it keeps unmodified attribute values without this etiquette
+	 * - it prefixes the values with this etiquette
+	 * @param ldapUser
+	 * @param attrName
+	 * @param etiquette
+	 * @param value
+	 * @throws LdapAttributesModificationException 
+	 */
+	public void setOrClearUserAttribute(final LdapUser ldapUser, final String attrName, 
+					    final String etiquette, final List<String> value) 
+					throws LdapAttributesModificationException {
+		Map<String, List<String>> attrs = ldapUser.getAttributes();
+		List<String> allValues = computeAttributeValues(attrs.get(attrName), etiquette, value);
+		attrs.put(attrName, allValues);
+
+		// call updateLdapUser with only the attribute we want to write in LDAP
+		ldapUser.setAttributes(singletonMap(attrName, allValues));
+		updateLdapUser(ldapUser);
+		ldapUser.setAttributes(attrs); // restore other attributes
+	}
+
+	private <A, B> Map<A, B> singletonMap(A key, B value) {
+		Map<A, B> r = new HashMap<A, B>();
+		r.put(key, value);
+		return r;
+	}
+
+	private List<String> computeAttributeValues(List<String> currentValues,	final String etiquette, final List<String> wantedValues) {
+		if (StringUtils.isEmpty(etiquette))
+			return wantedValues;
+
+		Set<String> set = new TreeSet<String>();
+		if (currentValues != null) {
+		    for (String s : currentValues)
+			if (!s.startsWith(etiquette)) set.add(s);
+		}
+		for (String v : wantedValues) 
+			set.add(mayAddPrefix(etiquette, v));
+		return new ArrayList<String>(set);
+	}
+
+	private String mayAddPrefix(String prefix, String s) {
+		return prefix == null || s.startsWith(prefix) ? s : prefix + s;
 	}
 
 	public void invalidateLdapCache() {
