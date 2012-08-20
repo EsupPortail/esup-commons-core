@@ -77,9 +77,7 @@ public class TransientTreeStateBase extends TreeStateBase {
 	 * @see org.apache.myfaces.custom.tree2.TreeStateBase#setTransient(boolean)
 	 */
 	@Override
-	public void setTransient(
-			@SuppressWarnings("unused")
-			final boolean trans) {
+	public void setTransient(final boolean trans) {
 		// must always be transient
 	}
 

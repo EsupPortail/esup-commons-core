@@ -62,7 +62,6 @@ public class LdapAttributesMapper implements AttributesMapper, Serializable {
 	 * ldapUser attribute name as the key. String and byte[] may be values.
 	 * @see org.springframework.ldap.AttributesMapper#mapFromAttributes(javax.naming.directory.Attributes)
 	 */
-	@SuppressWarnings("unchecked")
 	public Object mapFromAttributes(final Attributes attrs) throws NamingException {
 		LdapUserImpl ldapUser = new LdapUserImpl();
 		Attribute uidAttr = attrs.get(uidAttribute);

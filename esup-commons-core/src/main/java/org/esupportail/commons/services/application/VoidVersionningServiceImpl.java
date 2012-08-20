@@ -25,11 +25,7 @@ public class VoidVersionningServiceImpl implements VersionningService {
 	/**
 	 * @see org.esupportail.commons.services.application.VersionningService#checkVersion(boolean, boolean)
 	 */
-	public void checkVersion(
-			@SuppressWarnings("unused")
-			final boolean throwException, 
-			@SuppressWarnings("unused")
-			final boolean printLatestVersion)
+	public void checkVersion(final boolean throwException, final boolean printLatestVersion)
 	throws ConfigException {
 		// nothing to do here
 	}

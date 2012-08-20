@@ -216,7 +216,6 @@ public final class ExceptionUtils {
 	 * @param t
 	 * @param exceptionClasses
 	 */
-	@SuppressWarnings("unchecked")
 	public static boolean hasCause(final Throwable t, final Class [] exceptionClasses) {
 		for (Class clazz : exceptionClasses) {
 			if (hasCause(t, clazz)) {

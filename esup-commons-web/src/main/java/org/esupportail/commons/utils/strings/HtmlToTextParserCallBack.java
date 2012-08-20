@@ -31,11 +31,9 @@ public final class HtmlToTextParserCallBack extends HTMLEditorKit.ParserCallback
 	 * @see javax.swing.text.html.HTMLEditorKit.ParserCallback#handleText(char[], int)
 	 */
 	@Override
-	public void handleText(
-			final char[] data, 
-			@SuppressWarnings("unused") final int unusedPos) {      
+	public void handleText(final char[] data, final int unusedPos) {
 		textResult.append(data);
-		}    
+	}
 	
 	/**
 	 * Parse HTML and return text.
