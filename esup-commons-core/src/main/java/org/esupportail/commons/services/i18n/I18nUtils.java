@@ -3,8 +3,6 @@
  */
 package org.esupportail.commons.services.i18n;
 
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

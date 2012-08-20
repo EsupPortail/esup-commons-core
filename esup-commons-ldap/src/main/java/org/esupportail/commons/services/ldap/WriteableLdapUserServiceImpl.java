@@ -19,6 +19,7 @@ import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.ldap.UncategorizedLdapException;
 import org.springframework.ldap.core.DirContextAdapter;

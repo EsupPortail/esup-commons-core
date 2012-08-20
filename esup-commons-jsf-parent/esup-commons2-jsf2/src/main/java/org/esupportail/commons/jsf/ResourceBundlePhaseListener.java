@@ -4,7 +4,6 @@
 package org.esupportail.commons.jsf;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;

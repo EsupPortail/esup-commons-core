@@ -54,11 +54,7 @@ public class FileUtils {
      */
     public static byte[] getFileContent(final File file) throws ConfigException {
 		try {
-			InputStream is = new FileInputStream(file); 
-			if (is == null) {
-				throw new ConfigException("could not read [" + file.getName() + "]");
-			}
-			return getFileContent(is);
+			return getFileContent(new FileInputStream(file));
 		} catch (IOException e) {
 			throw new ConfigException(e);
 		}

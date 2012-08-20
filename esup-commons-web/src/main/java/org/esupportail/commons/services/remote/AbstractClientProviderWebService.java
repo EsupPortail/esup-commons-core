@@ -6,10 +6,6 @@ package org.esupportail.commons.services.remote;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import javax.servlet.http.HttpServletRequest;
-
-//TODO CL V2 : don't use xfire in esup-commons V2
-//import org.codehaus.xfire.transport.http.XFireServletController;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 

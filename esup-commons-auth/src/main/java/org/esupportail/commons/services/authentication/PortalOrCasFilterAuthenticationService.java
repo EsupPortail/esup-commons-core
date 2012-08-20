@@ -60,9 +60,7 @@ public class PortalOrCasFilterAuthenticationService extends DelegatingAuthentica
 	 * #setAuthenticationServices(List)
 	 */
 	@Override
-	public void setAuthenticationServices(
-			@SuppressWarnings("unused")
-			final List<AuthenticationService> authenticators) {
+	public void setAuthenticationServices(final List<AuthenticationService> authenticators) {
 		throw new UnsupportedOperationException(
 				"method " + getClass() + ".setAuthenticators() should never be called.");
 	}

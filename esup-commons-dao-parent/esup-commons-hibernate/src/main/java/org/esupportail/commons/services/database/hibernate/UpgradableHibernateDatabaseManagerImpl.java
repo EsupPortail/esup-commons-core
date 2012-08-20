@@ -134,9 +134,7 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 	/**
 	 * @param unused
 	 */
-	public void setUpgradeSessionFactoryBeanName(
-			@SuppressWarnings("unused")
-			final String unused) {
+	public void setUpgradeSessionFactoryBeanName(final String unused) {
 		throw new ConfigException(getClass() 
 				+ ": property [upgradeSessionFactoryBeanName] is obsolete, "
 				+ "use [jdbcSessionFactoryBeanName] instead and "
