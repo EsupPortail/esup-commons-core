@@ -19,6 +19,7 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 
 import org.apache.commons.lang.StringUtils;
+import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
@@ -177,10 +178,49 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		ldapUser.setAttributes(attrs); // restore other attributes
 	}
 
+	public void setOrClearUserAttribute(final LdapUserService ldapService, final String id, 
+					    final String attrName, final String etiquette, final List<String> value) 
+					throws UserNotFoundException, LdapAttributesModificationException {
+		// ensure we read straight from LDAP
+		// it is especially important since the attribute values with a different etiquette may have changed since last read
+		invalidateLdapCache();
+
+		LdapUser ldapUser = ldapService.getLdapUser(id);
+		setOrClearUserAttribute(ldapUser, attrName, etiquette, value);
+		checkAttributeWriteSucceeded(ldapService, id, attrName, ldapUser);
+	}
+
+	public void setOrClearUserAttribute(final LdapUserAndGroupService ldapService, final String id, 
+					    final String attrName, final String etiquette, final List<String> value) 
+					throws UserNotFoundException, LdapAttributesModificationException {
+		// ensure we read straight from LDAP
+		// it is especially important since the attribute values with a different etiquette may have changed since last read
+		invalidateLdapCache();
+
+		LdapUser ldapUser = ldapService.getLdapUser(id);
+		setOrClearUserAttribute(ldapUser, attrName, etiquette, value);
+		checkAttributeWriteSucceeded(ldapService, id, attrName, ldapUser);
+	}
+
 	private <A, B> Map<A, B> singletonMap(A key, B value) {
 		Map<A, B> r = new HashMap<A, B>();
 		r.put(key, value);
 		return r;
+	}
+
+	public static String join(Iterable<?> elements, CharSequence separator) {
+		if (elements == null) return "";
+
+		StringBuilder sb = null;
+
+		for (Object s : elements) {
+			if (sb == null)
+				sb = new StringBuilder();
+			else
+				sb.append(separator);
+			sb.append(s);			
+		}
+		return sb == null ? "" : sb.toString();
 	}
 
 	private List<String> computeAttributeValues(List<String> currentValues,	final String etiquette, final List<String> wantedValues) {
@@ -199,6 +239,37 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 
 	private String mayAddPrefix(String prefix, String s) {
 		return prefix == null || s.startsWith(prefix) ? s : prefix + s;
+	}
+
+	/**
+	 * Check wether setting or clearing attribute worked correctly
+	 * @throws UserNotFoundException 
+	 * @throws LdapAttributesModificationException
+	 */
+	private void checkAttributeWriteSucceeded(final LdapUserService ldapService, final String id, final String attrName, final LdapUser wantedLdapUser) throws UserNotFoundException, LdapAttributesModificationException {
+		checkAttributeWriteSucceeded(ldapService.getLdapUser(id), attrName, wantedLdapUser);
+	}
+	private void checkAttributeWriteSucceeded(final LdapUserAndGroupService ldapService, final String id, final String attrName, final LdapUser wantedLdapUser) throws UserNotFoundException, LdapAttributesModificationException {
+		checkAttributeWriteSucceeded(ldapService.getLdapUser(id), attrName, wantedLdapUser);
+	}
+	private void checkAttributeWriteSucceeded(final LdapUser storedLdapUser, final String attrName, final LdapUser wantedLdapUser) throws LdapAttributesModificationException {
+		List<String> value = wantedLdapUser.getAttributes(attrName);
+		List<String> storedValue = storedLdapUser.getAttributes(attrName);
+
+		String error = null;
+		if (value == null && (storedValue == null || storedValue.isEmpty()))
+			;
+		// nb: we can't check wether clearing attribute really removed the attribute or simply emptied it
+		else if (value != null && storedValue == null)
+			// this never happens, storedValue is never null afaik
+			error = "could not create attribute '" + attrName + "' with value " + join(value, ", ");
+		else if (!value.containsAll(storedValue) || !storedValue.containsAll(value))
+			error = "could not modify attribute '" + attrName + "' with value " + join(value, ", ") + ", it's value is still " + join(storedValue, ", "); 
+
+		if (error != null) {
+			logger.error(error);
+			throw new LdapAttributesModificationException(error);
+		}
 	}
 
 	public void invalidateLdapCache() {
