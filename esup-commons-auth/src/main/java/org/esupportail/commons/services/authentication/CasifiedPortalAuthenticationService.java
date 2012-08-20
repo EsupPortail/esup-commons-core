@@ -33,9 +33,7 @@ public class CasifiedPortalAuthenticationService extends PortalAuthenticationSer
 	 * java.lang.String)
 	 */
 	@Override
-	public void setAuthType(
-			@SuppressWarnings("unused")
-			final String authType) {
+	public void setAuthType(final String authType) {
 		throw new UnsupportedOperationException(
 				"method " + getClass() + ".setAuthType() should never be called.");
 	}

@@ -104,8 +104,7 @@ public abstract class AbstractFeedServlet extends HttpServlet {
      * @param req
      * @return the cache key of a request.
      */
-    protected String getCacheKey(@SuppressWarnings("unused")
-	final HttpServletRequest req) {
+    protected String getCacheKey(final HttpServletRequest req) {
     	return null;
     }
 

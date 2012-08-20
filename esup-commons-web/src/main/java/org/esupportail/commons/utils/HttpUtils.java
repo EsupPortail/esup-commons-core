@@ -270,7 +270,6 @@ public class HttpUtils {
 	 * @return the real IP address, not localhost.
 	 * @throws UnknownHostException 
 	 */
-	@SuppressWarnings("unchecked")
 	private static InetAddress getRealInetAddress(final String name) 
 	throws UnknownHostException {
 		if (!name.equals("localhost") && !name.equals("127.0.0.1") && !name.equals("0:0:0:0:0:0:0:1")) {

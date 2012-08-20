@@ -103,9 +103,7 @@ public class MockFacesContext extends FacesContext {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterator getMessages(
-			@SuppressWarnings("unused")
-			final String arg0) {
+	public Iterator getMessages(final String arg0) {
 		return null;
 	}
 
@@ -145,9 +143,7 @@ public class MockFacesContext extends FacesContext {
 	 * @see javax.faces.context.FacesContext#setResponseStream(javax.faces.context.ResponseStream)
 	 */
 	@Override
-	public void setResponseStream(
-			@SuppressWarnings("unused")
-			final ResponseStream arg0) {
+	public void setResponseStream(final ResponseStream arg0) {
 		// do nothing
 	}
 
@@ -163,9 +159,7 @@ public class MockFacesContext extends FacesContext {
 	 * @see javax.faces.context.FacesContext#setResponseWriter(javax.faces.context.ResponseWriter)
 	 */
 	@Override
-	public void setResponseWriter(
-			@SuppressWarnings("unused")
-			final ResponseWriter arg0) {
+	public void setResponseWriter(final ResponseWriter arg0) {
 		// do nothing
 	}
 
@@ -189,11 +183,7 @@ public class MockFacesContext extends FacesContext {
 	 * @see javax.faces.context.FacesContext#addMessage(java.lang.String, javax.faces.application.FacesMessage)
 	 */
 	@Override
-	public void addMessage(
-			@SuppressWarnings("unused")
-			final String arg0, 
-			@SuppressWarnings("unused")
-			final FacesMessage arg1) {
+	public void addMessage(final String arg0, final FacesMessage arg1) {
 		// do nothing
 	}
 

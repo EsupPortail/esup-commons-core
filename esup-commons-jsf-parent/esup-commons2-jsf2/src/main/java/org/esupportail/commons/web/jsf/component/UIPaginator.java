@@ -143,8 +143,6 @@ public class UIPaginator extends Div {
 	 * @throws IOException 
 	 * @see org.apache.myfaces.component.html.ext.HtmlDataTable#encodeBegin(javax.faces.context.FacesContext)
 	 */
-	@SuppressWarnings("unchecked")
-	
 	public void encodeBegin(final FacesContext arg0) throws IOException {
 		
 		if (logger.isDebugEnabled()) {

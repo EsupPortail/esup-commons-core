@@ -44,25 +44,16 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * The application map.
 	 */
-	@SuppressWarnings("unchecked")
 	private Map applicationMap;
 
 	/**
 	 * The session map.
 	 */
-	@SuppressWarnings("unchecked")
 	private Map sessionMap;
-
-//	/**
-//	 * The request map.
-//	 */
-//	@SuppressWarnings("unchecked")
-//	private Map requestMap;
 
 	/**
 	 * The request parameter map.
 	 */
-	@SuppressWarnings("unchecked")
 	private Map requestParameterMap;
 
 	/**
@@ -84,9 +75,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getSession(boolean)
 	 */
 	@Override
-	public Object getSession(
-			@SuppressWarnings("unused")
-			final boolean create) {
+	public Object getSession(final boolean create) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -109,8 +98,7 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param request
 	 */
-	public void setRequest(
-			@SuppressWarnings("unused") final Object request) {
+	public void setRequest(final Object request) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -125,18 +113,14 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param response
 	 */
-	public void setResponse(
-			@SuppressWarnings("unused") 
-			final Object response) {
+	public void setResponse(final Object response) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @param encoding
 	 */
-	public void setResponseCharacterEncoding(
-			@SuppressWarnings("unused") 
-			final String encoding) {
+	public void setResponseCharacterEncoding(final String encoding) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -155,7 +139,6 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param applicationMap
 	 */
-	@SuppressWarnings("unchecked")
 	public void setApplicationMap(final Map applicationMap) {
 		this.applicationMap = applicationMap;
 	}
@@ -203,7 +186,6 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param requestParameterMap
 	 */
-	@SuppressWarnings("unchecked")
 	public void setRequestParameterMap(final Map requestParameterMap) {
 		this.requestParameterMap = requestParameterMap;
 	}
@@ -211,7 +193,7 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param encoding
 	 */
-	public void setRequestCharacterEncoding(@SuppressWarnings("unused") final String encoding) {
+	public void setRequestCharacterEncoding(final String encoding) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -347,7 +329,6 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getInitParameterMap()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public Map getInitParameterMap() {
 		throw new UnsupportedOperationException();
 	}
@@ -357,16 +338,13 @@ public class MockExternalContext extends ExternalContext {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Set getResourcePaths(
-			@SuppressWarnings("unused")
-			final String path) {
+	public Set getResourcePaths(final String path) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @see javax.faces.context.ExternalContext#getResource(java.lang.String)
 	 */
-	@SuppressWarnings("unused")
 	@Override
 	public URL getResource(final String path) throws MalformedURLException {
 		throw new UnsupportedOperationException();
@@ -376,9 +354,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getResourceAsStream(java.lang.String)
 	 */
 	@Override
-	public InputStream getResourceAsStream(
-			@SuppressWarnings("unused")
-			final String path) {
+	public InputStream getResourceAsStream(final String path) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -386,9 +362,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#encodeActionURL(java.lang.String)
 	 */
 	@Override
-	public String encodeActionURL(
-			@SuppressWarnings("unused")
-			final String sb) {
+	public String encodeActionURL(final String sb) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -396,9 +370,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#encodeResourceURL(java.lang.String)
 	 */
 	@Override
-	public String encodeResourceURL(
-			@SuppressWarnings("unused")
-			final String sb) {
+	public String encodeResourceURL(final String sb) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -406,9 +378,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#encodeNamespace(java.lang.String)
 	 */
 	@Override
-	public String encodeNamespace(
-			@SuppressWarnings("unused")
-			final String aValue) {
+	public String encodeNamespace(final String aValue) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -416,9 +386,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#dispatch(java.lang.String)
 	 */
 	@Override
-	public void dispatch(
-			@SuppressWarnings("unused")
-			final String requestURI) throws FacesException {
+	public void dispatch(final String requestURI) throws FacesException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -426,9 +394,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#redirect(java.lang.String)
 	 */
 	@Override
-	public void redirect(
-			@SuppressWarnings("unused")
-			final String requestURI) {
+	public void redirect(final String requestURI) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -483,7 +449,6 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * An iterator for Locale.
 	 */
-	@SuppressWarnings("unchecked")
 	private class LocalesIterator implements Iterator {
 
 		/**

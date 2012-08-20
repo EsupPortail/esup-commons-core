@@ -5,10 +5,8 @@
 */
 package org.esupportail.commons.dao;
 
-import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.utils.BeanUtils;
-//TODO CL V2: lien vers module web
-//import org.esupportail.commons.utils.ContextUtils;
+
 import org.hibernate.SessionFactory;
 
 /**

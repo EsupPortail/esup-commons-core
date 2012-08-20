@@ -160,8 +160,9 @@ public final class DownloadUtils {
 	 * @throws DownloadException
 	 */
 	protected static byte[] getBytesFromFile(final File file) throws DownloadException {
+	    InputStream is = null;
 		try {
-			InputStream is = new FileInputStream(file);
+			is = new FileInputStream(file);
 			long length = file.length();
 			if (length > Integer.MAX_VALUE) {
 				throw new IOException("file [" + file.getName() + "] is too large for download");
@@ -180,6 +181,13 @@ public final class DownloadUtils {
 			return bytes;
 		} catch (Throwable t) {
 			throw new DownloadException(t);
+		} finally {
+            try {
+                if (is != null) {
+                    is.close();
+                }
+            } catch (IOException e) {
+            }
 		}
 	}
 	

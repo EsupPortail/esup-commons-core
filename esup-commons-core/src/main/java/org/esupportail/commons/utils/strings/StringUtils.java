@@ -3,12 +3,7 @@
  */
 package org.esupportail.commons.utils.strings; 
 
-import java.io.IOException;
-
 import com.ibm.icu.text.Transliterator;
-
-
-
 
 /**
  * A class to convert HTML to text using Swing.
@@ -248,7 +243,7 @@ public class StringUtils {
 	 */
 	public static Boolean isInteger(final String input) {
 		try {
-			Integer i = Integer.valueOf(input);
+			Integer.valueOf(input);
 			return true;
 		} catch (Exception e) {
 			return false;

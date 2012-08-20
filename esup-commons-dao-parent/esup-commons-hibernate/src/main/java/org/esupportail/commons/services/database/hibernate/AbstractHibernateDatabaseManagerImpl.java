@@ -220,9 +220,7 @@ implements InitializingBean {
 	/**
 	 * @param unused
 	 */
-	public void setSessionFactoryBeanName(
-			@SuppressWarnings("unused")
-			final String unused) {
+	public void setSessionFactoryBeanName(final String unused) {
 		throw new ConfigException(getClass() 
 				+ ": property [sessionFactoryBeanName] is obsolete, "
 				+ "use [jdbcSessionFactoryBeanName] instead and "

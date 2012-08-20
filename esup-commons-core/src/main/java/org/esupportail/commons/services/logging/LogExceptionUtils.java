@@ -3,12 +3,8 @@
  */
 package org.esupportail.commons.services.logging; 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-
-import org.esupportail.commons.exceptions.ExceptionHandlingException;
 
 /**
  * A class that provides static utilities for exception handling.

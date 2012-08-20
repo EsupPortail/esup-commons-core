@@ -218,7 +218,6 @@ implements PaginatorDaoService, InitializingBean {
 	 * Delete a list of objects from the database.
 	 * @param objects 
 	 */
-	@SuppressWarnings("unchecked")
 	protected void deleteObjects(final List objects) {
 		getHibernateTemplate().deleteAll(objects);
 	}

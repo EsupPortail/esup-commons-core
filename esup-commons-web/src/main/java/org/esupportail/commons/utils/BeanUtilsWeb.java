@@ -3,18 +3,9 @@
  */
 package org.esupportail.commons.utils; 
 
-import java.util.Map;
-
 import javax.portlet.PortletContext;
 import javax.servlet.ServletContext;
 
-import org.esupportail.commons.exceptions.ConfigException;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.portlet.context.PortletApplicationContextUtils;
 

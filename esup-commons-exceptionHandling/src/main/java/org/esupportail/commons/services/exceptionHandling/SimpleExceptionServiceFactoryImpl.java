@@ -68,7 +68,6 @@ implements ExceptionServiceFactory {
 	/**
 	 * The exception views.
 	 */
-	@SuppressWarnings("unchecked")
 	private Map<Class, String> exceptionViews;
 	
 	/**
@@ -79,7 +78,6 @@ implements ExceptionServiceFactory {
 	/**
 	 * Constructor.
 	 */
-	@SuppressWarnings("unchecked")
 	public SimpleExceptionServiceFactoryImpl() {
 		super();
 		exceptionViews = new HashMap<Class, String>();
@@ -136,7 +134,6 @@ implements ExceptionServiceFactory {
 	 * @param className 
 	 * @param exceptionView 
 	 */
-	@SuppressWarnings("unchecked")
 	private void addExceptionView(final String className, final String exceptionView) {
 		try {
 			Class clazz = Class.forName(className);
@@ -169,7 +166,6 @@ implements ExceptionServiceFactory {
 	/**
 	 * @return the exceptionView
 	 */
-	@SuppressWarnings("unchecked")
 	protected Map<Class, String> getExceptionViews() {
 		return exceptionViews;
 	}

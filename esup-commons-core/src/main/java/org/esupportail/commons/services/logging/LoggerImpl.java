@@ -33,7 +33,6 @@ public class LoggerImpl implements Logger, Serializable {
 	 * Constructor.
 	 * @param logClass the class the logger will be used by.
 	 */
-	@SuppressWarnings("unchecked")
 	public LoggerImpl(final Class logClass) {
 		logger = LogFactory.getLog(logClass);
 	}

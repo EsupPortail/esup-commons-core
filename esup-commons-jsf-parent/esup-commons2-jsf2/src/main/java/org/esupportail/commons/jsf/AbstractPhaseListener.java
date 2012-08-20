@@ -115,9 +115,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
 	 * @param event
 	 */
-	protected void afterPhaseInternal(
-			@SuppressWarnings("unused")
-			final PhaseEvent event) {
+	protected void afterPhaseInternal(final PhaseEvent event) {
 		//
 	}
 
@@ -133,9 +131,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
 	 * @param event
 	 */
-	protected void beforePhaseInternal(
-			@SuppressWarnings("unused")
-			final PhaseEvent event) {
+	protected void beforePhaseInternal(final PhaseEvent event) {
 		//
 	}
 

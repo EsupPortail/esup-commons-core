@@ -61,7 +61,6 @@ public class VersionServlet extends HttpServlet {
 	 */
 	@Override
 	public void service(
-			@SuppressWarnings("unused")
 			final ServletRequest servletRequest, 
 			final ServletResponse servletResponse) 
 	throws ServletException {

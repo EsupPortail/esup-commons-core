@@ -2,10 +2,9 @@ package org.esupportail.commons.domain;
 
 import java.io.Serializable;
 
-import org.esupportail.commons.dao.PaginatorDaoService;
 import org.esupportail.commons.dao.HqlQueryPojo;
+import org.esupportail.commons.dao.PaginatorDaoService;
 import org.esupportail.commons.dao.ResultPaginator;
-import org.springframework.dao.support.DaoSupport;
 
 /**
  * @author cleprous

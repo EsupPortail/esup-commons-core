@@ -297,11 +297,7 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 	 * @see org.apache.myfaces.portlet.MyFacesGenericPortlet#logException(java.lang.Throwable, java.lang.String)
 	 */
 	@Override
-	protected void logException(
-			@SuppressWarnings("unused")
-			final Throwable t, 
-			@SuppressWarnings("unused")
-			final String msgPrefix) {
+	protected void logException(final Throwable t, final String msgPrefix) {
 		// logged by the exception manager
 	}
 

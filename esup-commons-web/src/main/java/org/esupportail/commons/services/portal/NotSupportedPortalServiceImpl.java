@@ -46,18 +46,14 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getUser(java.lang.String)
 	 */
-	public PortalUser getUser(
-			@SuppressWarnings("unused")
-			final String userId) {
+	public PortalUser getUser(final String userId) {
 		throw notSupported();
 	}
 
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#searchUsers(java.lang.String)
 	 */
-	public List<PortalUser> searchUsers(
-			@SuppressWarnings("unused")
-			final String token)
+	public List<PortalUser> searchUsers(final String token)
 	throws PortalErrorException, PortalUserNotFoundException {
 		throw notSupported();
 	}
@@ -69,36 +65,28 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getGroupById(java.lang.String)
 	 */
-	public PortalGroup getGroupById(
-			@SuppressWarnings("unused")
-			final String groupId) {
+	public PortalGroup getGroupById(final String groupId) {
 		throw notSupported();
 	}
 
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getGroupByName(java.lang.String)
 	 */
-	public PortalGroup getGroupByName(
-			@SuppressWarnings("unused")
-			final String groupName) {
+	public PortalGroup getGroupByName(final String groupName) {
 		throw notSupported();
 	}
 
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#searchGroupsByName(java.lang.String)
 	 */
-	public List<PortalGroup> searchGroupsByName(
-			@SuppressWarnings("unused")
-			final String token) {
+	public List<PortalGroup> searchGroupsByName(final String token) {
 		throw notSupported();
 	}
 
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getSubGroupsById(java.lang.String)
 	 */
-	public List<PortalGroup> getSubGroupsById(
-			@SuppressWarnings("unused")
-			final String arg0)
+	public List<PortalGroup> getSubGroupsById(final String arg0)
 			throws PortalErrorException, PortalGroupNotFoundException {
 		throw notSupported();
 	}
@@ -106,9 +94,7 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getSubGroupsByName(java.lang.String)
 	 */
-	public List<PortalGroup> getSubGroupsByName(
-			@SuppressWarnings("unused")
-			final String arg0)
+	public List<PortalGroup> getSubGroupsByName(final String arg0)
 			throws PortalErrorException, PortalGroupNotFoundException {
 		throw notSupported();
 	}
@@ -120,9 +106,7 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getGroupHierarchyById(java.lang.String)
 	 */
-	public PortalGroupHierarchy getGroupHierarchyById(
-			@SuppressWarnings("unused")
-			final String arg0)
+	public PortalGroupHierarchy getGroupHierarchyById(final String arg0)
 	throws PortalErrorException, PortalGroupNotFoundException {
 		throw notSupported();
 	}
@@ -130,9 +114,7 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getGroupHierarchyByName(java.lang.String)
 	 */
-	public PortalGroupHierarchy getGroupHierarchyByName(
-			@SuppressWarnings("unused")
-			final String arg0)
+	public PortalGroupHierarchy getGroupHierarchyByName(final String arg0)
 	throws PortalErrorException, PortalGroupNotFoundException {
 		throw notSupported();
 	}
@@ -158,18 +140,14 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getUserGroups(java.lang.String)
 	 */
-	public List<PortalGroup> getUserGroups(
-			@SuppressWarnings("unused")
-			final String userId) {
+	public List<PortalGroup> getUserGroups(final String userId) {
 		throw notSupported();
 	}
 
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getGroupUsers(java.lang.String)
 	 */
-	public List<PortalUser> getGroupUsers(
-			@SuppressWarnings("unused")
-			final String groupId) {
+	public List<PortalUser> getGroupUsers(final String groupId) {
 		throw notSupported();
 	}
 
@@ -177,20 +155,14 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	 * @see org.esupportail.portal.ws.client.PortalService#isUserMemberOfGroup(
 	 * java.lang.String, java.lang.String)
 	 */
-	public boolean isUserMemberOfGroup(
-			@SuppressWarnings("unused")
-			final String userId,
-			@SuppressWarnings("unused")
-			final String groupId) {
+	public boolean isUserMemberOfGroup(final String userId, final String groupId) {
 		throw notSupported();
 	}
 
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getContainingGroupsById(java.lang.String)
 	 */
-	public List<PortalGroup> getContainingGroupsById(
-			@SuppressWarnings("unused")
-			final String groupId)
+	public List<PortalGroup> getContainingGroupsById(final String groupId)
 			throws PortalErrorException, PortalGroupNotFoundException {
 		throw notSupported();
 	}
@@ -198,9 +170,7 @@ public class NotSupportedPortalServiceImpl extends AbstractPortalService impleme
 	/**
 	 * @see org.esupportail.portal.ws.client.PortalService#getContainingGroupsByName(java.lang.String)
 	 */
-	public List<PortalGroup> getContainingGroupsByName(
-			@SuppressWarnings("unused")
-			final String groupName)
+	public List<PortalGroup> getContainingGroupsByName(final String groupName)
 			throws PortalErrorException, PortalGroupNotFoundException {
 		throw notSupported();
 	}

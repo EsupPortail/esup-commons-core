@@ -30,15 +30,10 @@ public class VoidSmtpServiceImpl extends AbstractSmtpService {
 	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public void send(
-			@SuppressWarnings("unused")
 			final InternetAddress to, 
-			@SuppressWarnings("unused")
 			final String subject, 
-			@SuppressWarnings("unused")
 			final String htmlBody, 
-			@SuppressWarnings("unused")
 			final String textBody,
-			@SuppressWarnings("unused")
 			final String messageId) {
 		// do nothing
 	}	
@@ -50,17 +45,11 @@ public class VoidSmtpServiceImpl extends AbstractSmtpService {
 	 * java.lang.String, java.util.List, java.lang.String)
 	 */
 	public void send(
-			@SuppressWarnings("unused")
 			final InternetAddress to, 
-			@SuppressWarnings("unused")
 			final String subject, 
-			@SuppressWarnings("unused")
 			final String htmlBody, 
-			@SuppressWarnings("unused")
 			final String textBody,
-			@SuppressWarnings("unused")
 			final List<File> files,
-			@SuppressWarnings("unused")
 			final String messageId) {
 		// do nothing
 	}	
@@ -74,21 +63,13 @@ public class VoidSmtpServiceImpl extends AbstractSmtpService {
 	 * java.lang.String, java.lang.String, java.util.List, java.lang.String)
 	 */
 	public void sendtocc(
-			@SuppressWarnings("unused")
 			final InternetAddress[] tos,
-			@SuppressWarnings("unused")
 			final InternetAddress[] ccs, 
-			@SuppressWarnings("unused")
 			final InternetAddress[] bccs, 
-			@SuppressWarnings("unused")
 			final String subject, 
-			@SuppressWarnings("unused")
 			final String htmlBody, 
-			@SuppressWarnings("unused")
 			final String textBody, 
-			@SuppressWarnings("unused")
 			final List<File> files,
-			@SuppressWarnings("unused")
 			final String messageId) {
 		// do nothing
 		
@@ -99,15 +80,10 @@ public class VoidSmtpServiceImpl extends AbstractSmtpService {
 	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public void sendDoNotIntercept(
-			@SuppressWarnings("unused")
 			final InternetAddress to, 
-			@SuppressWarnings("unused")
 			final String subject, 
-			@SuppressWarnings("unused")
 			final String htmlBody, 
-			@SuppressWarnings("unused")
 			final String textBody,
-			@SuppressWarnings("unused")
 			final String messageId) {
 		// do nothing
 	}
@@ -120,17 +96,11 @@ public class VoidSmtpServiceImpl extends AbstractSmtpService {
 	 * java.lang.String, java.util.List, java.lang.String)
 	 */
 	public void sendDoNotIntercept(
-			@SuppressWarnings("unused")
 			final InternetAddress to,
-			@SuppressWarnings("unused")
 			final String subject,
-			@SuppressWarnings("unused")
 			final String htmlBody,
-			@SuppressWarnings("unused")
 			final String textBody,
-			@SuppressWarnings("unused")
 			final List<File> files,
-			@SuppressWarnings("unused")
 			final String messageId) {
 		// do nothing
 	}
