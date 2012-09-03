@@ -18,7 +18,7 @@ import org.esupportail.commons.services.exceptionHandling.ExceptionUtils;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.BeanUtils;
-import org.esupportail.commons.web.controllers.Resettable;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -35,18 +35,16 @@ public class ExceptionController implements InitializingBean, Serializable {
 	 * A logger.
 	 */
 	private Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
-	 * When an exception is thrown, it is caught by 
-	 * and stored as a request attribute named "exception".  
+	 * When an exception is thrown, it is caught by
+	 * and stored as a request attribute named "exception".
 	 */
 	public ExceptionController() {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		//
 	}
@@ -293,7 +291,7 @@ public class ExceptionController implements InitializingBean, Serializable {
 		}
 		return getExceptionService().getRecipientEmail();
 	}
-	
+
 	/**
 	 * JSF callback.
 	 * @return a String.
@@ -306,13 +304,13 @@ public class ExceptionController implements InitializingBean, Serializable {
 			}
 			Object bean = resettables.get(name);
 			if (bean == null) {
-				throw new ConfigException("bean [" + name 
-						+ "] is null, " 
+				throw new ConfigException("bean [" + name
+						+ "] is null, "
 						+ "application can not be restarted.");
 			}
 			if (!(bean instanceof Resettable)) {
-				throw new ConfigException("bean [" + name 
-						+ "] does not implement Resettable, " 
+				throw new ConfigException("bean [" + name
+						+ "] does not implement Resettable, "
 						+ "application can not be restarted.");
 			}
 			((Resettable) bean).reset();

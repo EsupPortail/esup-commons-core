@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.urlGeneration; 
+package org.esupportail.commons.services.urlGeneration;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class ServletUrlGeneratorImpl extends AbstractCasUrlGenerator {
 	 * The name of the parameter for servlets.
 	 */
 	public static final String ARGS_PARAM = "args";
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -29,37 +29,34 @@ public class ServletUrlGeneratorImpl extends AbstractCasUrlGenerator {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The servlet URL.
 	 */
 	private String servletUrl;
-	
+
 	/**
 	 * The servlet CAS Login URL.
 	 */
 	private String servletCasLoginUrl;
-	
+
 	/**
 	 * The servlet Shibboleth Login URL.
 	 */
 	private String servletShibbolethLoginUrl;
-	
+
 	/**
 	 * The servlet Guest URL.
 	 */
 	private String servletGuestUrl;
-	
+
 	/**
 	 * Bean constructor.
 	 */
 	public ServletUrlGeneratorImpl() {
 		super();
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.AbstractCasUrlGenerator#afterPropertiesSet()
-	 */
+
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
@@ -92,10 +89,6 @@ public class ServletUrlGeneratorImpl extends AbstractCasUrlGenerator {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.AbstractUrlGenerator
-	 * #url(org.esupportail.commons.services.urlGeneration.AuthEnum, java.util.Map)
-	 */
 	@Override
 	protected String url(
 			final AuthEnum authType,
@@ -122,11 +115,11 @@ public class ServletUrlGeneratorImpl extends AbstractCasUrlGenerator {
 			url = servletGuestUrl;
 		}
 		if (arg != null) {
-			url = url + "?" + ARGS_PARAM 
+			url = url + "?" + ARGS_PARAM
 			+ "=" + StringUtilsWeb.utf8UrlEncode(arg);
 		}
 		if (AuthEnum.cas.equals(authType)) {
-			url = String.format(getCasLoginUrl(), 
+			url = String.format(getCasLoginUrl(),
 					StringUtilsWeb.utf8UrlEncode(url));
 		}
 		return url;

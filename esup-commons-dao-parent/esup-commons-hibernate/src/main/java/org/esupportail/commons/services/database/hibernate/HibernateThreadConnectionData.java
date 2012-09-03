@@ -6,6 +6,7 @@ package org.esupportail.commons.services.database.hibernate;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.BeanUtils;
+
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,25 +31,25 @@ public class HibernateThreadConnectionData {
 	 * A flag set to true if only participating.
 	 */
 	private boolean participate;
-	
+
 	/**
 	 * The hibernate session.
 	 */
 	private Session session;
-	
+
 	/**
 	 * The name of the session factory bean.
 	 */
 	private String sessionFactoryBeanName;
-	
+
 	/**
 	 * The session factory.
 	 */
 	private SessionFactory sessionFactory;
-	
+
 	/**
 	 * Bean constructor.
-	 * @param sessionFactoryBeanName 
+	 * @param sessionFactoryBeanName
 	 */
 	HibernateThreadConnectionData(final String sessionFactoryBeanName) {
 		super();
@@ -57,11 +58,8 @@ public class HibernateThreadConnectionData {
 		participate = false;
 		this.sessionFactoryBeanName = sessionFactoryBeanName;
 	}
-	
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	
+
+	@Override
 	public String toString() {
 		String str = getClass().getSimpleName() + "#" + hashCode() + "["
 		+ "sessionFactoryBeanName=" + sessionFactoryBeanName
@@ -117,12 +115,12 @@ public class HibernateThreadConnectionData {
 
 	/**
 	 * End a transaction.
-	 * @param commit 
+	 * @param commit
 	 */
 	void endTransaction(final boolean commit) {
 		if (participate) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("END(" + sessionFactoryBeanName + ", " 
+				logger.debug("END(" + sessionFactoryBeanName + ", "
 						+ commit + ") ***** particpate!");
 			}
 			return;
@@ -130,7 +128,7 @@ public class HibernateThreadConnectionData {
 		if (session != null) {
 			if (session.isOpen()) {
 				if (logger.isDebugEnabled()) {
-					logger.debug("END(" + sessionFactoryBeanName + ", " 
+					logger.debug("END(" + sessionFactoryBeanName + ", "
 							+ commit + ")");
 				}
 				Transaction transaction = session.getTransaction();
@@ -143,13 +141,13 @@ public class HibernateThreadConnectionData {
 				}
 			} else {
 				if (logger.isDebugEnabled()) {
-					logger.debug("END(" + sessionFactoryBeanName + ", " 
+					logger.debug("END(" + sessionFactoryBeanName + ", "
 							+ commit + ") ***** session is closed!");
 				}
 			}
 		} else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("END(" + sessionFactoryBeanName + ", " 
+				logger.debug("END(" + sessionFactoryBeanName + ", "
 						+ commit + ") ***** session is null!");
 			}
 		}

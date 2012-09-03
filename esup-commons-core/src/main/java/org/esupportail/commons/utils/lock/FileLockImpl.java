@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.utils.lock; 
+package org.esupportail.commons.utils.lock;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.io.IOException;
  * A cross-JVMs file lock.
  */
 public class FileLockImpl implements Lock {
-	
+
 	/**
 	 * The lock filename.
 	 */
@@ -19,16 +19,14 @@ public class FileLockImpl implements Lock {
 
 	/**
 	 * Constructor.
-	 * @param filename 
+	 * @param filename
 	 */
 	public FileLockImpl(final String filename) {
 		super();
 		this.filename = filename;
 	}
-	
-	/**
-	 * @see org.esupportail.commons.utils.lock.Lock#lock()
-	 */
+
+	@Override
 	public void lock() throws AlreadyLockedException {
 	    try {
 	        File file = new File(filename);
@@ -40,9 +38,7 @@ public class FileLockImpl implements Lock {
 	    }
 	}
 
-	/**
-	 * @see org.esupportail.commons.utils.lock.Lock#tryLock()
-	 */
+	@Override
 	public boolean tryLock() {
 	    try {
 	        lock();
@@ -52,9 +48,7 @@ public class FileLockImpl implements Lock {
 	    }
 	}
 
-	/**
-	 * @see org.esupportail.commons.utils.lock.Lock#unlock()
-	 */
+	@Override
 	public void unlock() {
         File file = new File(filename);
         if (!file.delete()) {

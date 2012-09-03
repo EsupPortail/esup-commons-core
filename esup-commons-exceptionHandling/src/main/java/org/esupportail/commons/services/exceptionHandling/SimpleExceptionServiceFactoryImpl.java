@@ -2,21 +2,22 @@
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
 package org.esupportail.commons.services.exceptionHandling;
- 
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.esupportail.commons.beans.AbstractApplicationAwareBean;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.authentication.AuthenticationService;
+
 import org.springframework.util.StringUtils;
 
 /**
  * A factory that returns SimpleExceptionService.
- * 
+ *
  * See /properties/exceptionHandling/exceptionHandling-example.xml.
  */
-public class SimpleExceptionServiceFactoryImpl 
+public class SimpleExceptionServiceFactoryImpl
 extends AbstractApplicationAwareBean
 implements ExceptionServiceFactory {
 
@@ -24,27 +25,27 @@ implements ExceptionServiceFactory {
 	 * A log level.
 	 */
 	static final String DEBUG = "debug";
-	
+
 	/**
 	 * A log level.
 	 */
 	static final String TRACE = "trace";
-	
+
 	/**
 	 * A log level.
 	 */
 	static final String INFO = "info";
-	
+
 	/**
 	 * A log level.
 	 */
 	static final String WARN = "warn";
-	
+
 	/**
 	 * A log level.
 	 */
 	static final String ERROR = "error";
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -54,27 +55,27 @@ implements ExceptionServiceFactory {
 	 * The default forward view.
 	 */
 	private static final String DEFAULT_EXCEPTION_VIEW = "/stylesheets/exception.jsp";
-	
+
 //	/**
 //	 * A logger.
 //	 */
 //	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The log level.
 	 */
 	private String logLevel;
-	
+
 	/**
 	 * The exception views.
 	 */
 	private Map<Class, String> exceptionViews;
-	
+
 	/**
 	 * The authentication service.
 	 */
 	private AuthenticationService authenticationService;
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -83,9 +84,6 @@ implements ExceptionServiceFactory {
 		exceptionViews = new HashMap<Class, String>();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
@@ -100,17 +98,15 @@ implements ExceptionServiceFactory {
 				&& !INFO.equalsIgnoreCase(logLevel)
 				&& !TRACE.equalsIgnoreCase(logLevel)
 				&& !DEBUG.equalsIgnoreCase(logLevel)) {
-			throw new ConfigException("invalid value for property [logLevel], " 
+			throw new ConfigException("invalid value for property [logLevel], "
 					+ "accepted values are ERROR, WARN, INFO, TRACE and DEBUG");
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionServiceFactory#getExceptionService()
-	 */
-	public ExceptionService getExceptionService() {
+	@Override
+    public ExceptionService getExceptionService() {
 		return new SimpleExceptionServiceImpl(
-				getI18nService(), getApplicationService(), 
+				getI18nService(), getApplicationService(),
 				exceptionViews, authenticationService, logLevel);
 	}
 
@@ -131,14 +127,14 @@ implements ExceptionServiceFactory {
 
 	/**
 	 * Add an exception view.
-	 * @param className 
-	 * @param exceptionView 
+	 * @param className
+	 * @param exceptionView
 	 */
 	private void addExceptionView(final String className, final String exceptionView) {
 		try {
 			Class clazz = Class.forName(className);
 			if (!(Throwable.class.isAssignableFrom(clazz))) {
-				throw new ConfigException("class [" + className 
+				throw new ConfigException("class [" + className
 						+ "] is not a subclass of [" + Throwable.class + "]");
 			}
 			this.exceptionViews.put(clazz, exceptionView);

@@ -7,7 +7,7 @@ package org.esupportail.commons.services.database.hibernate;
 /**
  * An abstract class for non updatable database managers.
  */
-public class BasicHibernateDatabaseManagerImpl 
+public class BasicHibernateDatabaseManagerImpl
 extends AbstractHibernateDatabaseManagerImpl {
 
 	/**
@@ -19,7 +19,7 @@ extends AbstractHibernateDatabaseManagerImpl {
 	 * true for a transactionnal manager.
 	 */
 	private boolean transactionnal;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -27,9 +27,7 @@ extends AbstractHibernateDatabaseManagerImpl {
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManager#isTransactionnal()
-	 */
+	@Override
 	public boolean isTransactionnal() {
 		return transactionnal;
 	}

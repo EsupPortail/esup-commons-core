@@ -30,7 +30,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * An implementation of LdapEntityService based on LdapTemplate.
- * 
+ *
  * See /properties/ldap/ldap-example.xml.
  */
 public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements LdapEntityService, InitializingBean {
@@ -44,7 +44,7 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 	 * The ObjectClass attribute.
 	 */
 	private static final String OBJECT_CLASS_ATTRIBUTE = "objectClass";
-	
+
 	/**
 	 * A logger.
 	 */
@@ -71,10 +71,10 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 	private String dnSubPath;
 
 	/**
-	 * The names of the attributes to retrieve.  
+	 * The names of the attributes to retrieve.
 	 */
 	private List<String> attributes;
-	
+
 	/**
 	 * The attributes mapper.
 	 */
@@ -91,27 +91,25 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 	public SimpleLdapEntityServiceImpl() {
 		super();
 	}
-	
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notNull(ldapTemplate, 
+		Assert.notNull(ldapTemplate,
 				"property ldapTemplate of class " + getClass().getName() + " can not be null");
-		Assert.hasText(idAttribute, 
+		Assert.hasText(idAttribute,
 				"property idAttribute of class " + getClass().getName() + " can not be null");
-		Assert.notEmpty(attributes,  
+		Assert.notEmpty(attributes,
 				"property attributes of class " + getClass().getName() + " can not be empty");
-		Assert.hasText(objectClass,  
+		Assert.hasText(objectClass,
 				"property objectClass of class " + getClass().getName() + " can not be empty");
 		if (!StringUtils.hasText(dnSubPath)) {
 			dnSubPath = null;
-			logger.info(getClass() + ": property dnSubPath is not set"); 
+			logger.info(getClass() + ": property dnSubPath is not set");
 		}
 		if (testFilter == null) {
-			logger.info(getClass() + ": property testFilter is not set, target ldap-test will not work."); 
+			logger.info(getClass() + ": property testFilter is not set, target ldap-test will not work.");
 		}
-		
+
 		if (attributes.size() == 1 && attributes.contains("*")) {
 			//get all attributes in LDAP
 			attributes = null;
@@ -121,14 +119,11 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		attributesMapper = new LdapAttributesMapper(idAttribute, attributes);
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "#" + hashCode() + "[" 
-		+ "objectClass=[" + objectClass + "], " 
-		+ "idAttribute=[" + idAttribute + "], " 
+		return getClass().getSimpleName() + "#" + hashCode() + "["
+		+ "objectClass=[" + objectClass + "], "
+		+ "idAttribute=[" + idAttribute + "], "
 		+ "dnSubPath=[" + dnSubPath + "], "
 		+ "attributes=[" + attributes + "], "
 		+ "testFilter=[" + testFilter + "]"
@@ -138,13 +133,13 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 	/**
 	 * Wrap an exception into a LdapException.
 	 * @param message
-	 * @param filterExpr 
+	 * @param filterExpr
 	 * @param e
 	 * @return a LdapException
-	 * @throws LdapException 
+	 * @throws LdapException
 	 */
 	private LdapException wrapException(
-			final String message, 
+			final String message,
 			final String filterExpr,
 			final Exception e) throws LdapException {
 		if (e instanceof DataRetrievalFailureException) {
@@ -153,7 +148,7 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		if (e instanceof BadLdapGrammarException) {
 			if (e.getCause() instanceof InvalidSearchFilterException) {
 				return new LdapBadFilterException(
-						message + ": bad filter [" + filterExpr + "]: " 
+						message + ": bad filter [" + filterExpr + "]: "
 						+ e.getCause().getMessage(), (Exception) e.getCause());
 			}
 		}
@@ -162,16 +157,16 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		}
 		return new LdapMiscException(message + ": " + e.getMessage(), e);
 	}
-	
+
 	/**
-	 * @param filter 
-	 * @param retry 
+	 * @param filter
+	 * @param retry
 	 * @return the LDAP entities that correspond to a filter.
-	 * @throws LdapException 
+	 * @throws LdapException
 	 */
 	@SuppressWarnings({ "cast", "unchecked" })
 	private List<LdapEntity> getLdapEntitiesFromFilter(
-			final Filter filter, 
+			final Filter filter,
 			final boolean retry) throws LdapException {
 		Exception ex = null;
 		DistinguishedName dn;
@@ -195,7 +190,7 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 			if (e.getCause() != null && e.getCause() instanceof ServiceUnavailableException && retry) {
 				//TODO CL V2 : use exception in core module
 //				ExceptionUtils.catchException(wrapException(
-//						"could not retrieve entities from the LDAP directory", 
+//						"could not retrieve entities from the LDAP directory",
 //						filter.encode(), e));
 				return getLdapEntitiesFromFilter(filter, false);
 			}
@@ -205,7 +200,7 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		}
 		throw wrapException("could not retrieve entities from the LDAP directory", filter.encode(), ex);
 	}
-	
+
 	/**
 	 * @param filter
 	 * @return the LDAP entities that correspond to a filter.
@@ -214,17 +209,13 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 	protected List<LdapEntity> getLdapEntitiesFromFilter(final Filter filter) throws LdapException {
 		return getLdapEntitiesFromFilter(filter, true);
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapEntityService#getLdapEntitiesFromFilter(java.lang.String)
-	 */
+
+	@Override
 	public List<LdapEntity> getLdapEntitiesFromFilter(final String filterExpr) throws LdapException {
 		return getLdapEntitiesFromFilter(new StringFilter(filterExpr));
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapEntityService#testLdapFilter(java.lang.String)
-	 */
+
+	@Override
 	public String testLdapFilter(final String filterExpr) throws LdapException {
 		try {
 			getLdapEntitiesFromFilter(new StringFilter(filterExpr));
@@ -233,10 +224,8 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 			return e.getMessage();
 		}
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapEntityService#getLdapEntity(java.lang.String)
-	 */
+
+	@Override
 	public LdapEntity getLdapEntity(final String id) throws LdapException, ObjectNotFoundException {
 		List<LdapEntity> ldapEntities = getLdapEntitiesFromFilter(new EqualsFilter(idAttribute, id));
 		if (ldapEntities.isEmpty()) {
@@ -248,10 +237,7 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapEntityService#entityMatchesFilter(
-	 * java.lang.String, java.lang.String)
-	 */
+	@Override
 	public boolean entityMatchesFilter(final String id, final String filterExpr) throws LdapException {
 		AndFilter filter = new AndFilter();
 		filter.and(new EqualsFilter(idAttribute, id));
@@ -259,21 +245,15 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		return !(getLdapEntitiesFromFilter(filter).isEmpty());
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.AbstractLdapService#supportsTest()
-	 */
 	@Override
 	public boolean supportsTest() {
 		return true;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.AbstractLdapService#test()
-	 */
 	@Override
 	public void test() {
 		if (testFilter == null) {
-			logger.error("can not test the LDAP connection when property testFilter is not set, " 
+			logger.error("can not test the LDAP connection when property testFilter is not set, "
 					+ "edit configuration file ldap.xml.");
 			return;
 		}
@@ -281,11 +261,11 @@ public class SimpleLdapEntityServiceImpl extends AbstractLdapService implements 
 		try {
 			ldapEntities = getLdapEntitiesFromFilter(testFilter);
 		} catch (LdapBadFilterException e) {
-			logger.warn("bad LDAP filter [" + testFilter + "], edit configuration file ldap.xml: " 
+			logger.warn("bad LDAP filter [" + testFilter + "], edit configuration file ldap.xml: "
 					+ e.getCause().getMessage());
 			return;
 		} catch (LdapConnectionException e) {
-			logger.warn("could not connect to LDAP, edit configuration file ldap.xml: " 
+			logger.warn("could not connect to LDAP, edit configuration file ldap.xml: "
 					+ e.getCause().getMessage());
 			return;
 		} catch (LdapException e) {
