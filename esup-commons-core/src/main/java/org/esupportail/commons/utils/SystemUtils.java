@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.utils; 
+package org.esupportail.commons.utils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -22,7 +22,7 @@ public class SystemUtils {
 	 * A logger.
 	 */
 	private static final Logger LOG = new LoggerImpl(SystemUtils.class);
-	
+
 	/**
 	 * Magic number.
 	 */
@@ -40,11 +40,11 @@ public class SystemUtils {
 	 */
 	public static Set<String> getSystemPropertiesStrings() {
 		Properties properties = System.getProperties();
-		Set<String> sortedPropertiesStrings = new TreeSet<String>();   
-		Enumeration keys = properties.keys();
+		Set<String> sortedPropertiesStrings = new TreeSet<String>();
+		Enumeration<Object> keys = properties.keys();
 		while (keys.hasMoreElements()) {
 			String key = (String) keys.nextElement();
-			String value; 
+			String value;
 			if (key.contains("password")) {
 				value = "******";
 			} else {
@@ -66,7 +66,7 @@ public class SystemUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @return the free memory (Mb).
 	 */

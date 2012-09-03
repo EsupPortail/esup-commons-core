@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 /**
  * This class is used to update a Hibernate sequence.
  */
-public class HibernateSequenceUpdater implements HibernateCallback {
+public class HibernateSequenceUpdater implements HibernateCallback<Object> {
 
 	/** The name of the sequence. */
 	private String sequenceName;
@@ -35,7 +35,8 @@ public class HibernateSequenceUpdater implements HibernateCallback {
 	 * @return null.
 	 * @throws HibernateException
 	 */
-	public Object doInHibernate(final Session session) throws HibernateException {
+	@Override
+    public Object doInHibernate(final Session session) throws HibernateException {
 		if (sequenceId != null) {
 			session.createSQLQuery(
                     "SELECT pg_catalog.setval('" + sequenceName + "', " + sequenceId + ", true)"

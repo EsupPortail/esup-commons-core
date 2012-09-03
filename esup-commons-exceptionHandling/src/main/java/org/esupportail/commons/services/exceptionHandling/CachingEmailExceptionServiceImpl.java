@@ -24,10 +24,10 @@ import org.esupportail.commons.services.smtp.SmtpService;
 
 /**
  * An implementation of ExceptionService, that logs the exceptions, send
- * them to an email address and redirect to an exception page. The difference 
- * with EmailExceptionServiceImpl is that exceptions are cached (to prevent 
+ * them to an email address and redirect to an exception page. The difference
+ * with EmailExceptionServiceImpl is that exceptions are cached (to prevent
  * from to several emails for the same exception).
- * 
+ *
  * See /properties/exceptionHandling/exceptionHandling-example.xml.
  */
 public class CachingEmailExceptionServiceImpl extends EmailExceptionServiceImpl {
@@ -41,31 +41,31 @@ public class CachingEmailExceptionServiceImpl extends EmailExceptionServiceImpl 
 	 * the cache.
 	 */
 	private Cache cache;
-	
+
 	/**
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * Constructor.
-	 * @param i18nService 
-	 * @param applicationService 
+	 * @param i18nService
+	 * @param applicationService
 	 * @param exceptionViews
-	 * @param noEmailExceptions 
-	 * @param authenticationService 
-	 * @param smtpService 
-	 * @param recipientEmail 
-	 * @param doNotSendExceptionReportsToDevelopers 
-	 * @param develEmail 
-	 * @param cache 
-	 * @param logLevel 
+	 * @param noEmailExceptions
+	 * @param authenticationService
+	 * @param smtpService
+	 * @param recipientEmail
+	 * @param doNotSendExceptionReportsToDevelopers
+	 * @param develEmail
+	 * @param cache
+	 * @param logLevel
 	 */
 	public CachingEmailExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
-			final Map<Class, String> exceptionViews,
-			final List<Class> noEmailExceptions,
+			final Map<Class<? extends Throwable>, String> exceptionViews,
+			final List<Class<? extends Throwable>> noEmailExceptions,
 			final AuthenticationService authenticationService,
 			final SmtpService smtpService,
 			final String recipientEmail,
@@ -75,19 +75,19 @@ public class CachingEmailExceptionServiceImpl extends EmailExceptionServiceImpl 
 			final String logLevel) {
 		super(
 				i18nService, applicationService,
-				exceptionViews, noEmailExceptions, authenticationService, smtpService, 
+				exceptionViews, noEmailExceptions, authenticationService, smtpService,
 				recipientEmail, doNotSendExceptionReportsToDevelopers, develEmail, logLevel);
 		this.cache = cache;
 	}
-	
+
 	/**
 	 * @param t
-	 * @param to 
-	 * @param interceipt 
+	 * @param to
+	 * @param interceipt
 	 * @return the cache key that corresponds to a user and an exception.
 	 */
 	private String getCacheKey(
-			final Throwable t, 
+			final Throwable t,
 			final InternetAddress to,
 			final boolean interceipt) {
 		try {
@@ -102,16 +102,16 @@ public class CachingEmailExceptionServiceImpl extends EmailExceptionServiceImpl 
 
 	/**
 	 * @see org.esupportail.commons.services.exceptionHandling.EmailExceptionServiceImpl#sendEmail(
-	 * boolean, java.lang.Throwable, javax.mail.internet.InternetAddress, 
+	 * boolean, java.lang.Throwable, javax.mail.internet.InternetAddress,
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	protected void sendEmail(
 			final boolean intercept,
-			final Throwable t, 
-			final InternetAddress to, 
-			final String emailSubject, 
-			final String htmlReport, 
+			final Throwable t,
+			final InternetAddress to,
+			final String emailSubject,
+			final String htmlReport,
 			final String textReport) {
 		String cacheKey = getCacheKey(t, to, intercept);
 		if (logger.isDebugEnabled()) {

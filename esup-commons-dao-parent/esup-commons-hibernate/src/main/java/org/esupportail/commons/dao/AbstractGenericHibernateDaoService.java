@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -20,13 +21,13 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 /**
  * An abstract DAO implementation.
  */
-public abstract class AbstractGenericHibernateDaoService 
+public abstract class AbstractGenericHibernateDaoService
 implements PaginatorDaoService, InitializingBean {
 
 	/**
 	 * A logger.
 	 */
-	private Logger logger = new LoggerImpl(getClass()); 
+	private Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * Bean constructor.
@@ -38,7 +39,8 @@ implements PaginatorDaoService, InitializingBean {
 	/**
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
-	public final void afterPropertiesSet() throws Exception {
+	@Override
+    public final void afterPropertiesSet() throws Exception {
 		initDao();
 	}
 
@@ -58,9 +60,10 @@ implements PaginatorDaoService, InitializingBean {
 	 */
 	public Query getQuery(
 			final String hqlQuery) {
-		return (Query) getHibernateTemplate().execute(
-				new HibernateCallback() {
-					public Object doInHibernate(final Session session) throws HibernateException {
+		return getHibernateTemplate().execute(
+				new HibernateCallback<Query>() {
+					@Override
+                    public Query doInHibernate(final Session session) throws HibernateException {
 						return session.createQuery(hqlQuery);
 					}
 				}
@@ -73,7 +76,8 @@ implements PaginatorDaoService, InitializingBean {
 	 * #executeQuery(java.lang.String, org.esupportail.commons.dao.HqlQueryPojo,
 	 *  java.lang.Integer, java.lang.Integer)
 	 */
-	public ResultPaginator executeQuery(String queryString, HqlQueryPojo hqlQueryPojo, Integer currentPage, Integer pageSize) {
+	@Override
+    public ResultPaginator executeQuery(String queryString, HqlQueryPojo hqlQueryPojo, Integer currentPage, Integer pageSize) {
 		//key row number and visibleItems
 		ResultPaginator r = new ResultPaginator();
 		if (hqlQueryPojo != null && !hqlQueryPojo.isEmpty()) {
@@ -151,9 +155,10 @@ implements PaginatorDaoService, InitializingBean {
 	 */
 	public SQLQuery getSqlQuery(
 			final String sqlQuery) {
-		return (SQLQuery) getHibernateTemplate().execute(
-				new HibernateCallback() {
-					public Object doInHibernate(final Session session) throws HibernateException {
+		return getHibernateTemplate().execute(
+				new HibernateCallback<SQLQuery>() {
+					@Override
+                    public SQLQuery doInHibernate(final Session session) throws HibernateException {
 						return session.createSQLQuery(sqlQuery);
 					}
 				}
@@ -166,7 +171,7 @@ implements PaginatorDaoService, InitializingBean {
 
 	/**
 	 * Add an object into the database.
-	 * @param object 
+	 * @param object
 	 */
 	protected void addObject(final Object object) {
 		if (logger.isDebugEnabled()) {
@@ -180,7 +185,7 @@ implements PaginatorDaoService, InitializingBean {
 
 	/**
 	 * Update an object in the database.
-	 * @param object 
+	 * @param object
 	 */
 	protected void updateObject(final Object object) {
 		if (logger.isDebugEnabled()) {
@@ -198,7 +203,7 @@ implements PaginatorDaoService, InitializingBean {
 
 	/**
 	 * Delete an object from the database.
-	 * @param object 
+	 * @param object
 	 */
 	protected void deleteObject(final Object object) {
 		if (logger.isDebugEnabled()) {
@@ -216,9 +221,10 @@ implements PaginatorDaoService, InitializingBean {
 
 	/**
 	 * Delete a list of objects from the database.
-	 * @param objects 
+	 * @param objects
 	 */
-	protected void deleteObjects(final List objects) {
+	@SuppressWarnings("rawtypes")
+    protected void deleteObjects(final List objects) {
 		getHibernateTemplate().deleteAll(objects);
 	}
 

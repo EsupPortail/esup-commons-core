@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.jsf;
 
@@ -24,6 +24,7 @@ import org.esupportail.commons.services.urlGeneration.ServletUrlGeneratorImpl;
 import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.strings.StringUtilsWeb;
 import org.esupportail.commons.web.jsf.tags.TagUtils;
+
 import org.springframework.util.StringUtils;
 
 /**
@@ -32,7 +33,7 @@ import org.springframework.util.StringUtils;
  */
 public class DeepLinkingPhaseListener implements PhaseListener {
 
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -43,8 +44,8 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
-	
+
+
 	/**
 	 * Constructor.
 	 */
@@ -52,12 +53,13 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 		super();
 	}
 
-	
-	
+
+
 	/**
 	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
 	 */
-	public void afterPhase(final PhaseEvent arg0) {
+	@Override
+    public void afterPhase(final PhaseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
@@ -65,14 +67,15 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 	/**
 	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
 	 */
-	public void beforePhase(final PhaseEvent event) {
+	@Override
+    public void beforePhase(final PhaseEvent event) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("enterig  DeepLinkingPhaseListener::beforePhase = " + event);
 		}
 		FacesContext context = event.getFacesContext();
 		HttpServletRequest httpRequest = (HttpServletRequest) context.getExternalContext().getRequest();
 		try {
-			
+
 			Map<String, String> params = getParams(httpRequest);
 			if (logger.isDebugEnabled()) {
 				logger.debug("params params  = " + params);
@@ -92,7 +95,7 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 									u.getActionBinding().getAction()),
 									u.getActionBinding().getReturns(),
 									u.getActionBinding().getArgs());
-					
+
 					Object navRules = method.invoke(context.getELContext(), param);
 					NavigationHandler navigation = context.getApplication().getNavigationHandler();
 					// Redirection vers la page des erreurs
@@ -110,21 +113,21 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 					}
 					context.renderResponse();
 					context.responseComplete();
-					
+
 				}
-			}	
-			
-			
+			}
+
+
 		} catch (Throwable t) {
 			//TODO catch DeepLinkingPhaseListener::beforePhase
 			logger.error(t);
 		}
 	}
-	
-	
+
+
 
 	/**
-	 * 
+	 *
 	 * @param params
 	 * @return UrlPatternDescriptor
 	 */
@@ -139,11 +142,11 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 		}
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * renvoie les arguments de la méthode qui va être execute.
-	 * Les valeurs de ces arguments sont dans les parametres de l'url. 
+	 * Les valeurs de ces arguments sont dans les parametres de l'url.
 	 * TODO a revoir reflechir à une meilleur solution.
 	 * @param params
 	 * @param u
@@ -167,34 +170,30 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 				}
 				//TODO faire les autres classes primaire.
 				//TODO voir utilisation de converter pour objet complexe
-				
+
 			}
 		}
 		return argsMethod;
 	}
- 	
+
 	/**
 	 * return all list UrlPatternDescriptor.
 	 */
 	private List<UrlPatternDescriptor> getUrlDescriptor() {
 		//ADD Action
-		Map<String, Object> treatments = BeanUtils.getBeansOfClass(UrlPatternDescriptor.class);
+		Map<String, UrlPatternDescriptor> treatments = BeanUtils.getBeansOfClass(UrlPatternDescriptor.class);
 		List<UrlPatternDescriptor> urlP = new ArrayList<UrlPatternDescriptor>();
 		for (String name : treatments.keySet()) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("get to roles bean [" + name + "]...");
 			}
-			Object bean = treatments.get(name);
+			UrlPatternDescriptor bean = treatments.get(name);
 			if (bean == null) {
-				throw new ConfigException("bean [" + name 
-						+ "] is null, " 
+				throw new ConfigException("bean [" + name
+						+ "] is null, "
 						+ "application doesn't init action.");
 			}
-			if (!(bean instanceof UrlPatternDescriptor)) {
-				throw new ConfigException("bean [" + name 
-						+ "] does not roles.");
-			}
-			urlP.add((UrlPatternDescriptor) bean);
+			urlP.add(bean);
 
 		}
 		return urlP;
@@ -215,8 +214,8 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 			args = StringUtilsWeb.utf8UrlDecode(args);
 			params = AbstractUrlGenerator.decodeArgToParams(args);
 		}
-			
-		
+
+
 		return params;
 	}
 
@@ -226,16 +225,17 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 
 
 
-	
-	
+
+
 	/**
 	 * @see javax.faces.event.PhaseListener#getPhaseId()
 	 */
-	public PhaseId getPhaseId() {
+	@Override
+    public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
 	}
-	
-	
-	
+
+
+
 
 }

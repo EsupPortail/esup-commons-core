@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
-import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
@@ -19,7 +18,7 @@ import javax.persistence.Query;
  * @author Yves Deschamps.
  * @param <T>
  *            Class bean
- * 
+ *
  */
 public class CrudJpaEntityFacadeImpl<T> implements CrudJpaEntityFacade<T> {
 

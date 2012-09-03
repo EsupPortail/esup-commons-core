@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MockExternalContext extends ExternalContext {
 
-	/** 
-	 * The servlet context. 
+	/**
+	 * The servlet context.
 	 */
 	private ServletContext context;
 
@@ -44,17 +44,17 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * The application map.
 	 */
-	private Map applicationMap;
+	private Map<String, Object> applicationMap;
 
 	/**
 	 * The session map.
 	 */
-	private Map sessionMap;
+	private Map<String, Object> sessionMap;
 
 	/**
 	 * The request parameter map.
 	 */
-	private Map requestParameterMap;
+	private Map<String, String> requestParameterMap;
 
 	/**
 	 * Constructor.
@@ -63,8 +63,8 @@ public class MockExternalContext extends ExternalContext {
 	 * @param response
 	 */
 	public MockExternalContext(
-			final ServletContext context, 
-			final ServletRequest request, 
+			final ServletContext context,
+			final ServletRequest request,
 			final ServletResponse response) {
 		this.context = context;
 		this.request = request;
@@ -98,7 +98,8 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param request
 	 */
-	public void setRequest(final Object request) {
+	@Override
+    public void setRequest(final Object request) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -113,14 +114,16 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param response
 	 */
-	public void setResponse(final Object response) {
+	@Override
+    public void setResponse(final Object response) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @param encoding
 	 */
-	public void setResponseCharacterEncoding(final String encoding) {
+	@Override
+    public void setResponseCharacterEncoding(final String encoding) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -128,10 +131,9 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getApplicationMap()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getApplicationMap() {
+	public Map<String, Object> getApplicationMap() {
 		if (applicationMap == null) {
-			return new HashMap();
+			return new HashMap<String, Object>();
 		}
 		return applicationMap;
 	}
@@ -139,18 +141,17 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param applicationMap
 	 */
-	public void setApplicationMap(final Map applicationMap) {
+	public void setApplicationMap(final Map<String, Object> applicationMap) {
 		this.applicationMap = applicationMap;
 	}
 
 	/**
 	 * @see javax.faces.context.ExternalContext#getSessionMap()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map getSessionMap() {
+	public Map<String, Object> getSessionMap() {
 		if (sessionMap == null) {
-			sessionMap = new HashMap();
+			sessionMap = new HashMap<String, Object>();
 			// for PortletUtil : test in mode servlet so no PORTLET_REQUEST_FLAG
 			// sessionMap.put(PortletUtil.PORTLET_REQUEST_FLAG, "dummy");
 		}
@@ -161,9 +162,8 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @see javax.faces.context.ExternalContext#getRequestMap()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map getRequestMap() {
+	public Map<String, Object> getRequestMap() {
 		/*
 		 * if (requestMap == null) { requestMap = new MockRequestMap(request); }
 		 * return (requestMap);
@@ -175,8 +175,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getRequestParameterMap()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestParameterMap() {
+	public Map<String, String> getRequestParameterMap() {
 		if (requestParameterMap != null) {
 			return requestParameterMap;
 		}
@@ -186,32 +185,31 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param requestParameterMap
 	 */
-	public void setRequestParameterMap(final Map requestParameterMap) {
+	public void setRequestParameterMap(final Map<String, String> requestParameterMap) {
 		this.requestParameterMap = requestParameterMap;
 	}
 
 	/**
 	 * @param encoding
 	 */
-	public void setRequestCharacterEncoding(final String encoding) {
+	@Override
+    public void setRequestCharacterEncoding(final String encoding) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @see javax.faces.context.ExternalContext#getRequestParameterValuesMap()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map getRequestParameterValuesMap() {
+	public Map<String, String[]> getRequestParameterValuesMap() {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @see javax.faces.context.ExternalContext#getRequestParameterNames()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Iterator getRequestParameterNames() {
+	public Iterator<String> getRequestParameterNames() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -219,8 +217,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getRequestHeaderMap()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestHeaderMap() {
+	public Map<String, String> getRequestHeaderMap() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -228,8 +225,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getRequestHeaderValuesMap()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestHeaderValuesMap() {
+	public Map<String, String[]> getRequestHeaderValuesMap() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -237,8 +233,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getRequestCookieMap()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestCookieMap() {
+	public Map<String, Object> getRequestCookieMap() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,7 +250,7 @@ public class MockExternalContext extends ExternalContext {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Iterator getRequestLocales() {
+	public Iterator<Locale> getRequestLocales() {
 		return new LocalesIterator(request.getLocales());
 	}
 
@@ -286,28 +281,32 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @return nothing
 	 */
-	public String getRequestCharacterEncoding() {
+	@Override
+    public String getRequestCharacterEncoding() {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @return nothing
 	 */
-	public String getRequestContentType() {
+	@Override
+    public String getRequestContentType() {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @return nothing
 	 */
-	public String getResponseCharacterEncoding() {
+	@Override
+    public String getResponseCharacterEncoding() {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @return nothing
 	 */
-	public String getResponseContentType() {
+	@Override
+    public String getResponseContentType() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -328,7 +327,8 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @see javax.faces.context.ExternalContext#getInitParameterMap()
 	 */
-	@Override
+	@SuppressWarnings("rawtypes")
+    @Override
 	public Map getInitParameterMap() {
 		throw new UnsupportedOperationException();
 	}
@@ -337,8 +337,7 @@ public class MockExternalContext extends ExternalContext {
 	 * @see javax.faces.context.ExternalContext#getResourcePaths(java.lang.String)
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Set getResourcePaths(final String path) {
+	public Set<String> getResourcePaths(final String path) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -449,40 +448,43 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * An iterator for Locale.
 	 */
-	private class LocalesIterator implements Iterator {
+	private class LocalesIterator implements Iterator<Locale> {
 
 		/**
 		 * The locales.
 		 */
-		private Enumeration locales;
+		private Enumeration<Locale> locales;
 
 		/**
 		 * Constructor.
 		 * @param locales
 		 */
 		@SuppressWarnings({ })
-		public LocalesIterator(final Enumeration locales) {
+		public LocalesIterator(final Enumeration<Locale> locales) {
 			this.locales = locales;
 		}
 
 		/**
 		 * @see java.util.Iterator#hasNext()
 		 */
-		public boolean hasNext() {
+		@Override
+        public boolean hasNext() {
 			return locales.hasMoreElements();
 		}
 
 		/**
 		 * @see java.util.Iterator#next()
 		 */
-		public Object next() {
+		@Override
+        public Locale next() {
 			return locales.nextElement();
 		}
 
 		/**
 		 * @see java.util.Iterator#remove()
 		 */
-		public void remove() {
+		@Override
+        public void remove() {
 			throw new UnsupportedOperationException();
 		}
 
