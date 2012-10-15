@@ -1,12 +1,13 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.utils; 
+package org.esupportail.commons.utils;
 
 import java.util.Map;
 
 import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryUtils;
@@ -18,12 +19,13 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  * A class to bind a beanFocatry to the current thread and retrieve beans.
  * @deprecated
  */
-public class BeanUtils {   
-	
+@Deprecated
+public class BeanUtils {
+
 	/**
 	 * The configuration file where Spring beans are defined.
 	 */
-	protected static final String SPRING_CONFIG_FILE = "/properties/applicationContext.xml"; 
+	protected static final String SPRING_CONFIG_FILE = "/properties/applicationContext.xml";
 
 	/**
 	 * The bean factory used for this thread.
@@ -37,8 +39,8 @@ public class BeanUtils {
 		throw new UnsupportedOperationException();
 	}
 
-	
-	
+
+
 	/**
 	 * Initialize the bean factory using a given config file.
 	 * @param configFile
@@ -74,17 +76,15 @@ public class BeanUtils {
 	}
 
 	/**
-	 * @param type 
+	 * @param type
 	 * @return the beans of a given type.
 	 * @throws ConfigException
 	 */
-	@SuppressWarnings("unchecked")
-	public static Map<String, Object> getBeansOfClass(
-			final Class type) throws ConfigException {
+	public static <E> Map<String, E> getBeansOfClass(final Class<E> type) throws ConfigException {
 		BeanFactory beanFactory = getBeanFactory();
 		if (!(beanFactory instanceof ListableBeanFactory)) {
 			throw new ConfigException(
-					"bean factory is not an instance of ListableBeanFactory (" 
+					"bean factory is not an instance of ListableBeanFactory ("
 					+ beanFactory.getClass() + ")");
 		}
 		return BeanFactoryUtils.beansOfTypeIncludingAncestors(

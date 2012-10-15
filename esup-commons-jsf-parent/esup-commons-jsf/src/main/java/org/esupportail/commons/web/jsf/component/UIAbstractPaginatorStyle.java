@@ -132,12 +132,10 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 	/**
 	 * Constructor.
 	 */
-	public UIAbstractPaginatorStyle() {
+	@SuppressWarnings("unchecked")
+    public UIAbstractPaginatorStyle() {
 		super();
-		bundles =
-			(Map<String, String>) getFacesContext().getExternalContext()
-		.getRequestMap().get(getStringsVar());
-
+		bundles = (Map<String, String>) getFacesContext().getExternalContext().getRequestMap().get(getStringsVar());
 	}
 
 	/*

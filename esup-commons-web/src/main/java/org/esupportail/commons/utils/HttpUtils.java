@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.utils; 
+package org.esupportail.commons.utils;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.portlet.context.PortletRequestAttributes;
@@ -51,7 +52,7 @@ public class HttpUtils {
 		if (ContextUtils.isServlet()) {
 			return ((ServletRequestAttributes) ContextUtils.getContextAttributes()).getRequest();
 		}
-		PortletRequest portletRequest = 
+		PortletRequest portletRequest =
 			((PortletRequestAttributes) ContextUtils.getContextAttributes()).getRequest();
 		return ContextUtils.getHttpServletRequestFromPortletRequest(portletRequest);
 	}
@@ -64,7 +65,7 @@ public class HttpUtils {
 		if (!ContextUtils.isPortlet()) {
 			throw new UnsupportedOperationException(
 			"call HttpUtils.getPortletRequest() in portlet mode only!");
-		} 
+		}
 		return ((PortletRequestAttributes) requestAttributes).getRequest();
 	}
 
@@ -86,9 +87,9 @@ public class HttpUtils {
 			String headerName = headerNames.nextElement();
 			List<String> values = new ArrayList<String>();
 			result.put(headerName, values);
-			Enumeration<String> headers = request.getHeaders(headerName); 
+			Enumeration<String> headers = request.getHeaders(headerName);
 			while (headers.hasMoreElements()) {
-				String header = headers.nextElement(); 
+				String header = headers.nextElement();
 				values.add(header);
 			}
 		}
@@ -201,10 +202,10 @@ public class HttpUtils {
 		}
 		return remoteAddr;
 	}
-	
+
 	/**
 	 * @return The client as a resolved InetAddress.
-	 * @throws UnknownHostException 
+	 * @throws UnknownHostException
 	 */
 	public static InetAddress getClient() throws UnknownHostException {
 		String rawClientString = getRawClientString();
@@ -221,7 +222,7 @@ public class HttpUtils {
 	 * @return The client as a printable string.
 	 */
 	public static String getClientString() {
-		String rawClientString = getRawClientString(); 
+		String rawClientString = getRawClientString();
 		if (rawClientString == null) {
 			return null;
 		}
@@ -249,10 +250,10 @@ public class HttpUtils {
 		}
 		return serverAddr;
 	}
-	
+
 	/**
 	 * @return The server as a resolved InetAddress.
-	 * @throws UnknownHostException 
+	 * @throws UnknownHostException
 	 */
 	public static InetAddress getServer() throws UnknownHostException {
 		String rawServerString = getRawServerString();
@@ -264,13 +265,13 @@ public class HttpUtils {
 		}
 		return InetAddress.getByName(rawServerString);
 	}
-	
+
 	/**
-	 * @param name 
+	 * @param name
 	 * @return the real IP address, not localhost.
-	 * @throws UnknownHostException 
+	 * @throws UnknownHostException
 	 */
-	private static InetAddress getRealInetAddress(final String name) 
+	private static InetAddress getRealInetAddress(final String name)
 	throws UnknownHostException {
 		if (!name.equals("localhost") && !name.equals("127.0.0.1") && !name.equals("0:0:0:0:0:0:0:1")) {
 			InetAddress host = InetAddress.getByName(name);
@@ -278,23 +279,23 @@ public class HttpUtils {
 			return host;
 		}
 		try {
-			Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
+			Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
 			if (interfaces == null) {
 				InetAddress host = InetAddress.getByName(name);
 				return host;
-			}	
+			}
 			while (interfaces.hasMoreElements()) {
-				NetworkInterface card = (NetworkInterface) interfaces.nextElement();
-				Enumeration addresses = card.getInetAddresses();
+				NetworkInterface card = interfaces.nextElement();
+				Enumeration<InetAddress> addresses = card.getInetAddresses();
 				if (addresses == null) {
 					continue;
 				}
 				while (addresses.hasMoreElements()) {
-					InetAddress address = (InetAddress) addresses.nextElement();
+					InetAddress address = addresses.nextElement();
 					address.getAddress();
 					String addressName = address.getHostName();
-					if (!addressName.equals("localhost") 
-							&& !addressName.equals("127.0.0.1") 
+					if (!addressName.equals("localhost")
+							&& !addressName.equals("127.0.0.1")
 							&& !addressName.equals("0:0:0:0:0:0:0:1")) {
 						return address;
 					}
@@ -356,9 +357,9 @@ public class HttpUtils {
 		}
 		return request.getQueryString();
 	}
-	
+
 	/**
-	 * @param prefName 
+	 * @param prefName
 	 * @return a JSR-168 preference (in portlet mode only).
 	 */
 	public static String getPortalPref(final String prefName) {
@@ -366,7 +367,7 @@ public class HttpUtils {
 		if (attrs == null) {
 			return null;
 		}
-		Object value = attrs.get(prefName); 
+		Object value = attrs.get(prefName);
 		if (value == null) {
 			return null;
 		}
@@ -395,7 +396,7 @@ public class HttpUtils {
 		}
 		return portalContext.getPortalInfo();
 	}
-	
+
 	/**
 	 * @return The current HttpServletResponse, null if not found.
 	 */
@@ -404,7 +405,7 @@ public class HttpUtils {
 //		FacesContext facesContext = FacesContext.getCurrentInstance();
 //		if (facesContext == null) {
 //			if (LOG.isDebugEnabled()) {
-//				LOG.debug("FacesContext.getCurrentInstance() returns null, " 
+//				LOG.debug("FacesContext.getCurrentInstance() returns null, "
 //						+ "can not get the current HTTP servlet response.");
 //			}
 //			return null;
@@ -412,7 +413,7 @@ public class HttpUtils {
 //		ExternalContext externalContext = facesContext.getExternalContext();
 //		if (externalContext == null) {
 //			if (LOG.isDebugEnabled()) {
-//				LOG.debug("facesContext.getExternalContext() returns null, " 
+//				LOG.debug("facesContext.getExternalContext() returns null, "
 //						+ "can not get the current HTTP servlet response.");
 //			}
 //			return  null;
@@ -420,14 +421,14 @@ public class HttpUtils {
 //		Object responseObject = externalContext.getResponse();
 //		if (responseObject == null) {
 //			if (LOG.isDebugEnabled()) {
-//				LOG.debug("externalContext.getRequest() returns null, " 
+//				LOG.debug("externalContext.getRequest() returns null, "
 //						+ "can not get the current HTTP servlet response.");
 //			}
 //			return null;
 //		}
 //		if (!(responseObject instanceof HttpServletResponse)) {
 //			if (LOG.isDebugEnabled()) {
-//				LOG.debug("requestObject is not a HttpServletResponse, " 
+//				LOG.debug("requestObject is not a HttpServletResponse, "
 //						+ "can not get the current HTTP servlet response.");
 //			}
 //			return null;

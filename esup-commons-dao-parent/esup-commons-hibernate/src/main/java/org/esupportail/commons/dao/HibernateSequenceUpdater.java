@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 /**
  * This class is used to update a Hibernate sequence.
  */
-public class HibernateSequenceUpdater implements HibernateCallback {
+public class HibernateSequenceUpdater implements HibernateCallback<Object> {
 
 	/** The name of the sequence. */
 	private String sequenceName;

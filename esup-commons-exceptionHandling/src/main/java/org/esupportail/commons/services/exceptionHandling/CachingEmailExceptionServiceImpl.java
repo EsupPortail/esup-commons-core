@@ -21,7 +21,6 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.SmtpService;
 
-
 /**
  * An implementation of ExceptionService, that logs the exceptions, send
  * them to an email address and redirect to an exception page. The difference
@@ -64,8 +63,8 @@ public class CachingEmailExceptionServiceImpl extends EmailExceptionServiceImpl 
 	public CachingEmailExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
-			final Map<Class, String> exceptionViews,
-			final List<Class> noEmailExceptions,
+			final Map<Class<? extends Throwable>, String> exceptionViews,
+			final List<Class<? extends Throwable>> noEmailExceptions,
 			final AuthenticationService authenticationService,
 			final SmtpService smtpService,
 			final String recipientEmail,

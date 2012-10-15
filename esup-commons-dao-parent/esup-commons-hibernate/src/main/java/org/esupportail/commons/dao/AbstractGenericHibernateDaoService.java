@@ -57,10 +57,10 @@ implements PaginatorDaoService, InitializingBean {
 	 */
 	public Query getQuery(
 			final String hqlQuery) {
-		return (Query) getHibernateTemplate().execute(
-				new HibernateCallback() {
+		return getHibernateTemplate().execute(
+				new HibernateCallback<Query>() {
 					@Override
-                    public Object doInHibernate(final Session session) throws HibernateException {
+                    public Query doInHibernate(final Session session) throws HibernateException {
 						return session.createQuery(hqlQuery);
 					}
 				}
@@ -146,10 +146,10 @@ implements PaginatorDaoService, InitializingBean {
 	 */
 	public SQLQuery getSqlQuery(
 			final String sqlQuery) {
-		return (SQLQuery) getHibernateTemplate().execute(
-				new HibernateCallback() {
+		return getHibernateTemplate().execute(
+				new HibernateCallback<SQLQuery>() {
 					@Override
-                    public Object doInHibernate(final Session session) throws HibernateException {
+                    public SQLQuery doInHibernate(final Session session) throws HibernateException {
 						return session.createSQLQuery(sqlQuery);
 					}
 				}
@@ -214,7 +214,8 @@ implements PaginatorDaoService, InitializingBean {
 	 * Delete a list of objects from the database.
 	 * @param objects
 	 */
-	protected void deleteObjects(final List objects) {
+	@SuppressWarnings("rawtypes")
+    protected void deleteObjects(final List objects) {
 		getHibernateTemplate().deleteAll(objects);
 	}
 

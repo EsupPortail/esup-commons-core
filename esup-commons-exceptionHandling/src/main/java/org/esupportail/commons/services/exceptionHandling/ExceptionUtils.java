@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.exceptionHandling; 
+package org.esupportail.commons.services.exceptionHandling;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import org.esupportail.commons.utils.ContextUtils;
  * A class that provides static utilities for exception handling.
  */
 public final class ExceptionUtils {
-	
+
 	/**
 	 * The name of the exception service bean.
 	 */
@@ -33,14 +33,14 @@ public final class ExceptionUtils {
 	/**
 	 * The text separator for the stack trace.
 	 */
-	private static final String STACK_TRACE_SEPARATOR = 
+	private static final String STACK_TRACE_SEPARATOR =
 		"- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ";
 
 	/**
 	 * The "caused by" element.
 	 */
-	private static final String STACK_TRACE_CAUSED_BY = "caused by: "; 
-	
+	private static final String STACK_TRACE_CAUSED_BY = "caused by: ";
+
 	/**
 	 * A logger.
 	 */
@@ -167,7 +167,7 @@ public final class ExceptionUtils {
 		}
 		return cause;
 	}
-	
+
 	/**
 	 * @return The real cause of an exception.
 	 * @param t
@@ -179,7 +179,7 @@ public final class ExceptionUtils {
 		}
 		return getRealCause(cause);
 	}
-	
+
 	/**
 	 * @return The causes of an exception as a list.
 	 * @param t
@@ -191,18 +191,17 @@ public final class ExceptionUtils {
 			result.add(t);
 			return result;
 		}
-		List<Throwable> causeResult = getCauses(cause); 
+		List<Throwable> causeResult = getCauses(cause);
 		causeResult.add(t);
 		return causeResult;
 	}
-	
+
 	/**
 	 * @return true if the exception has a cause of the given class, false otherwise.
 	 * @param t
 	 * @param exceptionClass
 	 */
-	@SuppressWarnings("unchecked")
-	public static boolean hasCause(final Throwable t, final Class exceptionClass) {
+	public static boolean hasCause(final Throwable t, final Class<? extends Throwable> exceptionClass) {
 		for (Throwable cause : getCauses(t)) {
 			if (exceptionClass.isAssignableFrom(cause.getClass())) {
 				return true;
@@ -210,21 +209,21 @@ public final class ExceptionUtils {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @return true if the exception has a cause of the given classes, false otherwise.
 	 * @param t
 	 * @param exceptionClasses
 	 */
-	public static boolean hasCause(final Throwable t, final Class [] exceptionClasses) {
-		for (Class clazz : exceptionClasses) {
+	public static boolean hasCause(final Throwable t, final Class<? extends Throwable>[] exceptionClasses) {
+		for (Class<? extends Throwable> clazz : exceptionClasses) {
 			if (hasCause(t, clazz)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @return a safe exception service.
 	 */
@@ -239,7 +238,7 @@ public final class ExceptionUtils {
 
 	/**
 	 * @param t
-	 * @throws ExceptionHandlingException 
+	 * @throws ExceptionHandlingException
 	 */
 	private static void safeCatchException(
 			final Throwable t) throws ExceptionHandlingException {
@@ -252,15 +251,15 @@ public final class ExceptionUtils {
 	 * @return an exception service.
 	 */
 	private static ExceptionService getExceptionService() {
-		ExceptionServiceFactory exceptionServiceFactory  = 
+		ExceptionServiceFactory exceptionServiceFactory  =
 			(ExceptionServiceFactory) BeanUtils.getBean(EXCEPTION_SERVICE_FACTORY_BEAN);
 		return exceptionServiceFactory.getExceptionService();
 	}
-	
+
 	/**
 	 * @param t
 	 * @return an ExceptionService instance, that can be used later to set a HTTP response.
-	 * @throws ExceptionHandlingException 
+	 * @throws ExceptionHandlingException
 	 */
 	public static ExceptionService catchException(
 			final Throwable t) throws ExceptionHandlingException {
@@ -272,17 +271,17 @@ public final class ExceptionUtils {
 "An exception was thrown while retrieving the exception service, falling back to a safe implementation", t1);
 			safeCatchException(t);
 			// never reached
-			return null; 
+			return null;
 		}
 		try {
 			exceptionService.setParameters(t);
 		} catch (ExceptionHandlingException e1) {
 			LOGGER.error(
-					"An exception was thrown while setting the parameters of the exception " 
+					"An exception was thrown while setting the parameters of the exception "
 					+ "service, falling back to a safe implementation", e1);
 			safeCatchException(t);
 			// never reached
-			return null; 
+			return null;
 		}
 		try {
 			exceptionService.handleException();
@@ -291,7 +290,7 @@ public final class ExceptionUtils {
 "An exception was thrown while handling the exception, falling back to a safe implementation", e1);
 			safeCatchException(t);
 			// never reached
-			return null; 
+			return null;
 		}
 		return exceptionService;
 	}
@@ -307,7 +306,7 @@ public final class ExceptionUtils {
 	 * @return The exception service created when the exception had been thrown.
 	 */
 	public static ExceptionService getMarkedExceptionService() {
-		Object marker = ContextUtils.getSessionAttribute(EXCEPTION_MARKER_NAME); 
+		Object marker = ContextUtils.getSessionAttribute(EXCEPTION_MARKER_NAME);
 		if (marker != null && marker instanceof ExceptionService) {
 			return (ExceptionService) marker;
 		}
@@ -318,23 +317,23 @@ public final class ExceptionUtils {
 	 * Mark that an exception has been caught.
 	 */
 	public static void markExceptionCaught() {
-		ContextUtils.setSessionAttribute(EXCEPTION_MARKER_NAME, Boolean.TRUE); 
+		ContextUtils.setSessionAttribute(EXCEPTION_MARKER_NAME, Boolean.TRUE);
 	}
 
 	/**
 	 * Mark that an exception has been caught.
-	 * @param exceptionService 
+	 * @param exceptionService
 	 */
 	public static void markExceptionCaught(
 			final ExceptionService exceptionService) {
-		ContextUtils.setSessionAttribute(EXCEPTION_MARKER_NAME, exceptionService); 
+		ContextUtils.setSessionAttribute(EXCEPTION_MARKER_NAME, exceptionService);
 	}
 
 	/**
 	 * Unmark that an exception has been caught.
 	 */
 	public static void unmarkExceptionCaught() {
-		ContextUtils.setSessionAttribute(EXCEPTION_MARKER_NAME, null); 
+		ContextUtils.setSessionAttribute(EXCEPTION_MARKER_NAME, null);
 	}
 
 }

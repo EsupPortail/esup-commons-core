@@ -105,7 +105,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	 * @return Div
 	 */
 	private Div makePages(final Div divPagination,
-					final Paginator pagi,
+					final Paginator<?> pagi,
 					final HtmlTag ul1, final Application a) {
 		Div divTemp = divPagination;
 		if (!pagi.getFirstPagesNumber().isEmpty()) {

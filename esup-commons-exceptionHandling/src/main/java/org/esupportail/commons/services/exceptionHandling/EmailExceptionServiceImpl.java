@@ -62,7 +62,7 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	/**
 	 * The exceptions that will generate no email.
 	 */
-	private List<Class> noEmailExceptions;
+	private List<Class<? extends Throwable>> noEmailExceptions;
 
 	/**
 	 * Constructor.
@@ -80,8 +80,8 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	public EmailExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
-			final Map<Class, String> exceptionViews,
-			final List<Class> noEmailExceptions,
+			final Map<Class<? extends Throwable>, String> exceptionViews,
+			final List<Class<? extends Throwable>> noEmailExceptions,
 			final AuthenticationService authenticationService,
 			final SmtpService smtpService,
 			final String recipientEmail,
@@ -411,7 +411,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	 * @param htmlReport the HTML body
 	 * @param textReport the plain text body
 	 */
-	@SuppressWarnings("unchecked")
 	protected void sendEmail(
 			final boolean intercept,
 			final Throwable t,
@@ -420,8 +419,8 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 			final String htmlReport,
 			final String textReport) {
 		for (Throwable cause : ExceptionUtils.getCauses(t)) {
-			Class causeClass = cause.getClass();
-			for (Class clazz : noEmailExceptions) {
+			Class<? extends Throwable> causeClass = cause.getClass();
+			for (Class<? extends Throwable> clazz : noEmailExceptions) {
 				if (clazz.isAssignableFrom(causeClass)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug("no email for exception class [" + causeClass + "]");

@@ -3,14 +3,12 @@
  */
 package org.esupportail.commons.batch;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.ServletException;
+
+import org.esupportail.commons.utils.ContextUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.esupportail.commons.utils.ContextUtils;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mock.web.MockFilterConfig;
@@ -29,16 +27,16 @@ import org.springframework.web.filter.RequestContextFilter;
  * - MockHttpServletRequest,
  * - MockHttpSession,
  * - MockFacesContext, etc.
- * 
+ *
  * It loads spring config files (by default "classpath:properties/applicationContext.xml") in a WebApplicationContext
  * puts this WebApplicationContext in a MockServletContext
  * and binds this MockServletContext with the MockHttpServletRequest
- * 
- * @see WebApplicationFilter 
- * 
+ *
+ * @see WebApplicationFilter
+ *
  */
 public class WebApplicationEnvironment {
-	
+
 	public static final String[] CONFIG_LOCATIONS = new String[]{"classpath:properties/applicationContext.xml" };
 
 	private static MockHttpSession session;
@@ -50,7 +48,7 @@ public class WebApplicationEnvironment {
 	private static MockServletContext context;
 
 	private final Log log = LogFactory.getLog(getClass());
-	
+
 	private MockHttpServletResponse response;
 
 	private MockHttpServletRequest request;
@@ -76,12 +74,12 @@ public class WebApplicationEnvironment {
 //		facesContext.setExternalContext(externalContext);
 //
 //		MockFacesContextHelper.setMockContext(facesContext);
-		
+
 	}
-	
+
 	/**
 	 * Constructor, reinitialize a new request/response.
-	 * => make a new Instance of WebApplicationUtils when you want to reinitialize a new request/response 
+	 * => make a new Instance of WebApplicationUtils when you want to reinitialize a new request/response
 	 */
 	public WebApplicationEnvironment() {
 		init(true);
@@ -89,8 +87,8 @@ public class WebApplicationEnvironment {
 
 	/**
 	 * Constructor, reinitialize a new request/response.
-	 * => make a new Instance of WebApplicationUtils when you want to reinitialize a new request/response 
-	 * @param preverseSession - True if you want preserve the current session across requests 
+	 * => make a new Instance of WebApplicationUtils when you want to reinitialize a new request/response
+	 * @param preverseSession - True if you want preserve the current session across requests
 	 */
 	public WebApplicationEnvironment(boolean preverseSession) {
 		init(preverseSession);
@@ -102,7 +100,7 @@ public class WebApplicationEnvironment {
 	private void init(boolean preverseSession) {
 		request = new MockHttpServletRequest(context);
 		if (preverseSession) {
-			request.setSession(session);			
+			request.setSession(session);
 		} else {
 			session = new MockHttpSession(context);
 		}
@@ -125,12 +123,11 @@ public class WebApplicationEnvironment {
 	 * @return the ApplicationContext loaded
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
 	public ConfigurableApplicationContext loadContextLocations(
 			final String[] locations) throws Exception {
 
 		if (log.isInfoEnabled()) {
-			log.info("Loading web application context for: " 
+			log.info("Loading web application context for: "
 					+ StringUtils.arrayToCommaDelimitedString(locations));
 		}
 
@@ -138,16 +135,10 @@ public class WebApplicationEnvironment {
 		ctx.setConfigLocations(locations);
 		ctx.setServletContext(context);
 		ctx.refresh();
-		//TODO CL V2 : use jsf mock in core module
-		//MockExternalContext externalContext = (MockExternalContext) facesContext.getExternalContext();
-		Map applicationMap = new HashMap();
-		applicationMap.put(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, ctx);
-		//externalContext.setApplicationMap(applicationMap);
 
 		context.setAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE, ctx);
-		
 		ContextUtils.bindRequestAndContext(request, context);
-		
+
 		return ctx;
 	}
 
@@ -179,5 +170,5 @@ public class WebApplicationEnvironment {
 		return contextFilter;
 	}
 
-	
+
 }

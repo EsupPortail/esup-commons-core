@@ -100,8 +100,7 @@ public class LdapAttributesMapper implements AttributesMapper, Serializable {
 	private List<String> getValues(Attribute attribute) throws NamingException {
 		List<String> listAttr = new ArrayList<String>();
 		// The attribute exists
-			NamingEnumeration<Object> attrValueEnum =
-				(NamingEnumeration<Object>) attribute.getAll();
+			NamingEnumeration<?> attrValueEnum = attribute.getAll();
 			while (attrValueEnum.hasMore()) {
 				Object attributeValue = attrValueEnum.next();
 				// Convert everything except byte[] to String

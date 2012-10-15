@@ -44,17 +44,17 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * The application map.
 	 */
-	private Map applicationMap;
+	private Map<String, Object> applicationMap;
 
 	/**
 	 * The session map.
 	 */
-	private Map sessionMap;
+	private Map<String, Object> sessionMap;
 
 	/**
 	 * The request parameter map.
 	 */
-	private Map requestParameterMap;
+	private Map<String, String> requestParameterMap;
 
 	/**
 	 * Constructor.
@@ -107,9 +107,9 @@ public class MockExternalContext extends ExternalContext {
 	}
 
     @Override
-	public Map getApplicationMap() {
+	public Map<String, Object> getApplicationMap() {
 		if (applicationMap == null) {
-			return new HashMap();
+			return new HashMap<String, Object>();
 		}
 		return applicationMap;
 	}
@@ -117,26 +117,30 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param applicationMap
 	 */
-	public void setApplicationMap(final Map applicationMap) {
+	public void setApplicationMap(final Map<String, Object> applicationMap) {
 		this.applicationMap = applicationMap;
 	}
 
 	@Override
-	public Map getSessionMap() {
+	public Map<String, Object> getSessionMap() {
 		if (sessionMap == null) {
-			sessionMap = new HashMap();
+			sessionMap = new HashMap<String, Object>();
 		}
 		return sessionMap;
 
 	}
 
 	@Override
-	public Map getRequestMap() {
+	public Map<String, Object> getRequestMap() {
+		/*
+		 * if (requestMap == null) { requestMap = new MockRequestMap(request); }
+		 * return (requestMap);
+		 */
 		return null;
 	}
 
 	@Override
-	public Map getRequestParameterMap() {
+	public Map<String, String> getRequestParameterMap() {
 		if (requestParameterMap != null) {
 			return requestParameterMap;
 		}
@@ -146,7 +150,7 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param requestParameterMap
 	 */
-	public void setRequestParameterMap(final Map requestParameterMap) {
+	public void setRequestParameterMap(final Map<String, String> requestParameterMap) {
 		this.requestParameterMap = requestParameterMap;
 	}
 
@@ -156,27 +160,27 @@ public class MockExternalContext extends ExternalContext {
 	}
 
 	@Override
-	public Map getRequestParameterValuesMap() {
+	public Map<String, String[]> getRequestParameterValuesMap() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Iterator getRequestParameterNames() {
+	public Iterator<String> getRequestParameterNames() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map getRequestHeaderMap() {
+	public Map<String, String> getRequestHeaderMap() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map getRequestHeaderValuesMap() {
+	public Map<String, String[]> getRequestHeaderValuesMap() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Map getRequestCookieMap() {
+	public Map<String, Object> getRequestCookieMap() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -185,8 +189,9 @@ public class MockExternalContext extends ExternalContext {
 		return request.getLocale();
 	}
 
-	@Override
-	public Iterator getRequestLocales() {
+	@SuppressWarnings("unchecked")
+    @Override
+	public Iterator<Locale> getRequestLocales() {
 		return new LocalesIterator(request.getLocales());
 	}
 
@@ -236,13 +241,14 @@ public class MockExternalContext extends ExternalContext {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+	@SuppressWarnings("rawtypes")
+    @Override
 	public Map getInitParameterMap() {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public Set getResourcePaths(final String path) {
+    @Override
+	public Set<String> getResourcePaths(final String path) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -314,18 +320,18 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * An iterator for Locale.
 	 */
-	private class LocalesIterator implements Iterator {
+	private class LocalesIterator implements Iterator<Locale> {
 
 		/**
 		 * The locales.
 		 */
-		private Enumeration locales;
+		private Enumeration<Locale> locales;
 
 		/**
 		 * Constructor.
 		 * @param locales
 		 */
-		public LocalesIterator(final Enumeration locales) {
+		public LocalesIterator(final Enumeration<Locale> locales) {
 			this.locales = locales;
 		}
 
@@ -335,7 +341,7 @@ public class MockExternalContext extends ExternalContext {
 		}
 
 		@Override
-        public Object next() {
+        public Locale next() {
 			return locales.nextElement();
 		}
 

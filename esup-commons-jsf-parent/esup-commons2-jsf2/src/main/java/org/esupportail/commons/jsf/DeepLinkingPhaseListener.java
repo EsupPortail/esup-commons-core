@@ -51,7 +51,9 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 	}
 
 	@Override
-	public void afterPhase(final PhaseEvent arg0) {
+    public void afterPhase(final PhaseEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -165,24 +167,19 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 	 */
 	private List<UrlPatternDescriptor> getUrlDescriptor() {
 		//ADD Action
-		Map<String, Object> treatments = BeanUtils.getBeansOfClass(UrlPatternDescriptor.class);
+		Map<String, UrlPatternDescriptor> treatments = BeanUtils.getBeansOfClass(UrlPatternDescriptor.class);
 		List<UrlPatternDescriptor> urlP = new ArrayList<UrlPatternDescriptor>();
 		for (String name : treatments.keySet()) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("get to roles bean [" + name + "]...");
 			}
-			Object bean = treatments.get(name);
+			UrlPatternDescriptor bean = treatments.get(name);
 			if (bean == null) {
 				throw new ConfigException("bean [" + name
 						+ "] is null, "
 						+ "application doesn't init action.");
 			}
-			if (!(bean instanceof UrlPatternDescriptor)) {
-				throw new ConfigException("bean [" + name
-						+ "] does not roles.");
-			}
-			urlP.add((UrlPatternDescriptor) bean);
-
+			urlP.add(bean);
 		}
 		return urlP;
 	}
@@ -202,7 +199,6 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 			args = StringUtilsWeb.utf8UrlDecode(args);
 			params = AbstractUrlGenerator.decodeArgToParams(args);
 		}
-
 
 		return params;
 	}

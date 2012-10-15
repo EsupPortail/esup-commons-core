@@ -69,7 +69,7 @@ implements ExceptionServiceFactory {
 	/**
 	 * The exception views.
 	 */
-	private Map<Class, String> exceptionViews;
+	private Map<Class<? extends Throwable>, String> exceptionViews;
 
 	/**
 	 * The authentication service.
@@ -81,7 +81,7 @@ implements ExceptionServiceFactory {
 	 */
 	public SimpleExceptionServiceFactoryImpl() {
 		super();
-		exceptionViews = new HashMap<Class, String>();
+		exceptionViews = new HashMap<Class<? extends Throwable>, String>();
 	}
 
 	@Override
@@ -130,14 +130,16 @@ implements ExceptionServiceFactory {
 	 * @param className
 	 * @param exceptionView
 	 */
-	private void addExceptionView(final String className, final String exceptionView) {
+	@SuppressWarnings("unchecked")
+    private void addExceptionView(final String className, final String exceptionView) {
 		try {
-			Class clazz = Class.forName(className);
+			Class<?> clazz = Class.forName(className);
 			if (!(Throwable.class.isAssignableFrom(clazz))) {
 				throw new ConfigException("class [" + className
 						+ "] is not a subclass of [" + Throwable.class + "]");
 			}
-			this.exceptionViews.put(clazz, exceptionView);
+			Class <? extends Throwable> exceptionClazz = (Class <? extends Throwable>) clazz;
+			this.exceptionViews.put(exceptionClazz, exceptionView);
 		} catch (ClassNotFoundException e) {
 			throw new ConfigException(e);
 		}
@@ -162,7 +164,7 @@ implements ExceptionServiceFactory {
 	/**
 	 * @return the exceptionView
 	 */
-	protected Map<Class, String> getExceptionViews() {
+	protected Map<Class<? extends Throwable>, String> getExceptionViews() {
 		return exceptionViews;
 	}
 
