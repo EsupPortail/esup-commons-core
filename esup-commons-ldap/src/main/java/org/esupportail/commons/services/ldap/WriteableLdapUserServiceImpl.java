@@ -14,12 +14,12 @@ import javax.naming.Name;
 
 import net.sf.ehcache.CacheManager;
 
-import org.apache.commons.lang.StringUtils;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.ldap.UncategorizedLdapException;
 import org.springframework.ldap.core.DirContextAdapter;
@@ -32,7 +32,7 @@ import org.springframework.ldap.core.support.LdapContextSource;
  * See /properties/ldap/ldap-write-example.xml.
  */
 public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, InitializingBean {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -47,7 +47,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	 * A LdapTemplate instance, to perform LDAP operations.
 	 */
 	private LdapTemplate ldapTemplate;
-	
+
 	/**
 	 * A LdapContextSource instance, to modify LDAP connections.
 	 */
@@ -62,22 +62,22 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	 * The DN of LDAP users. for example : ou=people,dc=domain,dc=edu
 	 */
 	private String dnAuth;
-	
+
 	/**
 	 * The name of the attribute that contains the unique id of LDAP users.
 	 */
 	private String idAuth;
-	
+
 	/**
 	 * The DN sub path.
 	 */
 	private String dnSubPath;
-	
+
 	/**
 	 * The names of the attributes to update.
 	 */
 	private List<String> attributes;
-    
+
 	/**
 	 * The cacheManager to invalidate when writing to LDAP to ensure coherence
 	 */
@@ -87,7 +87,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	 * The name of cache managed by cacheManager
 	 */
 	private String cacheName;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -95,22 +95,20 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.hasText(idAttribute, 
+		Assert.hasText(idAttribute,
 				"property idAttribute of class " + getClass().getName() + " can not be null");
-		Assert.notEmpty(attributes,  
+		Assert.notEmpty(attributes,
 				"property attributes of class " + getClass().getName() + " can not be empty");
-		Assert.hasText(dnSubPath,  
+		Assert.hasText(dnSubPath,
 				"property dnSubPath of class " + getClass().getName() + " can not be empty");
 		if (ldapTemplate == null) {
 			dnSubPath = null;
-			logger.info(getClass() + ": property ldapTemplate is not set"); 
+			logger.info(getClass() + ": property ldapTemplate is not set");
 		}
 		if (logger.isDebugEnabled() && dnAuth != null) {
-			logger.debug("dnAuth" + dnAuth); 
+			logger.debug("dnAuth" + dnAuth);
 		}
 		if (!attributes.contains(idAttribute)) {
 			attributes.add(idAttribute);
@@ -122,16 +120,13 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			if (cacheName == null) {
 				cacheName = org.esupportail.commons.services.ldap.CachingLdapEntityServiceImpl.class.getName();
 				logger.info("Property cacheName is not set. So default (" + cacheName +
-					") is used. This is not a problem if you do not specify a specific cacheName in ldapService Bean.");				
+					") is used. This is not a problem if you do not specify a specific cacheName in ldapService Bean.");
 			}
 		}
 
 	}
 
-	/** Modify an LDAP user using Spring LdapContextSource.
-	 * @see org.esupportail.commons.services.ldap.WriteableLdapUserService#updateLdapUser(
-	 * org.esupportail.commons.services.ldap.LdapUser)
-	 */
+	@Override
 	public void updateLdapUser(final LdapUser ldapUser) throws LdapAttributesModificationException {
 		Name dn = buildLdapUserDn(ldapUser.getId());
 		try {
@@ -146,9 +141,9 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			logger.info("Update of LDAP user :" + dn + " : " + ldapUser);
 			ldapTemplate.modifyAttributes(dn, context.getModificationItems());
 
-			// ensure LDAP cache 
+			// ensure LDAP cache
 			invalidateLdapCache();
-			
+
 		} catch (UncategorizedLdapException e) {
 			if (e.getCause() instanceof javax.naming.AuthenticationException) {
 				throw new LdapBindFailedException("Couldn't bind to LDAP with user" + ldapUser.getId());
@@ -160,22 +155,22 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			throw new LdapAttributesModificationException(
 					"Couldn't get modification items for '" + dn + "'", e);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Set or clear a user specified attribute.
-	 * It handles the attribute etiquette: 
+	 * It handles the attribute etiquette:
 	 * - it keeps unmodified attribute values without this etiquette
 	 * - it prefixes the values with this etiquette
 	 * @param ldapUser
 	 * @param attrName
 	 * @param etiquette
 	 * @param value
-	 * @throws LdapAttributesModificationException 
+	 * @throws LdapAttributesModificationException
 	 */
-	public void setOrClearUserAttribute(final LdapUser ldapUser, final String attrName, 
-					    final String etiquette, final List<String> value) 
+	public void setOrClearUserAttribute(final LdapUser ldapUser, final String attrName,
+					    final String etiquette, final List<String> value)
 					throws LdapAttributesModificationException {
 		Map<String, List<String>> attrs = ldapUser.getAttributes();
 		List<String> allValues = computeAttributeValues(attrs.get(attrName), etiquette, value);
@@ -187,8 +182,8 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		ldapUser.setAttributes(attrs); // restore other attributes
 	}
 
-	public void setOrClearUserAttribute(final LdapUserService ldapService, final String id, 
-					    final String attrName, final String etiquette, final List<String> value) 
+	public void setOrClearUserAttribute(final LdapUserService ldapService, final String id,
+					    final String attrName, final String etiquette, final List<String> value)
 					throws UserNotFoundException, LdapAttributesModificationException {
 		// ensure we read straight from LDAP
 		// it is especially important since the attribute values with a different etiquette may have changed since last read
@@ -199,8 +194,8 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		checkAttributeWriteSucceeded(ldapService, id, attrName, ldapUser);
 	}
 
-	public void setOrClearUserAttribute(final LdapUserAndGroupService ldapService, final String id, 
-					    final String attrName, final String etiquette, final List<String> value) 
+	public void setOrClearUserAttribute(final LdapUserAndGroupService ldapService, final String id,
+					    final String attrName, final String etiquette, final List<String> value)
 					throws UserNotFoundException, LdapAttributesModificationException {
 		// ensure we read straight from LDAP
 		// it is especially important since the attribute values with a different etiquette may have changed since last read
@@ -227,7 +222,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 				sb = new StringBuilder();
 			else
 				sb.append(separator);
-			sb.append(s);			
+			sb.append(s);
 		}
 		return sb == null ? "" : sb.toString();
 	}
@@ -241,7 +236,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		    for (String s : currentValues)
 			if (!s.startsWith(etiquette)) set.add(s);
 		}
-		for (String v : wantedValues) 
+		for (String v : wantedValues)
 			set.add(mayAddPrefix(etiquette, v));
 		return new ArrayList<String>(set);
 	}
@@ -252,7 +247,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 
 	/**
 	 * Check wether setting or clearing attribute worked correctly
-	 * @throws UserNotFoundException 
+	 * @throws UserNotFoundException
 	 * @throws LdapAttributesModificationException
 	 */
 	private void checkAttributeWriteSucceeded(final LdapUserService ldapService, final String id, final String attrName, final LdapUser wantedLdapUser) throws UserNotFoundException, LdapAttributesModificationException {
@@ -273,7 +268,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			// this never happens, storedValue is never null afaik
 			error = "could not create attribute '" + attrName + "' with value " + join(value, ", ");
 		else if (!value.containsAll(storedValue) || !storedValue.containsAll(value))
-			error = "could not modify attribute '" + attrName + "' with value " + join(value, ", ") + ", it's value is still " + join(storedValue, ", "); 
+			error = "could not modify attribute '" + attrName + "' with value " + join(value, ", ") + ", it's value is still " + join(storedValue, ", ");
 
 		if (error != null) {
 			logger.error(error);
@@ -292,11 +287,8 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 			logger.debug("no LDAP cacheManager to warn");
 		}
 	}
-	
-	/** Create an LDAP user using Spring LdapContextSource.
-	 * @see org.esupportail.commons.services.ldap.WriteableLdapUserService#createLdapUser(
-	 * org.esupportail.commons.services.ldap.LdapUser)
-	 */
+
+	@Override
 	public void createLdapUser(final LdapUser ldapUser) {
 		Name dn = buildLdapUserDn(ldapUser.getId());
 		DirContextAdapter context = new DirContextAdapter(dn);
@@ -304,7 +296,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		ldapTemplate.bind(dn, context, null);
 		logger.info("created [" + dn + "] from [" + ldapUser + "]");
 	}
-	
+
 	/** Build user full DN.
 	 * @param userId
 	 * @return user full DN
@@ -315,16 +307,13 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		dn.add(this.idAttribute, userId);
 		return dn;
 	}
-	
-	/** Delete an LDAP user using Spring LdapContextSource.
-	 * @see org.esupportail.commons.services.ldap.WriteableLdapUserService#deleteLdapUser(
-	 * org.esupportail.commons.services.ldap.LdapUser)
-	 */
+
+	@Override
 	public void deleteLdapUser(final LdapUser ldapUser) {
 		DistinguishedName ldapUserDn = buildLdapUserDn(ldapUser.getId());
 		ldapTemplate.unbind(ldapUserDn);
 	}
-	
+
 	/**
 	 * @param ldapUser
 	 * @param context
@@ -339,18 +328,15 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 				if (listAttr.contains(null)) {
 					//send empty list to remove attribute in ldap
 					listAttr = new ArrayList<String>();
-				} 
+				}
 				context.setAttributeValues(ldapAttributeName, listAttr.toArray());
 			}
 		}
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.WriteableLdapUserService#setAuthenticatedContext(
-	 * java.lang.String, java.lang.String)
-	 */
+
+	@Override
 	public void setAuthenticatedContext(
-			final String userId, 
+			final String userId,
 			final String password) throws LdapException {
 		DistinguishedName ldapBindUserDn = new DistinguishedName(this.dnAuth);
 		ldapBindUserDn.add(this.idAuth, userId);
@@ -360,11 +346,8 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		contextSource.setUserDn(ldapBindUserDn.encode());
 		contextSource.setPassword(password);
 	}
-	
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.WriteableLdapUserService#defineAnonymousContext()
-	 */
+
+	@Override
 	public void defineAnonymousContext() throws LdapException {
 		contextSource.setUserDn("");
 		contextSource.setPassword("");
@@ -377,7 +360,7 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 		return ldapTemplate;
 	}
 
-	
+
 	/**
 	 * @param ldapTemplate the LdapTemplate to set
 	 */
@@ -489,5 +472,5 @@ public class WriteableLdapUserServiceImpl implements WriteableLdapUserService, I
 	public void setCacheName(String cacheName) {
 		this.cacheName = cacheName;
 	}
-	
+
 }

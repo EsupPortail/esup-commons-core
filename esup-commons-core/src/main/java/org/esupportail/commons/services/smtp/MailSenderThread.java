@@ -21,7 +21,7 @@ public class MailSenderThread extends Thread {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(MailSenderThread.class);
-	
+
 	/**
 	 * The SMTP servers to use.
 	 */
@@ -46,22 +46,22 @@ public class MailSenderThread extends Thread {
 	 * The plain text body.
 	 */
 	private String textBody;
-	
+
 	/**
 	 * The list attach file.
 	 */
 	private List<File> files;
-	
+
 	/**
 	 * The charset used to encode the headers.
 	 */
 	private String charset;
-	
+
 	/**
 	 * Message-ID set to sending email.
 	 */
 	private String messageId;
-	
+
 	/**
 	 * Constructor.
 	 * @param smtpServers
@@ -70,15 +70,15 @@ public class MailSenderThread extends Thread {
 	 * @param subject
 	 * @param htmlBody
 	 * @param textBody
-	 * @param files 
-	 * @param charset 
+	 * @param files
+	 * @param charset
 	 * @param messageId
-	 * @throws SmtpException 
+	 * @throws SmtpException
 	 */
 	public MailSenderThread(
 			final List<SmtpServer> smtpServers,
-			final InternetAddress from, 
-			final InternetAddress to, 
+			final InternetAddress from,
+			final InternetAddress to,
 			final String subject,
 			final String htmlBody,
 			final String textBody,
@@ -102,9 +102,6 @@ public class MailSenderThread extends Thread {
 		logger.debug("thread started.");
 	}
 
-	/**
-	 * @see java.lang.Runnable#run()
-	 */
 	@Override
 	public final void run() {
 		SmtpUtils.sendEmail(smtpServers, from, to, subject, htmlBody, textBody, files, charset, messageId);

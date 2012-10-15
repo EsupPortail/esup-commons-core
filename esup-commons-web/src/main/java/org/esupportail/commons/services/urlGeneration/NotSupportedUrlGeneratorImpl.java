@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.urlGeneration; 
+package org.esupportail.commons.services.urlGeneration;
 
 import java.util.Map;
 
@@ -21,14 +21,10 @@ public class NotSupportedUrlGeneratorImpl extends AbstractCasUrlGenerator {
 	protected NotSupportedUrlGeneratorImpl() {
 		super();
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.AbstractUrlGenerator
-	 * #url(org.esupportail.commons.services.urlGeneration.AuthEnum, java.util.Map)
-	 */
+
 	@Override
 	protected String url(
-			final AuthEnum authType, 
+			final AuthEnum authType,
 			final Map<String, String> params) {
 		throw new UnsupportedOperationException("class " + getClass().getName() + "should never be called.");
 	}

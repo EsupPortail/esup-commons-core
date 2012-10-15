@@ -3,10 +3,11 @@
  */
 package org.esupportail.commons.annotations.cache;
 
+import org.esupportail.commons.utils.ContextUtils;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.esupportail.commons.utils.ContextUtils;
 
 /**
  * A caching interceptor that will check for results in session cache before calling methods.
@@ -21,29 +22,18 @@ public class SessionCachingMethodInterceptor extends AbstractCachingMethodInterc
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.aop.cache.AbstractCachingMethodInterceptor#getContextAttribute(java.lang.String)
-	 */
 	@Override
 	protected Object getContextAttribute(final String name) {
 		return ContextUtils.getSessionAttribute(name);
 	}
 
-	/**
-	 * @see org.esupportail.commons.aop.cache.AbstractCachingMethodInterceptor#setContextAttribute(
-	 * java.lang.String, java.lang.Object)
-	 */
 	@Override
 	protected void setContextAttribute(
-			final String name, 
+			final String name,
 			final Object value) {
 		ContextUtils.setSessionAttribute(name, value);
 	}
 
-	/**
-	 * @see org.esupportail.commons.aop.cache.AbstractCachingMethodInterceptor#around(
-	 * org.aspectj.lang.ProceedingJoinPoint)
-	 */
 	@Override
 	@Around("@annotation(org.esupportail.commons.annotations.cache.SessionCache)")
 	public Object around(final ProceedingJoinPoint joinPoint) throws Throwable {

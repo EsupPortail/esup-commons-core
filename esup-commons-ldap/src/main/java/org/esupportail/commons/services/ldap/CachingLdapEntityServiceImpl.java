@@ -14,13 +14,14 @@ import net.sf.ehcache.Element;
 import org.esupportail.commons.services.i18n.I18nService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.springframework.ldap.filter.Filter;
 import org.springframework.util.StringUtils;
 
 /**
  * Class which enable to add a cache to LDAP query,
  * In order to improve execution time.
- * 
+ *
  * See /properties/ldap/ldap-example.xml.
  */
 public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
@@ -34,37 +35,37 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 	 * A constant to calculate statistics.
 	 */
 	private static final int HUNDRED = 100;
-	
+
 	/**
 	 * The default name for the cache.
 	 */
 	private final String defaultCacheName = getClass().getName();
-	
+
 	/**
 	 * The i18n service (used for statistics).
 	 */
 	private I18nService i18nService;
-	
+
 	/**
 	 * the cache.
 	 */
 	private Cache cache;
-	
+
 	/**
 	 * the name of the cache.
 	 */
 	private String cacheName;
-	
+
 	/**
 	 * the cacheManager.
 	 */
 	private CacheManager cacheManager;
-	
+
 	/**
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * the number of requests made.
 	 */
@@ -85,14 +86,14 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 	 * the number of bad filter errors.
 	 */
 	private int badFilterErrors;
-	
+
 	/**
 	 * Bean constructor.
 	 */
 	public CachingLdapEntityServiceImpl() {
 		super();
 	}
-	
+
 	/**
 	 * set the default cacheName.
 	 */
@@ -100,9 +101,6 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 		this.cacheName = defaultCacheName;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.SimpleLdapEntityServiceImpl#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
@@ -110,12 +108,12 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 			logger.warn(getClass() + ": property cacheManager is not set, no cache will be used.");
 		} else {
 			if (i18nService == null) {
-				logger.warn(getClass() + ": property i18nService is not set, " 
+				logger.warn(getClass() + ": property i18nService is not set, "
 						+ "statistics will not be available.");
 			}
 			if (!StringUtils.hasText(cacheName)) {
 				setDefaultCacheName();
-				logger.info(getClass() + ": property cacheName is not set, '" 
+				logger.info(getClass() + ": property cacheName is not set, '"
 						+ cacheName + "' will be used");
 			}
 			if (!cacheManager.cacheExists(cacheName)) {
@@ -127,9 +125,9 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 
 	/**
 	 * Count a LdapException and re-throw it immediatly.
-	 * @param e 
+	 * @param e
 	 * @return the exception as-is
-	 * @throws LdapException 
+	 * @throws LdapException
 	 */
 	private LdapException countException(final LdapException e) {
 		if (supportStatistics()) {
@@ -142,10 +140,8 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 		return e;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.SimpleLdapEntityServiceImpl#getLdapEntitiesFromFilter(Filter)
-	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	protected List<LdapEntity> getLdapEntitiesFromFilter(final Filter filter) throws LdapException {
 		if (!supportStatistics()) {
 			return super.getLdapEntitiesFromFilter(filter);
@@ -173,17 +169,11 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.AbstractLdapService#supportStatistics()
-	 */
 	@Override
 	public boolean supportStatistics() {
 		return cache != null && i18nService != null;
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.AbstractLdapService#resetStatistics()
-	 */
+
 	@Override
 	public void resetStatistics() {
 		totalRequests = 0;
@@ -205,9 +195,6 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 		return val1 * HUNDRED / val2;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.AbstractLdapService#getStatistics(java.util.Locale)
-	 */
 	@Override
 	public List<String> getStatistics(final Locale locale) {
 		if (!supportStatistics()) {
@@ -218,21 +205,21 @@ public class CachingLdapEntityServiceImpl extends SimpleLdapEntityServiceImpl {
 		if (locale == null) {
 			theLocale = i18nService.getDefaultLocale();
 		}
-		statistics.add(i18nService.getString("LDAP_STATISTICS.TOTAL_REQUESTS", theLocale, 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.TOTAL_REQUESTS", theLocale,
 				totalRequests));
-		statistics.add(i18nService.getString("LDAP_STATISTICS.CACHED_REQUESTS", theLocale, 
-				cachedRequests, totalRequests, getPercent(cachedRequests, totalRequests))); 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.CACHED_REQUESTS", theLocale,
+				cachedRequests, totalRequests, getPercent(cachedRequests, totalRequests)));
 		int operations = totalRequests - cachedRequests;
-		statistics.add(i18nService.getString("LDAP_STATISTICS.OPERATIONS", theLocale, 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.OPERATIONS", theLocale,
 				operations, totalRequests, getPercent(operations, totalRequests)));
-		statistics.add(i18nService.getString("LDAP_STATISTICS.SUCCESSFULL", theLocale, 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.SUCCESSFULL", theLocale,
 				successfullOperations, operations, getPercent(successfullOperations, operations)));
-		statistics.add(i18nService.getString("LDAP_STATISTICS.CONNECTION_ERRORS", theLocale, 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.CONNECTION_ERRORS", theLocale,
 				connectionErrors, operations, getPercent(connectionErrors, operations)));
-		statistics.add(i18nService.getString("LDAP_STATISTICS.BAD_FILTER_ERRORS", theLocale, 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.BAD_FILTER_ERRORS", theLocale,
 				badFilterErrors, operations, getPercent(badFilterErrors, operations)));
 		int otherErrors = operations - successfullOperations - connectionErrors - badFilterErrors;
-		statistics.add(i18nService.getString("LDAP_STATISTICS.OTHER_ERRORS", theLocale, 
+		statistics.add(i18nService.getString("LDAP_STATISTICS.OTHER_ERRORS", theLocale,
 				otherErrors, operations, getPercent(otherErrors, operations)));
 		return statistics;
 	}

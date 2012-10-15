@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -22,7 +23,7 @@ import org.springframework.util.StringUtils;
  * A simple implementation of SmtpService.
  */
 public class SimpleSmtpServiceImpl extends AbstractSmtpService implements InitializingBean {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -32,7 +33,7 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	 * The default encoding charset.
 	 */
 	private static final String DEFAULT_CHARSET = "utf-8";
-	
+
 	/**
 	 * A logger.
 	 */
@@ -47,12 +48,12 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	 * The 'From' address to use.
 	 */
 	private InternetAddress fromAddress;
-	
+
 	/**
 	 * True to intercept all the outgoing emails.
 	 */
 	private Boolean interceptAll;
-	
+
 	/**
 	 * The address to which _all_ the emails should be sent (if null, all the
 	 * emails are sent normally).
@@ -63,7 +64,7 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	 * The recipient of the test emails.
 	 */
 	private InternetAddress testAddress;
-	
+
 	/**
 	 * The charset used to encode the headers.
 	 */
@@ -88,12 +89,10 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 		setCharset(DEFAULT_CHARSET);
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		if (CollectionUtils.isEmpty(servers)) {
-			logger.info(getClass() + ": no SMTP server set, '" + SmtpServer.DEFAULT_HOST + ":" 
+			logger.info(getClass() + ": no SMTP server set, '" + SmtpServer.DEFAULT_HOST + ":"
 					+ SmtpServer.DEFAULT_PORT + "' will be used");
 			SmtpServer server = new SmtpServer();
 			server.setDefaultHost();
@@ -103,21 +102,21 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 			}
 			this.servers.add(server);
 		}
-		Assert.notNull(this.fromAddress, 
+		Assert.notNull(this.fromAddress,
 				"property fromAddress of class " + this.getClass().getName() + " can not be null");
 		if (!StringUtils.hasText(charset)) {
 			logger.info(getClass() + ": no encoding charset set, '" + DEFAULT_CHARSET + "' will be used");
 			setDefaultCharset();
 		}
 		if (testAddress == null) {
-			logger.info(getClass() + ": no testAddress attribute set, target ldap-smtp will not work."); 
+			logger.info(getClass() + ": no testAddress attribute set, target ldap-smtp will not work.");
 		}
-		Assert.notNull(this.interceptAll, 
-				"property interceptAll of class " + this.getClass().getName() 
+		Assert.notNull(this.interceptAll,
+				"property interceptAll of class " + this.getClass().getName()
 				+ " can not be null");
 		if (interceptAll) {
-			Assert.notNull(this.interceptAddress, 
-					"property interceptAddress of class " + this.getClass().getName() 
+			Assert.notNull(this.interceptAddress,
+					"property interceptAddress of class " + this.getClass().getName()
 					+ " can not be null when interceptAll is true");
 		}
 		if (notInterceptedAddresses == null) {
@@ -132,13 +131,13 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	 */
 	protected InternetAddress getRealRecipient(final InternetAddress to, final boolean intercept) {
 		InternetAddress recipient;
-		if (intercept 
+		if (intercept
 				&& interceptAll
 				&& !notInterceptedAddresses.contains(to.getAddress().toLowerCase())) {
 			try {
 				recipient = new InternetAddress(
 						interceptAddress.getAddress(),
-						interceptAddress.getPersonal() + " (normally sent to " 
+						interceptAddress.getPersonal() + " (normally sent to "
 						+ to.getAddress() + ")");
 			} catch (UnsupportedEncodingException e) {
 				throw new SmtpException("could not send mail to '" + to.getAddress() + "'", e);
@@ -147,32 +146,32 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 			recipient = to;
 		}
 		return recipient;
-	}	
-	
+	}
+
 	/**
 	 * Send an email.
 	 * @param to
 	 * @param subject
 	 * @param htmlBody
 	 * @param textBody
-	 * @param files 
+	 * @param files
 	 * @param intercept
 	 * @param messageId
 	 */
 	protected void send(
-			final InternetAddress to, 
-			final String subject, 
-			final String htmlBody, 
+			final InternetAddress to,
+			final String subject,
+			final String htmlBody,
 			final String textBody,
 			final List<File> files,
 			final boolean intercept,
 			final String messageId) {
 		InternetAddress recipient = getRealRecipient(to, intercept);
 		SmtpUtils.sendEmail(
-				this.servers, this.fromAddress, recipient, subject, 
+				this.servers, this.fromAddress, recipient, subject,
 				htmlBody, textBody, files, this.charset, messageId);
 	}
-	
+
 	/**
 	 * Send an email to, cc, bcc.
 	 * @param tos
@@ -186,89 +185,69 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	 */
 	protected void send(
 			final InternetAddress[] tos,
-			final InternetAddress[] ccs, 
-			final InternetAddress[] bccs,  
-			final String subject, 
-			final String htmlBody, 
+			final InternetAddress[] ccs,
+			final InternetAddress[] bccs,
+			final String subject,
+			final String htmlBody,
 			final String textBody,
 			final List<File> files,
 			final String messageId) {
-	
+
 		SmtpUtils.sendEmailtocc(
 				this.servers, this.fromAddress, tos, ccs, bccs,
 				subject, htmlBody, textBody, files, this.charset, messageId);
 	}
-	
-	
+
+
 	/**
 	 * @see org.esupportail.commons.services.smtp.SmtpService#send(
 	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public void send(
-			final InternetAddress to, 
-			final String subject, 
-			final String htmlBody, 
+	@Override
+    public void send(
+			final InternetAddress to,
+			final String subject,
+			final String htmlBody,
 			final String textBody,
 			final String messageId) {
 		send(to, subject, htmlBody, textBody, null, true, messageId);
-	}	
-	
-	
-	/**
-	 * @see org.esupportail.commons.services.smtp.SmtpService#send(
-	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, java.lang.String, java.util.List,
-	 *  java.lang.String)
-	 */
+	}
+
+	@Override
 	public void send(
-			final InternetAddress to, 
-			final String subject, 
-			final String htmlBody, 
+			final InternetAddress to,
+			final String subject,
+			final String htmlBody,
 			final String textBody,
 			final List<File> files,
 			final String messageId) {
 		send(to, subject, htmlBody, textBody, files, true, messageId);
-	}	
-	
-	/**
-	 * @see org.esupportail.commons.services.smtp.SmtpService#sendtocc
-	 * (javax.mail.internet.InternetAddress[], 
-	 * javax.mail.internet.InternetAddress[], 
-	 * javax.mail.internet.InternetAddress[], 
-	 * java.lang.String, 
-	 * java.lang.String, java.lang.String, java.util.List, java.lang.String)
-	 */
+	}
+
+	@Override
 	public void sendtocc(
 			final InternetAddress[] tos,
-			final InternetAddress[] ccs, 
-			final InternetAddress[] bccs, 
-			final String subject, 
-			final String htmlBody, 
-			final String textBody, 
+			final InternetAddress[] ccs,
+			final InternetAddress[] bccs,
+			final String subject,
+			final String htmlBody,
+			final String textBody,
 			final List<File> files,
 			final String messageId) {
 		send(tos, ccs, bccs, subject, htmlBody, textBody, files, messageId);
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.smtp.SmtpService#sendDoNotIntercept(
-	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-	 */
+
+	@Override
 	public void sendDoNotIntercept(
-			final InternetAddress to, 
-			final String subject, 
-			final String htmlBody, 
+			final InternetAddress to,
+			final String subject,
+			final String htmlBody,
 			final String textBody,
 			final String messageId) {
 		send(to, subject, htmlBody, textBody, null, false, messageId);
 	}
-	
-	
-	
-	/**
-	 * @see org.esupportail.commons.services.smtp.SmtpService#sendDoNotIntercept(
-	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, 
-	 * java.lang.String, java.util.List, java.lang.String)
-	 */
+
+	@Override
 	public void sendDoNotIntercept(
 			final InternetAddress to,
 			final String subject,
@@ -276,24 +255,18 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 			final String textBody,
 			final List<File> files,
 			final String messageId) {
-		send(to, subject, htmlBody, textBody, files, false, messageId);	
+		send(to, subject, htmlBody, textBody, files, false, messageId);
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.smtp.AbstractSmtpService#supportsTest()
-	 */
+
 	@Override
 	public boolean supportsTest() {
 		return true;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.smtp.AbstractSmtpService#test()
-	 */
 	@Override
 	public void test() {
 		if (testAddress == null) {
-			logger.error("can not test the SMTP connection when property testAddress is not set, " 
+			logger.error("can not test the SMTP connection when property testAddress is not set, "
 					+ "edit configuration file smtp.xml.");
 			return;
 		}
@@ -306,6 +279,7 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	public List<SmtpServer> getServers() {
 		return this.servers;
 	}
+
 	/**
 	 * @param servers The servers to set.
 	 */
@@ -313,12 +287,14 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 			final List<SmtpServer> servers) {
 		this.servers = servers;
 	}
+
 	/**
 	 * @return The fromAddress.
 	 */
 	public InternetAddress getFromAddress() {
 		return this.fromAddress;
 	}
+
 	/**
 	 * @param fromAddress The fromAddress to set.
 	 */
@@ -326,12 +302,14 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 			final InternetAddress fromAddress) {
 		this.fromAddress = fromAddress;
 	}
+
 	/**
 	 * @return The interceptAddress.
 	 */
 	public InternetAddress getInterceptAddress() {
 		return this.interceptAddress;
 	}
+
 	/**
 	 * @param interceptAddress The interceptAddress to set.
 	 */
@@ -339,12 +317,14 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 			final InternetAddress interceptAddress) {
 		this.interceptAddress = interceptAddress;
 	}
+
 	/**
 	 * @return The charset.
 	 */
 	public String getCharset() {
 		return this.charset;
 	}
+
 	/**
 	 * @param charset The charset to set.
 	 */

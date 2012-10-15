@@ -14,20 +14,20 @@ public class CallResult {
 	private Throwable throwable;
 	/** The execution time. */
 	private long time;
-	
+
 	/** Constructor. */
 	public CallResult() {
 		super();
 	}
-	
+
 	/**
 	 * Constructor.
 	 * @param result
 	 * @param throwable
-	 * @param time 
+	 * @param time
 	 */
 	CallResult(
-			final Object result, 
+			final Object result,
 			final Throwable throwable,
 			final long time) {
 		super();
@@ -35,10 +35,7 @@ public class CallResult {
 		this.throwable = throwable;
 		this.time = time;
 	}
-	
-	/**
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		if (throwable == null) {
@@ -47,15 +44,15 @@ public class CallResult {
 		return " throws " + throwable;
 	}
 
-	/** 
-	 * @return the result 
+	/**
+	 * @return the result
 	 */
 	public Object getResult() {
 		return result;
 	}
-	
-	/** 
-	 * @return the throwable 
+
+	/**
+	 * @return the throwable
 	 */
 	public Throwable getThrowable() {
 		return throwable;
@@ -68,4 +65,4 @@ public class CallResult {
 		return time;
 	}
 }
-	
+

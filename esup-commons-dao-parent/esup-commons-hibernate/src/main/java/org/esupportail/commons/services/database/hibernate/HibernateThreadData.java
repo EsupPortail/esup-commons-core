@@ -14,7 +14,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  */
 
 public class HibernateThreadData {
-	
+
 	/**
 	 * A logger.
 	 */
@@ -28,15 +28,12 @@ public class HibernateThreadData {
 	/**
 	 * Bean constructor.
 	 */
-	HibernateThreadData() { 
+	HibernateThreadData() {
 		super();
 		connectionMap = new HashMap<String, HibernateThreadConnectionData>();
 	}
-	
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	
+
+	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "#" + hashCode() + "["
 		+ "connectionMap=" + connectionMap
@@ -50,7 +47,7 @@ public class HibernateThreadData {
 	void openSession(
 			final String sessionFactoryBeanName) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("OPEN(" + sessionFactoryBeanName 
+			logger.debug("OPEN(" + sessionFactoryBeanName
 					+ ") connnectionData=" + connectionMap.get(sessionFactoryBeanName));
 		}
 		HibernateThreadConnectionData connectionData = new HibernateThreadConnectionData(
@@ -68,7 +65,7 @@ public class HibernateThreadData {
 		HibernateThreadConnectionData connectionData = connectionMap.get(sessionFactoryBeanName);
 		if (connectionData != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("BEGIN(" + sessionFactoryBeanName 
+				logger.debug("BEGIN(" + sessionFactoryBeanName
 						+ ") connnectionData=" + connectionMap.get(sessionFactoryBeanName));
 			}
 			connectionData.beginTransaction();
@@ -76,13 +73,13 @@ public class HibernateThreadData {
 			if (logger.isDebugEnabled()) {
 				logger.debug("BEGIN(" + sessionFactoryBeanName + ") ***** connectionData is null!");
 			}
-		}			
+		}
 	}
 
 	/**
 	 * End a transaction.
 	 * @param sessionFactoryBeanName
-	 * @param commit 
+	 * @param commit
 	 */
 	void endTransaction(
 			final String sessionFactoryBeanName,
@@ -90,14 +87,14 @@ public class HibernateThreadData {
 		HibernateThreadConnectionData connectionData = connectionMap.get(sessionFactoryBeanName);
 		if (connectionData != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("END(" + sessionFactoryBeanName + ", " 
-						+ commit + ") connnectionData=" 
+				logger.debug("END(" + sessionFactoryBeanName + ", "
+						+ commit + ") connnectionData="
 						+ connectionMap.get(sessionFactoryBeanName));
 			}
 			connectionData.endTransaction(commit);
 		} else {
 			if (logger.isDebugEnabled()) {
-				logger.debug("END(" + sessionFactoryBeanName + ", " 
+				logger.debug("END(" + sessionFactoryBeanName + ", "
 						+ commit + ") ***** connection data is null!");
 			}
 		}
@@ -112,7 +109,7 @@ public class HibernateThreadData {
 		HibernateThreadConnectionData connectionData = connectionMap.get(sessionFactoryBeanName);
 		if (connectionData != null) {
 			if (logger.isDebugEnabled()) {
-				logger.debug("CLOSE(" + sessionFactoryBeanName 
+				logger.debug("CLOSE(" + sessionFactoryBeanName
 						+ ") connnectionData=" + connectionMap.get(sessionFactoryBeanName));
 			}
 			connectionData.closeSession();

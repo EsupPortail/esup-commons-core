@@ -10,16 +10,17 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
  * An implementation of I18nService that loads several bundles.
  * See /properties/i18n/i18n.xml for details.
- * 
+ *
  * See /properties/i18n/i18n-example.xml.
  */
 public class BundlesI18nServiceImpl extends AbstractI18nService implements InitializingBean {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -29,7 +30,7 @@ public class BundlesI18nServiceImpl extends AbstractI18nService implements Initi
 	 * The basename of the properties files that holds the bundles.
 	 */
 	private List<String> bundleBasenames;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -37,17 +38,13 @@ public class BundlesI18nServiceImpl extends AbstractI18nService implements Initi
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notEmpty(bundleBasenames, 
+		Assert.notEmpty(bundleBasenames,
 				"property bundleBasenames of class " + getClass().getName() + " can not be empty");
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.i18n.I18nService#getStrings(java.util.Locale)
-	 */
+	@Override
 	public Map<String, String> getStrings(final Locale locale) {
 		Map<String, String> result = new BundleMap(locale);
 		for (String bundleBasename : bundleBasenames) {

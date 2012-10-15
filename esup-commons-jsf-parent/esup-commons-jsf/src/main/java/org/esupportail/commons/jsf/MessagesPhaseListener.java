@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.jsf; 
+package org.esupportail.commons.jsf;
 
 //see http://learnjsf.com/wp/2006/08/06/a-prg-phase-listener-for-jsf/
 
@@ -37,7 +37,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 	private static final long serialVersionUID = -2560498754887415967L;
 
 	/**
-	 * A name under which to save messages between the redirect and 
+	 * A name under which to save messages between the redirect and
 	 * the subsequent get.
 	 */
 	private final String sessionToken = getClass().getName() + ".messages";
@@ -46,7 +46,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -54,14 +54,9 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 		super();
 	}
 
-	/**
-	 * Debug an event.
-	 * @param event
-	 * @param string
-	 */
 	@Override
 	protected void debugEvent(
-			final PhaseEvent event, 
+			final PhaseEvent event,
 			final String string) {
 		if (logger.isDebugEnabled()) {
 			super.debugEvent(event, string);
@@ -87,7 +82,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 			}
 			ExternalContext externalContext = facesContext.getExternalContext();
 			Map<String, Object>  sessionMap = externalContext.getSessionMap();
-			Map<String, List<FacesMessage>> allMessages = 
+			Map<String, List<FacesMessage>> allMessages =
 				(Map<String, List<FacesMessage>>) sessionMap.get(sessionToken);
 			if (allMessages == null) {
 				return;
@@ -101,21 +96,18 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.jsf.AbstractPhaseListener#afterPhaseInternal(javax.faces.event.PhaseEvent)
-	 */
 	@Override
 	protected void afterPhaseInternal(final PhaseEvent event) {
 		  FacesContext facesContext = event.getFacesContext();
 		  ExternalContext externalContext = facesContext.getExternalContext();
 		  String method = getMethod(externalContext);
-		  if (event.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES 
+		  if (event.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES
 		    && "POST".equals(method)) {
 		   Map<String, Object> sessionMap = facesContext.getExternalContext().getSessionMap();
 		   sessionMap.put(sessionToken, new HashMap<Object, Object>());
 		  }
-		
-		
+
+
 		// Save messages in session so they'll be available on the
 		// subsequent GET request
 		if (event.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES
@@ -129,9 +121,6 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.jsf.AbstractPhaseListener#beforePhaseInternal(javax.faces.event.PhaseEvent)
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void beforePhaseInternal(final PhaseEvent event) {
@@ -149,7 +138,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 		if (ContextUtils.isPortlet()) {
 			Map<String, Object> userInfo = null;
 			try {
-				userInfo = 
+				userInfo =
 				(Map<String, Object>) ContextUtils.getRequestAttribute(
 						PortletRequest.USER_INFO);
 			} catch (NoRequestBoundException e) {
@@ -180,7 +169,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 	/**
 	 * Remove the messages that are not associated with any particular component
 	 * from the user's session and add them to the faces context.
-	 * @param facesContext 
+	 * @param facesContext
 	 *
 	 * @return the number of removed messages.
 	 */
@@ -189,7 +178,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 		// remove messages from the session
 		int numRestoredMessages = 0;
 		Map<String, Object>  sessionMap = facesContext.getExternalContext().getSessionMap();
-		Map<String, List<FacesMessage>> allMessages = 
+		Map<String, List<FacesMessage>> allMessages =
 			(Map<String, List<FacesMessage>>) sessionMap.remove(sessionToken);
 		if (allMessages == null) {
 			return 0;
@@ -208,7 +197,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 	/**
 	 * Remove the messages that are not associated with any particular component
 	 * from the faces context and store them to the user's session.
-	 * @param facesContext 
+	 * @param facesContext
 	 *
 	 * @return the number of removed messages.
 	 */
@@ -222,7 +211,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 		if (!sessionMap.containsKey(sessionToken)) {
 			sessionMap.put(sessionToken, new HashMap<Object, Object>());
 		}
-		Map<String, List<FacesMessage>> allMessages = 
+		Map<String, List<FacesMessage>> allMessages =
 			(Map<String, List<FacesMessage>>) sessionMap.get(sessionToken);
 
 		for (Iterator<String> i = facesContext.getClientIdsWithMessages(); i.hasNext();) {
@@ -249,7 +238,7 @@ public class MessagesPhaseListener extends AbstractPhaseListener {
 	/**
 	 * Resets UIInput component values.
 	 * From http://forum.java.sun.com/thread.jspa?threadID=495087&messageID=3704164
-	 * @param children 
+	 * @param children
 	 */
 	private void resetComponentValues(final List<UIComponent> children) {
 		for (UIComponent component : children) {

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.jsf;
 
@@ -15,7 +15,7 @@ import org.esupportail.commons.utils.ContextUtils;
 
 /**
  * @author bourges
- * 
+ *
  * PortletPhaseListener est indispensable en mode portlet pour remplacer org.springframework.web.context.request.RequestContextListener
  *
  */
@@ -26,11 +26,9 @@ public class PortletPhaseListener implements PhaseListener {
 	/**
 	 * A logger.
 	 */
-	private final Logger logger = new LoggerImpl(getClass());	
+	private final Logger logger = new LoggerImpl(getClass());
 
-	/**
-	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
-	 */
+	@Override
 	public void beforePhase(PhaseEvent event) {
 		logger.debug("In beforePhase");
 		if (event.getPhaseId().equals(PhaseId.RESTORE_VIEW)) {
@@ -40,9 +38,7 @@ public class PortletPhaseListener implements PhaseListener {
 		}
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
-	 */
+	@Override
 	public void afterPhase(PhaseEvent event) {
 		logger.debug("In afterPhase");
 		FacesContext context = event.getFacesContext();
@@ -53,9 +49,7 @@ public class PortletPhaseListener implements PhaseListener {
 		}
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#getPhaseId()
-	 */
+	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
 	}

@@ -31,9 +31,6 @@ public abstract class AbstractVersionManager implements Serializable {
 		super();
 	}
 
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(final Object obj) {
 		if (obj == null) {
@@ -45,17 +42,11 @@ public abstract class AbstractVersionManager implements Serializable {
 		return ((AbstractVersionManager) obj).getId() == id;
 	}
 
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		return super.hashCode();
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "#" + hashCode() + "[id=[" + id + "], version=[" + version + "]]";

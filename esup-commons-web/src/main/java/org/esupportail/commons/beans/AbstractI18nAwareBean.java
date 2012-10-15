@@ -8,17 +8,17 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-//import javax.faces.application.FacesMessage;
-//import javax.faces.application.FacesMessage.Severity;
-//import javax.faces.context.FacesContext;
-
 import org.esupportail.commons.services.i18n.I18nService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.i18n.LocaleContextHolder;
+//import javax.faces.application.FacesMessage;
+//import javax.faces.application.FacesMessage.Severity;
+//import javax.faces.context.FacesContext;
 
 /**
  * An abstract class inherited by all the beans for them to gain i18n features.
@@ -26,21 +26,21 @@ import org.springframework.context.i18n.LocaleContextHolder;
 @SuppressWarnings("serial")
 public abstract class AbstractI18nAwareBean implements InitializingBean, Serializable {
 
-	/** 
+	/**
 	 * The name of the session attribute that stores the current locale.
 	 */
 	public static final String LOCALE_ATTRIBUTE = "locale";
-	
+
 	/**
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(this.getClass());
-	
+
 	/**
 	 * see {@link I18nService}.
 	 */
 	private I18nService i18nService;
-	
+
 	/**
 	 * The Timezone.
 	 */
@@ -53,12 +53,10 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notNull(this.i18nService, 
-				"property i18nService of class " + this.getClass().getName() 
+		Assert.notNull(this.i18nService,
+				"property i18nService of class " + this.getClass().getName()
 				+ " can not be null");
 		if (timezone == null) {
 			timezone = TimeZone.getDefault().getDisplayName();
@@ -77,7 +75,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 
 	/**
 	 * Set the session locale.
-	 * @param locale 
+	 * @param locale
 	 */
 	protected void setSessionLocale(final Locale locale) {
 		if (ContextUtils.isWeb()) {
@@ -111,7 +109,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 			logger.debug(this.getClass().getName() + ".getLocale()");
 		}
 		// try to get it from the session
-		Locale locale = getSessionLocale(); 
+		Locale locale = getSessionLocale();
 		if (locale == null) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("no locale in session, look at the current user");
@@ -132,7 +130,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 		}
 		return locale;
 	}
-	
+
 	/**
 	 * @param service the i18nService to set
 	 */
@@ -147,7 +145,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 		return i18nService;
 	}
 
-	
+
 	//TODO CL V2 : Use jsf error message is core module
 //	/**
 //	 * @return a FacesMessage that corresponds to a message and a severity level.
@@ -155,7 +153,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param message the message itself
 //	 */
 //	private FacesMessage getFacesFormattedMessage(
-//			final Severity severity, 
+//			final Severity severity,
 //			final String message) {
 //		return new FacesMessage(severity, message, null);
 //	}
@@ -164,17 +162,17 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @return a FacesMessage that corresponds to a message and a severity level.
 //	 * @param severity the severity
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	private FacesMessage getFacesMessage(
-//			final Severity severity, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final Severity severity,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		return getFacesFormattedMessage(
 //				severity, i18nService.getString(i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3));
@@ -184,15 +182,15 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @return a FacesMessage that corresponds to a message and a severity level.
 //	 * @param severity the severity
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	private FacesMessage getFacesMessage(
-//			final Severity severity, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final Severity severity,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		return getFacesFormattedMessage(
 //				severity, i18nService.getString(i18nMessage, i18nArg0, i18nArg1, i18nArg2));
@@ -202,13 +200,13 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @return a FacesMessage that corresponds to a message and a severity level.
 //	 * @param severity the severity
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	private FacesMessage getFacesMessage(
-//			final Severity severity, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final Severity severity,
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		return getFacesFormattedMessage(severity, i18nService.getString(i18nMessage, i18nArg0, i18nArg1));
 //	}
@@ -217,11 +215,11 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @return a FacesMessage that corresponds to a message and a severity level.
 //	 * @param severity the severity
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	private FacesMessage getFacesMessage(
-//			final Severity severity, 
-//			final String i18nMessage, 
+//			final Severity severity,
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		return getFacesFormattedMessage(severity, i18nService.getString(i18nMessage, i18nArg0));
 //	}
@@ -232,7 +230,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param i18nMessage the key of the message in the i18n bundles
 //	 */
 //	private FacesMessage getFacesMessage(
-//			final Severity severity, 
+//			final Severity severity,
 //			final String i18nMessage) {
 //		return getFacesFormattedMessage(severity, i18nService.getString(i18nMessage));
 //	}
@@ -240,16 +238,16 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return a warn FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	public FacesMessage getFacesWarnMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		return getFacesMessage(FacesMessage.SEVERITY_WARN, i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3);
 //	}
@@ -257,14 +255,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return a warn FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	public FacesMessage getFacesWarnMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		return getFacesMessage(FacesMessage.SEVERITY_WARN, i18nMessage, i18nArg0, i18nArg1, i18nArg2);
 //	}
@@ -272,12 +270,12 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return a warn FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	public FacesMessage getFacesWarnMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		return getFacesMessage(FacesMessage.SEVERITY_WARN, i18nMessage, i18nArg0, i18nArg1);
 //	}
@@ -285,10 +283,10 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return a warn FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	public FacesMessage getFacesWarnMessage(
-//			final String i18nMessage, 
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		return getFacesMessage(FacesMessage.SEVERITY_WARN, i18nMessage, i18nArg0);
 //	}
@@ -305,16 +303,16 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an error FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	public FacesMessage getFacesErrorMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		return getFacesMessage(
 //				FacesMessage.SEVERITY_ERROR, i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3);
@@ -323,14 +321,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an error FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	public FacesMessage getFacesErrorMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		return getFacesMessage(FacesMessage.SEVERITY_ERROR, i18nMessage, i18nArg0, i18nArg1, i18nArg2);
 //	}
@@ -338,12 +336,12 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an error FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	public FacesMessage getFacesErrorMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		return getFacesMessage(FacesMessage.SEVERITY_ERROR, i18nMessage, i18nArg0, i18nArg1);
 //	}
@@ -351,10 +349,10 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an error FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	public FacesMessage getFacesErrorMessage(
-//			final String i18nMessage, 
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		return getFacesMessage(FacesMessage.SEVERITY_ERROR, i18nMessage, i18nArg0);
 //	}
@@ -371,16 +369,16 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an info FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	public FacesMessage getFacesInfoMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		return getFacesMessage(FacesMessage.SEVERITY_INFO, i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3);
 //	}
@@ -388,14 +386,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an info FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	public FacesMessage getFacesInfoMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		return getFacesMessage(FacesMessage.SEVERITY_INFO, i18nMessage, i18nArg0, i18nArg1, i18nArg2);
 //	}
@@ -403,12 +401,12 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an info FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	public FacesMessage getFacesInfoMessage(
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		return getFacesMessage(FacesMessage.SEVERITY_INFO, i18nMessage, i18nArg0, i18nArg1);
 //	}
@@ -416,10 +414,10 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	/**
 //	 * @return an info FacesMessage that corresponds to a message and a severity level.
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	public FacesMessage getFacesInfoMessage(
-//			final String i18nMessage, 
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		return getFacesMessage(FacesMessage.SEVERITY_INFO, i18nMessage, i18nArg0);
 //	}
@@ -440,8 +438,8 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param message the message itself
 //	 */
 //	private void addFormattedMessage(
-//			final Severity severity, 
-//			final String clientId, 
+//			final Severity severity,
+//			final String clientId,
 //			final String message) {
 //		FacesMessage errorMessage = getFacesFormattedMessage(severity, message);
 //		FacesContext.getCurrentInstance().addMessage(clientId, errorMessage);
@@ -453,7 +451,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param message the message itself
 //	 */
 //	public void addFormattedError(
-//			final String clientId, 
+//			final String clientId,
 //			final String message) {
 //		addFormattedMessage(FacesMessage.SEVERITY_ERROR, clientId, message);
 //	}
@@ -464,7 +462,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param message the message itself
 //	 */
 //	public void addFormattedInfo(
-//			final String clientId, 
+//			final String clientId,
 //			final String message) {
 //		addFormattedMessage(FacesMessage.SEVERITY_INFO, clientId, message);
 //	}
@@ -475,7 +473,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param message the message itself
 //	 */
 //	public void addFormattedWarn(
-//			final String clientId, 
+//			final String clientId,
 //			final String message) {
 //		addFormattedMessage(FacesMessage.SEVERITY_WARN, clientId, message);
 //	}
@@ -485,18 +483,18 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param severity the severity
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	private void addMessage(
-//			final Severity severity, 
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final Severity severity,
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		String message = i18nService.getString(
 //				i18nMessage, getLocale(), i18nArg0, i18nArg1, i18nArg2, i18nArg3);
@@ -508,16 +506,16 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param severity the severity
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	private void addMessage(
-//			final Severity severity, 
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final Severity severity,
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		String message = i18nService.getString(i18nMessage, getLocale(), i18nArg0, i18nArg1, i18nArg2);
 //		addFormattedMessage(severity, clientId, message);
@@ -528,14 +526,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param severity the severity
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	private void addMessage(
-//			final Severity severity, 
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final Severity severity,
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		String message = i18nService.getString(i18nMessage, getLocale(), i18nArg0, i18nArg1);
 //		addFormattedMessage(severity, clientId, message);
@@ -546,12 +544,12 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param severity the severity
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	private void addMessage(
-//			final Severity severity, 
-//			final String clientId, 
-//			final String i18nMessage, 
+//			final Severity severity,
+//			final String clientId,
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		String message = i18nService.getString(i18nMessage, getLocale(), i18nArg0);
 //		addFormattedMessage(severity, clientId, message);
@@ -564,8 +562,8 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param i18nMessage the key of the message in the i18n bundles
 //	 */
 //	private void addMessage(
-//			final Severity severity, 
-//			final String clientId, 
+//			final Severity severity,
+//			final String clientId,
 //			final String i18nMessage) {
 //		String message = i18nService.getString(i18nMessage, getLocale());
 //		addFormattedMessage(severity, clientId, message);
@@ -575,17 +573,17 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	protected void addWarnMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		addMessage(FacesMessage.SEVERITY_WARN, clientId, i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3);
 //	}
@@ -594,15 +592,15 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	protected void addWarnMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		addMessage(FacesMessage.SEVERITY_WARN, clientId, i18nMessage, i18nArg0, i18nArg1, i18nArg2);
 //	}
@@ -611,13 +609,13 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	protected void addWarnMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		addMessage(FacesMessage.SEVERITY_WARN, clientId, i18nMessage, i18nArg0, i18nArg1);
 //	}
@@ -626,11 +624,11 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	protected void addWarnMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
+//			final String clientId,
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		addMessage(FacesMessage.SEVERITY_WARN, clientId, i18nMessage, i18nArg0);
 //	}
@@ -641,7 +639,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param i18nMessage the key of the message in the i18n bundles
 //	 */
 //	protected void addWarnMessage(
-//			final String clientId, 
+//			final String clientId,
 //			final String i18nMessage) {
 //		addMessage(FacesMessage.SEVERITY_WARN, clientId, i18nMessage);
 //	}
@@ -650,17 +648,17 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	protected void addErrorMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		addMessage(FacesMessage.SEVERITY_ERROR, clientId, i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3);
 //	}
@@ -669,15 +667,15 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	protected void addErrorMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		addMessage(FacesMessage.SEVERITY_ERROR, clientId, i18nMessage, i18nArg0, i18nArg1, i18nArg2);
 //	}
@@ -686,13 +684,13 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	protected void addErrorMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		addMessage(FacesMessage.SEVERITY_ERROR, clientId, i18nMessage, i18nArg0, i18nArg1);
 //	}
@@ -701,11 +699,11 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context a error message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	protected void addErrorMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
+//			final String clientId,
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		addMessage(FacesMessage.SEVERITY_ERROR, clientId, i18nMessage, i18nArg0);
 //	}
@@ -716,7 +714,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param i18nMessage the key of the message in the i18n bundles
 //	 */
 //	protected void addErrorMessage(
-//			final String clientId, 
+//			final String clientId,
 //			final String i18nMessage) {
 //		addMessage(FacesMessage.SEVERITY_ERROR, clientId, i18nMessage);
 //	}
@@ -725,17 +723,17 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context an info message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
-//	 * @param i18nArg3 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
+//	 * @param i18nArg3
 //	 */
 //	protected void addInfoMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
-//			final Object i18nArg2, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
+//			final Object i18nArg2,
 //			final Object i18nArg3) {
 //		addMessage(FacesMessage.SEVERITY_INFO, clientId, i18nMessage, i18nArg0, i18nArg1, i18nArg2, i18nArg3);
 //	}
@@ -744,15 +742,15 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context an info message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
-//	 * @param i18nArg2 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
+//	 * @param i18nArg2
 //	 */
 //	protected void addInfoMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
-//			final Object i18nArg1, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
+//			final Object i18nArg1,
 //			final Object i18nArg2) {
 //		addMessage(FacesMessage.SEVERITY_INFO, clientId, i18nMessage, i18nArg0, i18nArg1, i18nArg2);
 //	}
@@ -761,13 +759,13 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context an info message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
-//	 * @param i18nArg1 
+//	 * @param i18nArg0
+//	 * @param i18nArg1
 //	 */
 //	protected void addInfoMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
-//			final Object i18nArg0, 
+//			final String clientId,
+//			final String i18nMessage,
+//			final Object i18nArg0,
 //			final Object i18nArg1) {
 //		addMessage(FacesMessage.SEVERITY_INFO, clientId, i18nMessage, i18nArg0, i18nArg1);
 //	}
@@ -776,11 +774,11 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * Add to the current context an info message.
 //	 * @param clientId the id of client that should receive the message
 //	 * @param i18nMessage the key of the message in the i18n bundles
-//	 * @param i18nArg0 
+//	 * @param i18nArg0
 //	 */
 //	protected void addInfoMessage(
-//			final String clientId, 
-//			final String i18nMessage, 
+//			final String clientId,
+//			final String i18nMessage,
 //			final Object i18nArg0) {
 //		addMessage(FacesMessage.SEVERITY_INFO, clientId, i18nMessage, i18nArg0);
 //	}
@@ -791,7 +789,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 //	 * @param i18nMessage the key of the message in the i18n bundles
 //	 */
 //	protected void addInfoMessage(
-//			final String clientId, 
+//			final String clientId,
 //			final String i18nMessage) {
 //		addMessage(FacesMessage.SEVERITY_INFO, clientId, i18nMessage);
 //	}
@@ -815,7 +813,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 	 * java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)
 	 */
 	protected String getString(
-			final String key, final Object arg0, final Object arg1, 
+			final String key, final Object arg0, final Object arg1,
 			final Object arg2, final Object arg3, final Object arg4) {
 		return getString(key, getLocale(), arg0, arg1, arg2, arg3, arg4);
 	}
@@ -881,7 +879,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 
 	/**
 	 * @param key
-	 * @param locale 
+	 * @param locale
 	 * @param arg0
 	 * @param arg1
 	 * @param arg2
@@ -892,14 +890,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 	 * java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)
 	 */
 	protected String getString(
-			final String key, final Locale locale, final Object arg0, final Object arg1, 
+			final String key, final Locale locale, final Object arg0, final Object arg1,
 			final Object arg2, final Object arg3, final Object arg4) {
 		return i18nService.getString(key, locale, arg0, arg1, arg2, arg3, arg4);
 	}
 
 	/**
 	 * @param key
-	 * @param locale 
+	 * @param locale
 	 * @param arg0
 	 * @param arg1
 	 * @param arg2
@@ -909,14 +907,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 	 * java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object)
 	 */
 	protected String getString(
-			final String key, final Locale locale, final Object arg0, 
+			final String key, final Locale locale, final Object arg0,
 			final Object arg1, final Object arg2, final Object arg3) {
 		return i18nService.getString(key, locale, arg0, arg1, arg2, arg3);
 	}
 
 	/**
 	 * @param key
-	 * @param locale 
+	 * @param locale
 	 * @param arg0
 	 * @param arg1
 	 * @param arg2
@@ -924,14 +922,14 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 	 * @see org.esupportail.commons.services.i18n.I18nService#getString(
 	 * java.lang.String, java.lang.Object, java.lang.Object, java.lang.Object)
 	 */
-	protected String getString(final String key, final Locale locale, 
+	protected String getString(final String key, final Locale locale,
 			final Object arg0, final Object arg1, final Object arg2) {
 		return i18nService.getString(key, locale, arg0, arg1, arg2);
 	}
 
 	/**
 	 * @param key
-	 * @param locale 
+	 * @param locale
 	 * @param arg0
 	 * @param arg1
 	 * @return a formatted internationalized string
@@ -944,7 +942,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 
 	/**
 	 * @param key
-	 * @param locale 
+	 * @param locale
 	 * @param arg0
 	 * @return a formatted internationalized string
 	 * @see org.esupportail.commons.services.i18n.I18nService#getString(java.lang.String, java.lang.Object)
@@ -955,7 +953,7 @@ public abstract class AbstractI18nAwareBean implements InitializingBean, Seriali
 
 	/**
 	 * @param key
-	 * @param locale 
+	 * @param locale
 	 * @return a formatted internationalized string
 	 * @see org.esupportail.commons.services.i18n.I18nService#getString(java.lang.String)
 	 */

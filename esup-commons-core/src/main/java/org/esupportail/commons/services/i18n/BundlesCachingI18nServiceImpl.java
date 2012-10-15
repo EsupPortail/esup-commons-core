@@ -13,16 +13,17 @@ import net.sf.ehcache.Element;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.util.StringUtils;
 
 /**
- * This class should be preferred to BundlesI18nServiceImpl since it caches 
+ * This class should be preferred to BundlesI18nServiceImpl since it caches
  * resource bundles.
- * 
+ *
  * See /properties/i18n/i18n-example.xml.
  */
 public class BundlesCachingI18nServiceImpl extends BundlesI18nServiceImpl {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -32,27 +33,27 @@ public class BundlesCachingI18nServiceImpl extends BundlesI18nServiceImpl {
 	 * The default name for the cache.
 	 */
 	private static final String DEFAULT_CACHE_NAME = BundlesCachingI18nServiceImpl.class.getName();
-	
+
 	/**
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(BundlesCachingI18nServiceImpl.class);
-	
+
 	/**
 	 * the cache.
 	 */
 	private Cache cache;
-	
+
 	/**
 	 * the name of the cache.
 	 */
 	private String cacheName;
-	
+
 	/**
 	 * the cacheManager.
 	 */
 	private CacheManager cacheManager;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -67,18 +68,15 @@ public class BundlesCachingI18nServiceImpl extends BundlesI18nServiceImpl {
 		this.cacheName = DEFAULT_CACHE_NAME;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.i18n.BundlesI18nServiceImpl#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		if (!StringUtils.hasText(cacheName)) {
 			setDefaultCacheName();
-			logger.info(getClass() + ": no cacheName attribute set, '" 
+			logger.info(getClass() + ": no cacheName attribute set, '"
 					+ cacheName + "' will be used");
 		}
-		Assert.notNull(cacheManager, 
-				"property cacheManager of class " + getClass().getName() 
+		Assert.notNull(cacheManager,
+				"property cacheManager of class " + getClass().getName()
 				+ " can not be null");
 		if (!cacheManager.cacheExists(cacheName)) {
 			cacheManager.addCache(cacheName);
@@ -86,9 +84,6 @@ public class BundlesCachingI18nServiceImpl extends BundlesI18nServiceImpl {
 		cache = cacheManager.getCache(cacheName);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.i18n.BundlesI18nServiceImpl#getStrings(java.util.Locale)
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, String> getStrings(
@@ -117,7 +112,7 @@ public class BundlesCachingI18nServiceImpl extends BundlesI18nServiceImpl {
 	 */
 	public void setCacheName(final String cacheName) {
 		this.cacheName = cacheName;
-	}	
-	
+	}
+
 }
 

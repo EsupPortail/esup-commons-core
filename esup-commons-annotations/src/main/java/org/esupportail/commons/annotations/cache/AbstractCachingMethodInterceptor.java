@@ -3,9 +3,10 @@
  */
 package org.esupportail.commons.annotations.cache;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.esupportail.commons.annotations.AopUtils;
 import org.esupportail.commons.utils.ContextUtils;
+
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * An abstract caching interceptor that will check for results in cache before calling methods.
@@ -17,11 +18,6 @@ public abstract class AbstractCachingMethodInterceptor {
 	 */
 	private static final String ATTRIBUTE = AbstractCachingMethodInterceptor.class.getName() + ".map";
 
-//	/**
-//	 * A logger.
-//	 */
-//	private final Logger logger = new LoggerImpl(getClass());
-	
 	/**
 	 * True if a web request (false if batch command).
 	 */
@@ -35,20 +31,20 @@ public abstract class AbstractCachingMethodInterceptor {
 	}
 
 	/**
-	 * @param name 
+	 * @param name
 	 * @return a context attribute
 	 */
 	protected abstract Object getContextAttribute(String name);
 
 	/**
 	 * Set a context attribute.
-	 * @param name 
-	 * @param value 
+	 * @param name
+	 * @param value
 	 */
 	protected abstract void setContextAttribute(String name, Object value);
 
 	/**
-	 * @param create 
+	 * @param create
 	 * @return the map used to store the call results.
 	 */
 	public CallResultMap getMap(final boolean create) {
@@ -100,7 +96,7 @@ public abstract class AbstractCachingMethodInterceptor {
 		}
 		return web;
 	}
-	
+
 	/**
 	 * Clear all call results.
 	 */

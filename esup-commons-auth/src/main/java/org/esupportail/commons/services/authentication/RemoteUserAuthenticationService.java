@@ -5,7 +5,7 @@ package org.esupportail.commons.services.authentication;
 
 import org.esupportail.commons.utils.HttpUtils;
 
-/** 
+/**
  * A RemoteUser authenticator.
  */
 public class RemoteUserAuthenticationService extends AbstractTypedAuthenticationService {
@@ -22,9 +22,6 @@ public class RemoteUserAuthenticationService extends AbstractTypedAuthentication
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractRealAuthenticationService#getAuthId()
-	 */
 	@Override
 	public String getAuthId() {
 		return HttpUtils.getRemoteUser();

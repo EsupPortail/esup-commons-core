@@ -54,15 +54,7 @@ public class SMIMEMessageSignerImpl implements InitializingBean, Serializable, M
 	 */
 	private Key privateKey;
 
-	/**
-	 * The encryption subsystem.
-	 */
-	//TODO CL V2 : je n'ai pas trouve le jar correspondant à ces classes
-	//private EncryptionUtils encUtils;
-
-    /**
-     * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
+	@Override
     public void afterPropertiesSet() {
         if (isEnabled()) {
             if (certificateFile == null) {
@@ -86,9 +78,7 @@ public class SMIMEMessageSignerImpl implements InitializingBean, Serializable, M
         }
     }
 
-    /**
-     * @see org.esupportail.commons.services.smtp.signing.MessageSigner#sign(javax.mail.Session, javax.mail.internet.MimeMessage)
-     */
+	@Override
     public MimeMessage sign(final Session session, final MimeMessage mimeMessage) {
         if (isEnabled()) {
             MimeMessage signedMessage;

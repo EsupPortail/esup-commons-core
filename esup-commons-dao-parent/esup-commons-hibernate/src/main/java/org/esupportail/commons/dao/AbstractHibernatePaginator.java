@@ -3,8 +3,9 @@
  */
 package org.esupportail.commons.dao;
 
-import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.services.paginator.AbstractPaginator;
+import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -26,9 +27,7 @@ public abstract class AbstractHibernatePaginator<E> extends AbstractPaginator<E>
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		Assert.notNull(this.daoService,
 				"property daoService of class " + this.getClass().getName() + " can not be null");

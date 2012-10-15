@@ -20,7 +20,7 @@ import org.esupportail.commons.utils.HttpUtils;
 import org.esupportail.commons.utils.strings.StringUtils;
 
 
-/** 
+/**
  * A CAS authenticator.
  */
 public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAuthenticationService {
@@ -29,7 +29,7 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 	 * The serialization id.
 	 */
 	private static final long serialVersionUID = 943489018651202646L;
-	
+
 	/**
 	 * The default expected end of the request URI.
 	 */
@@ -39,7 +39,7 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The header that holds the id.
 	 */
@@ -49,7 +49,7 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 	 * The Shibboleth attribute headers.
 	 */
 	private List<String> attributeHeaders;
-	
+
 	/**
 	 * The expected end of the request URI.
 	 */
@@ -62,23 +62,17 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractTypedAuthenticationService#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 		Assert.hasText(
-				this.idHeader, 
+				this.idHeader,
 				"property idHeader of class " + getClass() + " should not be null");
 		Assert.notEmpty(
-				this.attributeHeaders, 
+				this.attributeHeaders,
 				"property attributeHeaders of class " + getClass() + " should not be null");
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractTypedAuthenticationService#getAuthId()
-	 */
 	@Override
 	protected String getAuthId() {
 		Map<String, List<String>> headers = HttpUtils.getRequestHeaders();
@@ -103,9 +97,6 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 		return isoToUTF8(idValues.get(0));
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractRealAuthenticationService#getAuthAttributes()
-	 */
 	@Override
 	protected Map<String, List<String>> getAuthAttributes() {
 		Map<String, List<String>> headers = HttpUtils.getRequestHeaders();
@@ -125,9 +116,6 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 		return attributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractTypedAuthenticationService#getAuthType()
-	 */
 	@Override
 	protected String getAuthType() {
 		return AuthUtils.SHIBBOLETH;
@@ -151,7 +139,7 @@ public class ShibbolethApacheModuleAuthenticationService extends AbstractTypedAu
 	 * @param attributeHeaders the comma-separated attributeHeaders
 	 */
 	public void setAttributeHeaders(final String attributeHeaders) {
-		if (attributeHeaders == null 
+		if (attributeHeaders == null
 				|| !org.springframework.util.StringUtils.hasLength(attributeHeaders)) {
 			return;
 		}

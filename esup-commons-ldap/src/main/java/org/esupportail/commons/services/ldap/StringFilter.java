@@ -11,7 +11,7 @@ import org.springframework.ldap.filter.AbstractFilter;
  * A LdapTemplate filter, build with a string (that represents an already-encoded filter).
  */
 public class StringFilter extends AbstractFilter implements Serializable {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -31,9 +31,6 @@ public class StringFilter extends AbstractFilter implements Serializable {
 		this.filterExpr = "(" + filterExpr + ")";
 	}
 
-	/**
-	 * @see org.springframework.ldap.support.filter.AbstractFilter#encode(java.lang.StringBuffer)
-	 */
 	@Override
 	public StringBuffer encode(final StringBuffer buff) {
 		buff.append(filterExpr);

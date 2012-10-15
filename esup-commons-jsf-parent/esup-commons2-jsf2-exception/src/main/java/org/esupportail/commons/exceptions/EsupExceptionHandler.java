@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.exceptions;
 
@@ -25,9 +25,6 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  */
 public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 
-
-
-
 	/*
 	 *************************** PROPERTIES ******************************** */
 
@@ -37,7 +34,7 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 	private final Logger log = new LoggerImpl(getClass());
 
 	/**
-	 * 
+	 *
 	 */
 	private ExceptionHandler wrapped;
 
@@ -63,9 +60,6 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 	/*
 	 *************************** METHODS *********************************** */
 
-	/**
-	 * @see ExceptionHandlerWrapper#getWrapped()
-	 */
 	@Override
 	public ExceptionHandler getWrapped() {
 		if (log.isDebugEnabled()) {
@@ -74,9 +68,6 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 		return this.wrapped;
 	}
 
-	/**
-	 * @see javax.faces.context.ExceptionHandlerWrapper#handle()
-	 */
 	@Override
 	public void handle() throws FacesException {
 		if (log.isDebugEnabled()) {
@@ -95,7 +86,7 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 			FacesContext fc = FacesContext.getCurrentInstance();
 			ExceptionService e = null;
 			HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
-			
+
 			try {
 				e = ExceptionUtils.catchException(result.getCause());
 				request.getSession().setAttribute(ExceptionUtils.EXCEPTION_MARKER_NAME, e);
@@ -110,9 +101,5 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 			fc.renderResponse();
 		}
 	}
-
-
-	/*
-	 *************************** ACCESSORS ********************************* */
 
 }

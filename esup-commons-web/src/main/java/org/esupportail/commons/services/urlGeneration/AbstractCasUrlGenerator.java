@@ -1,11 +1,12 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.urlGeneration; 
+package org.esupportail.commons.services.urlGeneration;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.strings.StringUtilsWeb;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -18,27 +19,25 @@ public abstract class AbstractCasUrlGenerator extends AbstractUrlGenerator imple
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The CAS URL.
 	 */
 	private String casUrl;
-	
+
 	/**
 	 * The CAS login URL.
 	 */
 	private String casLoginUrl;
-	
+
 	/**
 	 * Bean constructor.
 	 */
 	protected AbstractCasUrlGenerator() {
 		super();
 	}
-	
- 	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+
+	@Override
 	public void afterPropertiesSet() {
 		if (casLoginUrl == null) {
 			if (casUrl == null) {

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.jsf;
 
@@ -23,7 +23,6 @@ import org.esupportail.commons.web.jsf.tags.config.TagsConfigurator;
  */
 public class ResourceBundlePhaseListener implements PhaseListener {
 
-
 	/**
 	 * The serialization id.
 	 */
@@ -39,7 +38,6 @@ public class ResourceBundlePhaseListener implements PhaseListener {
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
 
-
 	/**
 	 * Constructor.
 	 */
@@ -47,19 +45,13 @@ public class ResourceBundlePhaseListener implements PhaseListener {
 		super();
 	}
 
-
-
-	/**
-	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
-	 */
+	@Override
 	public void afterPhase(final PhaseEvent arg0) {
 		//do nothing
 
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
-	 */
+	@Override
 	public void beforePhase(final PhaseEvent event) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("enterig  RessourceBundlePhaseListener::beforePhase = " + event);
@@ -82,22 +74,11 @@ public class ResourceBundlePhaseListener implements PhaseListener {
 			//do nothing
 			logger.warn("in ResourceBundlePhaseListener::beforePhase NoRequestBoundException");
 		}
-
-
 	}
 
-
-
-
-
-	/**
-	 * @see javax.faces.event.PhaseListener#getPhaseId()
-	 */
+	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
 	}
-
-
-
 
 }

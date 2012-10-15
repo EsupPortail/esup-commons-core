@@ -10,7 +10,7 @@ import org.esupportail.commons.services.authentication.info.AuthInfo;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
-/** 
+/**
  * An abstract typed authenticator.
  */
 public class DelegatingAuthenticationService extends AbstractAuthenticationService {
@@ -19,17 +19,17 @@ public class DelegatingAuthenticationService extends AbstractAuthenticationServi
 	 * The serialization id.
 	 */
 	private static final long serialVersionUID = -163359171428098265L;
-	
+
 	/**
 	 * A logger.
 	 */
 	private Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The authenticators to delegate.
 	 */
 	private List<AuthenticationService> authenticationServices;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -37,9 +37,6 @@ public class DelegatingAuthenticationService extends AbstractAuthenticationServi
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractAuthenticationService#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
@@ -48,9 +45,7 @@ public class DelegatingAuthenticationService extends AbstractAuthenticationServi
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AuthenticationService#getAuthInfo()
-	 */
+	@Override
 	public AuthInfo getAuthInfo() {
 		for (AuthenticationService authenticationService : authenticationServices) {
 			AuthInfo authInfo = authenticationService.getAuthInfo();

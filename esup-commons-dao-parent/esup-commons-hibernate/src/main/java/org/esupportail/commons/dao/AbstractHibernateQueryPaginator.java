@@ -27,16 +27,13 @@ public abstract class AbstractHibernateQueryPaginator<E> extends AbstractHiberna
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.web.beans.AbstractPaginator#loadItemsInternal()
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	protected void loadItemsInternal() {
 		String queryString = getQueryString();
 		HqlQueryPojo hql = getHqlQueryPojo();
-		if (queryString == null && 
-				(hql== null 
+		if (queryString == null &&
+				(hql== null
 				|| hql.isEmpty())) {
 			setVisibleItems(new ArrayList<E>());
 			setCurrentPageInternal(0);
@@ -44,7 +41,7 @@ public abstract class AbstractHibernateQueryPaginator<E> extends AbstractHiberna
 			return;
 		}
 		ResultPaginator r = getDaoService().executeQuery(queryString, hql, this.getCurrentPage(), this.getPageSize());
-	
+
 		setVisibleItems(r.getVisibleItems());
 		// the total number of results is computed here since scrolling is not allowed when rendering
 		setTotalItemsCount(r.getRowNumber());
@@ -62,10 +59,10 @@ public abstract class AbstractHibernateQueryPaginator<E> extends AbstractHiberna
 	 * @return the query string.
 	 */
 	protected abstract String getQueryString();
-	
+
 	/**
-	 * 
-	 * @return the HqlQueryPojo 
+	 *
+	 * @return the HqlQueryPojo
 	 */
 	protected abstract HqlQueryPojo getHqlQueryPojo();
 

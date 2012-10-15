@@ -16,6 +16,7 @@ import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.commons.utils.HttpUtils;
 import org.esupportail.commons.utils.SystemUtils;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -46,16 +47,14 @@ public class DebugController implements InitializingBean, Serializable {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notNull(applicationService, "property applicationService of class " 
-				+ this.getClass().getName() 
+		Assert.notNull(applicationService, "property applicationService of class "
+				+ this.getClass().getName()
 				+ " can not be null.");
 		//TODO CL V2 : Use Authentication is core module
-//		Assert.notNull(authenticationService, "property authenticationService of class " 
-//				+ this.getClass().getName() 
+//		Assert.notNull(authenticationService, "property authenticationService of class "
+//				+ this.getClass().getName()
 //				+ " can not be null.");
 	}
 

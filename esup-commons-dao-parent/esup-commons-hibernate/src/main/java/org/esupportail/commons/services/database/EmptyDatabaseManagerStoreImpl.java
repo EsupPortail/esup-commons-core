@@ -23,9 +23,6 @@ public class EmptyDatabaseManagerStoreImpl extends AbstractDatabaseManagerStore 
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.AbstractDatabaseManagerStore#getDatabaseManagers()
-	 */
 	@Override
 	protected List<DatabaseManager> getDatabaseManagers() {
 		return null;

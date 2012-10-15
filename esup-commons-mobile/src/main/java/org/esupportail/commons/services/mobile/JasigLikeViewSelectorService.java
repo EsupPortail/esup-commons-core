@@ -1,16 +1,17 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.services.mobile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import org.esupportail.commons.services.logging.Logger;
-import org.esupportail.commons.services.logging.LoggerImpl;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -48,14 +49,14 @@ public class JasigLikeViewSelectorService implements ViewSelectorService, Initia
 	private String waiPrefix;
 
 	/**
-	 * Regexes of mobile device user agents 
+	 * Regexes of mobile device user agents
 	 */
 	private List<Pattern> mobileDeviceRegexes = null;
 
 	/**
 	 * Set a list of regex patterns for user agents which should be considered
 	 * to be mobile devices.
-	 * 
+	 *
 	 * @param patterns
 	 */
 	@Resource(name="mobileDeviceRegexes")
@@ -66,6 +67,7 @@ public class JasigLikeViewSelectorService implements ViewSelectorService, Initia
 		}
 	}
 
+	@Override
 	public String getCalifiedViewName(String viewName,
 			HttpServletRequest request, boolean isWAI) {
 		String prefix = null;
@@ -80,19 +82,18 @@ public class JasigLikeViewSelectorService implements ViewSelectorService, Initia
 			if (isWAI) {
 				prefix = prefix + waiPrefix;
 			}
-		}		
+		}
 		return prefix + viewName;
-	}	
+	}
 
-	public String getCalifiedViewName(String viewName,
+	@Override
+    public String getCalifiedViewName(String viewName,
 			HttpServletRequest request) {
 		return getCalifiedViewName(viewName, request, false);
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	public void afterPropertiesSet() {
+	@Override
+    public void afterPropertiesSet() {
 		if (browserPrefix == null) {
 			logger.info("property BrowserPrefix is not set default value " + DEFAULT_BROWSER_PREFIX + " is used");
 			browserPrefix = DEFAULT_BROWSER_PREFIX;
@@ -137,6 +138,7 @@ public class JasigLikeViewSelectorService implements ViewSelectorService, Initia
 		this.mobilePrefix = mobilePrefix;
 	}
 
+	@Override
 	public boolean isMobile(HttpServletRequest request) {
 		String userAgent = request.getHeader("User-Agent");
 		// check to see if this is a mobile device
@@ -146,10 +148,11 @@ public class JasigLikeViewSelectorService implements ViewSelectorService, Initia
 					return true;
 				}
 			}
-		}	
+		}
 		return false;
 	}
 
+	@Override
 	public boolean isGPSAware(HttpServletRequest request) {
 		return false;
 	}

@@ -13,12 +13,12 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  * A map to store bundle strings.
  */
 public class BundleMap extends HashMap<String, String> {
-	
+
 	/**
 	 * The id for serialization.
 	 */
 	private static final long serialVersionUID = 4329416691636820025L;
-	
+
 	/**
 	 * A logger.
 	 */
@@ -31,26 +31,23 @@ public class BundleMap extends HashMap<String, String> {
 
 	/**
 	 * Bean constructor.
-	 * @param locale 
+	 * @param locale
 	 */
 	public BundleMap(final Locale locale) {
 		super();
 		this.locale = locale;
 	}
 
-	/**
-	 * @see java.util.HashMap#get(java.lang.Object)
-	 */
 	@Override
 	public String get(final Object key) {
 		String result = super.get(key);
 		if (result == null) {
 			logger.warn("no string found for key '" + key + "' and locale '" + locale + "'");
-			return "?????" + key + "?????"; 
+			return "?????" + key + "?????";
 		}
 		return result;
 	}
-	
-	
+
+
 
 }

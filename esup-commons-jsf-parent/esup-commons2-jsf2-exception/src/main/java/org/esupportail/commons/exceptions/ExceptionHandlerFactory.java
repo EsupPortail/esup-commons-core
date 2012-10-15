@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.exceptions;
 
@@ -14,7 +14,6 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  */
 public class ExceptionHandlerFactory extends javax.faces.context.ExceptionHandlerFactory {
 
-
 	/*
 	 *************************** PROPERTIES ******************************** */
 	/**
@@ -26,6 +25,7 @@ public class ExceptionHandlerFactory extends javax.faces.context.ExceptionHandle
 	 * ExceptionHandlerFactory parent.
 	 */
 	private javax.faces.context.ExceptionHandlerFactory parent;
+
 	/*
 	 *************************** INIT ************************************** */
 
@@ -36,8 +36,6 @@ public class ExceptionHandlerFactory extends javax.faces.context.ExceptionHandle
 		super();
 	}
 
-
-
 	/**
 	 * Constructor.
 	 * @param parent
@@ -46,8 +44,6 @@ public class ExceptionHandlerFactory extends javax.faces.context.ExceptionHandle
 		super();
 		this.parent = parent;
 	}
-
-
 
 	/*
 	 *************************** METHODS *********************************** */
@@ -60,25 +56,15 @@ public class ExceptionHandlerFactory extends javax.faces.context.ExceptionHandle
 		if (parent != null) {
 			ExceptionHandler result = parent.getExceptionHandler();
 			result = new EsupExceptionHandler(result);
-	
+
 			return result;
 		}
 		return null;
 	}
 
-
-
-	/**
-	 * @see javax.faces.context.ExceptionHandlerFactory#getWrapped()
-	 */
 	@Override
 	public javax.faces.context.ExceptionHandlerFactory getWrapped() {
 		return parent;
 	}
-	
-	
-
-	/*
-	 *************************** ACCESSORS ********************************* */
 
 }

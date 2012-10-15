@@ -24,14 +24,11 @@ public abstract class AbstractApplicationAwareBean extends AbstractI18nAwareBean
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
-		Assert.notNull(this.applicationService, 
-				"property applicationService of class " + this.getClass().getName() 
+		Assert.notNull(this.applicationService,
+				"property applicationService of class " + this.getClass().getName()
 				+ " can not be null");
 	}
 

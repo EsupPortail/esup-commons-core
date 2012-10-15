@@ -5,44 +5,45 @@ package org.esupportail.commons.dao;
 
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.utils.BeanUtils;
+import org.esupportail.commons.utils.strings.StringUtils;
+
+import org.springframework.orm.hibernate3.HibernateTemplate;
 //TODO CL V2: lien vers module web
 //import org.esupportail.commons.utils.ContextUtils;
-import org.esupportail.commons.utils.strings.StringUtils;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 
 /**
  * A simple abstract DAO implementation.
  */
-public abstract class AbstractJdbcJndiHibernateDaoService 
+public abstract class AbstractJdbcJndiHibernateDaoService
 extends AbstractGenericHibernateDaoService {
 
 	/**
 	 * True to use JDBC.
 	 */
 	private boolean useJdbc;
-	
+
 	/**
 	 * True to use JNDI.
 	 */
 	private boolean useJndi;
-	
+
 	/**
 	 * The name of the JDBC Hibernate template bean.
 	 */
 	private String jdbcHibernateTemplateBeanName;
-	
+
 	/**
 	 * The name of the JNDI Hibernate template bean.
 	 */
 	private String jndiHibernateTemplateBeanName;
-	
+
 	/**
-	 * The JDBC Hibernate template. 
+	 * The JDBC Hibernate template.
 	 */
 	private HibernateTemplate jdbcHibernateTemplate;
 
 	/**
-	 * The JNDI Hibernate template. 
+	 * The JNDI Hibernate template.
 	 */
 	private HibernateTemplate jndiHibernateTemplate;
 
@@ -55,9 +56,6 @@ extends AbstractGenericHibernateDaoService {
 		useJndi = false;
 	}
 
-	/**
-	 * @see org.esupportail.commons.dao.AbstractGenericHibernateDaoService#initDao()
-	 */
 	@Override
 	public void initDao() throws Exception {
 		if (jdbcHibernateTemplateBeanName == null && useJdbc ) {
@@ -69,14 +67,11 @@ extends AbstractGenericHibernateDaoService {
 					+ getClass().getName() + "] can not be null when property [useJndi] is true");
 		}
 		if (!useJdbc && !useJndi) {
-			throw new ConfigException("properties [useJdbc] and [useJndi] of class [" 
+			throw new ConfigException("properties [useJdbc] and [useJndi] of class ["
 					+ getClass().getName() + "] can not be both false");
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.dao.AbstractGenericHibernateDaoService#getHibernateTemplate()
-	 */
 	@Override
 	protected HibernateTemplate getHibernateTemplate() {
 		HibernateTemplate hibernateTemplate;
@@ -99,7 +94,7 @@ extends AbstractGenericHibernateDaoService {
 	}
 
 	/**
-	 * @param name 
+	 * @param name
 	 * @return the Hibernate template that corresponds to a name.
 	 */
 	protected HibernateTemplate retrieveHibernateTemplate(
