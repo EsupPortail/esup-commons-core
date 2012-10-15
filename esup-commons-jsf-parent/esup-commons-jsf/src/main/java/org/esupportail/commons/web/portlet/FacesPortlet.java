@@ -18,20 +18,21 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.myfaces.context.servlet.FacesContextImpl;
-import org.apache.myfaces.context.servlet.ServletFacesContextImpl;
-import org.apache.myfaces.portlet.MyFacesGenericPortlet;
 import org.esupportail.commons.services.application.VersionningUtils;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.ContextUtils;
+
+import org.apache.myfaces.context.servlet.FacesContextImpl;
+import org.apache.myfaces.context.servlet.ServletFacesContextImpl;
+import org.apache.myfaces.portlet.MyFacesGenericPortlet;
 import org.springframework.web.portlet.context.PortletRequestAttributes;
 
 /**
  * A JSF-based portlet that catches exception and gives them to an exception service.
  */
 public class FacesPortlet extends MyFacesGenericPortlet implements Serializable {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -49,9 +50,6 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 		super();
 	}
 
-	/**
-	 * @see javax.portlet.Portlet#init(javax.portlet.PortletConfig)
-	 */
 	@Override
 	public void init(final PortletConfig portletConfig) throws PortletException {
 		try {
@@ -66,9 +64,6 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 		}
 	}
 
-	/**
-	 * @see org.apache.myfaces.portlet.MyFacesGenericPortlet#initMyFaces()
-	 */
 	@Override
 	protected void initMyFaces() {
 		// do nothing to prevent double loading of pahse listeners
@@ -76,47 +71,17 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 		// cf https://issues.apache.org/jira/browse/MYFACES-1671
 	}
 
-	/**
-	 * Catch an exception.
-	 * @param throwable
-	 * @return an exception service
-	 */
-	//TODO CL V2 : use exception in jsf module
-//	protected ExceptionService catchException(
-//			final Throwable throwable) {
-//		ExceptionUtils.markExceptionCaught(); 
-//		ExceptionService exceptionService = ExceptionUtils.catchException(throwable);
-//		ExceptionUtils.markExceptionCaught(exceptionService); 
-//		return exceptionService;
-//	}
-
-    /**
-     * This method follows JSF Spec section 2.1.1.  It renders the default view from a non-faces
-     * request.
-     *
-     * @param request The portlet render request.
-     * @param response The portlet render response.
-     */
     @Override
 	protected void nonFacesRequest(
-			final RenderRequest request, 
+			final RenderRequest request,
 			final RenderResponse response) throws PortletException {
         nonFacesRequest(request, response, null);
     }
 
-    /**
-     * This method follows JSF Spec section 2.1.1.  It renders a view from a non-faces
-     * request.  This is useful for a default view as well as for views that need to
-     * be rendered from the portlet's edit and help buttons.
-     *
-     * @param request The portlet render request.
-     * @param response The portlet render response.
-     * @param view The name of the view that needs to be rendered.
-     */
 	@Override
 	protected void nonFacesRequest(
-    		final RenderRequest request, 
-    		final RenderResponse response, 
+    		final RenderRequest request,
+    		final RenderResponse response,
     		final String view)
             throws PortletException {
     	 // do this in case nonFacesRequest is called by a subclass
@@ -129,7 +94,7 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
    		facesContext.setExternalContext(makeExternalContext(request, response));
         String viewToRender = view;
         if (viewToRender == null) {
-        	// the call to selectDefaultView was moved here to be sure 
+        	// the call to selectDefaultView was moved here to be sure
         	// that the faces context has been initialized before
         	//TODO CL V2 : use dao in jsf module
         	//DatabaseUtils.begin();
@@ -149,18 +114,14 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 			throw new PortletException(t);
 		}
     }
-	
-	/**
-	 * @see org.apache.myfaces.portlet.MyFacesGenericPortlet#facesRender(
-	 * javax.portlet.RenderRequest, javax.portlet.RenderResponse)
-	 */
+
 	@Override
 	public void facesRender(
-			final RenderRequest request, 
-			final RenderResponse response) 
+			final RenderRequest request,
+			final RenderResponse response)
 	throws PortletException, IOException {
     	long startTime = System.currentTimeMillis();
-		PortletRequestAttributes previousRequestAttributes = 
+		PortletRequestAttributes previousRequestAttributes =
 			ContextUtils.bindRequestAndContext(request, getPortletContext());
 		//TODO CL V2 : use exception in jsf module
 		//if (!ExceptionUtils.exceptionAlreadyCaught()) {
@@ -184,7 +145,7 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 	                facesContext = (ServletFacesContextImpl) request.
 	                                                        getPortletSession().
 	                                                        getAttribute(CURRENT_FACES_CONTEXT);
-	                if (facesContext == null) { 
+	                if (facesContext == null) {
 	                	// processAction was not called
 	                   facesContext = (ServletFacesContextImpl) facesContext(request, response);
 	                   ////////////////////////////
@@ -216,7 +177,7 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 				//TODO CL V2 : use dao in jsf module
 				//DatabaseUtils.close();
 				if (!error) {
-					// Call ContextUtils.unbindRequest if no error only because 
+					// Call ContextUtils.unbindRequest if no error only because
 					// used by ExceptionUtils.getMarkedExceptionService()
 					//TODO CL V2 : use to module annotations
 					//MonitorUtils.log(startTime, "RENDER STAGE");
@@ -240,16 +201,9 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 		}
 	}
 
-	/**
-	 * @see javax.portlet.Portlet#processAction(javax.portlet.ActionRequest, javax.portlet.ActionResponse)
-     * A patched version of the original processAction method to catch exceptions and
-     * get the facesContext in exception reports.
-     * @param request 
-     * @param response 
-     */
  	@Override
     public void processAction(
-    		final ActionRequest request, 
+    		final ActionRequest request,
     		final ActionResponse response) {
         if (sessionTimedOut(request)) {
         	return;
@@ -287,15 +241,12 @@ public class FacesPortlet extends MyFacesGenericPortlet implements Serializable 
 //			}
         	//TODO CL V2 : use to module annotations
         	//MonitorUtils.log(startTime, "PROCESS STAGE");
-        	//TODO CL V2      
+        	//TODO CL V2
         	//saveRequestAttributes(request);
         	ContextUtils.unbindRequest(previousRequestAttributes);
         }
     }
 
-	/**
-	 * @see org.apache.myfaces.portlet.MyFacesGenericPortlet#logException(java.lang.Throwable, java.lang.String)
-	 */
 	@Override
 	protected void logException(final Throwable t, final String msgPrefix) {
 		// logged by the exception manager

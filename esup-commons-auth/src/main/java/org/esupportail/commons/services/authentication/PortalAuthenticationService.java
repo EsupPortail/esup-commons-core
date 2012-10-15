@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.esupportail.commons.utils.HttpUtils;
 
-/** 
+/**
  * A portal authenticator.
  */
 public class PortalAuthenticationService extends AbstractTypedAuthenticationService {
@@ -27,15 +27,15 @@ public class PortalAuthenticationService extends AbstractTypedAuthenticationServ
 	private static final long serialVersionUID = 6775192478532264210L;
 
 	/**
-	 * The portal attribute that contains the uid. 
+	 * The portal attribute that contains the uid.
 	 */
 	private String uidPortalAttribute = DEFAULT_UID_PORTAL_ATTRIBUTE;
-	
+
 	/**
-	 * The portal attributes. 
+	 * The portal attributes.
 	 */
 	private List<String> portalAttributes;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -43,17 +43,11 @@ public class PortalAuthenticationService extends AbstractTypedAuthenticationServ
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractRealAuthenticationService#getAuthId()
-	 */
 	@Override
 	public String getAuthId() {
 		return HttpUtils.getPortalPref(uidPortalAttribute);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractRealAuthenticationService#getAuthAttributes()
-	 */
 	@Override
 	protected Map<String, List<String>> getAuthAttributes() {
 		if (portalAttributes == null) {
@@ -89,7 +83,7 @@ public class PortalAuthenticationService extends AbstractTypedAuthenticationServ
 	 * @param portalAttributes the portalAttributes to set
 	 */
 	public void setPortalAttributes(final String portalAttributes) {
-		if (portalAttributes == null 
+		if (portalAttributes == null
 				|| !org.springframework.util.StringUtils.hasLength(portalAttributes)) {
 			return;
 		}

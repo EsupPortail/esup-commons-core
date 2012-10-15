@@ -29,10 +29,7 @@ public class TimestampConverter implements Converter, Serializable {
 		super();
 	}
 
-	/**
-	 * @see javax.faces.convert.Converter#getAsObject(
-	 * javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
-	 */
+	@Override
 	public Object getAsObject(final FacesContext context, final UIComponent component,final String value) {
 		if (!StringUtils.hasText(value)) {
 			return null;
@@ -40,10 +37,7 @@ public class TimestampConverter implements Converter, Serializable {
 		return new Timestamp(Long.valueOf(value));
 	}
 
-	/**
-	 * @see javax.faces.convert.Converter#getAsString(
-	 * javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)
-	 */
+	@Override
 	public String getAsString(final FacesContext context, final UIComponent component, final Object value) {
 		if (value == null || !StringUtils.hasText(value.toString())) {
 			return "";

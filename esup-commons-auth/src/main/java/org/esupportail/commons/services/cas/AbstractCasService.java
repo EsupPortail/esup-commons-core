@@ -3,23 +3,16 @@
  */
 package org.esupportail.commons.services.cas;
 
-import org.esupportail.commons.services.logging.Logger;
-import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 
-/** 
- * An abstract implementation of CasService; inheriting classes 
+/**
+ * An abstract implementation of CasService; inheriting classes
  * should simply implement getProxyGrantingTicket() (each implementation
  * has its own way to know what the PGT is).
  */
 @SuppressWarnings("serial")
 public abstract class AbstractCasService implements CasService {
 
-	/**
-	 * A logger.
-	 */
-	private final Logger logger = new LoggerImpl(getClass());
-	
 	/**
 	 * The CAS validate URL.
 	 */
@@ -34,7 +27,7 @@ public abstract class AbstractCasService implements CasService {
 	 * The proxy callback URL.
 	 */
 	private String proxyCallbackUrl;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -46,14 +39,14 @@ public abstract class AbstractCasService implements CasService {
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() {
-		Assert.hasText(casValidateUrl, "property [casValidateUrl] of class [" 
+		Assert.hasText(casValidateUrl, "property [casValidateUrl] of class ["
 				+ getClass() + "] can not be null");
-		Assert.hasText(service, "property [service] of class [" 
+		Assert.hasText(service, "property [service] of class ["
 				+ getClass() + "] can not be null");
-		Assert.hasText(proxyCallbackUrl, "property [proxyCallbackUrl] of class [" 
+		Assert.hasText(proxyCallbackUrl, "property [proxyCallbackUrl] of class ["
 				+ getClass() + "] can not be null");
 	}
-	
+
 	/**
 	 * @return the service ticket that was passed to the application.
 	 */
@@ -62,7 +55,8 @@ public abstract class AbstractCasService implements CasService {
 	/**
 	 * @see org.esupportail.commons.services.cas.CasService#getProxyTicket(java.lang.String)
 	 */
-	abstract public String getProxyTicket(final String targetService) throws CasException;
+	@Override
+    abstract public String getProxyTicket(final String targetService) throws CasException;
 
 	/**
 	 * @param casValidateUrl the casValidateUrl to set
@@ -84,5 +78,5 @@ public abstract class AbstractCasService implements CasService {
 	public void setProxyCallbackUrl(final String proxyCallbackUrl) {
 		this.proxyCallbackUrl = proxyCallbackUrl;
 	}
-	
+
 }

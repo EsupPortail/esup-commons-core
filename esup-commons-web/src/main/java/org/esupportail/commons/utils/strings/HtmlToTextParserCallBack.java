@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.utils.strings; 
+package org.esupportail.commons.utils.strings;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -13,8 +13,8 @@ import javax.swing.text.html.parser.ParserDelegator;
 /**
  * A class to convert HTML to text using Swing.
  */
-public final class HtmlToTextParserCallBack extends HTMLEditorKit.ParserCallback {   
-	
+public final class HtmlToTextParserCallBack extends HTMLEditorKit.ParserCallback {
+
 	/**
 	 * A StringBuffer to store the result of the parsing.
 	 */
@@ -27,14 +27,11 @@ public final class HtmlToTextParserCallBack extends HTMLEditorKit.ParserCallback
 		super();
 	}
 
-	/**
-	 * @see javax.swing.text.html.HTMLEditorKit.ParserCallback#handleText(char[], int)
-	 */
 	@Override
 	public void handleText(final char[] data, final int unusedPos) {
 		textResult.append(data);
 	}
-	
+
 	/**
 	 * Parse HTML and return text.
 	 * @param htmlString an HTML string.
@@ -42,8 +39,8 @@ public final class HtmlToTextParserCallBack extends HTMLEditorKit.ParserCallback
 	 * @throws IOException
 	 */
 	static String convert(final String htmlString) throws IOException {
-		Reader r = new StringReader(htmlString);      
-		ParserDelegator parser = new ParserDelegator();      
+		Reader r = new StringReader(htmlString);
+		ParserDelegator parser = new ParserDelegator();
 		HtmlToTextParserCallBack callback = new HtmlToTextParserCallBack();
 		parser.parse(r, callback, false);
 		return callback.getTextResult().toString();

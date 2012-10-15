@@ -12,11 +12,11 @@ import java.util.Locale;
  */
 @SuppressWarnings("serial")
 abstract class AbstractLdapService implements BasicLdapService {
-	
+
 	/**
 	 * The exception thrown when the statistics methods are called.
 	 */
-	private final UnsupportedOperationException unsupportedExcepion = 
+	private final UnsupportedOperationException unsupportedExcepion =
 		new UnsupportedOperationException("class " + getClass() + " does not support statistics.");
 
 	/**
@@ -26,37 +26,27 @@ abstract class AbstractLdapService implements BasicLdapService {
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.BasicLdapService#getStatistics(java.util.Locale)
-	 */
+	@Override
 	public List<String> getStatistics(final Locale locale) {
 		throw unsupportedExcepion;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.BasicLdapService#resetStatistics()
-	 */
+	@Override
 	public void resetStatistics() {
 		throw unsupportedExcepion;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.BasicLdapService#supportStatistics()
-	 */
+	@Override
 	public boolean supportStatistics() {
 		return false;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.BasicLdapService#supportsTest()
-	 */
+	@Override
 	public boolean supportsTest() {
 		return false;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.BasicLdapService#test()
-	 */
+	@Override
 	public void test() {
 		throw unsupportedExcepion;
 	}

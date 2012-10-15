@@ -88,9 +88,6 @@ public class UIForm extends HtmlForm {
 		div.getChildren().add(text);
 	}
 
-	/**
-	 * @see javax.faces.component.UIComponentBase#encodeBegin(javax.faces.context.FacesContext)
-	 */
 	@Override
 	public void encodeBegin(final FacesContext context) throws IOException {
 		if (!hasSubmitPopup()) {
@@ -99,17 +96,11 @@ public class UIForm extends HtmlForm {
 		super.encodeBegin(context);
 	}
 
-	/**
-	 * @see javax.faces.component.UIComponentBase#getRendersChildren()
-	 */
 	@Override
 	public boolean getRendersChildren() {
 		return true;
 	}
 
-	/**
-	 * @see javax.faces.component.UIComponentBase#encodeChildren(javax.faces.context.FacesContext)
-	 */
 	@Override
 	public void encodeChildren(final FacesContext context) throws IOException {
 		RendererUtils.renderChildren(context, this);

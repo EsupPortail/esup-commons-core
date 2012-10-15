@@ -6,6 +6,7 @@ package org.esupportail.commons.services.database;
 import java.util.List;
 
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -22,7 +23,7 @@ public class BasicDatabaseManagerStoreImpl extends AbstractDatabaseManagerStore 
 	 * The database managers.
 	 */
 	private List<DatabaseManager> databaseManagers;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -30,12 +31,10 @@ public class BasicDatabaseManagerStoreImpl extends AbstractDatabaseManagerStore 
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notNull(databaseManagers, 
-				"property [databaseManagers] of class [" 
+		Assert.notNull(databaseManagers,
+				"property [databaseManagers] of class ["
 				+ getClass().getName() + "] can not be null");
 	}
 
@@ -46,9 +45,6 @@ public class BasicDatabaseManagerStoreImpl extends AbstractDatabaseManagerStore 
 		this.databaseManagers = databaseManagers;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.AbstractDatabaseManagerStore#getDatabaseManagers()
-	 */
 	@Override
 	protected List<DatabaseManager> getDatabaseManagers() {
 		return databaseManagers;

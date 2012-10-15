@@ -6,6 +6,7 @@ package org.esupportail.commons.services.ldap;
 import java.io.Serializable;
 
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -25,47 +26,47 @@ public class LdapSchema implements InitializingBean, Serializable {
 	 * the displayName attribute.
 	 */
 	private String displayName;
-	
+
 	/**
 	 * the birthdate attribute.
 	 */
 	private String birthdate;
-	
+
 	/**
 	 * the birthdateFormat attribute.
 	 */
 	private String birthdateFormat;
-	
+
 	/**
 	 * the uid attribute.
 	 */
 	private String uid;
-	
+
 	/**
 	 * the employeeId attribute.
 	 */
 	private String employeeId;
-	
+
 	/**
 	 * the cn attribute.
 	 */
 	private String cn;
-	
+
 	/**
 	 * the birthName attribute.
 	 */
 	private String birthName;
-	
+
 	/**
 	 * the password attribute.
 	 */
 	private String password;
-	
+
 	/**
 	 * the shadowLastChange attribute.
 	 */
 	private String shadowLastChange;
-	
+
 	/**
 	 * the mail attribute.
 	 */
@@ -78,32 +79,30 @@ public class LdapSchema implements InitializingBean, Serializable {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notNull(this.displayName, 
+		Assert.notNull(this.displayName,
 				"property displayName of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.birthdate, 
+		Assert.notNull(this.birthdate,
 				"property birthdate of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.birthdateFormat, 
+		Assert.notNull(this.birthdateFormat,
 				"property birthdateFormat of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.uid, 
+		Assert.notNull(this.uid,
 				"property uid of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.employeeId, 
+		Assert.notNull(this.employeeId,
 				"property employeeId of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.cn, 
+		Assert.notNull(this.cn,
 				"property cn of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.birthName, 
+		Assert.notNull(this.birthName,
 				"property sn of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.password, 
+		Assert.notNull(this.password,
 				"property password of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.shadowLastChange, 
+		Assert.notNull(this.shadowLastChange,
 				"property shadowLastChange of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.mail, 
+		Assert.notNull(this.mail,
 				"property mail of class " + this.getClass().getName() + " can not be null");
 	}
-	
+
 	/**
 	 * @return Returns the birthdate.
 	 */
@@ -117,7 +116,7 @@ public class LdapSchema implements InitializingBean, Serializable {
 	public void setBirthdate(final String birthdate) {
 		this.birthdate = birthdate;
 	}
-	
+
 	/**
 	 * @return Returns the birthdateFormat.
 	 */
@@ -188,7 +187,7 @@ public class LdapSchema implements InitializingBean, Serializable {
 	public void setUid(final String uid) {
 		this.uid = uid;
 	}
-	
+
 	/**
 	 * @return Returns the displayName.
 	 */

@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.remote; 
+package org.esupportail.commons.services.remote;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -11,6 +11,7 @@ import java.util.List;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +19,7 @@ import org.springframework.util.StringUtils;
  * An abstract web service that provides the client of the request.
  */
 public class AbstractIpProtectedWebService extends AbstractClientProviderWebService implements InitializingBean {
-	
+
 	/**
 	 * A logger.
 	 */
@@ -28,7 +29,7 @@ public class AbstractIpProtectedWebService extends AbstractClientProviderWebServ
 	 * The names of the authorized clients.
 	 */
 	private List<String> authorizedClientNames;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -36,9 +37,7 @@ public class AbstractIpProtectedWebService extends AbstractClientProviderWebServ
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		if (authorizedClientNames == null || authorizedClientNames.isEmpty()) {
 			authorizedClientNames = null;
@@ -53,7 +52,7 @@ public class AbstractIpProtectedWebService extends AbstractClientProviderWebServ
 
 	/**
 	 * Check if the client is authorized.
-	 * @throws ConfigException 
+	 * @throws ConfigException
 	 */
 	protected void checkClient() throws ConfigException {
 		if (authorizedClientNames == null) {
@@ -77,10 +76,10 @@ public class AbstractIpProtectedWebService extends AbstractClientProviderWebServ
 		throw new WebServiceAuthorizationException(
 				"client [" + client.getHostName() + "] is not authorized");
 	}
-	
+
 	/**
 	 * Set the authorized clients with a list of comma-separated host names.
-	 * @param authorizedClientNames 
+	 * @param authorizedClientNames
 	 */
 	public void setAuthorizedClientNames(final String authorizedClientNames) {
 		if (!StringUtils.hasText(authorizedClientNames)) {

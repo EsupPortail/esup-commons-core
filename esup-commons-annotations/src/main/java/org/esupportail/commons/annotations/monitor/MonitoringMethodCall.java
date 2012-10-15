@@ -6,8 +6,9 @@ package org.esupportail.commons.annotations.monitor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.esupportail.commons.annotations.AopUtils;
+
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * A monitoring method call.
@@ -19,13 +20,13 @@ public class MonitoringMethodCall implements Comparable<MonitoringMethodCall> {
 
 	/** The method called. */
 	private String methodName;
-	
+
 	/** The complete call string. */
 	private String fullString;
-	
+
 	/** The time spent. */
 	private List<Long> times;
-	
+
 	/**
 	 * Constructor.
 	 * @param joinPoint
@@ -41,7 +42,7 @@ public class MonitoringMethodCall implements Comparable<MonitoringMethodCall> {
 		this.times = new ArrayList<Long>();
 		addTime(time);
 	}
-	
+
 	/**
 	 * Add an execution time.
 	 * @param time
@@ -49,12 +50,8 @@ public class MonitoringMethodCall implements Comparable<MonitoringMethodCall> {
 	public void addTime(final long time) {
 		times.add(time);
 	}
-	
-	/**
-	 * @param o 
-	 * @return an int
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
+
+	@Override
 	public int compareTo(final MonitoringMethodCall o) {
 		int classVal = className.compareTo(o.className);
 		if (classVal != 0) {
@@ -69,22 +66,22 @@ public class MonitoringMethodCall implements Comparable<MonitoringMethodCall> {
 		}
 		return fullString.compareTo(o.fullString);
 	}
-	
+
 	/** @return the className */
 	public String getClassName() {
 		return className;
 	}
-	
+
 	/** @return the methodName */
 	public String getMethodName() {
 		return methodName;
 	}
-	
+
 	/** @return the times */
 	public List<Long> getTimes() {
 		return times;
 	}
-	
+
 	/** @return the fullString */
 	public String getFullString() {
 		return fullString;
