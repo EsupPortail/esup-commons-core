@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.urlGeneration; 
+package org.esupportail.commons.services.urlGeneration;
 
 import java.util.Map;
 
@@ -19,12 +19,12 @@ public class UportalUrlGeneratorImpl extends AbstractCasUrlGenerator {
 	 * The name of the parameter that uPortal uses to pass parameters to channels.
 	 */
 	public static final String ARGS_PARAM = "uP_args";
-	
+
 	/**
 	 * The uP_fname uPortal parameter.
 	 */
 	protected static final String UPORTAL_FNAME_PARAM = "uP_fname";
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -34,41 +34,38 @@ public class UportalUrlGeneratorImpl extends AbstractCasUrlGenerator {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The uPortal URL.
 	 */
 	private String uportalUrl;
-	
+
 	/**
 	 * The uPortal Login URL.
 	 */
 	private String uportalLoginUrl;
-	
+
 	/**
 	 * The uPortal Guest URL.
 	 */
 	private String uportalGuestUrl;
-	
+
 	/**
 	 * The uPortal funtionnal name (the name used to publish the uPortal channel of the portlet).
 	 */
 	private String uportalFunctionnalName;
-	
+
 	/**
 	 * Bean constructor.
 	 */
 	public UportalUrlGeneratorImpl() {
 		super();
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.AbstractCasUrlGenerator#afterPropertiesSet()
-	 */
+
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
-		Assert.notNull(uportalFunctionnalName, "property uportalFunctionnalName of class " 
+		Assert.notNull(uportalFunctionnalName, "property uportalFunctionnalName of class "
 				+ this.getClass().getName() + " can not be null");
 		if (uportalLoginUrl == null) {
 			if (uportalUrl == null) {
@@ -90,10 +87,6 @@ public class UportalUrlGeneratorImpl extends AbstractCasUrlGenerator {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.AbstractUrlGenerator
-	 * #url(org.esupportail.commons.services.urlGeneration.AuthEnum, java.util.Map)
-	 */
 	@Override
 	protected String url(
 			final AuthEnum authType,
@@ -131,7 +124,7 @@ public class UportalUrlGeneratorImpl extends AbstractCasUrlGenerator {
 			logger.debug("url(): url1=[" + url + "]");
 		}
 		if (arg != null) {
-			url = url + "&" + ARGS_PARAM 
+			url = url + "&" + ARGS_PARAM
 			+ "=" + StringUtilsWeb.utf8UrlEncode(arg);
 			if (logger.isDebugEnabled()) {
 				logger.debug("url(): url2=[" + url + "]");
@@ -139,7 +132,7 @@ public class UportalUrlGeneratorImpl extends AbstractCasUrlGenerator {
 		}
 		if (AuthEnum.cas.equals(authType)) {
 			String encodedUrl = StringUtilsWeb.utf8UrlEncode(url);
-			url = String.format(getCasLoginUrl(), 
+			url = String.format(getCasLoginUrl(),
 					encodedUrl);
 			if (logger.isDebugEnabled()) {
 				logger.debug("url(): encodedUrl=[" + encodedUrl + "]");

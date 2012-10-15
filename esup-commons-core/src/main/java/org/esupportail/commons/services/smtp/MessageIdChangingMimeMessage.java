@@ -12,12 +12,12 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 
 /**
  * @author lusl0338
- * MimeMessage that can has Message-ID set. 
+ * MimeMessage that can has Message-ID set.
  */
 public class MessageIdChangingMimeMessage extends MimeMessage {
-	
+
 	/**
-	 * A Logger. 
+	 * A Logger.
 	 */
 	private static final Logger LOG = new LoggerImpl(SmtpUtils.class);
 
@@ -25,7 +25,7 @@ public class MessageIdChangingMimeMessage extends MimeMessage {
 	 * Message-ID to set.
 	 */
 	private String messageId;
-	
+
 	/**
 	 * @param session Session
 	 * @param messageId Message-ID to set
@@ -50,9 +50,6 @@ public class MessageIdChangingMimeMessage extends MimeMessage {
 		LOG.debug("Setting messageID: " + messageId);
 	}
 
-	/**
-	 * @see javax.mail.internet.MimeMessage#updateHeaders()
-	 */
 	@Override
 	protected void updateHeaders() throws MessagingException {
 		super.updateHeaders();

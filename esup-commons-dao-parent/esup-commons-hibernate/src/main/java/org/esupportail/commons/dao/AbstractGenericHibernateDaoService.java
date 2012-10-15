@@ -36,11 +36,8 @@ implements PaginatorDaoService, InitializingBean {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
-    public final void afterPropertiesSet() throws Exception {
+	public final void afterPropertiesSet() throws Exception {
 		initDao();
 	}
 
@@ -70,12 +67,6 @@ implements PaginatorDaoService, InitializingBean {
 		);
 	}
 
-
-	/**
-	 * @see org.esupportail.commons.dao.HibernateDaoService
-	 * #executeQuery(java.lang.String, org.esupportail.commons.dao.HqlQueryPojo,
-	 *  java.lang.Integer, java.lang.Integer)
-	 */
 	@Override
     public ResultPaginator executeQuery(String queryString, HqlQueryPojo hqlQueryPojo, Integer currentPage, Integer pageSize) {
 		//key row number and visibleItems

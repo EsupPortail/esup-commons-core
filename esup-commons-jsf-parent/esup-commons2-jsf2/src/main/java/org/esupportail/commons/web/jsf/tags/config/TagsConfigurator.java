@@ -9,25 +9,28 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
-//TODO CL V2 : PB PORTLET
-//import org.apache.myfaces.portlet.PortletUtil;
+
 import org.esupportail.commons.beans.AbstractApplicationAwareBean;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.BeanUtils;
+
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+//TODO CL V2 : PB PORTLET
+//import org.apache.myfaces.portlet.PortletUtil;
 
 /**
  * @deprecated
  * A bean to configure extended tags.
  */
+@Deprecated
 public class TagsConfigurator extends AbstractApplicationAwareBean {
 
 	/**
 	 * The name of the bean to configure the tags.
 	 */
-	public static final String TAGS_CONFIGURATOR_BEAN = "tagsConfigurator"; 
+	public static final String TAGS_CONFIGURATOR_BEAN = "tagsConfigurator";
 
 	/**
 	 * The serialization id.
@@ -43,42 +46,42 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	/**
 	 * The default style class for the document body.
 	 */
-	private static final String DEFAULT_DOCUMENT_BODY_STYLE_CLASS = "portlet-section-body"; 
+	private static final String DEFAULT_DOCUMENT_BODY_STYLE_CLASS = "portlet-section-body";
 
 	/**
 	 * The default class for info messages.
 	 */
-	private static final String DEFAULT_MESSAGES_INFO_CLASS = "portlet-msg-info"; 
+	private static final String DEFAULT_MESSAGES_INFO_CLASS = "portlet-msg-info";
 
 	/**
 	 * The default class for warn messages.
 	 */
-	private static final String DEFAULT_MESSAGES_WARN_CLASS = "portlet-msg-alert"; 
+	private static final String DEFAULT_MESSAGES_WARN_CLASS = "portlet-msg-alert";
 
 	/**
 	 * The default class for error messages.
 	 */
-	private static final String DEFAULT_MESSAGES_ERROR_CLASS = "portlet-msg-error"; 
+	private static final String DEFAULT_MESSAGES_ERROR_CLASS = "portlet-msg-error";
 
 	/**
 	 * The default class for fatal messages.
 	 */
-	private static final String DEFAULT_MESSAGES_FATAL_CLASS = "portlet-msg-error"; 
+	private static final String DEFAULT_MESSAGES_FATAL_CLASS = "portlet-msg-error";
 
 	/**
 	 * The default layout for messages.
 	 */
-	private static final String DEFAULT_MESSAGES_LAYOUT = "table"; 
-	
-	
+	private static final String DEFAULT_MESSAGES_LAYOUT = "table";
+
+
 	/**
 	 * The default style class for labels.
 	 */
-	private static final String DEFAULT_LABEL_STYLE_CLASS = "portlet-form-field-label"; 
+	private static final String DEFAULT_LABEL_STYLE_CLASS = "portlet-form-field-label";
 	/**
 	 * The default style class for Button.
 	 */
-	private static final String DEFAULT_BUTTON_STYLE_CLASS = "portlet-form-button"; 
+	private static final String DEFAULT_BUTTON_STYLE_CLASS = "portlet-form-button";
 
 	/**
 	 * The default style class for input Field.
@@ -94,17 +97,17 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The default style class for datatable footer.
 	 */
 	private static final String DEFAULT_DATATABLE_FOOTER_CLASS = "portlet-table-footer";
-	
+
 	/**
 	 * The default style class for datatable row.
 	 */
 	private static final String DEFAULT_DATATABLE_ROW_CLASS = "portlet-table-text";
-	
+
 	/**
 	 * The default style class for datatable row.
 	 */
 	private static final String DEFAULT_DATATABLE_ROW_ALTERNATE_CLASS = "portlet-table-alternate";
-	
+
 	/**
 	 * The default style class for datatable column.
 	 */
@@ -114,7 +117,7 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The default style class for checkboxes.
 	 */
 	private static final String DEFAULT_CHECKBOX_STYLE_CLASS = "portlet-form-field";
-	
+
 	/**
 	 * The default wrapping tag for sections.
 	 */
@@ -144,17 +147,17 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The default style class for paragraphs.
 	 */
 	private static final String DEFAULT_PARAGRAPH_STYLE_CLASS = "portlet-section-text";
-	
+
 	/**
 	 * The default style class for normal text.
 	 */
 	private static final String DEFAULT_TEXT_STYLE_CLASS = DEFAULT_PARAGRAPH_STYLE_CLASS;
-	
+
 	/**
 	 * The default layout for menu.
 	 */
-	private static final String DEFAULT_MENU_LAYOUT = "list"; 
-	
+	private static final String DEFAULT_MENU_LAYOUT = "list";
+
 	/**
 	 * The default style class for menu.
 	 */
@@ -178,7 +181,7 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The default style class for footer item.
 	 */
 	private static final String DEFAULT_FOOTER_ITEM_STYLE_CLASS = "portlet-menu-item";
-	
+
 	/**
 	 * The default style class for paginator.
 	 */
@@ -188,12 +191,12 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The media path for portlets.
 	 */
 	private static final String DEFAULT_PORTLET_MEDIA_PATH = "../media";
-	
+
 	/**
 	 * The media path for servlets.
 	 */
 	private static final String DEFAULT_SERVLET_MEDIA_PATH = "/esup-application/media";
-	
+
 	/**
 	 * A logger.
 	 */
@@ -202,37 +205,37 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	/**
 	 * The singleton bean.
 	 */
-	private static TagsConfigurator singleton; 
-	
+	private static TagsConfigurator singleton;
+
 	/**
 	 * The class for info messages.
 	 */
-	private String messagesInfoClass; 
+	private String messagesInfoClass;
 
 	/**
 	 * The class for warn messages.
 	 */
-	private String messagesWarnClass; 
+	private String messagesWarnClass;
 
 	/**
 	 * The class for error messages.
 	 */
-	private String messagesErrorClass; 
+	private String messagesErrorClass;
 
 	/**
 	 * The class for fatal messages.
 	 */
-	private String messagesFatalClass; 
+	private String messagesFatalClass;
 
 	/**
 	 * The layout for messages.
 	 */
-	private String messagesLayout; 
+	private String messagesLayout;
 
 	/**
 	 * The layout for menu.
 	 */
-	private String menuLayout; 
+	private String menuLayout;
 
 	/**
 	 * The style class of the document body.
@@ -311,37 +314,37 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The subSection wrapping tag.
 	 */
 	private String subSectionTag;
-	
+
 	/**
 	 * The subSection style class.
 	 */
 	private String subSectionStyleClass;
-	
+
 	/**
 	 * The section wrapping tag.
 	 */
 	private String sectionTag;
-	
+
 	/**
 	 * The section style class.
 	 */
 	private String sectionStyleClass;
-	
+
 	/**
 	 * The paragraph wrapping tag.
 	 */
 	private String paragraphTag;
-	
+
 	/**
 	 * The paragraph style class.
 	 */
 	private String paragraphStyleClass;
-	
+
 	/**
 	 * The normal text style class.
 	 */
 	private String textStyleClass;
-	
+
 	/**
 	 * The menu style class.
 	 */
@@ -361,32 +364,32 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * The footer text.
 	 */
 	private String footerText;
-	
+
 	/**
 	 * The footer style class.
 	 */
 	private String footerStyleClass;
-	
+
 	/**
 	 * The footer item style class.
 	 */
 	private String footerItemStyleClass;
-	
+
 	/**
 	 * The paginator style class.
 	 */
 	private String paginatorStyleClass;
-	
+
 	/**
 	 * The media path for portlets.
 	 */
 	private String portletMediaPath;
-	
+
 	/**
 	 * The media path for servlets.
 	 */
 	private String servletMediaPath;
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -405,55 +408,52 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 * @return the default footer text.
 	 */
 	protected String getDefaultFooterText() {
-		return getApplicationService().getName() 
-		+ " v" + getApplicationService().getVersion() 
+		return getApplicationService().getName()
+		+ " v" + getApplicationService().getVersion()
 		+ " - " + getApplicationService().getCopyright();
 	}
 
-	/**
-	 * @see org.esupportail.commons.beans.AbstractApplicationAwareBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 		if (!StringUtils.hasText(messagesInfoClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no messagesInfoClass set, using default [" 
+				LOGGER.debug(getClass() + ": no messagesInfoClass set, using default ["
 					+ DEFAULT_MESSAGES_INFO_CLASS + "]");
 			}
 			messagesInfoClass = DEFAULT_MESSAGES_INFO_CLASS;
 		}
 		if (!StringUtils.hasText(messagesWarnClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no messagesWarnClass set, using default [" 
+				LOGGER.debug(getClass() + ": no messagesWarnClass set, using default ["
 					+ DEFAULT_MESSAGES_WARN_CLASS + "]");
 			}
 			messagesWarnClass = DEFAULT_MESSAGES_WARN_CLASS;
 		}
 		if (!StringUtils.hasText(messagesErrorClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no messagesErrorClass set, using default [" 
+				LOGGER.debug(getClass() + ": no messagesErrorClass set, using default ["
 					+ DEFAULT_MESSAGES_ERROR_CLASS + "]");
 			}
 			messagesErrorClass = DEFAULT_MESSAGES_ERROR_CLASS;
 		}
 		if (!StringUtils.hasText(messagesFatalClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no messagesFatalClass set, using default [" 
+				LOGGER.debug(getClass() + ": no messagesFatalClass set, using default ["
 					+ DEFAULT_MESSAGES_FATAL_CLASS + "]");
 			}
 			messagesFatalClass = DEFAULT_MESSAGES_FATAL_CLASS;
 		}
 		if (!StringUtils.hasText(messagesLayout)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no messagesLayout set, using default [" 
+				LOGGER.debug(getClass() + ": no messagesLayout set, using default ["
 					+ DEFAULT_MESSAGES_LAYOUT + "]");
 			}
 			messagesLayout = DEFAULT_MESSAGES_LAYOUT;
 		}
 		if (!StringUtils.hasText(documentBodyStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no documentBodyStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no documentBodyStyleClass set, using default ["
 					+ DEFAULT_DOCUMENT_BODY_STYLE_CLASS + "]");
 			}
 			documentBodyStyleClass = DEFAULT_DOCUMENT_BODY_STYLE_CLASS;
@@ -461,7 +461,7 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 		if (!StringUtils.hasText(documentTitle)) {
 			documentTitle = getDefaultDocumentTitle();
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no documentTitle set, using default [" 
+				LOGGER.debug(getClass() + ": no documentTitle set, using default ["
 						+ documentTitle + "]");
 			}
 		}
@@ -479,140 +479,140 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 		}
 		if (!StringUtils.hasText(labelStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no labelStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no labelStyleClass set, using default ["
 					+ DEFAULT_LABEL_STYLE_CLASS + "]");
 			}
 			labelStyleClass = DEFAULT_LABEL_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(inputFieldStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no inputFieldStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no inputFieldStyleClass set, using default ["
 					+ DEFAULT_INPUT_FIELD_STYLE_CLASS + "]");
 			}
 			inputFieldStyleClass = DEFAULT_INPUT_FIELD_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(buttonStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no buttonStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no buttonStyleClass set, using default ["
 					+ DEFAULT_BUTTON_STYLE_CLASS + "]");
 			}
 			buttonStyleClass = DEFAULT_BUTTON_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(dataTableHeaderClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no dataTableHeaderClass set, using default [" 
+				LOGGER.debug(getClass() + ": no dataTableHeaderClass set, using default ["
 					+ DEFAULT_DATATABLE_HEADER_CLASS + "]");
 			}
 			dataTableHeaderClass = DEFAULT_DATATABLE_HEADER_CLASS;
 		}
 		if (!StringUtils.hasText(dataTableFooterClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no dataTableFooterClass set, using default [" 
+				LOGGER.debug(getClass() + ": no dataTableFooterClass set, using default ["
 					+ DEFAULT_DATATABLE_FOOTER_CLASS + "]");
 			}
 			dataTableFooterClass = DEFAULT_DATATABLE_FOOTER_CLASS;
 		}
 		if (!StringUtils.hasText(dataTableRowClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no dataTableRowClass set, using default [" 
+				LOGGER.debug(getClass() + ": no dataTableRowClass set, using default ["
 					+ DEFAULT_DATATABLE_ROW_CLASS + "]");
 			}
 			dataTableRowClass = DEFAULT_DATATABLE_ROW_CLASS;
 		}
 		if (!StringUtils.hasText(dataTableRowAlternateClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no dataTableRowAlternateClass set, using default [" 
+				LOGGER.debug(getClass() + ": no dataTableRowAlternateClass set, using default ["
 					+ DEFAULT_DATATABLE_ROW_ALTERNATE_CLASS + "]");
 			}
 			dataTableRowAlternateClass = DEFAULT_DATATABLE_ROW_ALTERNATE_CLASS;
 		}
 		if (!StringUtils.hasText(dataTableColumnClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no dataTableColumnClass set, using default [" 
+				LOGGER.debug(getClass() + ": no dataTableColumnClass set, using default ["
 					+ DEFAULT_DATATABLE_COLUMN_CLASS + "]");
 			}
 			dataTableColumnClass = DEFAULT_DATATABLE_COLUMN_CLASS;
 		}
 		if (!StringUtils.hasText(checkboxStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no checkboxStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no checkboxStyleClass set, using default ["
 					+ DEFAULT_CHECKBOX_STYLE_CLASS + "]");
 			}
 			checkboxStyleClass  = DEFAULT_CHECKBOX_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(sectionTag)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no sectionTag set, using default [" 
+				LOGGER.debug(getClass() + ": no sectionTag set, using default ["
 					+ DEFAULT_SECTION_TAG + "]");
 			}
 			sectionTag = DEFAULT_SECTION_TAG;
 		}
 		if (!StringUtils.hasText(sectionStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no sectionStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no sectionStyleClass set, using default ["
 					+ DEFAULT_SECTION_STYLE_CLASS + "]");
 			}
 			sectionStyleClass = DEFAULT_SECTION_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(subSectionTag)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no subSectionTag set, using default [" 
+				LOGGER.debug(getClass() + ": no subSectionTag set, using default ["
 					+ DEFAULT_SUBSECTION_TAG + "]");
 			}
 			subSectionTag = DEFAULT_SUBSECTION_TAG;
 		}
 		if (!StringUtils.hasText(subSectionStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no subSectionStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no subSectionStyleClass set, using default ["
 					+ DEFAULT_SUBSECTION_STYLE_CLASS + "]");
 			}
 			subSectionStyleClass = DEFAULT_SUBSECTION_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(paragraphTag)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no paragraphTag set, using default [" 
+				LOGGER.debug(getClass() + ": no paragraphTag set, using default ["
 					+ DEFAULT_PARAGRAPH_TAG + "]");
 			}
 			paragraphTag = DEFAULT_PARAGRAPH_TAG;
 		}
 		if (!StringUtils.hasText(paragraphStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no paragraphStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no paragraphStyleClass set, using default ["
 					+ DEFAULT_PARAGRAPH_STYLE_CLASS + "]");
 			}
 			paragraphStyleClass = DEFAULT_PARAGRAPH_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(textStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no textStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no textStyleClass set, using default ["
 					+ DEFAULT_TEXT_STYLE_CLASS + "]");
 			}
 			textStyleClass = DEFAULT_TEXT_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(menuLayout)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no menuLayout set, using default [" 
+				LOGGER.debug(getClass() + ": no menuLayout set, using default ["
 					+ DEFAULT_MENU_LAYOUT + "]");
 			}
 			menuLayout = DEFAULT_MENU_LAYOUT;
 		}
 		if (!StringUtils.hasText(menuStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no menuStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no menuStyleClass set, using default ["
 					+ DEFAULT_MENU_STYLE_CLASS + "]");
 			}
 			menuStyleClass = DEFAULT_MENU_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(menuItemStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no menuItemStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no menuItemStyleClass set, using default ["
 					+ DEFAULT_MENU_ITEM_STYLE_CLASS + "]");
 			}
 			menuItemStyleClass = DEFAULT_MENU_ITEM_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(menuActiveItemStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no menuActiveItemStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no menuActiveItemStyleClass set, using default ["
 					+ DEFAULT_MENU_ACTIVE_ITEM_STYLE_CLASS + "]");
 			}
 			menuActiveItemStyleClass = DEFAULT_MENU_ACTIVE_ITEM_STYLE_CLASS;
@@ -620,41 +620,41 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 		if (!StringUtils.hasText(footerText)) {
 			footerText = getDefaultFooterText();
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no footerText set, using default [" 
+				LOGGER.debug(getClass() + ": no footerText set, using default ["
 					+ footerText + "]");
 			}
 		}
 		if (!StringUtils.hasText(footerStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no footerStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no footerStyleClass set, using default ["
 					+ DEFAULT_FOOTER_STYLE_CLASS + "]");
 			}
 			footerStyleClass = DEFAULT_FOOTER_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(footerItemStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no footerItemStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no footerItemStyleClass set, using default ["
 					+ DEFAULT_FOOTER_ITEM_STYLE_CLASS + "]");
 			}
 			footerItemStyleClass = DEFAULT_FOOTER_ITEM_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(paginatorStyleClass)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no paginatorStyleClass set, using default [" 
+				LOGGER.debug(getClass() + ": no paginatorStyleClass set, using default ["
 					+ DEFAULT_PAGINATOR_STYLE_CLASS + "]");
 			}
 			paginatorStyleClass = DEFAULT_PAGINATOR_STYLE_CLASS;
 		}
 		if (!StringUtils.hasText(portletMediaPath)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no portletMediaPath set, using default [" 
+				LOGGER.debug(getClass() + ": no portletMediaPath set, using default ["
 					+ DEFAULT_PORTLET_MEDIA_PATH + "]");
 			}
 			portletMediaPath = DEFAULT_PORTLET_MEDIA_PATH;
 		}
 		if (!StringUtils.hasText(servletMediaPath)) {
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(getClass() + ": no servletMediaPath set, using default [" 
+				LOGGER.debug(getClass() + ": no servletMediaPath set, using default ["
 					+ DEFAULT_SERVLET_MEDIA_PATH + "]");
 			}
 			servletMediaPath = DEFAULT_SERVLET_MEDIA_PATH;
@@ -670,33 +670,33 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 		}
 		return singleton;
 	}
-	
+
 	/**
 	 * @return the class for info messages.
 	 */
 	public String getMessagesInfoClass() {
-		return messagesInfoClass; 
+		return messagesInfoClass;
 	}
 
 	/**
 	 * @return the class for warn messages.
 	 */
 	public String getMessagesWarnClass() {
-		return messagesWarnClass; 
+		return messagesWarnClass;
 	}
 
 	/**
 	 * @return the class for error messages.
 	 */
 	public String getMessagesErrorClass() {
-		return messagesErrorClass; 
+		return messagesErrorClass;
 	}
 
 	/**
 	 * @return the class for fatal messages.
 	 */
 	public String getMessagesFatalClass() {
-		return messagesFatalClass; 
+		return messagesFatalClass;
 	}
 
 	/**
@@ -1146,10 +1146,6 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 		this.footerStyleClass = footerStyleClass;
 	}
 
-	/**
-	 * @param locale
-	 * @return the strings that correspond to a locale
-	 */
 	@Override
 	public Map<String, String> getStrings(final Locale locale) {
 		return super.getStrings(locale);

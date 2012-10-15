@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.jsf; 
+package org.esupportail.commons.jsf;
 
 //see http://learnjsf.com/wp/2006/08/06/a-prg-phase-listener-for-jsf/
 
@@ -28,7 +28,7 @@ public class RedirectPhaseListener extends AbstractPhaseListener {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -36,9 +36,6 @@ public class RedirectPhaseListener extends AbstractPhaseListener {
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.jsf.AbstractPhaseListener#beforePhaseInternal(javax.faces.event.PhaseEvent)
-	 */
 	@Override
 	public void beforePhaseInternal(final PhaseEvent event) {
 		FacesContext facesContext = event.getFacesContext();

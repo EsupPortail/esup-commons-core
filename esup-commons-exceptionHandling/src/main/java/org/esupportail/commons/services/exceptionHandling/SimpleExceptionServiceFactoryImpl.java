@@ -84,9 +84,6 @@ implements ExceptionServiceFactory {
 		exceptionViews = new HashMap<Class<? extends Throwable>, String>();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
@@ -106,9 +103,6 @@ implements ExceptionServiceFactory {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionServiceFactory#getExceptionService()
-	 */
 	@Override
     public ExceptionService getExceptionService() {
 		return new SimpleExceptionServiceImpl(

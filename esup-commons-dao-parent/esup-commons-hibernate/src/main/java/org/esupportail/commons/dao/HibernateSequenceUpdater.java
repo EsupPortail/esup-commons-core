@@ -29,14 +29,8 @@ public class HibernateSequenceUpdater implements HibernateCallback<Object> {
 		this.sequenceName = sequenceName;
 	}
 
-	/**
-	 * Hibernate callback.
-	 * @param session
-	 * @return null.
-	 * @throws HibernateException
-	 */
 	@Override
-    public Object doInHibernate(final Session session) throws HibernateException {
+	public Object doInHibernate(final Session session) throws HibernateException {
 		if (sequenceId != null) {
 			session.createSQLQuery(
                     "SELECT pg_catalog.setval('" + sequenceName + "', " + sequenceId + ", true)"

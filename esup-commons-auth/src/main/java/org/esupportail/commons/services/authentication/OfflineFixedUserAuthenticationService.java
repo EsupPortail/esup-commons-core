@@ -6,11 +6,11 @@ package org.esupportail.commons.services.authentication;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.strings.StringUtils;
 
-/** 
+/**
  * This authenticator is to be used when working offline, it always returns the same user.
  */
 public class OfflineFixedUserAuthenticationService extends AbstractTypedAuthenticationService {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -28,20 +28,14 @@ public class OfflineFixedUserAuthenticationService extends AbstractTypedAuthenti
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
-		Assert.hasText(this.authId, 
-				"property authId of class " + this.getClass().getName() 
+		Assert.hasText(this.authId,
+				"property authId of class " + this.getClass().getName()
 				+ " can not be null");
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractRealAuthenticationService#getAuthId()
-	 */
 	@Override
 	protected String getAuthId() {
 		return authId;

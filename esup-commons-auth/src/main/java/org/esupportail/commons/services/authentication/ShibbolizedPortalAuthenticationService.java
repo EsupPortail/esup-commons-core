@@ -3,7 +3,7 @@
  */
 package org.esupportail.commons.services.authentication;
 
-/** 
+/**
  * A Shibbolized portal authenticator.
  */
 public class ShibbolizedPortalAuthenticationService extends PortalAuthenticationService {
@@ -20,18 +20,11 @@ public class ShibbolizedPortalAuthenticationService extends PortalAuthentication
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractTypedAuthenticationService#getAuthType()
-	 */
 	@Override
 	protected String getAuthType() {
 		return AuthUtils.SHIBBOLETH;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AbstractTypedAuthenticationService#setAuthType(
-	 * java.lang.String)
-	 */
 	@Override
 	public void setAuthType(final String authType) {
 		throw new UnsupportedOperationException(

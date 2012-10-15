@@ -4,22 +4,23 @@
 package org.esupportail.commons.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import javax.persistence.Query;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
  * An abstract DAO implementation.
  */
-public abstract class AbstractGenericJPADaoService 
+public abstract class AbstractGenericJPADaoService
 implements PaginatorDaoService, InitializingBean {
 
 	/**
 	 * A logger.
 	 */
-	private Logger logger = new LoggerImpl(getClass()); 
+	private Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * Bean constructor.
@@ -27,7 +28,6 @@ implements PaginatorDaoService, InitializingBean {
 	protected AbstractGenericJPADaoService() {
 		super();
 	}
-
 
 	/**
 	 * @return the Hibernate template used for database operations
@@ -39,15 +39,10 @@ implements PaginatorDaoService, InitializingBean {
 	 */
 	public Query getQuery(
 			final String hqlQuery) {
-		return (Query) getEntityManager().createQuery(hqlQuery);
+		return getEntityManager().createQuery(hqlQuery);
 	}
 
-
-	/**
-	 * @see org.esupportail.commons.dao.HibernateDaoService
-	 * #executeQuery(java.lang.String, org.esupportail.commons.dao.HqlQueryPojo,
-	 *  java.lang.Integer, java.lang.Integer)
-	 */
+	@Override
 	public ResultPaginator executeQuery(String queryString, HqlQueryPojo hqlQueryPojo, Integer currentPage, Integer pageSize) {
 		//key row number and visibleItems
 		ResultPaginator r = new ResultPaginator();
@@ -88,17 +83,17 @@ implements PaginatorDaoService, InitializingBean {
 		Query query = getQuery(queryString);
 		query.setFirstResult(currentPage * pageSize);
 		query.setMaxResults(pageSize);
-		
+
 		//genere le count
 		StringBuilder count = new StringBuilder("SELECT ");
 		count.append("count(*) ");
 		String fromAndWhereClause = queryString.substring(queryString.indexOf("FROM"), queryString.length());
-		
+
 		count.append(fromAndWhereClause);
-		
+
 		logger.debug(count.toString());
 		Long l = (Long) getQuery(count.toString()).getSingleResult();
-		
+
 		r.setRowNumber(l.intValue());
 
 		r.setVisibleItems(query.getResultList());

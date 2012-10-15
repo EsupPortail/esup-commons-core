@@ -164,11 +164,8 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 
 	}
 
-	/**
-	 * @see org.apache.myfaces.component.html.ext.HtmlDataTable#encodeBegin(javax.faces.context.FacesContext)
-	 */
 	@Override
-    public void encodeBegin(final FacesContext arg0)  {
+	public void encodeBegin(final FacesContext arg0)  {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Entered encodeBegin for client-Id: " + getId());
 		}
@@ -339,11 +336,8 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 		return divNbItemsByPage;
 	}
 
-	/**
-	 * @see javax.faces.component.UIComponentBase#encodeChildren(javax.faces.context.FacesContext)
-	 */
 	@Override
-    public void encodeChildren(final FacesContext context) throws IOException {
+	public void encodeChildren(final FacesContext context) throws IOException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Entered encodeChildren for client-Id: ");
 		}
@@ -357,19 +351,13 @@ public abstract class UIAbstractPaginatorStyle extends UIComponentBase {
 		}
 	}
 
-	/**
-	 * @see org.apache.myfaces.component.html.ext.HtmlDataTable#encodeEnd(javax.faces.context.FacesContext)
-	 */
 	@Override
-    public void encodeEnd(final FacesContext arg0) throws IOException {
+	public void encodeEnd(final FacesContext arg0) throws IOException {
 		super.encodeEnd(arg0);
 	}
 
-	/**
-	 * @see javax.faces.component.UIComponent#getFamily()
-	 */
 	@Override
-    public String getFamily() {
+	public String getFamily() {
 		return COMPONENT_FAMILY;
 	}
 

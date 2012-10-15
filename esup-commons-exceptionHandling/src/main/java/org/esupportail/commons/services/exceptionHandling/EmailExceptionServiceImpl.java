@@ -440,9 +440,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		logger.debug("done.");
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.SimpleExceptionServiceImpl#handleException()
-	 */
 	@Override
 	public void handleException() throws ExceptionHandlingException {
 		String textReport = null;
@@ -484,9 +481,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.SimpleExceptionServiceImpl#getRecipientEmail()
-	 */
 	@Override
 	public String getRecipientEmail() {
 		return recipientEmail;

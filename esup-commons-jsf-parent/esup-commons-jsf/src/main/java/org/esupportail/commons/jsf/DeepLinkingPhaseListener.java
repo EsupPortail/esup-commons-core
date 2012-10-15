@@ -33,18 +33,15 @@ import org.springframework.util.StringUtils;
  */
 public class DeepLinkingPhaseListener implements PhaseListener {
 
-
 	/**
 	 * The serialization id.
 	 */
 	private static final long serialVersionUID = -7429514681508723093L;
 
-
 	/**
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-
 
 	/**
 	 * Constructor.
@@ -53,22 +50,14 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 		super();
 	}
 
-
-
-	/**
-	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
-	 */
 	@Override
-    public void afterPhase(final PhaseEvent arg0) {
+	public void afterPhase(final PhaseEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
-	 */
 	@Override
-    public void beforePhase(final PhaseEvent event) {
+	public void beforePhase(final PhaseEvent event) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("enterig  DeepLinkingPhaseListener::beforePhase = " + event);
 		}
@@ -124,8 +113,6 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 		}
 	}
 
-
-
 	/**
 	 *
 	 * @param params
@@ -142,7 +129,6 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 		}
 		return null;
 	}
-
 
 	/**
 	 * renvoie les arguments de la méthode qui va être execute.
@@ -215,27 +201,12 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 			params = AbstractUrlGenerator.decodeArgToParams(args);
 		}
 
-
 		return params;
 	}
 
-
-
-
-
-
-
-
-
-	/**
-	 * @see javax.faces.event.PhaseListener#getPhaseId()
-	 */
 	@Override
-    public PhaseId getPhaseId() {
+	public PhaseId getPhaseId() {
 		return PhaseId.RENDER_RESPONSE;
 	}
-
-
-
 
 }

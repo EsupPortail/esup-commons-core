@@ -70,9 +70,6 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 		return null;
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
@@ -93,9 +90,6 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionServiceFactory#getExceptionService()
-	 */
 	@Override
 	public ExceptionService getExceptionService() {
 		return new EmailExceptionServiceImpl(

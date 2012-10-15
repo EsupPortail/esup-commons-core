@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.services.urlGeneration; 
+package org.esupportail.commons.services.urlGeneration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,19 +18,19 @@ public abstract class AbstractUrlGenerator implements UrlGenerator {
 	 * The separator between parameters.
 	 */
 	public static final String PARAMS_SEPARATOR = "&";
-	
+
 	/**
 	 * The separator between name and value.
 	 */
 	public static final String NAME_VALUE_SEPARATOR = "=";
-	
+
 	/**
 	 * Bean constructor.
 	 */
 	protected AbstractUrlGenerator() {
 		super();
 	}
-	
+
 	/**
 	 * Encode parameters into an argument.
 	 * @param params
@@ -44,7 +44,7 @@ public abstract class AbstractUrlGenerator implements UrlGenerator {
 		String arg = "";
 		String separator = "";
 		for (String name : params.keySet()) {
-			arg = arg + separator + name + NAME_VALUE_SEPARATOR 
+			arg = arg + separator + name + NAME_VALUE_SEPARATOR
 			+ StringUtilsWeb.utf8UrlEncode(params.get(name));
 			separator = PARAMS_SEPARATOR;
 		}
@@ -65,7 +65,7 @@ public abstract class AbstractUrlGenerator implements UrlGenerator {
 		}
 		String decodedArg;
 		decodedArg = arg;
-		Map<String, String> params = new HashMap<String, String>(); 
+		Map<String, String> params = new HashMap<String, String>();
 		for (String param : decodedArg.split(PARAMS_SEPARATOR)) {
 			String[] nameValueArray = param.split(NAME_VALUE_SEPARATOR, 2);
 			if (nameValueArray.length == 2) {
@@ -79,54 +79,42 @@ public abstract class AbstractUrlGenerator implements UrlGenerator {
 
 	/**
 	 * @param authType
-	 * @param params 
+	 * @param params
 	 * @return a link to the application with parameters.
 	 */
 	protected abstract String url(
 			final AuthEnum authType,
 			final Map<String, String> params);
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.UrlGenerator#guestUrl(java.util.Map)
-	 */
+	@Override
 	public String guestUrl(
 			final Map<String, String> params) {
 		return url(AuthEnum.application, params);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.UrlGenerator#guestUrl()
-	 */
+	@Override
 	public String guestUrl() {
 		return guestUrl(null);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.UrlGenerator#casUrl(java.util.Map)
-	 */
+	@Override
 	public String casUrl(
 			final Map<String, String> params) {
 		return url(AuthEnum.cas, params);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.UrlGenerator#casUrl()
-	 */
+	@Override
 	public String casUrl() {
 		return casUrl(null);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.UrlGenerator#shibbolethUrl(java.util.Map)
-	 */
+	@Override
 	public String shibbolethUrl(
 			final Map<String, String> params) {
 		return url(AuthEnum.shibboleth, params);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.urlGeneration.UrlGenerator#shibbolethUrl()
-	 */
+	@Override
 	public String shibbolethUrl() {
 		return shibbolethUrl(null);
 	}

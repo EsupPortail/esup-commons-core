@@ -44,11 +44,8 @@ public class ExceptionController implements InitializingBean, Serializable {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
 	@Override
-    public void afterPropertiesSet() {
+	public void afterPropertiesSet() {
 		//
 	}
 

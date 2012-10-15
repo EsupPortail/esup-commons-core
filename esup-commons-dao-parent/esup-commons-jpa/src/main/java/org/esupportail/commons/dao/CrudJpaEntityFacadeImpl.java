@@ -16,9 +16,7 @@ import javax.persistence.Query;
 
 /**
  * @author Yves Deschamps.
- * @param <T>
- *            Class bean
- *
+ * @param <T> Class bean
  */
 public class CrudJpaEntityFacadeImpl<T> implements CrudJpaEntityFacade<T> {
 

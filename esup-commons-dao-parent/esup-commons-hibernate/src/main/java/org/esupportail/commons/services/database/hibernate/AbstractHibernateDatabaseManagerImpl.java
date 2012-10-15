@@ -7,24 +7,25 @@ import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.database.AbstractBasicDatabaseManager;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.commons.utils.strings.StringUtils;
+
+import org.springframework.beans.factory.InitializingBean;
 //TODO CL V2: lien vers module web
 //import org.esupportail.commons.utils.ContextUtils;
-import org.esupportail.commons.utils.strings.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
 
 /**
  * An abstract class for non updatable database managers.
  */
 @SuppressWarnings("serial")
-public abstract class AbstractHibernateDatabaseManagerImpl 
-extends AbstractBasicDatabaseManager 
+public abstract class AbstractHibernateDatabaseManagerImpl
+extends AbstractBasicDatabaseManager
 implements InitializingBean {
-	
+
 	/**
 	 * Holds the thread data.
 	 */
 	private ThreadLocal<HibernateThreadData> ts = new ThreadLocal<HibernateThreadData>();
-	
+
 	/**
 	 * A logger.
 	 */
@@ -34,22 +35,22 @@ implements InitializingBean {
 	 * True to use JDBC.
 	 */
 	private boolean useJdbc;
-	
+
 	/**
 	 * True to use JNDI.
 	 */
 	private boolean useJndi;
-	
+
 	/**
 	 * The name of the JDBC session factory bean (normal mode).
 	 */
 	private String jdbcSessionFactoryBeanName;
-	
+
 	/**
 	 * The name of the JNDI session factory bean (normal mode).
 	 */
 	private String jndiSessionFactoryBeanName;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -57,17 +58,15 @@ implements InitializingBean {
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
-	public void afterPropertiesSet() throws Exception {
+	@Override
+    public void afterPropertiesSet() throws Exception {
 		if (jdbcSessionFactoryBeanName == null && jndiSessionFactoryBeanName == null) {
 			throw new ConfigException("properties [jdbcSessionFactoryBeanName] "
-					+ "and [jndiSessionFactoryBeanName] of class [" 
+					+ "and [jndiSessionFactoryBeanName] of class ["
 					+ getClass().getName() + "] can not be both null");
 		}
 	}
-	
+
 	/**
 	 * @return the name of the session factory, depending on the context (web or not).
 	 */
@@ -91,9 +90,7 @@ implements InitializingBean {
 		return sessionFactoryBeanName;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManager#openSession()
-	 */
+	@Override
 	public void openSession() {
 		String sessionFactoryBeanName = getSessionFactoryBeanName();
 		HibernateThreadData td = ts.get();
@@ -114,9 +111,7 @@ implements InitializingBean {
 		td.openSession(sessionFactoryBeanName);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManager#beginTransaction()
-	 */
+	@Override
 	public void beginTransaction() {
 		String sessionFactoryBeanName = getSessionFactoryBeanName();
 		if (!isTransactionnal()) {
@@ -141,16 +136,14 @@ implements InitializingBean {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManager#endTransaction(boolean)
-	 */
-	public void endTransaction(
+	@Override
+    public void endTransaction(
 			final boolean commit) {
 		String sessionFactoryBeanName = getSessionFactoryBeanName();
 		if (!isTransactionnal()) {
 			if (logger.isDebugEnabled()) {
 				logger.debug(
-						"END(" + sessionFactoryBeanName + ", " 
+						"END(" + sessionFactoryBeanName + ", "
 						+ commit + ") ***** not transactionnal!");
 			}
 			return;
@@ -171,10 +164,8 @@ implements InitializingBean {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManager#closeSession()
-	 */
-	public void closeSession() {
+	@Override
+    public void closeSession() {
 		String sessionFactoryBeanName = getSessionFactoryBeanName();
 		HibernateThreadData td = ts.get();
 		if (logger.isDebugEnabled()) {
@@ -193,10 +184,8 @@ implements InitializingBean {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManager#test()
-	 */
-	public void test() {
+	@Override
+    public void test() {
 		openSession();
 		beginTransaction();
 		endTransaction(false);
@@ -221,7 +210,7 @@ implements InitializingBean {
 	 * @param unused
 	 */
 	public void setSessionFactoryBeanName(final String unused) {
-		throw new ConfigException(getClass() 
+		throw new ConfigException(getClass()
 				+ ": property [sessionFactoryBeanName] is obsolete, "
 				+ "use [jdbcSessionFactoryBeanName] instead and "
 				+ "optionnaly [jndiSessionFactoryBeanName]");

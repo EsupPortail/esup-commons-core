@@ -21,7 +21,6 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.SmtpService;
 
-
 /**
  * An implementation of ExceptionService, that logs the exceptions, send
  * them to an email address and redirect to an exception page. The difference
@@ -100,11 +99,6 @@ public class CachingEmailExceptionServiceImpl extends EmailExceptionServiceImpl 
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.EmailExceptionServiceImpl#sendEmail(
-	 * boolean, java.lang.Throwable, javax.mail.internet.InternetAddress,
-	 * java.lang.String, java.lang.String, java.lang.String)
-	 */
 	@Override
 	protected void sendEmail(
 			final boolean intercept,

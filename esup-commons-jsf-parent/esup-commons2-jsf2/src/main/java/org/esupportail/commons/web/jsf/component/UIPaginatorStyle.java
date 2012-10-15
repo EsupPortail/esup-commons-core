@@ -66,12 +66,8 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	/*
 	 ******************* METHODS ********************** */
 
-	/**
-	 * @see org.esupportail.commons.web.component.UIAbstractPaginatorStyle#makeDivPages(
-	 * javax.faces.application.Application)
-	 */
 	@Override
-    protected Div makeDivPages(final Application a) {
+	protected Div makeDivPages(final Application a) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering makeDivPagination(" + a + ")");
 		}

@@ -22,7 +22,7 @@ public class PortletCasServiceImpl implements CasService {
 	 * @see org.esupportail.commons.services.cas.AbstractCasService#getProxyTicket(java.lang.String)
 	 */
 	@Override
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
     public String getProxyTicket(String targetService) throws CasException {
 		Map<String,String> userInfo = (Map<String,String>) ContextUtils.getGlobalSessionAttribute("javax.portlet.userinfo");
 		String proxyTicket = userInfo.get("casProxyTicket");

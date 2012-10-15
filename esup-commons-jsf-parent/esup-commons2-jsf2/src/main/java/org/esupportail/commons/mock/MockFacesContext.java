@@ -42,9 +42,6 @@ public class MockFacesContext extends FacesContext {
 		super();
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getApplication()
-	 */
 	@Override
 	public Application getApplication() {
 		return application;
@@ -57,17 +54,11 @@ public class MockFacesContext extends FacesContext {
 		this.application = application;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getClientIdsWithMessages()
-	 */
 	@Override
 	public Iterator<String> getClientIdsWithMessages() {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getExternalContext()
-	 */
 	@Override
 	public ExternalContext getExternalContext() {
 		return externalContext;
@@ -80,129 +71,81 @@ public class MockFacesContext extends FacesContext {
 		this.externalContext = externalContext;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getMaximumSeverity()
-	 */
 	@Override
 	public Severity getMaximumSeverity() {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getMessages()
-	 */
 	@Override
 	public Iterator<FacesMessage> getMessages() {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getMessages(java.lang.String)
-	 */
 	@Override
 	public Iterator<FacesMessage> getMessages(final String arg0) {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getRenderKit()
-	 */
 	@Override
 	public RenderKit getRenderKit() {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getRenderResponse()
-	 */
 	@Override
 	public boolean getRenderResponse() {
 		return false;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getResponseComplete()
-	 */
 	@Override
 	public boolean getResponseComplete() {
 		return false;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getResponseStream()
-	 */
 	@Override
 	public ResponseStream getResponseStream() {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#setResponseStream(javax.faces.context.ResponseStream)
-	 */
 	@Override
 	public void setResponseStream(final ResponseStream arg0) {
 		// do nothing
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getResponseWriter()
-	 */
 	@Override
 	public ResponseWriter getResponseWriter() {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#setResponseWriter(javax.faces.context.ResponseWriter)
-	 */
 	@Override
 	public void setResponseWriter(final ResponseWriter arg0) {
 		// do nothing
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#getViewRoot()
-	 */
 	@Override
 	public UIViewRoot getViewRoot() {
 		return viewRoot;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#setViewRoot(javax.faces.component.UIViewRoot)
-	 */
 	@Override
 	public void setViewRoot(final UIViewRoot viewRoot) {
 		this.viewRoot = viewRoot;
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#addMessage(java.lang.String, javax.faces.application.FacesMessage)
-	 */
 	@Override
 	public void addMessage(final String arg0, final FacesMessage arg1) {
 		// do nothing
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#release()
-	 */
 	@Override
 	public void release() {
 		// do nothing
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#renderResponse()
-	 */
 	@Override
 	public void renderResponse() {
 		// do nothing
 	}
 
-	/**
-	 * @see javax.faces.context.FacesContext#responseComplete()
-	 */
 	@Override
 	public void responseComplete() {
 		// do nothing

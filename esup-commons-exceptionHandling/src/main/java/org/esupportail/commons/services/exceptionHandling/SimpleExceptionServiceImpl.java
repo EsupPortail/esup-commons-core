@@ -392,12 +392,8 @@ implements ExceptionService {
 		return sb.toString();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#setParameters(
-	 * java.lang.Throwable)
-	 */
 	@Override
-    public void setParameters(
+	public void setParameters(
 			final Throwable t) throws ExceptionHandlingException {
 		try {
 			throwable = t;
@@ -474,11 +470,8 @@ implements ExceptionService {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#handleException()
-	 */
 	@Override
-    public void handleException() throws ExceptionHandlingException {
+	public void handleException() throws ExceptionHandlingException {
 		// try to log the throwable
 		try {
 			logTextReport(getThrowable(), getTextReport());
@@ -489,163 +482,103 @@ implements ExceptionService {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getApplicationName()
-	 */
 	@Override
-    public String getApplicationName() {
+	public String getApplicationName() {
 		return applicationName;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getApplicationVersion()
-	 */
 	@Override
-    public Version getApplicationVersion() {
+	public Version getApplicationVersion() {
 		return applicationVersion;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getClient()
-	 */
 	@Override
-    public String getClient() {
+	public String getClient() {
 		return client;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getCookies()
-	 */
 	@Override
-    public Set<String> getCookies() {
+	public Set<String> getCookies() {
 		return cookies;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getDate()
-	 */
 	@Override
-    public Long getDate() {
+	public Long getDate() {
 		return date;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getPortal()
-	 */
 	@Override
-    public String getPortal() {
+	public String getPortal() {
 		return portal;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getQueryString()
-	 */
 	@Override
-    public String getQueryString() {
+	public String getQueryString() {
 		return queryString;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getQuickStart()
-	 */
 	@Override
-    public Boolean getQuickStart() {
+	public Boolean getQuickStart() {
 		return quickStart;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRequestHeaders()
-	 */
 	@Override
-    public Set<String> getRequestHeaders() {
+	public Set<String> getRequestHeaders() {
 		return requestHeaders;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRequestParameters()
-	 */
 	@Override
-    public Set<String> getRequestParameters() {
+	public Set<String> getRequestParameters() {
 		return requestParameters;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getServer()
-	 */
 	@Override
-    public String getServer() {
+	public String getServer() {
 		return server;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRequestAttributes()
-	 */
 	@Override
-    public Set<String> getRequestAttributes() {
+	public Set<String> getRequestAttributes() {
 		return requestAttributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getSessionAttributes()
-	 */
 	@Override
-    public Set<String> getSessionAttributes() {
+	public Set<String> getSessionAttributes() {
 		return sessionAttributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getGlobalSessionAttributes()
-	 */
 	@Override
-    public Set<String> getGlobalSessionAttributes() {
+	public Set<String> getGlobalSessionAttributes() {
 		return globalSessionAttributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getSystemProperties()
-	 */
 	@Override
-    public Set<String> getSystemProperties() {
+	public Set<String> getSystemProperties() {
 		return systemProperties;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getThrowable()
-	 */
 	@Override
-    public Throwable getThrowable() {
+	public Throwable getThrowable() {
 		return throwable;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getUserAgent()
-	 */
 	@Override
-    public String getUserAgent() {
+	public String getUserAgent() {
 		return userAgent;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getUserId()
-	 */
 	@Override
-    public String getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRecipientEmail()
-	 */
 	@Override
-    public String getRecipientEmail() {
+	public String getRecipientEmail() {
 		return null;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getExceptionView()
-	 */
 	@Override
-    public String getExceptionView() {
+	public String getExceptionView() {
 		if (throwable != null) {
 			for (Class<? extends Throwable> clazz : exceptionViews.keySet()) {
 				for (Throwable cause : ExceptionUtils.getCauses(throwable)) {

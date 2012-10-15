@@ -55,15 +55,8 @@ public class LdapAttributesMapper implements AttributesMapper, Serializable {
 		return attributes;
 	}
 
-	/**
-	 * Performs mapping after an LDAP query for a set of user attributes. Takes each key in the ldap
-	 * to ldapUser attribute Map and tries to find it in the returned Attributes set. For each found
-	 * Attribute the value is added to the attribute Map as the value or in the value Set with the
-	 * ldapUser attribute name as the key. String and byte[] may be values.
-	 * @see org.springframework.ldap.AttributesMapper#mapFromAttributes(javax.naming.directory.Attributes)
-	 */
 	@Override
-    public Object mapFromAttributes(final Attributes attrs) throws NamingException {
+	public Object mapFromAttributes(final Attributes attrs) throws NamingException {
 		LdapUserImpl ldapUser = new LdapUserImpl();
 		Attribute uidAttr = attrs.get(uidAttribute);
 		if (uidAttr == null) {

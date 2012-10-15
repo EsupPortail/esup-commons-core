@@ -20,6 +20,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.BeanUtilsWeb;
 import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.commons.utils.DownloadUtils;
+
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
@@ -30,27 +31,27 @@ public class DownloadServlet extends HttpServlet {
 	/**
 	 * The attribute to retrieve the data from.
 	 */
-	public static final String ID_ATTRIBUTE = "downloadId"; 
+	public static final String ID_ATTRIBUTE = "downloadId";
 
 	/**
 	 * The attribute to retrieve the data from.
 	 */
-	public static final String DATA_ATTRIBUTE = "downloadData-"; 
+	public static final String DATA_ATTRIBUTE = "downloadData-";
 
 	/**
 	 * The attribute to retrieve the content-type from.
 	 */
-	public static final String CONTENT_TYPE_ATTRIBUTE = "downloadContentType-"; 
+	public static final String CONTENT_TYPE_ATTRIBUTE = "downloadContentType-";
 
 	/**
 	 * The atribute to retrieve the content-disposition from.
 	 */
-	public static final String CONTENT_DISPOSITION_ATTRIBUTE = "downloadContentDisposition"; 
+	public static final String CONTENT_DISPOSITION_ATTRIBUTE = "downloadContentDisposition";
 
 	/**
 	 * The attribute to retrieve the filename from.
 	 */
-	public static final String FILENAME_ATTRIBUTE = "downloadFilename-"; 
+	public static final String FILENAME_ATTRIBUTE = "downloadFilename-";
 
 	/**
 	 * The id for serialization.
@@ -74,9 +75,6 @@ public class DownloadServlet extends HttpServlet {
 		super();
 	}
 
-	/**
-	 * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
-	 */
 	@Override
 	public void init(final ServletConfig config) throws ServletException {
 		super.init(config);
@@ -86,16 +84,10 @@ public class DownloadServlet extends HttpServlet {
 		}
 	}
 
-
-
-	/**
-	 * @throws ServletException 
-	 * @see javax.servlet.http.HttpServlet#service(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
-	 */
 	@Override
 	public void service(
-			final ServletRequest servletRequest, 
-			final ServletResponse servletResponse) 
+			final ServletRequest servletRequest,
+			final ServletResponse servletResponse)
 	throws ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -122,11 +114,11 @@ public class DownloadServlet extends HttpServlet {
 			if (filename != null) {
 				if (disposition != null) {
 					response.setHeader(
-							"Content-disposition", disposition 
+							"Content-disposition", disposition
 							+ "; filename=\"" + filename + "\"");
 				} else {
 					response.setHeader(
-							"Content-disposition", "inline; filename=\"" 
+							"Content-disposition", "inline; filename=\""
 							+ filename + "\"");
 				}
 			}
@@ -142,12 +134,12 @@ public class DownloadServlet extends HttpServlet {
 				out.write(data);
 			} catch (SocketException e) {
 				logger.warn(
-						"SocketException was raides while downloading, " 
+						"SocketException was raides while downloading, "
 						+ "probably because the client cancelled");
 			}
 		} catch (Throwable t) {
 			Exception de = new DownloadException(t);
-			//TODO CL V2 : Use exception in core module 
+			//TODO CL V2 : Use exception in core module
 			//ExceptionUtils.catchException(de);
 			ContextUtils.unbindRequest(previousRequestAttributes);
 			throw new ServletException(de);

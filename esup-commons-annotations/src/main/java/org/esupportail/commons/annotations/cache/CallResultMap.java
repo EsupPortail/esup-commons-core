@@ -22,7 +22,7 @@ public class CallResultMap extends HashMap<String, CallResult> {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -31,7 +31,7 @@ public class CallResultMap extends HashMap<String, CallResult> {
 	}
 
 	/**
-	 * @param key 
+	 * @param key
 	 * @return a call result.
 	 * @see java.util.HashMap#get(java.lang.Object)
 	 */
@@ -44,14 +44,14 @@ public class CallResultMap extends HashMap<String, CallResult> {
 	}
 
 	/**
-	 * @param key 
-	 * @param callResult 
+	 * @param key
+	 * @param callResult
 	 * @return the call result.
 	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	public CallResult put(
-			final String key, 
+			final String key,
 			final CallResult callResult) {
 		super.put(key, callResult);
 		if (logger.isDebugEnabled()) {

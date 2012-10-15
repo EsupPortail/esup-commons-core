@@ -5,9 +5,10 @@ package org.esupportail.commons.domain.beans;
 
 import java.util.Locale;
 
+import org.esupportail.commons.exceptions.PasswordException;
 import org.esupportail.commons.services.i18n.I18nService;
 import org.esupportail.commons.utils.Assert;
-import org.esupportail.commons.exceptions.PasswordException;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -29,12 +30,12 @@ public class UserPasswordManagerImpl implements UserPasswordManager, Initializin
 	 * The default maximum length for passwords.
 	 */
 	private static final int DEFAULT_PASSWORD_MAX_LENGTH = 8;
-	
+
 	/**
 	 * The i18n service.
 	 */
 	private I18nService i18nService;
-	
+
 	/**
 	 * The minimum length for passwords.
 	 */
@@ -52,9 +53,7 @@ public class UserPasswordManagerImpl implements UserPasswordManager, Initializin
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		Assert.notNull(i18nService, "property i18nService can not be null");
 		if (passwordMaxLength == null || passwordMaxLength < 1) {
@@ -65,16 +64,14 @@ public class UserPasswordManagerImpl implements UserPasswordManager, Initializin
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.domain.UserPasswordManager#generate()
-	 */
-	public String generate() {
+	@Override
+    public String generate() {
 		StringBuffer sb = new StringBuffer(8);
 		Math.random();
 		for (int i = 0; i < 8; i++) {
 			char intChar = 0;
-			while (intChar < 48 
-					|| intChar > 122 
+			while (intChar < 48
+					|| intChar > 122
 					|| (intChar > 57 && intChar < 65)
 					|| (intChar > 90 && intChar < 97)) {
 				Math.random();
@@ -85,10 +82,8 @@ public class UserPasswordManagerImpl implements UserPasswordManager, Initializin
 		return sb.toString();
 	}
 
-	/**
-	 * @see org.esupportail.commons.domain.UserPasswordManager#check(java.lang.String, java.util.Locale)
-	 */
-	public void check(final String password, final Locale locale) throws PasswordException {
+	@Override
+    public void check(final String password, final Locale locale) throws PasswordException {
 		if (password == null) {
 			throw new PasswordException(i18nService.getString("PASSWORD_ERROR.NULL", locale));
 		}

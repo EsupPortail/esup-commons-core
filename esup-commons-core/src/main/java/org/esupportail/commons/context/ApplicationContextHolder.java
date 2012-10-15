@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.context;
 
@@ -13,17 +13,17 @@ import org.springframework.context.ApplicationContextAware;
  */
 public class ApplicationContextHolder implements ApplicationContextAware {
 
-	
+
 	/*
 	 *************************** PROPERTIES ******************************** */
-	
+
 	/** Contexte Spring qui sera injecte par Spring directement */
 	private static ApplicationContext context;;
 
-	
+
 	/*
 	 *************************** INIT ************************************** */
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -31,20 +31,17 @@ public class ApplicationContextHolder implements ApplicationContextAware {
 		super();
 	}
 
-	
-	
+
+
 	/*
 	 *************************** METHODS *********************************** */
-	
-	/**
-	 * @see org.springframework.context.ApplicationContextAware
-	 * #setApplicationContext(org.springframework.context.ApplicationContext)
-	 */
+
+	@Override
 	public void setApplicationContext(final ApplicationContext applicationContext)
 			throws BeansException {
 		context = applicationContext;
 	}
-	
+
 
 	/**
 	 * Methode statique pour récupérer le contexte
@@ -53,7 +50,7 @@ public class ApplicationContextHolder implements ApplicationContextAware {
 		return context;
 	}
 
-	
+
 
 	/*
 	 *************************** ACCESSORS ********************************* */

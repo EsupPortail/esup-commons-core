@@ -1,7 +1,7 @@
 /**
-* 
-* 
-* 
+*
+*
+*
 */
 package org.esupportail.commons.dao;
 
@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
  * @author ylecuyer
  *
  */
-public class HibernateTransactionManager 
+public class HibernateTransactionManager
 	extends org.springframework.orm.hibernate3.HibernateTransactionManager {
 
 	/**
@@ -28,17 +28,17 @@ public class HibernateTransactionManager
 	 * True to use JNDI.
 	 */
 	private boolean useJndi;
-	
+
 	/**
 	 * True to use JNDI.
 	 */
 	private boolean isUseJdbc;
-	
+
 	/**
 	 * The name of the JDBC session factory bean (upgrade mode).
 	 */
 	private String jdbcSessionFactoryBeanName;
-	
+
 	/**
 	 * The name of the JNDI session factory bean (upgrade mode).
 	 */
@@ -61,9 +61,6 @@ public class HibernateTransactionManager
 		super(sessionFactory);
 	}
 
-	/**
-	 * @see org.springframework.orm.hibernate3.HibernateTransactionManager#afterPropertiesSet()
-	 */
 	@Override
 	public void afterPropertiesSet() {
 		isUseJdbc = true;
@@ -72,16 +69,12 @@ public class HibernateTransactionManager
 	/*
 	 *************************** METHODS *********************************** */
 
-	/**
-	 * @see org.springframework.orm.hibernate3.HibernateTransactionManager#getSessionFactory()
-	 */
 	@Override
 	public SessionFactory getSessionFactory() {
 		return (SessionFactory) BeanUtils.getBean(getSessionFactoryBeanName());
 
 	}
-	
-	
+
 	/**
 	 * @return the name of the upgrade session factory, depending on the context (web or not).
 	 */
@@ -104,7 +97,7 @@ public class HibernateTransactionManager
 //		}
 		return sessionFactoryBeanName;
 	}
-	
+
 	/*
 	 *************************** ACCESSORS ********************************* */
 
@@ -121,8 +114,8 @@ public class HibernateTransactionManager
 	public void setUseJndi(final boolean useJndi) {
 		this.useJndi = useJndi;
 	}
-	
-	
+
+
 
 	/**
 	 * @return the jdbcSessionFactoryBeanName
@@ -152,7 +145,7 @@ public class HibernateTransactionManager
 		this.jndiSessionFactoryBeanName = jndiSessionFactoryBeanName;
 	}
 
-	
+
 
 }
 

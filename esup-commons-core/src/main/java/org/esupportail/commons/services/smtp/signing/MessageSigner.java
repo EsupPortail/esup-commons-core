@@ -6,7 +6,7 @@ package org.esupportail.commons.services.smtp.signing;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-/** 
+/**
  * The interface for signing email messages.
  */
 public interface MessageSigner {
@@ -16,5 +16,5 @@ public interface MessageSigner {
      * @param mimeMessage the message that should be signed
      * @return the message with sign embedded
      */
-    public MimeMessage sign(Session session, MimeMessage mimeMessage);
+    MimeMessage sign(Session session, MimeMessage mimeMessage);
 }
