@@ -69,6 +69,7 @@
 				<configuration>
 					<tagNameFormat>V2-@{project.version}</tagNameFormat>
 					<goals>deploy</goals>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 			<plugin>
