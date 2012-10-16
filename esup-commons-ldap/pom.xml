@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>esup-commons2-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.3.1-SNAPSHOT</version>
+		<version>0.3.1</version>
 	</parent>
 	<artifactId>esup-commons2-ldap</artifactId>
 	<name>esup-commons-ldap</name>
