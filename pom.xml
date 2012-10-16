@@ -4,7 +4,7 @@
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.1-SNAPSHOT</version>
+	<version>0.3.2-SNAPSHOT</version>
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
@@ -69,6 +69,7 @@
 				<configuration>
 					<tagNameFormat>V2-@{project.version}</tagNameFormat>
 					<goals>deploy</goals>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 			<plugin>

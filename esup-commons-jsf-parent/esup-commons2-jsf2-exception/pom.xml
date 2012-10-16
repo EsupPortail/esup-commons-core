@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.3.1-SNAPSHOT</version>
+		<version>0.3.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>esup-commons2-jsf2-exception</artifactId>
 	<name>esup-commons-jsf2-exception</name>
