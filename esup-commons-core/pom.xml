@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-parent</artifactId>
-		<version>0.3.1</version>
+		<version>0.3.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>esup-commons2-core</artifactId>
 	<name>esup-commons-core</name>
