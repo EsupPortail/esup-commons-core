@@ -158,7 +158,7 @@ implements ExceptionService {
 	/**
 	 * The views to redirect to.
 	 */
-	private Map<Class, String> exceptionViews;
+	private Map<Class<? extends Throwable>, String> exceptionViews;
 
 	/**
 	 * The log level.
@@ -181,7 +181,7 @@ implements ExceptionService {
 	public SimpleExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
-			final Map<Class, String> exceptionViews,
+			final Map<Class<? extends Throwable>, String> exceptionViews,
 			final AuthenticationService authenticationService,
 			final String logLevel) {
 		super();
@@ -580,9 +580,9 @@ implements ExceptionService {
 	@Override
 	public String getExceptionView() {
 		if (throwable != null) {
-			for (Class clazz : exceptionViews.keySet()) {
+			for (Class<? extends Throwable> clazz : exceptionViews.keySet()) {
 				for (Throwable cause : ExceptionUtils.getCauses(throwable)) {
-					Class causeClass = cause.getClass();
+					Class<? extends Throwable> causeClass = cause.getClass();
 					if (clazz.equals(causeClass)) {
 						return exceptionViews.get(clazz);
 					}

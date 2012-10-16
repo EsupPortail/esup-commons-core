@@ -53,14 +53,14 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	/**
 	 * No email sent for these exceptions.
 	 */
-	private List<Class> noEmailExceptions;
+	private List<Class<? extends Throwable>> noEmailExceptions;
 
 	/**
 	 * Bean constructor.
 	 */
 	public EmailExceptionServiceFactoryImpl() {
 		super();
-		this.noEmailExceptions = new ArrayList<Class>();
+		this.noEmailExceptions = new ArrayList<Class<? extends Throwable>>();
 	}
 
 	/**
@@ -146,14 +146,16 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	 * Add a 'no email' exception.
 	 * @param className
 	 */
-	private void addNoEmailException(final String className) {
+	@SuppressWarnings("unchecked")
+    private void addNoEmailException(final String className) {
 		try {
-			Class clazz = Class.forName(className);
+			Class<?> clazz = Class.forName(className);
 			if (!(Exception.class.isAssignableFrom(clazz))) {
 				throw new ConfigException("class [" + className
 						+ "] is not a subclass of [" + Exception.class + "]");
 			}
-			this.noEmailExceptions.add(clazz);
+			Class<? extends Throwable> exceptionClazz = (Class<? extends Throwable>) clazz;
+			this.noEmailExceptions.add(exceptionClazz);
 		} catch (ClassNotFoundException e) {
 			throw new ConfigException(e);
 		}
@@ -171,7 +173,7 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	/**
 	 * @return the noEmailExceptions
 	 */
-	protected List<Class> getNoEmailExceptions() {
+	protected List<Class<? extends Throwable>> getNoEmailExceptions() {
 		return noEmailExceptions;
 	}
 

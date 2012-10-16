@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.utils; 
+package org.esupportail.commons.utils;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.commons.exceptions.ConfigException;
+
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -101,7 +102,7 @@ public abstract class Assert {
 	 * @param message the exception message to use if the assertion fails
 	 */
 	public static void doesNotContain(final String textToSearch, final String substring, final String message) {
-		if (StringUtils.hasLength(textToSearch) && StringUtils.hasLength(substring) 
+		if (StringUtils.hasLength(textToSearch) && StringUtils.hasLength(substring)
 				&& textToSearch.indexOf(substring) != -1) {
 			throw new ConfigException(message);
 		}
@@ -128,7 +129,7 @@ public abstract class Assert {
 	 * @param collection the collection to check
 	 * @param message the exception message to use if the assertion fails
 	 */
-	public static void notEmpty(final Collection collection, final String message) {
+	public static void notEmpty(final Collection<?> collection, final String message) {
 		if (CollectionUtils.isEmpty(collection)) {
 			throw new ConfigException(message);
 		}
@@ -141,7 +142,7 @@ public abstract class Assert {
 	 * @param map the map to check
 	 * @param message the exception message to use if the assertion fails
 	 */
-	public static void notEmpty(final Map map, final String message) {
+	public static void notEmpty(final Map<?, ?> map, final String message) {
 		if (CollectionUtils.isEmpty(map)) {
 			throw new ConfigException(message);
 		}
@@ -158,15 +159,15 @@ public abstract class Assert {
 	 * ok when prepended to it.
 	 * @see Class#isInstance
 	 */
-	public static void isInstanceOf(final Class clazz, final Object obj, final String message) {
+	public static void isInstanceOf(final Class <?>clazz, final Object obj, final String message) {
 		Assert.notNull(clazz, "The clazz to perform the instanceof assertion cannot be null");
 		if (obj == null) {
-			Assert.isTrue(clazz.isInstance(obj), message 
-					+ "Object of class '" + "[null]" 
+			Assert.isTrue(clazz.isInstance(obj), message
+					+ "Object of class '" + "[null]"
 					+ "' must be an instance of '" + clazz.getName() + "'");
 		} else {
-			Assert.isTrue(clazz.isInstance(obj), message 
-					+ "Object of class '" + obj.getClass().getName() 
+			Assert.isTrue(clazz.isInstance(obj), message
+					+ "Object of class '" + obj.getClass().getName()
 					+ "' must be an instance of '" + clazz.getName() + "'");
 		}
 	}
@@ -181,7 +182,7 @@ public abstract class Assert {
 	 * normally end in a ": " or ". " so that the function generate message looks
 	 * ok when prepended to it.
 	 */
-	public static void isAssignable(final Class superType, final Class subType, final String message) {
+	public static void isAssignable(final Class<?> superType, final Class<?> subType, final String message) {
 		Assert.notNull(superType, "superType cannot be null");
 		Assert.notNull(subType, "subType cannot be null");
 		Assert.isTrue(superType.isAssignableFrom(subType), message + "Type [" + subType.getName()
@@ -206,8 +207,8 @@ public abstract class Assert {
 	/**
 	 * Assert that a list of strings contains a value.
 	 * @param values
-	 * @param listName 
-	 * @param value 
+	 * @param listName
+	 * @param value
 	 */
 	public static void contains(
 			final List<String> values,
@@ -230,8 +231,8 @@ public abstract class Assert {
 	/**
 	 * Assert that an array of strings contains a value.
 	 * @param values
-	 * @param listName 
-	 * @param value 
+	 * @param listName
+	 * @param value
 	 */
 	public static void contains(
 			final String [] values,
@@ -243,8 +244,8 @@ public abstract class Assert {
 	/**
 	 * Assert that a list of strings contains a value.
 	 * @param values
-	 * @param listName 
-	 * @param value 
+	 * @param listName
+	 * @param value
 	 */
 	public static void contains(
 			final List<Integer> values,
@@ -267,8 +268,8 @@ public abstract class Assert {
 	/**
 	 * Assert that an array of strings contains a value.
 	 * @param values
-	 * @param listName 
-	 * @param value 
+	 * @param listName
+	 * @param value
 	 */
 	public static void contains(
 			final Integer [] values,
