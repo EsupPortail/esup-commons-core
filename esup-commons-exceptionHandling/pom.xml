@@ -3,13 +3,10 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-parent</artifactId>
-		<version>0.3.1-SNAPSHOT</version>
+		<version>0.3.1</version>
 	</parent>
 	<artifactId>esup-commons2-exceptionHandling</artifactId>
-	<packaging>jar</packaging>
-	<version>0.3.1-SNAPSHOT</version>
 	<name>esup-commons-exceptionHandling</name>
-	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>org.esupportail</groupId>

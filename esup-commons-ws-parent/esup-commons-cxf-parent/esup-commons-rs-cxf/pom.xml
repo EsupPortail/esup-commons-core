@@ -4,14 +4,11 @@
 	<parent>
 		<artifactId>esup-commons2-cxf-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.3.1-SNAPSHOT</version>
+		<version>0.3.1</version>
 	</parent>
-	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-rs-cxf</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.1-SNAPSHOT</version>
 	<name>esup-commons-rs-cxf</name>
-	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -22,22 +19,16 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 			<version>${cxf.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>		
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-jaxrs</artifactId>
 			<version>${jackson.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-xc</artifactId>
 			<version>${jackson.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<properties>

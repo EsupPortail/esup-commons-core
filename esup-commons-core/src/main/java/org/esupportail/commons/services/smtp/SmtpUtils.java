@@ -352,12 +352,12 @@ public class SmtpUtils {
 						multipart.addBodyPart(textBodyPart);
 						// Create your html message part
 						BodyPart htmlBodyPart = new MimeBodyPart();
-						htmlBodyPart.setContent(htmlBody, "text/html");
+						htmlBodyPart.setContent(htmlBody, "text/html; charset=\"" + charset + "\""); 
 						multipart.addBodyPart(htmlBodyPart);
 						// Associate multi-part with message
 						message.setContent(multipart);
 					} else if (htmlBody != null) {
-						message.setContent(htmlBody, "text/html");
+						message.setContent(htmlBody, "text/html; charset=\"" + charset + "\""); 
 					} else {
 						message.setText(textBody);
 					}

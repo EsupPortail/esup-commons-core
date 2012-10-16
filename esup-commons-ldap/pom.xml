@@ -4,20 +4,10 @@
 	<parent>
 		<artifactId>esup-commons2-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.3.1-SNAPSHOT</version>
+		<version>0.3.1</version>
 	</parent>
-	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-ldap</artifactId>
-	<version>0.3.1-SNAPSHOT</version>
 	<name>esup-commons-ldap</name>
-	<url>http://maven.apache.org</url>
-	<repositories>
-		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Portfolio Milestone Repository</name>
-			<url>http://s3.amazonaws.com/maven.springframework.org/milestone</url>
-		</repository>
-	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

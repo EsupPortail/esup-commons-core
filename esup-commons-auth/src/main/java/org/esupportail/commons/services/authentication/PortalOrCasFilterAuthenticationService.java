@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/** 
+/**
  * A class to resolve the current user depending on the installation:
  * - for portlet installations, rely on the portal,
- * - for servlet installations, rely on the CAS filter. 
+ * - for servlet installations, rely on the CAS filter.
  * @deprecated Use DelegatingAuthenticationService instead.
  */
 @Deprecated
@@ -20,7 +20,7 @@ public class PortalOrCasFilterAuthenticationService extends DelegatingAuthentica
 	 * The serialization id.
 	 */
 	private static final long serialVersionUID = 1030107540760290734L;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -55,14 +55,8 @@ public class PortalOrCasFilterAuthenticationService extends DelegatingAuthentica
 		getPortalAuthenticator().setAuthType(portalAuthType);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.DelegatingAuthenticationService
-	 * #setAuthenticationServices(List)
-	 */
 	@Override
-	public void setAuthenticationServices(
-			@SuppressWarnings("unused")
-			final List<AuthenticationService> authenticators) {
+	public void setAuthenticationServices(final List<AuthenticationService> authenticators) {
 		throw new UnsupportedOperationException(
 				"method " + getClass() + ".setAuthenticators() should never be called.");
 	}

@@ -3,8 +3,6 @@
  */
 package org.esupportail.commons.dao;
 
-import org.esupportail.commons.utils.Assert;
-
 /**
  * A Hibernate paginator that uses a fixed query.
  * @param <E> the class of the results
@@ -20,7 +18,7 @@ public class HibernateFixedQueryPaginator<E> extends AbstractHibernateQueryPagin
 	 * The fixed query string.
 	 */
 	private String queryString;
-	
+
 	/**
 	 * make the hqlQuery.
 	 */
@@ -46,19 +44,6 @@ public class HibernateFixedQueryPaginator<E> extends AbstractHibernateQueryPagin
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.dao.AbstractHibernateQueryPaginator#afterPropertiesSet()
-	 */
-	@Override
-	public void afterPropertiesSet() {
-		super.afterPropertiesSet();
-//		Assert.hasLength(queryString,
-//				"property queryString of class " + this.getClass().getName() + " can not be null");
-	}
-
-	/**
-	 * @see org.esupportail.commons.dao.AbstractHibernateQueryPaginator#getQueryString()
-	 */
 	@Override
 	protected final String getQueryString() {
 		return queryString;
@@ -71,10 +56,7 @@ public class HibernateFixedQueryPaginator<E> extends AbstractHibernateQueryPagin
 		this.queryString = queryString;
 	}
 
-	/**
-	 * @see org.esupportail.commons.dao.AbstractHibernateQueryPaginator
-	 * #getHqlQueryPojo()
-	 */
+	@Override
 	protected HqlQueryPojo getHqlQueryPojo() {
 		return hqlQueryPojo;
 	}

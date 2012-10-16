@@ -3,18 +3,16 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.3.1-SNAPSHOT</version>
+		<version>0.3.1</version>
 	</parent>
 	<artifactId>esup-commons2-jsf-primeFaces</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.1-SNAPSHOT</version>
 	<name>esup-commons-jsf-primeFaces</name>
-	<url>http://maven.apache.org</url>
 	<repositories>
 		<repository>
 			<id>prime-repo</id>
 			<name>Prime Technology Maven Repository</name>
-			<url>http://repository.prime.com.tr</url>
+			<url>http://repository.primefaces.org/</url>
 			<layout>default</layout>
 		</repository>
 	</repositories>

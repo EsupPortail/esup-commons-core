@@ -26,32 +26,32 @@ import com.sun.syndication.io.SyndFeedOutput;
  */
 @SuppressWarnings("serial")
 public abstract class AbstractFeedServlet extends HttpServlet {
-	
+
 	/**
 	 * The parameter for the feed type.
 	 */
 	public static final String FEED_TYPE_PARAM = "feedType";
-	
+
 	/**
 	 * The mime type.
 	 */
 	public static final String MIME_TYPE = "application/xml; charset=UTF-8";
-	
+
 	/**
 	 * The name of the cache manager bean.
 	 */
 	private static final String CACHE_MANAGER_BEAN = "cacheManager";
-	
+
 	/**
 	 * the cacheManager.
 	 */
 	private CacheManager cacheManager;
-	
+
 	/**
 	 * the cache.
 	 */
 	private Cache cache;
-	
+
     /**
      * Constructor.
      */
@@ -65,7 +65,7 @@ public abstract class AbstractFeedServlet extends HttpServlet {
 	protected String getCacheName() {
 		return getClass().getName();
 	}
-	
+
 	/**
 	 * @return the cache manager.
 	 */
@@ -96,16 +96,15 @@ public abstract class AbstractFeedServlet extends HttpServlet {
      * @throws FeedException
      */
     protected abstract SyndFeed getFeed(
-    		final HttpServletRequest req) 
+    		final HttpServletRequest req)
     throws FeedException;
-    
+
     /**
      * Override this method to implement cache.
      * @param req
      * @return the cache key of a request.
      */
-    protected String getCacheKey(@SuppressWarnings("unused")
-	final HttpServletRequest req) {
+    protected String getCacheKey(final HttpServletRequest req) {
     	return null;
     }
 
@@ -115,7 +114,7 @@ public abstract class AbstractFeedServlet extends HttpServlet {
      * @throws FeedException
      */
     protected SyndFeed getFeedWithCache(
-    		final HttpServletRequest req) 
+    		final HttpServletRequest req)
     throws FeedException {
     	String cacheKey = getCacheKey(req);
     	if (cacheKey != null) {
@@ -130,16 +129,16 @@ public abstract class AbstractFeedServlet extends HttpServlet {
     	}
 		return feed;
     }
-    
+
     /**
      * @return the default feed type.
      */
     protected String getDefaultFeedType() {
     	return "rss_2.0";
     }
-    
+
 	/**
-	 * @param request 
+	 * @param request
 	 * @return the feed type.
 	 */
 	protected String getFeedType(
@@ -151,14 +150,10 @@ public abstract class AbstractFeedServlet extends HttpServlet {
         return feedType;
 	}
 
-	/**
-	 * @see javax.servlet.http.HttpServlet#service(
-	 * javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
 	@Override
 	protected void service(
-			final HttpServletRequest request, 
-			final HttpServletResponse response) 
+			final HttpServletRequest request,
+			final HttpServletResponse response)
 	throws ServletException, IOException {
 		try {
 			BeanUtilsWeb.initBeanFactory(getServletContext());
@@ -173,7 +168,7 @@ public abstract class AbstractFeedServlet extends HttpServlet {
           //TODO CL V2 : use dao in core module
 			//DatabaseUtils.close();
 		} catch (Throwable t) {
-			//TODO CL V2 : Use exception in core module 
+			//TODO CL V2 : Use exception in core module
 			//ExceptionUtils.catchException(t);
 			//TODO CL V2 : use dao in core module
 			//DatabaseUtils.close();
@@ -183,7 +178,7 @@ public abstract class AbstractFeedServlet extends HttpServlet {
 			if (t instanceof IOException) {
 				throw (IOException) t;
 			}
-			//TODO CL V2 : Use exception in core module 
+			//TODO CL V2 : Use exception in core module
 			//throw new ServletException(ExceptionUtils.getRealCause(t).getMessage(), t);
 		}
 	}

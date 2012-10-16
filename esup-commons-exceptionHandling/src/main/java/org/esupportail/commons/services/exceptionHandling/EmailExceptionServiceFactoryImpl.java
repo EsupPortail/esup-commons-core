@@ -2,7 +2,7 @@
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
 package org.esupportail.commons.services.exceptionHandling;
- 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +14,13 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.SmtpService;
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.util.StringUtils;
 
 /**
  * An implementation of ExceptionService, that logs the exceptions, send
  * them to an email address and redirect to an exception page.
- * 
+ *
  * See /properties/exceptionHandling/exceptionHandling-example.xml.
  */
 public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFactoryImpl {
@@ -33,12 +34,12 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(EmailExceptionServiceFactoryImpl.class);
-	
+
 	/**
 	 * The SMTP service.
 	 */
 	private SmtpService smtpService;
-	
+
 	/**
 	 * The email exception reports are sent to.
 	 */
@@ -48,20 +49,18 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	 * A flag set to true not to send exception reports to the developers (see getDevelEmail()).
 	 */
 	private boolean doNotSendExceptionReportsToDevelopers;
-	
+
 	/**
 	 * No email sent for these exceptions.
 	 */
-	@SuppressWarnings("unchecked")
-	private List<Class> noEmailExceptions;
+	private List<Class<? extends Throwable>> noEmailExceptions;
 
 	/**
 	 * Bean constructor.
 	 */
-	@SuppressWarnings("unchecked")
 	public EmailExceptionServiceFactoryImpl() {
 		super();
-		this.noEmailExceptions = new ArrayList<Class>();
+		this.noEmailExceptions = new ArrayList<Class<? extends Throwable>>();
 	}
 
 	/**
@@ -70,14 +69,11 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	public String getDevelEmail() {
 		return null;
 	}
-	
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+
 	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
-		Assert.notNull(this.smtpService, 
+		Assert.notNull(this.smtpService,
 				"property smtpService of class " + this.getClass().getName() + " can not be null");
 		if (!StringUtils.hasText(recipientEmail)) {
 			recipientEmail = null;
@@ -88,21 +84,18 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 				new InternetAddress(this.recipientEmail);
 			} catch (AddressException e) {
 				throw new IllegalArgumentException(
-						getClass() + ".recipientEmail '" 
+						getClass() + ".recipientEmail '"
 						+ this.recipientEmail + "' is not a valid email address");
 			}
 		}
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionServiceFactory#getExceptionService()
-	 */
+
 	@Override
 	public ExceptionService getExceptionService() {
 		return new EmailExceptionServiceImpl(
-				getI18nService(), getApplicationService(), 
-				getExceptionViews(), getNoEmailExceptions(), getAuthenticationService(), 
-				smtpService, recipientEmail, doNotSendExceptionReportsToDevelopers, 
+				getI18nService(), getApplicationService(),
+				getExceptionViews(), getNoEmailExceptions(), getAuthenticationService(),
+				smtpService, recipientEmail, doNotSendExceptionReportsToDevelopers,
 				getDevelEmail(), getLogLevel());
 	}
 
@@ -119,7 +112,7 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	public void setRecipientEmail(final String recipientEmail) {
 		this.recipientEmail = recipientEmail;
 	}
-	
+
 	/**
 	 * @param doNotSendExceptionReportsToDevelopers The doNotSendExceptionReportsToDevelopers to set.
 	 */
@@ -151,17 +144,18 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 
 	/**
 	 * Add a 'no email' exception.
-	 * @param className 
+	 * @param className
 	 */
 	@SuppressWarnings("unchecked")
-	private void addNoEmailException(final String className) {
+    private void addNoEmailException(final String className) {
 		try {
-			Class clazz = Class.forName(className);
+			Class<?> clazz = Class.forName(className);
 			if (!(Exception.class.isAssignableFrom(clazz))) {
-				throw new ConfigException("class [" + className 
+				throw new ConfigException("class [" + className
 						+ "] is not a subclass of [" + Exception.class + "]");
 			}
-			this.noEmailExceptions.add(clazz);
+			Class<? extends Throwable> exceptionClazz = (Class<? extends Throwable>) clazz;
+			this.noEmailExceptions.add(exceptionClazz);
 		} catch (ClassNotFoundException e) {
 			throw new ConfigException(e);
 		}
@@ -179,8 +173,7 @@ public class EmailExceptionServiceFactoryImpl extends SimpleExceptionServiceFact
 	/**
 	 * @return the noEmailExceptions
 	 */
-	@SuppressWarnings("unchecked")
-	protected List<Class> getNoEmailExceptions() {
+	protected List<Class<? extends Throwable>> getNoEmailExceptions() {
 		return noEmailExceptions;
 	}
 

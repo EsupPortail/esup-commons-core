@@ -1,7 +1,7 @@
 /**
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
-package org.esupportail.commons.jsf; 
+package org.esupportail.commons.jsf;
 
 //see http://learnjsf.com/wp/2006/08/06/a-prg-phase-listener-for-jsf/
 
@@ -15,13 +15,12 @@ import javax.faces.event.PhaseListener;
 import javax.portlet.PortletRequest;
 import javax.servlet.http.HttpServletRequest;
 
-//TODO CL V2 : find in maven repository the jp.sf.pal.tomahawk.multipart.MultipartPortletRequestWrapper
-//import jp.sf.pal.tomahawk.multipart.MultipartPortletRequestWrapper;
-
 import org.esupportail.commons.exceptions.NoRequestBoundException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.ContextUtils;
+//TODO CL V2 : find in maven repository the jp.sf.pal.tomahawk.multipart.MultipartPortletRequestWrapper
+//import jp.sf.pal.tomahawk.multipart.MultipartPortletRequestWrapper;
 
 /**
  * An abstract phase listener with debug facilities.
@@ -38,18 +37,16 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 	 * Constructor.
 	 */
 	protected AbstractPhaseListener() {
-		super(); 
+		super();
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#getPhaseId()
-	 */
+	@Override
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
 	}
 
 	/**
-	 * @param externalContext 
+	 * @param externalContext
 	 * @return the method of the current request.
 	 */
 	protected String getMethod(
@@ -75,7 +72,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void debugEvent(
-			final PhaseEvent event, 
+			final PhaseEvent event,
 			final String string) {
 		if (logger.isDebugEnabled()) {
 			FacesContext facesContext = event.getFacesContext();
@@ -83,7 +80,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 			String msg;
 			Map<String, Object> userInfo = null;
 			try {
-				userInfo = 
+				userInfo =
 					(Map<String, Object>) ContextUtils.getRequestAttribute(
 							PortletRequest.USER_INFO);
 			} catch (NoRequestBoundException e) {
@@ -95,7 +92,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 			} else {
 				msg = userInfo.toString();
 			}
-			msg += " " + string; 
+			msg += " " + string;
 			msg += " " + event.getPhaseId();
 			msg += " " + getMethod(externalContext);
 			msg += " " + externalContext.getResponse().getClass().getSimpleName();
@@ -103,9 +100,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 		}
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
-	 */
+	@Override
 	public final void afterPhase(final PhaseEvent event) {
 		debugEvent(event, "AFTER");
 		afterPhaseInternal(event);
@@ -115,15 +110,11 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 	 * @see javax.faces.event.PhaseListener#afterPhase(javax.faces.event.PhaseEvent)
 	 * @param event
 	 */
-	protected void afterPhaseInternal(
-			@SuppressWarnings("unused")
-			final PhaseEvent event) {
+	protected void afterPhaseInternal(final PhaseEvent event) {
 		//
 	}
 
-	/**
-	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
-	 */
+	@Override
 	public final void beforePhase(final PhaseEvent event) {
 		debugEvent(event, "BEFORE");
 		beforePhaseInternal(event);
@@ -133,9 +124,7 @@ public abstract class AbstractPhaseListener implements PhaseListener {
 	 * @see javax.faces.event.PhaseListener#beforePhase(javax.faces.event.PhaseEvent)
 	 * @param event
 	 */
-	protected void beforePhaseInternal(
-			@SuppressWarnings("unused")
-			final PhaseEvent event) {
+	protected void beforePhaseInternal(final PhaseEvent event) {
 		//
 	}
 

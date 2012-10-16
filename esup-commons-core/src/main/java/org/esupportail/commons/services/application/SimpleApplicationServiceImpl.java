@@ -2,7 +2,7 @@
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
 package org.esupportail.commons.services.application;
- 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,16 +13,17 @@ import java.net.URLConnection;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
 
 /**
  * A simple implementation of ApplicationService.
- * 
+ *
  * See properties/misc/application-example.xml.
  */
 public class SimpleApplicationServiceImpl implements ApplicationService, InitializingBean {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -71,32 +72,32 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 	 * The URL where the latest version should be found.
 	 */
 	private String latestVersionBaseUrl;
-	
+
 	/**
 	 * True for a quick-start installation.
 	 */
 	private Boolean quickStart;
-	
+
 	/**
 	 * The deploy type.
 	 */
 	private String deployType;
-	
+
 	/**
 	 * The database driver.
 	 */
 	private String databaseDriver;
-	
+
 	/**
 	 * The database dialect.
 	 */
 	private String databaseDialect;
-	
+
 	/**
 	 * True when using JNDI.
 	 */
 	private Boolean databaseUseJndi;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -104,17 +105,15 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
-		Assert.notNull(this.name, "property name of class " + this.getClass().getName() 
+		Assert.notNull(this.name, "property name of class " + this.getClass().getName()
 				+ " can not be null");
-		Assert.notNull(this.versionMajorNumber, "property versionMajorNumber of class " 
+		Assert.notNull(this.versionMajorNumber, "property versionMajorNumber of class "
 				+ this.getClass().getName() + " can not be null");
-		Assert.notNull(this.versionMinorNumber, "property versionMinorNumber of class " 
+		Assert.notNull(this.versionMinorNumber, "property versionMinorNumber of class "
 				+ this.getClass().getName() + " can not be null");
-		Assert.notNull(this.versionUpdate, "property versionUpdateNumber of class " 
+		Assert.notNull(this.versionUpdate, "property versionUpdateNumber of class "
 				+ this.getClass().getName() + " can not be null");
 		logger.info("starting " + getName() + " v" + getVersion() + "...");
 		if (!StringUtils.hasText(copyright)) {
@@ -131,25 +130,23 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		}
 		if (!StringUtils.hasText(latestVersionBaseUrl)) {
 			latestVersionBaseUrl = null;
-			logger.warn(getClass() + ": no latestVersionBaseUrl set, " 
+			logger.warn(getClass() + ": no latestVersionBaseUrl set, "
 					+ "the latest version number will not be available");
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getLatestVersion()
-	 */
+	@Override
 	public Version getLatestVersion() {
 		if (latestVersionBaseUrl == null) {
 			return null;
 		}
 		URL url;
-		try { 
-			url = new URL(latestVersionBaseUrl + "/latestVersion.txt"); 
+		try {
+			url = new URL(latestVersionBaseUrl + "/latestVersion.txt");
 		} catch (MalformedURLException e) {
 			logger.error("URL [" + latestVersionBaseUrl + "] is not correct");
 			return null;
-		}	
+		}
 		URLConnection connection;
 	     try {
 			logger.info("retrieving the latest version from URL [" + url + "]...");
@@ -179,9 +176,7 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		return version;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getVersion()
-	 */
+	@Override
 	public Version getVersion() {
 		return new Version(versionMajorNumber + "." + versionMinorNumber + "." + versionUpdate);
 	}
@@ -207,9 +202,7 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.versionUpdate = Integer.valueOf(versionUpdate);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getName()
-	 */
+	@Override
 	public String getName() {
 		return this.name;
 	}
@@ -220,10 +213,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.name = name;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getCopyright()
-	 */
-	public String getCopyright() {
+	@Override
+    public String getCopyright() {
 		return copyright;
 	}
 
@@ -237,7 +228,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 	/**
 	 * @return the vendor
 	 */
-	public String getVendor() {
+	@Override
+    public String getVendor() {
 		return vendor;
 	}
 
@@ -255,10 +247,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.latestVersionBaseUrl = latestVersionBaseUrl;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#isQuickStart()
-	 */
-	public boolean isQuickStart() {
+	@Override
+    public boolean isQuickStart() {
 		if (quickStart == null) {
 			logger.error("property quickStart is not set!");
 			return false;
@@ -273,10 +263,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.quickStart = quickStart;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getDeployType()
-	 */
-	public String getDeployType() {
+	@Override
+    public String getDeployType() {
 		if (deployType == null) {
 			logger.error("property deployType is not set!");
 			return null;
@@ -291,10 +279,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.deployType = deployType;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getDatabaseDriver()
-	 */
-	public String getDatabaseDriver() {
+	@Override
+    public String getDatabaseDriver() {
 		if (databaseDriver == null) {
 			logger.error("property databaseDriver is not set!");
 			return null;
@@ -309,10 +295,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.databaseDriver = databaseDriver;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#getDatabaseDialect()
-	 */
-	public String getDatabaseDialect() {
+	@Override
+    public String getDatabaseDialect() {
 		if (databaseDialect == null) {
 			logger.error("property databaseDialect is not set!");
 			return null;
@@ -327,10 +311,8 @@ public class SimpleApplicationServiceImpl implements ApplicationService, Initial
 		this.databaseDialect = databaseDialect;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.ApplicationService#isDatabaseUseJndi()
-	 */
-	public boolean isDatabaseUseJndi() {
+	@Override
+    public boolean isDatabaseUseJndi() {
 		if (databaseUseJndi == null) {
 			logger.error("property databaseUseJndi is not set!");
 			return false;

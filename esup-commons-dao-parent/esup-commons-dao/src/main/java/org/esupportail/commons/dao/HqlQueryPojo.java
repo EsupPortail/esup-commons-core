@@ -1,10 +1,10 @@
 /**
  * CRI - Université de Rennes 1 - <nom du projet> - <année>
  * <url de gestion du projet>
- * Version de la norme de développement : <version de ce document> 
+ * Version de la norme de développement : <version de ce document>
  */
 /**
- * 
+ *
  */
 package org.esupportail.commons.dao;
 
@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.springframework.util.StringUtils;
 
 /**
@@ -64,12 +65,9 @@ public class HqlQueryPojo implements Serializable {
 		where = new ArrayList<String>();
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "HqlQueryPojo#" + hashCode() + "[select =" + select 
+		return "HqlQueryPojo#" + hashCode() + "[select =" + select
 						+ "],[form =" + from + "], [where =" + where + "]";
 	}
 
@@ -77,14 +75,14 @@ public class HqlQueryPojo implements Serializable {
 	 * ************************** METHODS ***********************************
 	 */
 
-	
+
 	/**
 	 * @return true is not hql.
 	 */
 	public boolean isEmpty() {
 		return !StringUtils.hasText(buildHql());
 	}
-	
+
 	/**
 	 * @param hql
 	 * @param l
@@ -102,7 +100,7 @@ public class HqlQueryPojo implements Serializable {
 		StringBuilder hql = new StringBuilder();
 		if (!l.isEmpty()) {
 			hql.append(clause);
-			int cpt = 0; 
+			int cpt = 0;
 			for (String s : l) {
 				if (log.isDebugEnabled()) {
 					log.debug(cpt + " : s = " + s);
@@ -126,14 +124,14 @@ public class HqlQueryPojo implements Serializable {
 	public String geteClauseFrom() {
 		return appendHql(from, " FROM ", ", ").toString();
 	}
-	
+
 	/**
 	 * @return String clause FROM
 	 */
 	public String geteClauseWhere() {
 		return appendHql(where, " WHERE ", " AND ").toString();
 	}
-	
+
 	/**
 	 * @return the hql request.
 	 */
@@ -151,7 +149,7 @@ public class HqlQueryPojo implements Serializable {
 		return hql.toString();
 	}
 
-	
+
 	/**
 	 * @param s
 	 */
@@ -349,8 +347,8 @@ public class HqlQueryPojo implements Serializable {
 		}
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * @return the from
 	 */

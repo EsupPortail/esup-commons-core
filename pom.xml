@@ -4,7 +4,7 @@
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.1-SNAPSHOT</version>
+	<version>0.3.1</version>
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
@@ -67,16 +67,17 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.2.1</version>
 				<configuration>
-                    <tagNameFormat>V2-@{project.version}</tagNameFormat>
+					<tagNameFormat>V2-@{project.version}</tagNameFormat>
 					<goals>deploy</goals>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>

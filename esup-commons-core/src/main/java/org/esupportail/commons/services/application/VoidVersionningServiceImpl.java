@@ -21,33 +21,24 @@ public class VoidVersionningServiceImpl implements VersionningService {
 	public VoidVersionningServiceImpl() {
 		super();
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.application.VersionningService#checkVersion(boolean, boolean)
-	 */
-	public void checkVersion(
-			@SuppressWarnings("unused")
-			final boolean throwException, 
-			@SuppressWarnings("unused")
-			final boolean printLatestVersion)
+
+	@Override
+	public void checkVersion(final boolean throwException, final boolean printLatestVersion)
 	throws ConfigException {
 		// nothing to do here
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.VersionningService#initDatabase()
-	 */
+	@Override
 	public void initDatabase() {
 		// nothing to do here
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.application.VersionningService#upgradeDatabase()
-	 */
+	@Override
 	public boolean upgradeDatabase() {
 		return false;
 	}
 
+	@Override
 	public void checkVersion() throws VersionException {
 		// TODO Auto-generated method stub
 	}

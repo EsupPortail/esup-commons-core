@@ -12,19 +12,19 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
 /**
- * An implementation of SmtpService that sends emails asynchronously to 
+ * An implementation of SmtpService that sends emails asynchronously to
  * prevent from rendering timetouts.
- * 
+ *
  * The configuration of such a bean is exactly the same as SimpleSmtpServiceImpl.
- * 
+ *
  * Please note that, as a new thread is created each time an email is sent,
- * exceptions thrown by the threads are not caught at engine level. They are 
+ * exceptions thrown by the threads are not caught at engine level. They are
  * however logged.
- * 
+ *
  * See /properties/smtp/smtp-example.xml.
  */
 public class AsynchronousSmtpServiceImpl extends SimpleSmtpServiceImpl {
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -42,17 +42,12 @@ public class AsynchronousSmtpServiceImpl extends SimpleSmtpServiceImpl {
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.smtp.SimpleSmtpServiceImpl#send(
-	 * javax.mail.internet.InternetAddress, java.lang.String, java.lang.String, 
-	 * java.lang.String, java.util.List, boolean, java.lang.String)
-	 */
 	@Override
 	protected void send(
-			final InternetAddress to, 
-			final String subject, 
-			final String htmlBody, 
-			final String textBody, 
+			final InternetAddress to,
+			final String subject,
+			final String htmlBody,
+			final String textBody,
 			final List<File> files,
 			final boolean intercept,
 			final String messageId) {
@@ -62,9 +57,9 @@ public class AsynchronousSmtpServiceImpl extends SimpleSmtpServiceImpl {
 		}
 		// start a new thread that will do the job asynchroneously
 		new MailSenderThread(
-				getServers(), getFromAddress(), recipient, 
+				getServers(), getFromAddress(), recipient,
 				subject, htmlBody, textBody, files, getCharset(), messageId).start();
 		logger.debug("thread launched.");
-	}	
-	
+	}
+
 }

@@ -9,12 +9,12 @@ import java.util.Map;
 import org.esupportail.commons.services.authentication.info.AuthInfo;
 import org.esupportail.commons.utils.ContextUtils;
 
-/** 
+/**
  * An abstract real authenticator.
  */
 @SuppressWarnings("serial")
 public abstract class AbstractRealAuthenticationService extends AbstractAuthenticationService {
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -34,9 +34,7 @@ public abstract class AbstractRealAuthenticationService extends AbstractAuthenti
 		return null;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.authentication.AuthenticationService#getAuthInfo()
-	 */
+	@Override
 	public AuthInfo getAuthInfo() {
 		if (!ContextUtils.isWeb()) {
 			return null;

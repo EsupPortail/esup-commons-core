@@ -18,9 +18,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#open()
-	 */
+	@Override
 	public void open() throws DatabaseException {
 		try {
 			if (getDatabaseManagers() != null) {
@@ -33,9 +31,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#begin()
-	 */
+	@Override
 	public void begin() throws DatabaseException {
 		try {
 			if (getDatabaseManagers() != null) {
@@ -48,9 +44,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#end(boolean)
-	 */
+	@Override
 	public void end(final boolean commit) throws DatabaseException {
 		Throwable error = null;
 		if (getDatabaseManagers() != null) {
@@ -67,9 +61,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#close()
-	 */
+	@Override
 	public void close() throws DatabaseException {
 		Throwable error = null;
 		if (getDatabaseManagers() != null) {
@@ -86,9 +78,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#test()
-	 */
+	@Override
 	public void test() throws DatabaseException {
 		try {
 			if (getDatabaseManagers() != null) {
@@ -101,9 +91,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#create()
-	 */
+	@Override
 	public void create() throws DatabaseException {
 		try {
 			if (getDatabaseManagers() != null) {
@@ -118,9 +106,7 @@ public abstract class AbstractDatabaseManagerStore implements DatabaseManagerSto
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.DatabaseManagerStore#update()
-	 */
+	@Override
 	public void update() throws DatabaseException {
 		try {
 			if (getDatabaseManagers() != null) {

@@ -2,7 +2,7 @@
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
 package org.esupportail.commons.services.exceptionHandling;
- 
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +19,12 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.SmtpService;
 import org.esupportail.commons.utils.ContextUtils;
 import org.esupportail.commons.utils.SystemUtils;
-import org.esupportail.commons.utils.strings.StringUtils;
 import org.esupportail.commons.utils.strings.StringUtilsWeb;
 
 /**
  * An implementation of ExceptionService, that logs the exceptions, send
  * them to an email address and redirect to an exception page.
- * 
+ *
  * See /properties/exceptionHandling/exceptionHandling-example.xml.
  */
 public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
@@ -39,12 +38,12 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(EmailExceptionServiceImpl.class);
-	
+
 	/**
 	 * The SMTP service.
 	 */
 	private SmtpService smtpService;
-	
+
 	/**
 	 * The email exception reports are sent to.
 	 */
@@ -54,44 +53,42 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	 * A flag set to true not to send exception reports to the developers (see getDevelEmail()).
 	 */
 	private boolean doNotSendExceptionReportsToDevelopers;
-	
+
 	/**
 	 * The developers' email.
 	 */
 	private String develEmail;
-	
+
 	/**
 	 * The exceptions that will generate no email.
 	 */
-	@SuppressWarnings("unchecked")
-	private List<Class> noEmailExceptions;
+	private List<Class<? extends Throwable>> noEmailExceptions;
 
 	/**
 	 * Constructor.
-	 * @param i18nService 
-	 * @param applicationService 
+	 * @param i18nService
+	 * @param applicationService
 	 * @param exceptionViews
-	 * @param noEmailExceptions 
-	 * @param authenticationService 
-	 * @param smtpService 
-	 * @param recipientEmail 
-	 * @param doNotSendExceptionReportsToDevelopers 
-	 * @param develEmail 
-	 * @param logLevel 
+	 * @param noEmailExceptions
+	 * @param authenticationService
+	 * @param smtpService
+	 * @param recipientEmail
+	 * @param doNotSendExceptionReportsToDevelopers
+	 * @param develEmail
+	 * @param logLevel
 	 */
-	@SuppressWarnings("unchecked")
 	public EmailExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
-			final Map<Class, String> exceptionViews,
-			final List<Class> noEmailExceptions,
+			final Map<Class<? extends Throwable>, String> exceptionViews,
+			final List<Class<? extends Throwable>> noEmailExceptions,
 			final AuthenticationService authenticationService,
 			final SmtpService smtpService,
 			final String recipientEmail,
 			final boolean doNotSendExceptionReportsToDevelopers,
 			final String develEmail,
 			final String logLevel) {
-		super(i18nService, applicationService, 
+		super(i18nService, applicationService,
 				exceptionViews, authenticationService, logLevel);
 		this.smtpService = smtpService;
 		this.recipientEmail = recipientEmail;
@@ -106,7 +103,7 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	public String getDevelEmail() {
 		return develEmail;
 	}
-	
+
 	/**
 	 * @return a HTML String that represents a row of one 2-cols header cell.
 	 * @param title
@@ -122,8 +119,8 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	}
 
 	/**
-	 * @param str1 
-	 * @param str2 
+	 * @param str1
+	 * @param str2
 	 * @return a HTML String that represents a row of two cells.
 	 */
 	private String row2(final String str1, final String str2) {
@@ -140,7 +137,7 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	}
 
 	/**
-	 * @param str 
+	 * @param str
 	 * @return a HTML String that represents a row of one 2-cols cell.
 	 */
 	private String row(final String str) {
@@ -152,10 +149,10 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		sb.append("\n</tr>");
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Emphasize a HTML string.
-	 * @param str 
+	 * @param str
 	 * @return a String.
 	 */
 	private String em(final String str) {
@@ -164,7 +161,7 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 
 	/**
 	 * wrap a string into a H1 tag.
-	 * @param str 
+	 * @param str
 	 * @return a String.
 	 */
 	private String h1(final String str) {
@@ -177,9 +174,9 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	private StringBuffer getHtmlReportInformation() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(header(getString("EXCEPTION.HEADER.INFORMATION")));
-		sb.append(row2(getString("EXCEPTION.INFORMATION.APPLICATION"), 
+		sb.append(row2(getString("EXCEPTION.INFORMATION.APPLICATION"),
 				StringUtilsWeb.escapeHtml(getApplicationName())));
-		sb.append(row2(getString("EXCEPTION.INFORMATION.VERSION"), 
+		sb.append(row2(getString("EXCEPTION.INFORMATION.VERSION"),
 				StringUtilsWeb.escapeHtml(getApplicationVersion().toString())));
 		String serverStr;
 		if (getServer() == null) {
@@ -205,12 +202,12 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 			sb.append(row2(getString("EXCEPTION.INFORMATION.USER_ID"), userIdStr));
 			String portalStr;
 			if (getPortal() == null) {
-				portalStr = 
+				portalStr =
 					em(getString("EXCEPTION.INFORMATION.PORTAL.UNKNOWN"));
 			} else {
 				portalStr = StringUtilsWeb.escapeHtml(getPortal());
 				if (getQuickStart() != null && getQuickStart().booleanValue()) {
-					portalStr = portalStr + " " 
+					portalStr = portalStr + " "
 					+ getString("EXCEPTION.INFORMATION.PORTAL.QUICK_START");
 				}
 				sb.append(row2(getString(
@@ -225,14 +222,14 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 				sb.append(row2(getString("EXCEPTION.INFORMATION.CLIENT"), clientStr));
 				String queryStringStr;
 				if (getQueryString() == null) {
-					queryStringStr = 
+					queryStringStr =
 						em(getString(
 								"EXCEPTION.INFORMATION.QUERY_STRING.UNKNOWN"));
 				} else {
 					queryStringStr = StringUtilsWeb.escapeHtml(getQueryString());
 				}
 				sb.append(row2(
-						getString("EXCEPTION.INFORMATION.QUERY_STRING"), 
+						getString("EXCEPTION.INFORMATION.QUERY_STRING"),
 						queryStringStr));
 				String userAgentStr;
 				if (getUserAgent() == null) {
@@ -264,7 +261,7 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * @return a StringBuffer.
 	 */
@@ -283,13 +280,13 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 			shortStackTrace = html(ExceptionUtils.getShortStackTraceStrings(t));
 			stackTrace = html(ExceptionUtils.getStackTraceStrings(t));
 		}
-		sb.append(row2(getString("EXCEPTION.EXCEPTION.NAME"), 
+		sb.append(row2(getString("EXCEPTION.EXCEPTION.NAME"),
 				name));
-		sb.append(row2(getString("EXCEPTION.EXCEPTION.MESSAGE"), 
+		sb.append(row2(getString("EXCEPTION.EXCEPTION.MESSAGE"),
 				message));
-		sb.append(row2(getString("EXCEPTION.EXCEPTION.SHORT_STACK_TRACE"), 
+		sb.append(row2(getString("EXCEPTION.EXCEPTION.SHORT_STACK_TRACE"),
 				shortStackTrace));
-		sb.append(row2(getString("EXCEPTION.EXCEPTION.STACK_TRACE"), 
+		sb.append(row2(getString("EXCEPTION.EXCEPTION.STACK_TRACE"),
 				stackTrace));
 		return sb;
 	}
@@ -307,19 +304,19 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		StringBuffer sb = new StringBuffer();
 		sb.append(header(getString("EXCEPTION.HEADER.REQUEST_ATTRIBUTES")));
 		if (requestAttributesStr == null) {
-			requestAttributesStr = 
+			requestAttributesStr =
 				em(getString("EXCEPTION.REQUEST_ATTRIBUTES.NONE"));
 		}
 		sb.append(row(requestAttributesStr));
 		sb.append(header(getString("EXCEPTION.HEADER.SESSION_ATTRIBUTES")));
 		if (sessionAttributesStr == null) {
-			sessionAttributesStr = 
+			sessionAttributesStr =
 				em(getString("EXCEPTION.SESSION_ATTRIBUTES.NONE"));
 		}
 		sb.append(row(sessionAttributesStr));
 		sb.append(header(getString("EXCEPTION.HEADER.GLOBAL_SESSION_ATTRIBUTES")));
 		if (globalSessionAttributesStr == null) {
-			globalSessionAttributesStr = 
+			globalSessionAttributesStr =
 				em(getString("EXCEPTION.GLOBAL_SESSION_ATTRIBUTES.NONE"));
 		}
 		sb.append(row(globalSessionAttributesStr));
@@ -330,7 +327,7 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		sb.append(row(requestHeadersStr));
 		sb.append(header(getString("EXCEPTION.HEADER.REQUEST_PARAMETERS")));
 		if (requestParametersStr == null) {
-			requestParametersStr = 
+			requestParametersStr =
 				em(getString("EXCEPTION.REQUEST_PARAMETERS.NONE"));
 		}
 		sb.append(row(requestParametersStr));
@@ -350,19 +347,19 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		StringBuffer sb = new StringBuffer();
 		sb.append(header(getString("EXCEPTION.HEADER.SYSTEM_PROPERTIES")));
 		if (systemPropertiesStr == null) {
-			systemPropertiesStr = 
+			systemPropertiesStr =
 				"\n" + em(getString("EXCEPTION.SYSTEM_PROPERTIES.NONE"));
 		}
 		sb.append(row(systemPropertiesStr));
 		sb.append(header(getString("EXCEPTION.HEADER.MEMORY")));
 		sb.append(row2(
-				getString("EXCEPTION.MEMORY.FREE"), 
+				getString("EXCEPTION.MEMORY.FREE"),
 				getString("EXCEPTION.MEMORY.VALUE", SystemUtils.getFreeMemory())));
 		sb.append(row2(
-				getString("EXCEPTION.MEMORY.TOTAL"), 
+				getString("EXCEPTION.MEMORY.TOTAL"),
 				getString("EXCEPTION.MEMORY.VALUE", SystemUtils.getTotalMemory())));
 		sb.append(row2(
-				getString("EXCEPTION.MEMORY.MAX"), 
+				getString("EXCEPTION.MEMORY.MAX"),
 				getString("EXCEPTION.MEMORY.VALUE", SystemUtils.getMaxMemory())));
 		return sb;
 	}
@@ -397,15 +394,15 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 			className = ExceptionUtils.getRealCause(getThrowable()).getClass().getSimpleName();
 		}
 		return getString(
-				"EXCEPTION.EMAIL_SUBJECT", 
-				getApplicationName(), 
-				getApplicationVersion(), 
-				className, 
+				"EXCEPTION.EMAIL_SUBJECT",
+				getApplicationName(),
+				getApplicationVersion(),
+				className,
 				serverStr);
 	}
 
 	/**
-	 * Send an exception report. This method has been added to allow 
+	 * Send an exception report. This method has been added to allow
 	 * it to be overriden (see org.esupportail.commons.services.exceptionHandling.CachingEmailExceptionServiceImpl).
 	 * @param intercept
 	 * @param t
@@ -414,7 +411,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 	 * @param htmlReport the HTML body
 	 * @param textReport the plain text body
 	 */
-	@SuppressWarnings("unchecked")
 	protected void sendEmail(
 			final boolean intercept,
 			final Throwable t,
@@ -423,8 +419,8 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 			final String htmlReport,
 			final String textReport) {
 		for (Throwable cause : ExceptionUtils.getCauses(t)) {
-			Class causeClass = cause.getClass(); 
-			for (Class clazz : noEmailExceptions) {
+			Class<? extends Throwable> causeClass = cause.getClass();
+			for (Class<? extends Throwable> clazz : noEmailExceptions) {
 				if (clazz.isAssignableFrom(causeClass)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug("no email for exception class [" + causeClass + "]");
@@ -444,9 +440,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		logger.debug("done.");
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.SimpleExceptionServiceImpl#handleException()
-	 */
 	@Override
 	public void handleException() throws ExceptionHandlingException {
 		String textReport = null;
@@ -488,9 +481,6 @@ public class EmailExceptionServiceImpl extends SimpleExceptionServiceImpl {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.SimpleExceptionServiceImpl#getRecipientEmail()
-	 */
 	@Override
 	public String getRecipientEmail() {
 		return recipientEmail;

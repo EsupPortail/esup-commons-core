@@ -77,6 +77,16 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	private int maxNearPages;
 	
 	/**
+	 * True when loading the items.
+	 */
+	private boolean loadRunning;
+	
+	/**
+	 * Is data loaded for this request (thread)
+	 */
+	private ThreadLocal<Boolean> loadedMarker = new ThreadLocal<Boolean>(); 
+	
+	/**
 	 * Constructor.
 	 */
 	protected AbstractPaginator() {
@@ -86,13 +96,12 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 		reset();
 	}
 	
-
-	
 	/**
 	 * @see org.esupportail.commons.web.controllers.Resettable#reset()
 	 */
 	public void reset() {
 		pageSize = defaultPageSize;
+		loadRunning = false;
 		currentPage = 0;
 		visibleItems = null;
 		totalItemsCount = 0;
@@ -100,14 +109,41 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 		maxNearPages = MAX_NEAR_PAGES;
 	}
 
+	/**
+	 * @return true if the paginator has already been loaded for this request.
+	 */
+	protected boolean isLoadedForThisRequest() {
+		Boolean marker = loadedMarker.get(); 
+		return marker != null && marker;
+	}
+
+	/**
+	 * Set the paginator as loaded for this request.
+	 */
+	protected void setLoadedForThisRequest() {
+		loadedMarker.set(Boolean.TRUE);
+	}
 
 	/**
 	 * @see org.esupportail.commons.web.beans.Paginator#forceReload()
 	 */
 	public void forceReload() {
-		loadItemsInternal();
+		loadedMarker.set(Boolean.FALSE);
 	}
 
+	/**
+	 * Load the items.
+	 */
+	protected void loadItems() {
+		if (!loadRunning) {
+			loadRunning = true;
+			if (!isLoadedForThisRequest()) {
+				loadItemsInternal();
+				setLoadedForThisRequest();
+			}
+			loadRunning = false;
+		}
+	}
 
 	/**
 	 * Load the items (internal).
@@ -202,6 +238,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getCurrentPage()
 	 */
 	public final int getCurrentPage() {
+		loadItems();
 		return getCurrentPageInternal();
 	}
 
@@ -216,6 +253,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#isFirstPage()
 	 */
 	public final boolean isFirstPage() {
+		loadItems();
 		return isFirstPageInternal(); 
 	}
 
@@ -230,6 +268,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#isLastPage()
 	 */
 	public final boolean isLastPage() {
+		loadItems();
 		return isLastPageInternal(); 
 	} 
 
@@ -244,6 +283,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getPreviousPage()
 	 */
 	public final int getPreviousPage() {
+		loadItems();
 		return getPreviousPageInternal();
 	}
 
@@ -258,6 +298,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getNextPage()
 	 */
 	public final int getNextPage() {
+		loadItems();
 		return getNextPageInternal();
 	}
 
@@ -272,6 +313,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getFirstPageNumber()
 	 */
 	public final int getFirstPageNumber() {
+		loadItems();
 		return getFirstPageNumberInternal(); 
 	}
 
@@ -286,6 +328,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getLastPageNumber()
 	 */
 	public final int getLastPageNumber() {
+		loadItems();
 		return getLastPageNumberInternal(); 
 	}
 
@@ -300,6 +343,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getFirstVisibleNumber()
 	 */
 	public final int getFirstVisibleNumber() {
+		loadItems();
 		return getFirstVisibleNumberInternal(); 
 	}
 
@@ -314,6 +358,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getLastVisibleNumber()
 	 */
 	public final int getLastVisibleNumber() {
+		loadItems();
 		return getLastVisibleNumberInternal();
 	}
 
@@ -355,6 +400,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getVisibleItems()
 	 */
 	public final List<E> getVisibleItems() {
+		loadItems();
 		return getVisibleItemsInternal();
 	}
 
@@ -377,6 +423,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getNearPages()
 	 */
 	public final List<Integer> getNearPages() {
+		loadItems();
 		return getNearPagesInternal();
 	}
 
@@ -391,6 +438,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getVisibleItemsCount()
 	 */
 	public final int getVisibleItemsCount() {
+		loadItems();
 		return getVisibleItemsCountInternal();
 	}
 
@@ -405,6 +453,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getTotalItemsCount()
 	 */
 	public final int getTotalItemsCount() {
+		loadItems();
 		return getTotalItemsCountInternal();
 	}
 
@@ -488,6 +537,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getFirstPagesNumber()
 	 */
 	public final List<Integer> getFirstPagesNumber() {
+		loadItems();
 		return getFirstPagesNumberInternal();
 	}
 	
@@ -511,6 +561,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getLastPagesNumber()
 	 */
 	public final List<Integer> getLastPagesNumber() {
+		loadItems();
 		return getLastPagesNumberInternal();
 	}
 	
@@ -534,6 +585,7 @@ public abstract class AbstractPaginator<E> implements Paginator<E>, Resettable {
 	 * @see org.esupportail.commons.web.beans.Paginator#getMiddlePagesNumber()
 	 */
 	public final List<Integer> getMiddlePagesNumber() {
+		loadItems();
 		return getMiddlePagesNumberInternal();
 	}
 	

@@ -34,51 +34,39 @@ public class MockUploadedFile implements UploadedFile {
 	 * @param name
 	 */
 	public MockUploadedFile(
-			final InputStream stream, 
+			final InputStream stream,
 			final String name) {
 		super();
 		this.stream = stream;
 		this.name = name;
 	}
 
-	/**
-	 * @see org.apache.myfaces.custom.fileupload.UploadedFile#getBytes()
-	 */
+	@Override
 	public byte[] getBytes() {
 		return null;
 	}
 
-	/**
-	 * @see org.apache.myfaces.custom.fileupload.UploadedFile#getContentType()
-	 */
+	@Override
 	public String getContentType() {
 		return null;
 	}
 
-	/**
-	 * @see org.apache.myfaces.custom.fileupload.UploadedFile#getInputStream()
-	 */
+	@Override
 	public InputStream getInputStream() {
 		return stream;
 	}
 
-	/**
-	 * @see org.apache.myfaces.custom.fileupload.UploadedFile#getName()
-	 */
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @see org.apache.myfaces.custom.fileupload.UploadedFile#getSize()
-	 */
+	@Override
 	public long getSize() {
 		return 0;
 	}
 
-	/**
-	 * @see org.apache.myfaces.custom.fileupload.UploadedFile#getStorageStrategy()
-	 */
+	@Override
 	public StorageStrategy getStorageStrategy() {
 		// TODO CL V2 : new implement method injsf 1.2
 		return null;

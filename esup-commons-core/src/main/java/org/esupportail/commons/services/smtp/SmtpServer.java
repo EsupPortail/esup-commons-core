@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
 
@@ -15,7 +16,7 @@ import org.springframework.util.StringUtils;
  * A class that represents SMTP servers.
  */
 public class SmtpServer implements InitializingBean, Serializable {
-	
+
 	/**
 	 * The default host.
 	 */
@@ -35,17 +36,17 @@ public class SmtpServer implements InitializingBean, Serializable {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(SmtpServer.class);
-	
+
 	/**
 	 * The host name or IP number of the server.
 	 */
 	private String host;
-	
+
 	/**
 	 * The port number the SMTP server is running on.
 	 */
 	private int port;
-	
+
 	/**
 	 * The name of the user used to connect to the SMTP server.
 	 */
@@ -63,31 +64,29 @@ public class SmtpServer implements InitializingBean, Serializable {
 		this.host = null;
 		this.port = -1;
 	}
-	
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+
+	@Override
 	public void afterPropertiesSet() {
 		if (this.host == null) {
 			logger.info(getClass() + ": host not set, " + DEFAULT_HOST + " will be used.");
 			this.host = "localhost";
 		}
 		if (this.port == -1) {
-			logger.info(getClass() + ": port not set, " + DEFAULT_PORT + " will be used for host '" 
+			logger.info(getClass() + ": port not set, " + DEFAULT_PORT + " will be used for host '"
 					+ this.host + "'.");
 			setDefaultPort();
 		}
 		if (!StringUtils.hasText(this.user)) {
 			this.user = null;
-			logger.info(getClass() + ": an anonymous connection will be used for SMTP server '" 
+			logger.info(getClass() + ": an anonymous connection will be used for SMTP server '"
 					+ this.host + ":" + this.port + "'.");
 			setDefaultPort();
 			if (StringUtils.hasText(this.password)) {
-				logger.warn(getClass() + ": an anonymous connection will be used for SMTP server '" 
+				logger.warn(getClass() + ": an anonymous connection will be used for SMTP server '"
 						+ this.host + ":" + this.port + "', password ignored.");
 			}
 		} else if (this.password == null) {
-			this.password = "";		
+			this.password = "";
 		}
 	}
 

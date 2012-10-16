@@ -2,7 +2,7 @@
  * ESUP-Portail Commons - Copyright (c) 2006-2009 ESUP-Portail consortium.
  */
 package org.esupportail.commons.services.exceptionHandling;
- 
+
 import java.util.Map;
 import java.util.Set;
 
@@ -23,11 +23,11 @@ import org.esupportail.commons.utils.strings.StringUtilsWeb;
 /**
  * A simple implementation of ExceptionService, that just logs the exceptions
  * and redirect to an throwable page.
- * 
+ *
  * See /properties/exceptionHandling/exceptionHandling-example.xml.
  */
-public class SimpleExceptionServiceImpl 
-extends AbstractApplicationAwareBean 
+public class SimpleExceptionServiceImpl
+extends AbstractApplicationAwareBean
 implements ExceptionService {
 
 	/**
@@ -38,28 +38,28 @@ implements ExceptionService {
 	/**
 	 * The separator used in text reports.
 	 */
-	private static final String TEXT_HRULE = "\n-----------------------------------------------------------------"; 
-	
+	private static final String TEXT_HRULE = "\n-----------------------------------------------------------------";
+
 	/**
 	 * The separator used in text reports.
 	 */
-	private static final String TEXT_CR = "\n"; 
-	
+	private static final String TEXT_CR = "\n";
+
 	/**
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The throwable caught.
 	 */
 	private Throwable throwable;
-	
+
 	/**
 	 * The name of the application.
 	 */
 	private String applicationName;
-	
+
 	/**
 	 * The version of the application.
 	 */
@@ -69,17 +69,17 @@ implements ExceptionService {
 	 * The server.
 	 */
 	private String server;
-	
+
 	/**
 	 * The date.
 	 */
 	private Long date;
-	
+
 	/**
 	 * The id of the current user.
 	 */
 	private String userId;
-	
+
 	/**
 	 * The portal.
 	 */
@@ -104,91 +104,89 @@ implements ExceptionService {
 	 * The browser.
 	 */
 	private String userAgent;
-	
+
 	/**
 	 * The global session attributes.
 	 */
 	private Set<String> globalSessionAttributes;
-	
+
 	/**
 	 * The session attributes.
 	 */
 	private Set<String> sessionAttributes;
-	
+
 	/**
 	 * The request attributes.
 	 */
 	private Set<String> requestAttributes;
-	
+
 	/**
 	 * The headers of the request.
 	 */
 	private Set<String> requestHeaders;
-	
+
 	/**
 	 * The parameters of the request.
 	 */
 	private Set<String> requestParameters;
-	
+
 	/**
 	 * The cookies of the request.
 	 */
 	private Set<String> cookies;
-	
+
 	/**
 	 * The system properties.
 	 */
 	private Set<String> systemProperties;
-	
+
 	/**
 	 * The free memory.
 	 */
 	private long freeMemory;
-	
+
 	/**
 	 * The max memory.
 	 */
 	private long maxMemory;
-	
+
 	/**
 	 * The total memory.
 	 */
 	private long totalMemory;
-	
+
 	/**
 	 * The views to redirect to.
 	 */
-	@SuppressWarnings("unchecked")
-	private Map<Class, String> exceptionViews;
-	
+	private Map<Class<? extends Throwable>, String> exceptionViews;
+
 	/**
 	 * The log level.
 	 */
 	private String logLevel;
-	
+
 	/**
 	 * The authentication service.
 	 */
 	private AuthenticationService authenticationService;
-	
+
 	/**
 	 * Constructor.
-	 * @param applicationService 
-	 * @param i18nService 
+	 * @param applicationService
+	 * @param i18nService
 	 * @param exceptionViews
-	 * @param authenticationService 
-	 * @param logLevel 
+	 * @param authenticationService
+	 * @param logLevel
 	 */
-	@SuppressWarnings("unchecked")
 	public SimpleExceptionServiceImpl(
 			final I18nService i18nService,
 			final ApplicationService applicationService,
-			final Map<Class, String> exceptionViews,
+			final Map<Class<? extends Throwable>, String> exceptionViews,
 			final AuthenticationService authenticationService,
 			final String logLevel) {
 		super();
 		setI18nService(i18nService);
-		setApplicationService(applicationService);		
+		setApplicationService(applicationService);
 		this.exceptionViews = exceptionViews;
 		this.authenticationService = authenticationService;
 		this.logLevel = logLevel;
@@ -204,63 +202,63 @@ implements ExceptionService {
 		sb.append(TEXT_HRULE);
 		sb.append(TEXT_CR + getString("EXCEPTION.HEADER.INFORMATION"));
 		sb.append(TEXT_HRULE);
-		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.APPLICATION") 
+		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.APPLICATION")
 				+ separator + applicationName);
-		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.VERSION") 
+		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.VERSION")
 				+ separator + applicationVersion);
 		if (server == null) {
 			server = getString("EXCEPTION.INFORMATION.SERVER.UNKNOWN");
 		}
-		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.SERVER") 
+		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.SERVER")
 				+ separator + server);
 		String dateStr;
-		if (date == null) { 
+		if (date == null) {
 			dateStr = getString("EXCEPTION.INFORMATION.DATE.UNKNOWN");
 		} else {
 			dateStr = printableDate(date.longValue());
 		}
-		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.DATE") 
+		sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.DATE")
 				+ separator + dateStr);
 		if (ContextUtils.isWeb()) {
 			if (userId == null) {
 				userId = getString("EXCEPTION.INFORMATION.USER_ID.UNKNOWN");
 			}
-			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.USER_ID") 
+			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.USER_ID")
 					+ separator + userId);
 			if (portal == null) {
 				portal = getString("EXCEPTION.INFORMATION.PORTAL.UNKNOWN");
 			} else {
 				if (quickStart != null && quickStart.booleanValue()) {
-					portal = portal + " " 
+					portal = portal + " "
 					+ getString("EXCEPTION.INFORMATION.PORTAL.QUICK_START");
 				}
 			}
-			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.PORTAL") 
+			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.PORTAL")
 					+ separator + portal);
 			if (client == null) {
 				client = getString("EXCEPTION.INFORMATION.CLIENT.UNKNOWN");
 			}
-			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.CLIENT") 
+			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.CLIENT")
 					+ separator + client);
 			if (queryString == null) {
-				queryString = 
+				queryString =
 					getString("EXCEPTION.INFORMATION.QUERY_STRING.UNKNOWN");
 			}
-			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.QUERY_STRING") 
+			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.QUERY_STRING")
 					+ separator + queryString);
 			if (userAgent == null) {
 				userAgent = getString("EXCEPTION.INFORMATION.USER_AGENT.UNKNOWN");
 			} else {
 				userAgent = StringUtilsWeb.escapeHtml(userAgent);
 			}
-			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.USER_AGENT") 
+			sb.append(TEXT_CR + getString("EXCEPTION.INFORMATION.USER_AGENT")
 					+ separator + userAgent);
 		}
 		return sb;
 	}
 
 	/**
-	 * @param separator 
+	 * @param separator
 	 * @return a StringBuffer.
 	 */
 	private StringBuffer getTextReportException(
@@ -271,22 +269,22 @@ implements ExceptionService {
 			sb.append(TEXT_HRULE);
 			sb.append(TEXT_CR + getString("EXCEPTION.HEADER.EXCEPTION"));
 			sb.append(TEXT_HRULE);
-			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.NAME") 
+			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.NAME")
 					+ separator + cause.getClass().getSimpleName());
-			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.MESSAGE") 
+			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.MESSAGE")
 					+ separator + cause.getMessage());
-			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.SHORT_STACK_TRACE") 
+			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.SHORT_STACK_TRACE")
 					+ separator);
 			sb.append(TEXT_CR + ExceptionUtils.getShortPrintableStackTrace(throwable));
-			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.STACK_TRACE") 
+			sb.append(TEXT_CR + getString("EXCEPTION.EXCEPTION.STACK_TRACE")
 					+ separator);
 			sb.append(TEXT_CR + ExceptionUtils.getPrintableStackTrace(throwable));
 		}
 		return sb;
 	}
-	
+
 	/**
-	 * @param set 
+	 * @param set
 	 * @return a printable String for text outputs.
 	 */
 	private String text(final Set<String> set) {
@@ -301,7 +299,7 @@ implements ExceptionService {
 		}
 		return result.toString();
 	}
-	
+
 	/**
 	 * @return a StringBuffer.
 	 */
@@ -359,7 +357,7 @@ implements ExceptionService {
 		sb.append(TEXT_CR + cookiesStr);
 		return sb;
 	}
-	
+
 	/**
 	 * @return a StringBuffer.
 	 */
@@ -376,7 +374,7 @@ implements ExceptionService {
 		sb.append(TEXT_CR + getString("EXCEPTION.MEMORY.VALUES", freeMemory, totalMemory, maxMemory));
 		return sb;
 	}
-	
+
 
 	/**
 	 * @return a plain/text report of the throwable.
@@ -393,11 +391,8 @@ implements ExceptionService {
 		sb.append(TEXT_HRULE);
 		return sb.toString();
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#setParameters(
-	 * java.lang.Throwable)
-	 */
+
+	@Override
 	public void setParameters(
 			final Throwable t) throws ExceptionHandlingException {
 		try {
@@ -475,9 +470,7 @@ implements ExceptionService {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#handleException()
-	 */
+	@Override
 	public void handleException() throws ExceptionHandlingException {
 		// try to log the throwable
 		try {
@@ -489,148 +482,107 @@ implements ExceptionService {
 		}
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getApplicationName()
-	 */
+	@Override
 	public String getApplicationName() {
 		return applicationName;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getApplicationVersion()
-	 */
+	@Override
 	public Version getApplicationVersion() {
 		return applicationVersion;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getClient()
-	 */
+	@Override
 	public String getClient() {
 		return client;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getCookies()
-	 */
+	@Override
 	public Set<String> getCookies() {
 		return cookies;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getDate()
-	 */
+	@Override
 	public Long getDate() {
 		return date;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getPortal()
-	 */
+	@Override
 	public String getPortal() {
 		return portal;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getQueryString()
-	 */
+	@Override
 	public String getQueryString() {
 		return queryString;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getQuickStart()
-	 */
+	@Override
 	public Boolean getQuickStart() {
 		return quickStart;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRequestHeaders()
-	 */
+	@Override
 	public Set<String> getRequestHeaders() {
 		return requestHeaders;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRequestParameters()
-	 */
+	@Override
 	public Set<String> getRequestParameters() {
 		return requestParameters;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getServer()
-	 */
+	@Override
 	public String getServer() {
 		return server;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRequestAttributes()
-	 */
+	@Override
 	public Set<String> getRequestAttributes() {
 		return requestAttributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getSessionAttributes()
-	 */
+	@Override
 	public Set<String> getSessionAttributes() {
 		return sessionAttributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getGlobalSessionAttributes()
-	 */
+	@Override
 	public Set<String> getGlobalSessionAttributes() {
 		return globalSessionAttributes;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getSystemProperties()
-	 */
+	@Override
 	public Set<String> getSystemProperties() {
 		return systemProperties;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getThrowable()
-	 */
+	@Override
 	public Throwable getThrowable() {
 		return throwable;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getUserAgent()
-	 */
+	@Override
 	public String getUserAgent() {
 		return userAgent;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getUserId()
-	 */
+	@Override
 	public String getUserId() {
 		return userId;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getRecipientEmail()
-	 */
+	@Override
 	public String getRecipientEmail() {
 		return null;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.exceptionHandling.ExceptionService#getExceptionView()
-	 */
-	@SuppressWarnings("unchecked")
+	@Override
 	public String getExceptionView() {
 		if (throwable != null) {
-			for (Class clazz : exceptionViews.keySet()) {
+			for (Class<? extends Throwable> clazz : exceptionViews.keySet()) {
 				for (Throwable cause : ExceptionUtils.getCauses(throwable)) {
-					Class causeClass = cause.getClass(); 
+					Class<? extends Throwable> causeClass = cause.getClass();
 					if (clazz.equals(causeClass)) {
 						return exceptionViews.get(clazz);
 					}

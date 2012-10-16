@@ -6,8 +6,9 @@ package org.esupportail.commons.web.jsf.tags;
 
 import javax.faces.component.UIComponent;
 
-import org.apache.myfaces.custom.navmenu.htmlnavmenu.HtmlPanelNavigationMenuTag;
 import org.esupportail.commons.web.jsf.tags.config.TagsConfigurator;
+
+import org.apache.myfaces.custom.navmenu.htmlnavmenu.HtmlPanelNavigationMenuTag;
 
 /**
  * The ESUP-Portail implementation of the panelNavigationMenu tag.
@@ -20,14 +21,10 @@ public class PanelNavigationMenuTag extends HtmlPanelNavigationMenuTag {
 	public PanelNavigationMenuTag() {
 		super();
 	}
-	
-	/**
-	 * @see org.apache.myfaces.custom.navmenu.htmlnavmenu.HtmlPanelNavigationMenuTag#setProperties(
-	 * javax.faces.component.UIComponent)
-	 */
+
 	@Override
 	protected void setProperties(final UIComponent component) {
-		TagsConfigurator tagsConfigurator = TagsConfigurator.getInstance(); 
+		TagsConfigurator tagsConfigurator = TagsConfigurator.getInstance();
 		setLayout(TagUtils.getStringValueExpression(
 				getFacesContext().getApplication(),tagsConfigurator.getMenuLayout()));
 		setStyleClass(TagUtils.getStringValueExpression(

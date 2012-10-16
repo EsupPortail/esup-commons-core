@@ -3,12 +3,12 @@
  */
 package org.esupportail.commons.services.authentication;
 
-/** 
+/**
  * An abstract authenticator.
  */
 @SuppressWarnings("serial")
 public abstract class AbstractAuthenticationService implements AuthenticationService {
-	
+
 	/**
 	 * True if enabled.
 	 */
@@ -21,16 +21,12 @@ public abstract class AbstractAuthenticationService implements AuthenticationSer
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		// nothing to check
 	}
 
-	/**
-	 * @return the enabled
-	 */
+	@Override
 	public boolean isEnabled() {
 		return enabled;
 	}

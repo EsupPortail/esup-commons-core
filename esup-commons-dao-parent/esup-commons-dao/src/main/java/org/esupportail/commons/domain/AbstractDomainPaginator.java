@@ -3,8 +3,9 @@
  */
 package org.esupportail.commons.domain;
 
-import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.services.paginator.AbstractPaginator;
+import org.esupportail.commons.utils.Assert;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -26,9 +27,7 @@ public abstract class AbstractDomainPaginator<E> extends AbstractPaginator<E> im
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		Assert.notNull(this.domainService,
 				"property domainService of class " + this.getClass().getName() + " can not be null");

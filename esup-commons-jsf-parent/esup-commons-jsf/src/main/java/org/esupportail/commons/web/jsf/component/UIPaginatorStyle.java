@@ -7,6 +7,13 @@ package org.esupportail.commons.web.jsf.component;
 import javax.el.MethodExpression;
 import javax.faces.application.Application;
 
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.commons.services.paginator.Paginator;
+import org.esupportail.commons.services.paginator.PaginatorUtils;
+import org.esupportail.commons.web.jsf.tags.TagUtils;
+import org.esupportail.commons.web.jsf.tags.config.TagsConfigurator;
+
 import org.apache.myfaces.component.html.ext.HtmlCommandButton;
 import org.apache.myfaces.component.html.ext.HtmlOutputText;
 import org.apache.myfaces.custom.div.Div;
@@ -14,12 +21,6 @@ import org.apache.myfaces.custom.htmlTag.HtmlTag;
 import org.apache.myfaces.custom.updateactionlistener.UpdateActionListener;
 import org.apache.myfaces.shared_tomahawk.renderkit.JSFAttr;
 import org.apache.myfaces.shared_tomahawk.renderkit.html.HTML;
-import org.esupportail.commons.services.logging.Logger;
-import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.services.paginator.Paginator;
-import org.esupportail.commons.services.paginator.PaginatorUtils;
-import org.esupportail.commons.web.jsf.tags.TagUtils;
-import org.esupportail.commons.web.jsf.tags.config.TagsConfigurator;
 import org.springframework.util.StringUtils;
 
 
@@ -36,17 +37,17 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	 * Key for the name of next button.
 	 */
 	private static final String NEXT_BUTTON_I18N_KEY = "_.BUTTON.NEXT";
-	
+
 	/**
 	 * Key for the name of previous button.
 	 */
 	private static final String PREVIOUS_BUTTON_I18N_KEY = "_.BUTTON.PREVIOUS";
-	
+
 	/**
 	 * Key for the text who separating the different lists of pages.
 	 */
 	private static final String TEXT_SEPARATOR_I18N_KEY = "PAGINATION.TEXT.SEPARATOR";
-	
+
 	/**
 	 * A logger.
 	 */
@@ -65,10 +66,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	/*
 	 ******************* METHODS ********************** */
 
-	/** 
-	 * @see org.esupportail.commons.web.component.UIAbstractPaginatorStyle#makeDivPages(
-	 * javax.faces.application.Application)
-	 */
+	@Override
 	protected Div makeDivPages(final Application a) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("entering makeDivPagination(" + a + ")");
@@ -84,11 +82,11 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 			ul1.setId(divPages.getId() + "first_ul");
 			ul1.setParent(divPages);
 			//PREVIOUS BUTTON
-			if (getPaginator().getCurrentPage() 
+			if (getPaginator().getCurrentPage()
 					!= getPaginator().getFirstPageNumber()) {
-				ul1.getChildren().add(makeLiGroup(a, 
-								getStringsVar() + "['" 
-								+ PREVIOUS_BUTTON_I18N_KEY + "']", 
+				ul1.getChildren().add(makeLiGroup(a,
+								getStringsVar() + "['"
+								+ PREVIOUS_BUTTON_I18N_KEY + "']",
 								null, true,
 								PaginatorUtils.GOTO_PREVIOUS,
 								null, null));
@@ -98,7 +96,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 		}
 		return divPages;
 	}
-	
+
 	/**
 	 * @param divPagination
 	 * @param pagi
@@ -106,9 +104,8 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	 * @param a
 	 * @return Div
 	 */
-	@SuppressWarnings("unchecked")
 	private Div makePages(final Div divPagination,
-					final Paginator pagi, 
+					final Paginator<?> pagi,
 					final HtmlTag ul1, final Application a) {
 		Div divTemp = divPagination;
 		if (!pagi.getFirstPagesNumber().isEmpty()) {
@@ -120,7 +117,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 									false,
 									PaginatorUtils.RELOAD_DATA,
 									PaginatorUtils.CURRENT_PAGE, null));
-				} else { 
+				} else {
 
 					ul1.getChildren().add(
 							makeLiGroup(a, "" + (page + 1), "" + page,
@@ -131,7 +128,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 				}
 			}
 			ul1.getChildren().add(makeLiText(a));
-			String nameValueButton = getPaginatorELExpression() 
+			String nameValueButton = getPaginatorELExpression()
 					+ "." + PaginatorUtils.LAST_PAGE_NUMBER + "+1";
 			ul1.getChildren().add(
 					makeLiGroup(a, nameValueButton, PaginatorUtils.LAST_PAGE_NUMBER,
@@ -139,7 +136,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 							PaginatorUtils.RELOAD_DATA,
 							PaginatorUtils.CURRENT_PAGE, null));
 		} else if (!pagi.getLastPagesNumber().isEmpty()) {
-			String nameValueButton = getPaginatorELExpression() 
+			String nameValueButton = getPaginatorELExpression()
 					+ "." + PaginatorUtils.FIRST_PAGE_NUMBER + "+1";
 			ul1.getChildren().add(
 					makeLiGroup(a, nameValueButton, PaginatorUtils.FIRST_PAGE_NUMBER,
@@ -155,7 +152,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 									false,
 									PaginatorUtils.RELOAD_DATA,
 									PaginatorUtils.CURRENT_PAGE, null));
-				} else { 
+				} else {
 					ul1.getChildren().add(
 							makeLiGroup(a, "" + (page + 1), "" + page,
 									false,
@@ -165,7 +162,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 				}
 			}
 		} else if (!pagi.getMiddlePagesNumber().isEmpty()) {
-			String nameValueButton = getPaginatorELExpression() 
+			String nameValueButton = getPaginatorELExpression()
 					+ "." + PaginatorUtils.FIRST_PAGE_NUMBER + "+1";
 			ul1.getChildren().add(
 					makeLiGroup(a, nameValueButton, PaginatorUtils.FIRST_PAGE_NUMBER,
@@ -181,7 +178,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 									false,
 									PaginatorUtils.RELOAD_DATA,
 									PaginatorUtils.CURRENT_PAGE, null));
-				} else { 
+				} else {
 
 					ul1.getChildren().add(
 							makeLiGroup(a, "" + (page + 1), "" + page,
@@ -192,7 +189,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 				}
 			}
 			ul1.getChildren().add(makeLiText(a));
-			nameValueButton = getPaginatorELExpression() 
+			nameValueButton = getPaginatorELExpression()
 					+ "." + PaginatorUtils.LAST_PAGE_NUMBER + "+1";
 			ul1.getChildren().add(
 					makeLiGroup(a, nameValueButton, PaginatorUtils.LAST_PAGE_NUMBER,
@@ -209,7 +206,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 									false,
 									PaginatorUtils.RELOAD_DATA,
 									PaginatorUtils.CURRENT_PAGE, null));
-				} else { 
+				} else {
 
 					ul1.getChildren().add(
 							makeLiGroup(a, "" + (page + 1), "" + page,
@@ -237,16 +234,16 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 	 * @param valueButton
 	 * @param valueListener if a null or empty -> the listener is not created
 	 * @param isValueBinding a true if valueButton and / or valueListener are valueBinding
-	 * @param methodForButton 
+	 * @param methodForButton
 	 * @param methodForListener if a null or empty -> the listener is not created
-	 * @param styleClassForLi 
+	 * @param styleClassForLi
 	 * @return HtmlTag : LI including (or not) a command Button with his Listener.
 	 */
-	private HtmlTag makeLiGroup(final Application a, 
+	private HtmlTag makeLiGroup(final Application a,
 			final String valueButton,
 			final String valueListener,
 			final boolean isValueBinding,
-			final String methodForButton, 
+			final String methodForButton,
 			final String methodForListener,
 			final String styleClassForLi) {
 		HtmlTag li = (HtmlTag) a.createComponent(HtmlTag.COMPONENT_TYPE);
@@ -258,15 +255,15 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 		a.createComponent(HtmlCommandButton.COMPONENT_TYPE);
 		command.setImmediate(true);
 		command.setParent(li);
-		MethodExpression m = a.getExpressionFactory().createMethodExpression(getFacesContext().getELContext(), 
-				TagUtils.makeELExpression(getPaginatorELExpression() 
+		MethodExpression m = a.getExpressionFactory().createMethodExpression(getFacesContext().getELContext(),
+				TagUtils.makeELExpression(getPaginatorELExpression()
 						+ "." + methodForButton),Void.TYPE,
 						 new Class<?>[0]);
 		command.setActionExpression(m);
 		if (isValueBinding) {
-			command.setValueExpression(JSFAttr.VALUE_ATTR, 
+			command.setValueExpression(JSFAttr.VALUE_ATTR,
 					a.getExpressionFactory().createValueExpression(
-							getFacesContext().getELContext(), 
+							getFacesContext().getELContext(),
 							TagUtils.makeELExpression(valueButton), String.class));
 		} else {
 			command.setValue(valueButton);
@@ -276,7 +273,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 			if (isValueBinding) {
 				listener.setValueBinding(a.createValueBinding(
 						TagUtils.makeELExpression(
-								getPaginatorELExpression() 
+								getPaginatorELExpression()
 								+ "." + valueListener)));
 			} else {
 				listener.setValue(valueListener);
@@ -304,7 +301,7 @@ public class UIPaginatorStyle extends UIAbstractPaginatorStyle {
 			text.setValue(getBundles().get(TEXT_SEPARATOR_I18N_KEY));
 			text.setParent(liText);
 			text.setStyleClass(TagsConfigurator.getInstance().getTextStyleClass());
-			
+
 			liText.getChildren().add(text);
 		}
 		return liText;

@@ -14,12 +14,13 @@ import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.i18n.I18nService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.util.StringUtils;
 
 /**
- * An implementation of LdapUserAndGroupService that delegates to 
+ * An implementation of LdapUserAndGroupService that delegates to
  * two instances of CachingLdapEntityServiceImpl.
  */
 public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupService, InitializingBean {
@@ -53,7 +54,7 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
-	
+
 	/**
 	 * The attribute used by method getLdapUsersFromToken().
 	 */
@@ -82,12 +83,12 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 	 * The attributes that is used by groups to store members.
 	 */
 	private String groupMemberAttribute;
-	
+
 	/**
 	 * The real user LDAP entity service to delegate.
 	 */
 	private LdapUserService userService;
-	
+
 	/**
 	 * The real group LDAP entity service to delegate.
 	 */
@@ -100,95 +101,79 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		super();
 	}
 
-	/**
-	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-	 */
+	@Override
 	public void afterPropertiesSet() {
 		//if != null because injected by spring
 		if (userService == null) {
-			//old method 
+			//old method
 			//the userService must be injected by spring
 			userService = new SearchableLdapUserServiceImpl();
 			SearchableLdapUserServiceImpl s = (SearchableLdapUserServiceImpl)userService;
 			s.setIdAttribute(DEFAULT_USER_ID_ATTRIBUTE);
 			s.setObjectClass(DEFAULT_USER_OBJECT_CLASS);
 			if (userSearchAttribute == null) {
-				logger.info("property userSearchAttribute is not set, " 
+				logger.info("property userSearchAttribute is not set, "
 						+ "method getLdapGroupsFromToken() will fail");
 			} else {
 				s.setSearchAttribute(userSearchAttribute);
 				s.setSearchDisplayedAttributes(userSearchDisplayedAttributes);
 			}
 			s.afterPropertiesSet();
-			
+
 		}
 		//if != null because injected by spring
 		if (groupService == null) {
-			//old method 
+			//old method
 			//the userService must be injected by spring
 			groupService = new SearchableLdapGroupServiceImpl();
 			SearchableLdapGroupServiceImpl s = (SearchableLdapGroupServiceImpl)groupService;
 			s.setIdAttribute(DEFAULT_GROUP_ID_ATTRIBUTE);
 			s.setObjectClass(DEFAULT_GROUP_OBJECT_CLASS);
-			
+
 			if (groupSearchAttribute == null) {
-				logger.info("property groupSearchAttribute is not set, " 
+				logger.info("property groupSearchAttribute is not set, "
 						+ "method getLdapGroupsFromToken() will fail");
 			} else {
 				s.setSearchAttribute(userSearchAttribute);
 				s.setSearchDisplayedAttributes(groupSearchDisplayedAttributes);
 			}
 			s.afterPropertiesSet();
-			
+
 		}
-		
+
 		if (!StringUtils.hasText(groupMemberAttribute)) {
 			groupMemberAttribute = null;
-			logger.warn("property groupMemberAttribute is not set, " 
+			logger.warn("property groupMemberAttribute is not set, "
 					+ "method getMemberIds() and getMembers() will fail");
 		}
 	}
 
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getLdapUser(java.lang.String)
-	 */
+	@Override
 	public LdapUser getLdapUser(final String id) throws LdapException, UserNotFoundException {
 		return userService.getLdapUser(id);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getLdapUsersFromFilter(java.lang.String)
-	 */
+	@Override
 	public List<LdapUser> getLdapUsersFromFilter(final String filterExpr) throws LdapException {
 		return userService.getLdapUsersFromFilter(filterExpr);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getLdapUsersFromToken(java.lang.String)
-	 */
+	@Override
 	public List<LdapUser> getLdapUsersFromToken(final String token) throws LdapException {
 		return userService.getLdapUsersFromFilter(token);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#userMatchesFilter(
-	 * java.lang.String, java.lang.String)
-	 */
+	@Override
 	public boolean userMatchesFilter(final String id, final String filter) throws LdapException {
 		return userService.userMatchesFilter(id, filter);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getUserStatistics(java.util.Locale)
-	 */
+	@Override
 	public List<String> getUserStatistics(final Locale locale) {
 		return userService.getStatistics(locale);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#resetUserStatistics()
-	 */
+	@Override
 	public void resetUserStatistics() {
 		userService.resetStatistics();
 	}
@@ -246,37 +231,27 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		((SearchableLdapUserServiceImpl)userService).setTestFilter(testFilter);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#supportUserStatistics()
-	 */
+	@Override
 	public boolean supportUserStatistics() {
 		return userService.supportStatistics();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#supportsUserTest()
-	 */
+	@Override
 	public boolean supportsUserTest() {
 		return userService.supportsTest();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#userTest()
-	 */
+	@Override
 	public void userTest() {
 		userService.test();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#testUserLdapFilter(java.lang.String)
-	 */
+	@Override
 	public String testUserLdapFilter(final String filterExpr) throws LdapException {
 		return userService.testLdapFilter(filterExpr);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getUserSearchDisplayedAttributes()
-	 */
+	@Override
 	public List<String> getUserSearchDisplayedAttributes() {
 		return userService.getSearchDisplayedAttributes();
 	}
@@ -297,23 +272,17 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		((SearchableLdapUserServiceImpl)userService).setSearchAttribute(searchAttribute);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getLdapGroup(java.lang.String)
-	 */
+	@Override
 	public LdapGroup getLdapGroup(final String id) throws LdapException, GroupNotFoundException {
 		return groupService.getLdapGroup(id);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getLdapGroupsFromFilter(java.lang.String)
-	 */
+	@Override
 	public List<LdapGroup> getLdapGroupsFromFilter(final String filterExpr) throws LdapException {
 		return groupService.getLdapGroupsFromFilter(filterExpr);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getLdapGroupsFromToken(java.lang.String)
-	 */
+	@Override
 	public List<LdapGroup> getLdapGroupsFromToken(final String token) throws LdapException {
 		return groupService.getLdapGroupsFromFilter(token);
 	}
@@ -343,10 +312,7 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		return null;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getMemberIds(
-	 * org.esupportail.commons.services.ldap.LdapGroup)
-	 */
+	@Override
 	public List<String> getMemberIds(final LdapGroup group) {
 		if (groupMemberAttribute == null) {
 			throw new UnsupportedOperationException("property groupMemberAttribute is not set");
@@ -362,11 +328,8 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		}
 		return memberIds;
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getMembers(
-	 * org.esupportail.commons.services.ldap.LdapGroup)
-	 */
+
+	@Override
 	public List<LdapUser> getMembers(final LdapGroup group) {
 		List<LdapUser> members = new ArrayList<LdapUser>();
 		for (String uid : getMemberIds(group)) {
@@ -378,25 +341,18 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		}
 		return members;
 	}
-	
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#groupMatchesFilter(
-	 * java.lang.String, java.lang.String)
-	 */
+
+	@Override
 	public boolean groupMatchesFilter(final String id, final String filter) throws LdapException {
 		return groupService.groupMatchesFilter(id, filter);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getGroupStatistics(java.util.Locale)
-	 */
+	@Override
 	public List<String> getGroupStatistics(final Locale locale) {
 		return groupService.getStatistics(locale);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#resetGroupStatistics()
-	 */
+	@Override
 	public void resetGroupStatistics() {
 		groupService.resetStatistics();
 	}
@@ -455,37 +411,27 @@ public class SearchableLdapUserAndGroupServiceImpl implements LdapUserAndGroupSe
 		((SearchableLdapGroupServiceImpl)groupService).setTestFilter(testFilter);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#supportGroupStatistics()
-	 */
+	@Override
 	public boolean supportGroupStatistics() {
 		return groupService.supportStatistics();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#supportsGroupTest()
-	 */
+	@Override
 	public boolean supportsGroupTest() {
 		return groupService.supportsTest();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#groupTest()
-	 */
+	@Override
 	public void groupTest() {
 		groupService.test();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#testGroupLdapFilter(java.lang.String)
-	 */
+	@Override
 	public String testGroupLdapFilter(final String filterExpr) throws LdapException {
 		return groupService.testLdapFilter(filterExpr);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.ldap.LdapUserAndGroupService#getGroupSearchDisplayedAttributes()
-	 */
+	@Override
 	public List<String> getGroupSearchDisplayedAttributes() {
 		return groupService.getSearchDisplayedAttributes();
 	}

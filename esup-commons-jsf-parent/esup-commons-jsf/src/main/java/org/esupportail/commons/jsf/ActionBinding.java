@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.esupportail.commons.jsf;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
  */
 public class ActionBinding implements Serializable {
 
-	
+
 	/**
 	 * The serialization id.
 	 */
@@ -20,26 +20,25 @@ public class ActionBinding implements Serializable {
 
 	/*
 	 ******************* PROPERTIES ******************* */
-	
-	
+
 	/**
 	 * The EL expression.
 	 */
 	private String action;
-	
+
 	/**
 	 * arguments to action method.
 	 */
 	private Class< ? >[] args;
-	
+
 	/**
-	 * The class return to this action method. 
+	 * The class return to this action method.
 	 */
 	private Class< ? > returns;
-	
+
 	/*
 	 ******************* INIT ************************* */
-	
+
 	/**
 	 * Constructor.
 	 */
@@ -47,9 +46,6 @@ public class ActionBinding implements Serializable {
 		super();
 	}
 
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,12 +56,6 @@ public class ActionBinding implements Serializable {
 		return result;
 	}
 
-
-
-
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(final Object obj) {
 		if (this == obj) { return true; }
@@ -82,9 +72,6 @@ public class ActionBinding implements Serializable {
 		return true;
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "ActionBinding#" + hashCode() + "[action=[" + action + "], returns=[" + returns + "]]";
@@ -94,8 +81,8 @@ public class ActionBinding implements Serializable {
 
 	/*
 	 ******************* ACCESSORS ******************** */
-	
-	
+
+
 	/**
 	 * @return the action
 	 */
@@ -141,6 +128,6 @@ public class ActionBinding implements Serializable {
 
 
 
-	
-	
+
+
 }

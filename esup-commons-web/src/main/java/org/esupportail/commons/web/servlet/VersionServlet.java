@@ -25,45 +25,37 @@ public class VersionServlet extends HttpServlet {
 	 * The id for serialization.
 	 */
 	private static final long serialVersionUID = -4582010858813700546L;
-	
+
 	/**
 	 * The result.
 	 */
 	private String result;
-	
+
 	/**
 	 * Constructor.
 	 */
 	public VersionServlet() {
 		super();
 	}
-	
-	/**
-	 * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
-	 */
+
 	@Override
 	public void init(final ServletConfig config) throws ServletException {
 		super.init(config);
 		try {
-			ApplicationService applicationService = 
+			ApplicationService applicationService =
 				(ApplicationService) BeanUtils.getBean("applicationService");
 			Version version = applicationService.getVersion();
 			result = version.toString();
 		} catch (Throwable t) {
-			//TODO CL V2 : Use exception in core module 
+			//TODO CL V2 : Use exception in core module
 			//result = ExceptionUtils.getShortPrintableStackTrace(t);
 		}
 	}
 
-	/**
-	 * @throws ServletException 
-	 * @see javax.servlet.http.HttpServlet#service(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
-	 */
 	@Override
 	public void service(
-			@SuppressWarnings("unused")
-			final ServletRequest servletRequest, 
-			final ServletResponse servletResponse) 
+			final ServletRequest servletRequest,
+			final ServletResponse servletResponse)
 	throws ServletException {
 		try {
 			HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -71,7 +63,7 @@ public class VersionServlet extends HttpServlet {
 			out.write(result.getBytes());
 		} catch (Throwable t) {
 			Exception ve = new VersionException(t);
-			//TODO CL V2 : Use exception in core module 
+			//TODO CL V2 : Use exception in core module
 			//ExceptionUtils.catchException(ve);
 			throw new ServletException(ve);
 		}

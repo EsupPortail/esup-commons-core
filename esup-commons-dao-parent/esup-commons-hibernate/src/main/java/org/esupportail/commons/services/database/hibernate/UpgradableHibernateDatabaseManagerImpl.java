@@ -6,9 +6,9 @@ package org.esupportail.commons.services.database.hibernate;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.BeanUtils;
+import org.esupportail.commons.utils.strings.StringUtils;
 //TODO CL V2: lien vers module web
 //import org.esupportail.commons.utils.ContextUtils;
-import org.esupportail.commons.utils.strings.StringUtils;
 
 /**
  * An abstract class for non updatable database managers.
@@ -24,17 +24,17 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 	 * The name of the session factory bean (create mode).
 	 */
 	private String createSessionFactoryBeanName;
-	
+
 	/**
 	 * The name of the JDBC session factory bean (upgrade mode).
 	 */
 	private String jdbcUpgradeSessionFactoryBeanName;
-	
+
 	/**
 	 * The name of the JNDI session factory bean (upgrade mode).
 	 */
 	private String jndiUpgradeSessionFactoryBeanName;
-	
+
 	/**
 	 * Bean constructor.
 	 */
@@ -42,20 +42,16 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 		super();
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.hibernate.BasicHibernateDatabaseManagerImpl
-	 * #afterPropertiesSet()
-	 */
-	
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		if (jdbcUpgradeSessionFactoryBeanName == null && jndiUpgradeSessionFactoryBeanName == null) {
 			throw new ConfigException("properties [jdbcUpgradeSessionFactoryBeanName] "
-					+ "and [jndiUpgradeSessionFactoryBeanName] of class [" 
+					+ "and [jndiUpgradeSessionFactoryBeanName] of class ["
 					+ getClass().getName() + "] can not be both null");
 		}
-		Assert.hasText(createSessionFactoryBeanName, 
-				"property [createSessionFactoryBeanName] of class [" 
+		Assert.hasText(createSessionFactoryBeanName,
+				"property [createSessionFactoryBeanName] of class ["
 				+ getClass().getName() + "] can not be null");
 	}
 
@@ -82,26 +78,17 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 		return sessionFactoryBeanName;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.AbstractBasicDatabaseManager#isUpgradable()
-	 */
-	
+	@Override
 	public boolean isUpgradable() {
 		return true;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.AbstractBasicDatabaseManager#create()
-	 */
-	
+	@Override
 	public void create() {
 		BeanUtils.getBean(createSessionFactoryBeanName);
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.AbstractBasicDatabaseManager#upgrade()
-	 */
-	
+	@Override
 	public void upgrade() {
 		BeanUtils.getBean(getUpgradeSessionFactoryBeanName());
 	}
@@ -118,7 +105,7 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 	 */
 	public void setJdbcUpgradeSessionFactoryBeanName(
 			final String jdbcUpgradeSessionFactoryBeanName) {
-		this.jdbcUpgradeSessionFactoryBeanName = 
+		this.jdbcUpgradeSessionFactoryBeanName =
 			StringUtils.nullIfEmpty(jdbcUpgradeSessionFactoryBeanName);
 	}
 
@@ -127,38 +114,29 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 	 */
 	public void setJndiUpgradeSessionFactoryBeanName(
 			final String jndiUpgradeSessionFactoryBeanName) {
-		this.jndiUpgradeSessionFactoryBeanName = 
+		this.jndiUpgradeSessionFactoryBeanName =
 			StringUtils.nullIfEmpty(jndiUpgradeSessionFactoryBeanName);
 	}
 
 	/**
 	 * @param unused
 	 */
-	public void setUpgradeSessionFactoryBeanName(
-			@SuppressWarnings("unused")
-			final String unused) {
-		throw new ConfigException(getClass() 
+	public void setUpgradeSessionFactoryBeanName(final String unused) {
+		throw new ConfigException(getClass()
 				+ ": property [upgradeSessionFactoryBeanName] is obsolete, "
 				+ "use [jdbcSessionFactoryBeanName] instead and "
 				+ "optionnaly [jndiSessionFactoryBeanName]");
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.hibernate.BasicHibernateDatabaseManagerImpl#isTransactionnal()
-	 */
-	
+	@Override
 	public boolean isTransactionnal() {
 		return true;
 	}
 
-	/**
-	 * @see org.esupportail.commons.services.database.hibernate.BasicHibernateDatabaseManagerImpl#setTransactionnal(
-	 * boolean)
-	 */
-	
+	@Override
 	public void setTransactionnal(final boolean transactionnal) {
 		throw new ConfigException(
-				"property [" + transactionnal + "] is always true for class [" 
+				"property [" + transactionnal + "] is always true for class ["
 				+ getClass().getName() + "]");
 	}
 

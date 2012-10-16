@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MockExternalContext extends ExternalContext {
 
-	/** 
-	 * The servlet context. 
+	/**
+	 * The servlet context.
 	 */
 	private ServletContext context;
 
@@ -44,26 +44,17 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * The application map.
 	 */
-	@SuppressWarnings("unchecked")
-	private Map applicationMap;
+	private Map<String, Object> applicationMap;
 
 	/**
 	 * The session map.
 	 */
-	@SuppressWarnings("unchecked")
-	private Map sessionMap;
-
-//	/**
-//	 * The request map.
-//	 */
-//	@SuppressWarnings("unchecked")
-//	private Map requestMap;
+	private Map<String, Object> sessionMap;
 
 	/**
 	 * The request parameter map.
 	 */
-	@SuppressWarnings("unchecked")
-	private Map requestParameterMap;
+	private Map<String, String> requestParameterMap;
 
 	/**
 	 * Constructor.
@@ -72,82 +63,53 @@ public class MockExternalContext extends ExternalContext {
 	 * @param response
 	 */
 	public MockExternalContext(
-			final ServletContext context, 
-			final ServletRequest request, 
+			final ServletContext context,
+			final ServletRequest request,
 			final ServletResponse response) {
 		this.context = context;
 		this.request = request;
 		this.response = response;
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getSession(boolean)
-	 */
 	@Override
-	public Object getSession(
-			@SuppressWarnings("unused")
-			final boolean create) {
+	public Object getSession(final boolean create) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getContext()
-	 */
 	@Override
 	public Object getContext() {
 		return context;
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequest()
-	 */
 	@Override
 	public Object getRequest() {
 		return request;
 	}
 
-	/**
-	 * @param request
-	 */
-	public void setRequest(
-			@SuppressWarnings("unused") final Object request) {
+	@Override
+	public void setRequest(final Object request) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getResponse()
-	 */
 	@Override
 	public Object getResponse() {
 		return response;
 	}
 
-	/**
-	 * @param response
-	 */
-	public void setResponse(
-			@SuppressWarnings("unused") 
-			final Object response) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @param encoding
-	 */
-	public void setResponseCharacterEncoding(
-			@SuppressWarnings("unused") 
-			final String encoding) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @see javax.faces.context.ExternalContext#getApplicationMap()
-	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getApplicationMap() {
+	public void setResponse(final Object response) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void setResponseCharacterEncoding(final String encoding) {
+		throw new UnsupportedOperationException();
+	}
+
+    @Override
+	public Map<String, Object> getApplicationMap() {
 		if (applicationMap == null) {
-			return new HashMap();
+			return new HashMap<String, Object>();
 		}
 		return applicationMap;
 	}
@@ -155,32 +117,21 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param applicationMap
 	 */
-	@SuppressWarnings("unchecked")
-	public void setApplicationMap(final Map applicationMap) {
+	public void setApplicationMap(final Map<String, Object> applicationMap) {
 		this.applicationMap = applicationMap;
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getSessionMap()
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map getSessionMap() {
+	public Map<String, Object> getSessionMap() {
 		if (sessionMap == null) {
-			sessionMap = new HashMap();
-			// for PortletUtil : test in mode servlet so no PORTLET_REQUEST_FLAG
-			// sessionMap.put(PortletUtil.PORTLET_REQUEST_FLAG, "dummy");
+			sessionMap = new HashMap<String, Object>();
 		}
 		return sessionMap;
 
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestMap()
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map getRequestMap() {
+	public Map<String, Object> getRequestMap() {
 		/*
 		 * if (requestMap == null) { requestMap = new MockRequestMap(request); }
 		 * return (requestMap);
@@ -188,12 +139,8 @@ public class MockExternalContext extends ExternalContext {
 		return null;
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestParameterMap()
-	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestParameterMap() {
+	public Map<String, String> getRequestParameterMap() {
 		if (requestParameterMap != null) {
 			return requestParameterMap;
 		}
@@ -203,135 +150,86 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * @param requestParameterMap
 	 */
-	@SuppressWarnings("unchecked")
-	public void setRequestParameterMap(final Map requestParameterMap) {
+	public void setRequestParameterMap(final Map<String, String> requestParameterMap) {
 		this.requestParameterMap = requestParameterMap;
 	}
 
-	/**
-	 * @param encoding
-	 */
-	public void setRequestCharacterEncoding(@SuppressWarnings("unused") final String encoding) {
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestParameterValuesMap()
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Map getRequestParameterValuesMap() {
+    public void setRequestCharacterEncoding(final String encoding) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestParameterNames()
-	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Iterator getRequestParameterNames() {
+	public Map<String, String[]> getRequestParameterValuesMap() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestHeaderMap()
-	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestHeaderMap() {
+	public Iterator<String> getRequestParameterNames() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestHeaderValuesMap()
-	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestHeaderValuesMap() {
+	public Map<String, String> getRequestHeaderMap() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestCookieMap()
-	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map getRequestCookieMap() {
+	public Map<String, String[]> getRequestHeaderValuesMap() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestLocale()
-	 */
+	@Override
+	public Map<String, Object> getRequestCookieMap() {
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public Locale getRequestLocale() {
 		return request.getLocale();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestLocales()
-	 */
 	@SuppressWarnings("unchecked")
-	@Override
-	public Iterator getRequestLocales() {
+    @Override
+	public Iterator<Locale> getRequestLocales() {
 		return new LocalesIterator(request.getLocales());
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestPathInfo()
-	 */
 	@Override
 	public String getRequestPathInfo() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestContextPath()
-	 */
 	@Override
 	public String getRequestContextPath() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRequestServletPath()
-	 */
 	@Override
 	public String getRequestServletPath() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @return nothing
-	 */
-	public String getRequestCharacterEncoding() {
+	@Override
+    public String getRequestCharacterEncoding() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @return nothing
-	 */
-	public String getRequestContentType() {
+	@Override
+    public String getRequestContentType() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @return nothing
-	 */
-	public String getResponseCharacterEncoding() {
+	@Override
+    public String getResponseCharacterEncoding() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @return nothing
-	 */
-	public String getResponseContentType() {
+	@Override
+    public String getResponseContentType() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getInitParameter(java.lang.String)
-	 */
 	@Override
 	public String getInitParameter(final String name) {
 		if (name.equals(javax.faces.application.StateManager.STATE_SAVING_METHOD_PARAM_NAME)) {
@@ -343,138 +241,77 @@ public class MockExternalContext extends ExternalContext {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getInitParameterMap()
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
+    @Override
 	public Map getInitParameterMap() {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getResourcePaths(java.lang.String)
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Set getResourcePaths(
-			@SuppressWarnings("unused")
-			final String path) {
+    @Override
+	public Set<String> getResourcePaths(final String path) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getResource(java.lang.String)
-	 */
-	@SuppressWarnings("unused")
 	@Override
 	public URL getResource(final String path) throws MalformedURLException {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getResourceAsStream(java.lang.String)
-	 */
 	@Override
-	public InputStream getResourceAsStream(
-			@SuppressWarnings("unused")
-			final String path) {
+	public InputStream getResourceAsStream(final String path) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#encodeActionURL(java.lang.String)
-	 */
 	@Override
-	public String encodeActionURL(
-			@SuppressWarnings("unused")
-			final String sb) {
+	public String encodeActionURL(final String sb) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#encodeResourceURL(java.lang.String)
-	 */
 	@Override
-	public String encodeResourceURL(
-			@SuppressWarnings("unused")
-			final String sb) {
+	public String encodeResourceURL(final String sb) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#encodeNamespace(java.lang.String)
-	 */
 	@Override
-	public String encodeNamespace(
-			@SuppressWarnings("unused")
-			final String aValue) {
+	public String encodeNamespace(final String aValue) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#dispatch(java.lang.String)
-	 */
 	@Override
-	public void dispatch(
-			@SuppressWarnings("unused")
-			final String requestURI) throws FacesException {
+	public void dispatch(final String requestURI) throws FacesException {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#redirect(java.lang.String)
-	 */
 	@Override
-	public void redirect(
-			@SuppressWarnings("unused")
-			final String requestURI) {
+	public void redirect(final String requestURI) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#log(java.lang.String)
-	 */
 	@Override
 	public void log(final String message) {
 		context.log(message);
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#log(java.lang.String, java.lang.Throwable)
-	 */
 	@Override
 	public void log(final String message, final Throwable throwable) {
 		context.log(message, throwable);
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getAuthType()
-	 */
 	@Override
 	public String getAuthType() {
 		return ((HttpServletRequest) request).getAuthType();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getRemoteUser()
-	 */
 	@Override
 	public String getRemoteUser() {
 		return ((HttpServletRequest) request).getRemoteUser();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#getUserPrincipal()
-	 */
 	@Override
 	public java.security.Principal getUserPrincipal() {
 		return ((HttpServletRequest) request).getUserPrincipal();
 	}
 
-	/**
-	 * @see javax.faces.context.ExternalContext#isUserInRole(java.lang.String)
-	 */
 	@Override
 	public boolean isUserInRole(final String role) {
 		return ((HttpServletRequest) request).isUserInRole(role);
@@ -483,41 +320,33 @@ public class MockExternalContext extends ExternalContext {
 	/**
 	 * An iterator for Locale.
 	 */
-	@SuppressWarnings("unchecked")
-	private class LocalesIterator implements Iterator {
+	private class LocalesIterator implements Iterator<Locale> {
 
 		/**
 		 * The locales.
 		 */
-		private Enumeration locales;
+		private Enumeration<Locale> locales;
 
 		/**
 		 * Constructor.
 		 * @param locales
 		 */
-		@SuppressWarnings({ })
-		public LocalesIterator(final Enumeration locales) {
+		public LocalesIterator(final Enumeration<Locale> locales) {
 			this.locales = locales;
 		}
 
-		/**
-		 * @see java.util.Iterator#hasNext()
-		 */
-		public boolean hasNext() {
+		@Override
+        public boolean hasNext() {
 			return locales.hasMoreElements();
 		}
 
-		/**
-		 * @see java.util.Iterator#next()
-		 */
-		public Object next() {
+		@Override
+        public Locale next() {
 			return locales.nextElement();
 		}
 
-		/**
-		 * @see java.util.Iterator#remove()
-		 */
-		public void remove() {
+		@Override
+        public void remove() {
 			throw new UnsupportedOperationException();
 		}
 
