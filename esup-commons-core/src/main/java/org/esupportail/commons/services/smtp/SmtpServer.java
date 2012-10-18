@@ -80,7 +80,6 @@ public class SmtpServer implements InitializingBean, Serializable {
 			this.user = null;
 			logger.info(getClass() + ": an anonymous connection will be used for SMTP server '"
 					+ this.host + ":" + this.port + "'.");
-			setDefaultPort();
 			if (StringUtils.hasText(this.password)) {
 				logger.warn(getClass() + ": an anonymous connection will be used for SMTP server '"
 						+ this.host + ":" + this.port + "', password ignored.");
