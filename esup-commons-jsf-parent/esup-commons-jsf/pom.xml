@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.3.1</version>
+		<version>0.3.2</version>
 	</parent>
 	<artifactId>esup-commons2-jsf</artifactId>
 	<name>esup-commons-jsf</name>
@@ -62,7 +62,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<myfaces.version>1.2.9</myfaces.version>
+		<myfaces.version>1.2.12</myfaces.version>
 		<myfaces.tomahawk.version>1.1.9</myfaces.tomahawk.version>
 		<javax.el.version>1.0</javax.el.version>
 		<javax.servlet.jsp.version>2.1</javax.servlet.jsp.version>

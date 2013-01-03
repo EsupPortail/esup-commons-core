@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+		"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="smtpService"
+		class="org.esupportail.commons.services.smtp.SimpleSmtpServiceImpl"
+		lazy-init="true">
+		<property name="servers">
+			<list>
+				<ref bean="smtpServer" />
+			</list>
+		</property>
+		<property name="fromAddress" ref="smtpFromAddress" />
+		<property name="interceptAll" value="false" />
+		<property name="charset" value="UTF-8" />
+	</bean>
+	
+    <bean 
+    	id="smtpFromAddress" 
+    	class="javax.mail.internet.InternetAddress">
+        <property name="address" value="foo@univ.fr" />
+        <property name="personal" value="FOO" />
+    </bean>
+    
+    <bean 
+    	id="smtpServer" 
+    	class="org.esupportail.commons.services.smtp.SmtpServer">
+        <property name="host" value="localhost" />
+        <property name="port" value="2525" />
+    </bean>
+</beans>
+	
