@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-dao-parent</artifactId>
-		<version>0.3.2</version>
+		<version>0.3.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>esup-commons2-hibernate</artifactId>
 	<name>esup-commons-hibernate</name>
