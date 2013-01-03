@@ -184,20 +184,37 @@ public class SimpleSmtpServiceImpl extends AbstractSmtpService implements Initia
 	 * @param messageId
 	 */
 	protected void send(
-			final InternetAddress[] tos,
-			final InternetAddress[] ccs,
-			final InternetAddress[] bccs,
+			InternetAddress[] tos,
+			InternetAddress[] ccs,
+			InternetAddress[] bccs,
 			final String subject,
 			final String htmlBody,
 			final String textBody,
 			final List<File> files,
 			final String messageId) {
-
+		
+		//if mail to be intercepted?
+		if (interceptAll && tos[0] != null) {
+			//retrieve to from interceptAddress
+			InternetAddress recipient;
+			try {
+				recipient = new InternetAddress(
+						interceptAddress.getAddress(),
+						interceptAddress.getPersonal() + " (normally sent to "
+						+ tos[0].getAddress() + ")");
+			} catch (UnsupportedEncodingException e) {
+				throw new SmtpException("could not send mail to '" + tos[0].getAddress() + "'", e);
+			}
+			//init tos with interceptAddress and remove ccs and bccs
+			tos = new InternetAddress[1];
+			tos[0] = recipient;
+			ccs = null;
+			bccs = null;
+		} 
 		SmtpUtils.sendEmailtocc(
 				this.servers, this.fromAddress, tos, ccs, bccs,
-				subject, htmlBody, textBody, files, this.charset, messageId);
+				subject, htmlBody, textBody, files, this.charset, messageId);			
 	}
-
 
 	/**
 	 * @see org.esupportail.commons.services.smtp.SmtpService#send(

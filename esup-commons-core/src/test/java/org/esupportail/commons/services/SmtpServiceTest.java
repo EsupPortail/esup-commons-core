@@ -55,6 +55,7 @@ public class SmtpServiceTest {
 
 	@Test
 	public void testMailwithOneRecipient(){
+		smtpService.setInterceptAll(false);
 		smtpService.send(to, TITLE, HTML_BODY, TEXT_BODY);
 		Assert.assertEquals(1, server.getReceivedEmailSize());
 		SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
@@ -75,6 +76,7 @@ public class SmtpServiceTest {
 	public void testMailwithRecipients(){
 		InternetAddress[] tos = {to};
 		InternetAddress[] ccs = {to2};
+		smtpService.setInterceptAll(false);
 		smtpService.sendtocc(tos, ccs, null, TITLE, HTML_BODY, TEXT_BODY, null);
 		Assert.assertEquals(1, server.getReceivedEmailSize());
 		SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
