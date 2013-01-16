@@ -11,11 +11,11 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.NoRequestBoundException;
 import org.esupportail.commons.services.i18n.I18nService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.ContextUtils;
 
 /**
@@ -66,7 +66,7 @@ public class ResourceBundlePhaseListener implements PhaseListener {
 
 			if (locale != null
 					&& context.getExternalContext().getRequestMap().get(DEFAULT_STRINGVAR) == null) {
-				I18nService i18nService = (I18nService) BeanUtils.getBean("i18nService");
+				I18nService i18nService = (I18nService) ApplicationContextHolder.getContext().getBean("i18nService");
 				context.getExternalContext().getRequestMap().put(
 						DEFAULT_STRINGVAR,
 						i18nService.getStrings(locale));

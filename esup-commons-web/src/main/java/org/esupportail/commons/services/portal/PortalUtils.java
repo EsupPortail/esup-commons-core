@@ -3,7 +3,7 @@
  */
 package org.esupportail.commons.services.portal;
 
-import org.esupportail.commons.utils.BeanUtilsWeb;
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.portal.ws.client.PortalService;
 
 /**
@@ -27,7 +27,7 @@ public class PortalUtils {
 	 * @return the portal service.
 	 */
 	public static PortalService createPortalService() {
-		return (PortalService) BeanUtilsWeb.getBean(PORTAL_SERVICE_BEAN);
+		return (PortalService) ApplicationContextHolder.getContext().getBean(PORTAL_SERVICE_BEAN);
 	}
 
 }

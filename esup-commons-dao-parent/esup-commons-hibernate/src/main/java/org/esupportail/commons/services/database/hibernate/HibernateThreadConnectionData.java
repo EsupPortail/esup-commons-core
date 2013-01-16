@@ -3,10 +3,9 @@
  */
 package org.esupportail.commons.services.database.hibernate;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
-
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -79,7 +78,7 @@ public class HibernateThreadConnectionData {
 	 * Open the session.
 	 */
 	void openSession() {
-		sessionFactory = (SessionFactory) BeanUtils.getBean(sessionFactoryBeanName);
+		sessionFactory = (SessionFactory) ApplicationContextHolder.getContext().getBean(sessionFactoryBeanName);
 		if (TransactionSynchronizationManager.hasResource(sessionFactory)) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("OPEN(" + sessionFactoryBeanName + ") ***** participate!");

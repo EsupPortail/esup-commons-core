@@ -3,7 +3,7 @@
  */
 package org.esupportail.commons.services.application; 
 
-import org.esupportail.commons.utils.BeanUtils;
+import org.esupportail.commons.context.ApplicationContextHolder;
 
 /**
  * A class that provides static utilities for applications.
@@ -26,7 +26,7 @@ public final class ApplicationUtils {
 	 * @return an application service.
 	 */
 	public static ApplicationService createApplicationService() {
-		return (ApplicationService) BeanUtils.getBean(APPLICATION_SERVICE_BEAN);
+		return (ApplicationService) ApplicationContextHolder.getContext().getBean(APPLICATION_SERVICE_BEAN);
 	}
 	
 }

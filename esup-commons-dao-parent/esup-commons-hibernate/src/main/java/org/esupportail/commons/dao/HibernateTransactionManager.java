@@ -5,6 +5,7 @@
 */
 package org.esupportail.commons.dao;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.utils.BeanUtils;
 
 import org.hibernate.SessionFactory;
@@ -71,7 +72,7 @@ public class HibernateTransactionManager
 
 	@Override
 	public SessionFactory getSessionFactory() {
-		return (SessionFactory) BeanUtils.getBean(getSessionFactoryBeanName());
+		return (SessionFactory) ApplicationContextHolder.getContext().getBean(getSessionFactoryBeanName());
 
 	}
 

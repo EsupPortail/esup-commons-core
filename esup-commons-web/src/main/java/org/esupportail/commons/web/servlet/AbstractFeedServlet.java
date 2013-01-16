@@ -14,6 +14,7 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.application.VersionningUtils;
 import org.esupportail.commons.utils.BeanUtilsWeb;
 
@@ -71,7 +72,7 @@ public abstract class AbstractFeedServlet extends HttpServlet {
 	 */
 	protected CacheManager getCacheManager() {
 		if (cacheManager == null) {
-			cacheManager = (CacheManager) BeanUtilsWeb.getBean(CACHE_MANAGER_BEAN);
+			cacheManager = (CacheManager) ApplicationContextHolder.getContext().getBean(CACHE_MANAGER_BEAN);
 		}
 		return cacheManager;
 	}

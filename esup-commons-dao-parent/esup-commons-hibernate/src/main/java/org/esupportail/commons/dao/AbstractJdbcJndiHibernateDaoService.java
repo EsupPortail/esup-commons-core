@@ -3,6 +3,7 @@
  */
 package org.esupportail.commons.dao;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.strings.StringUtils;
@@ -102,7 +103,7 @@ extends AbstractGenericHibernateDaoService {
 		if (name == null) {
 			return null;
 		}
-		return (HibernateTemplate) BeanUtils.getBean(name);
+		return (HibernateTemplate) ApplicationContextHolder.getContext().getBean(name);
 	}
 
 	/**

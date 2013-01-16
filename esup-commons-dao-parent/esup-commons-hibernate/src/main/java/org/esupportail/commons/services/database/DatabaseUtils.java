@@ -3,10 +3,10 @@
  */
 package org.esupportail.commons.services.database;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 
 /**
  * A simple utility class to create/update the Hibernate database structures.
@@ -45,7 +45,7 @@ public class DatabaseUtils {
      */
     private static DatabaseManagerStore getDatabaseManagerStore() {
     	if (databaseManagerStore == null) {
-    		databaseManagerStore = (DatabaseManagerStore) BeanUtils.getBean(DATABASE_MANAGER_STORE);
+    		databaseManagerStore = (DatabaseManagerStore) ApplicationContextHolder.getContext().getBean(DATABASE_MANAGER_STORE);
     	}
     	return databaseManagerStore;
     }

@@ -11,14 +11,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.application.Version;
 import org.esupportail.commons.services.exceptionHandling.ExceptionService;
 import org.esupportail.commons.services.exceptionHandling.ExceptionUtils;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
-
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -297,7 +296,7 @@ public class ExceptionController implements InitializingBean, Serializable {
 	 * @return a String.
 	 */
 	public String restart() {
-		Map<String, Resettable> resettables = BeanUtils.getBeansOfClass(Resettable.class);
+		Map<String, Resettable> resettables = ApplicationContextHolder.getContext().getBeansOfType(Resettable.class);
 		for (String name : resettables.keySet()) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("trying to reset bean [" + name + "]...");

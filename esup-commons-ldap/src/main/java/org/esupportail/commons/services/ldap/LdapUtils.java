@@ -3,7 +3,7 @@
  */
 package org.esupportail.commons.services.ldap;
 
-import org.esupportail.commons.utils.BeanUtils;
+import org.esupportail.commons.context.ApplicationContextHolder;
 
 /**
  * A class that provides utilities to access LDAP.
@@ -26,7 +26,7 @@ public class LdapUtils {
 	 * @return the LDAP service.
 	 */
 	public static LdapUserService createLdapService() {
-		return (LdapUserService) BeanUtils.getBean(LDAP_SERVICE_BEAN);
+		return (LdapUserService) ApplicationContextHolder.getContext().getBean(LDAP_SERVICE_BEAN);
 	}
 
 }

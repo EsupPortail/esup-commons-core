@@ -3,7 +3,7 @@
  */
 package org.esupportail.commons.services.urlGeneration; 
 
-import org.esupportail.commons.utils.BeanUtilsWeb;
+import org.esupportail.commons.context.ApplicationContextHolder;
 
 /**
  * A class that provides static utilities for URL generation.
@@ -26,7 +26,7 @@ public final class UrlGenerationUtils {
 	 * @return a URL generator.
 	 */
 	public static UrlGenerator createUrlGenerator() {
-		return (UrlGenerator) BeanUtilsWeb.getBean(URL_GENERATOR_BEAN);
+		return (UrlGenerator) ApplicationContextHolder.getContext().getBean(URL_GENERATOR_BEAN);
 	}
 	
 }

@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ExceptionHandlingException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.ContextUtils;
 
 /**
@@ -252,7 +252,7 @@ public final class ExceptionUtils {
 	 */
 	private static ExceptionService getExceptionService() {
 		ExceptionServiceFactory exceptionServiceFactory  =
-			(ExceptionServiceFactory) BeanUtils.getBean(EXCEPTION_SERVICE_FACTORY_BEAN);
+			(ExceptionServiceFactory) ApplicationContextHolder.getContext().getBean(EXCEPTION_SERVICE_FACTORY_BEAN);
 		return exceptionServiceFactory.getExceptionService();
 	}
 

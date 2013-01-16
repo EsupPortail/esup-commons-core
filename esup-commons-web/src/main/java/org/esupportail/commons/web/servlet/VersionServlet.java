@@ -11,10 +11,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.application.ApplicationService;
 import org.esupportail.commons.services.application.Version;
 import org.esupportail.commons.services.application.VersionException;
-import org.esupportail.commons.utils.BeanUtils;
 
 /**
  * The servlet to show the version number.
@@ -43,7 +43,7 @@ public class VersionServlet extends HttpServlet {
 		super.init(config);
 		try {
 			ApplicationService applicationService =
-				(ApplicationService) BeanUtils.getBean("applicationService");
+				(ApplicationService) ApplicationContextHolder.getContext().getBean("applicationService");
 			Version version = applicationService.getVersion();
 			result = version.toString();
 		} catch (Throwable t) {

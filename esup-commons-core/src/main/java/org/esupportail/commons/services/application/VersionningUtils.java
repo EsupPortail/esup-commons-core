@@ -3,10 +3,10 @@
  */
 package org.esupportail.commons.services.application; 
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 
 /**
  * Utilities for versionning management.
@@ -51,7 +51,7 @@ public class VersionningUtils {
 	 * @return the versionning service.
 	 */
 	public static VersionningService createVersionningService() {
-		return (VersionningService) BeanUtils.getBean(VERSIONNING_SERVICE_BEAN);
+		return (VersionningService) ApplicationContextHolder.getContext().getBean(VERSIONNING_SERVICE_BEAN);
 	}
 
 	/**

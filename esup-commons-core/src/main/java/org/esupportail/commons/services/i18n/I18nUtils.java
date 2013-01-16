@@ -11,9 +11,9 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 
 /**
  * An abstract class that should be inherited by all the implementations 
@@ -174,7 +174,7 @@ public class I18nUtils {
 	 * @return the i18n service.
 	 */
 	public static I18nService createI18nService() {
-		return (I18nService) BeanUtils.getBean(I18N_SERVICE_BEAN);
+		return (I18nService) ApplicationContextHolder.getContext().getBean(I18N_SERVICE_BEAN);
 	}
 
 }

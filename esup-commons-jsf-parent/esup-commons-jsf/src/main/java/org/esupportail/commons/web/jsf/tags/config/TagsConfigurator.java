@@ -11,10 +11,9 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 
 import org.esupportail.commons.beans.AbstractApplicationAwareBean;
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
-
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 //TODO CL V2 : PB PORTLET
@@ -666,7 +665,7 @@ public class TagsConfigurator extends AbstractApplicationAwareBean {
 	 */
 	public static TagsConfigurator getInstance() {
 		if (singleton == null) {
-			singleton = (TagsConfigurator) BeanUtils.getBean(TAGS_CONFIGURATOR_BEAN);
+			singleton = (TagsConfigurator) ApplicationContextHolder.getContext().getBean(TAGS_CONFIGURATOR_BEAN);
 		}
 		return singleton;
 	}

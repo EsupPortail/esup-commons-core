@@ -29,9 +29,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.esupportail.commons.utils.BeanUtils;
 
 /**
  * A class that provides utilities to send emails.
@@ -255,7 +255,7 @@ public class SmtpUtils {
 	 * @return the SMTP service.
 	 */
 	public static SmtpService createSmtpService() {
-		return (SmtpService) BeanUtils.getBean(SMTP_SERVICE_BEAN);
+		return (SmtpService) ApplicationContextHolder.getContext().getBean(SMTP_SERVICE_BEAN);
 	}
 
 	/**

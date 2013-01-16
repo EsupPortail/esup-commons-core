@@ -3,9 +3,9 @@
  */
 package org.esupportail.commons.services.database.hibernate;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.utils.Assert;
-import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.strings.StringUtils;
 //TODO CL V2: lien vers module web
 //import org.esupportail.commons.utils.ContextUtils;
@@ -85,12 +85,12 @@ public class UpgradableHibernateDatabaseManagerImpl extends BasicHibernateDataba
 
 	@Override
 	public void create() {
-		BeanUtils.getBean(createSessionFactoryBeanName);
+		ApplicationContextHolder.getContext().getBean(createSessionFactoryBeanName);
 	}
 
 	@Override
 	public void upgrade() {
-		BeanUtils.getBean(getUpgradeSessionFactoryBeanName());
+		ApplicationContextHolder.getContext().getBean(getUpgradeSessionFactoryBeanName());
 	}
 
 	/**

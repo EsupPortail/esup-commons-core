@@ -16,15 +16,14 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletRequest;
 
+import org.esupportail.commons.context.ApplicationContextHolder;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.urlGeneration.AbstractUrlGenerator;
 import org.esupportail.commons.services.urlGeneration.ServletUrlGeneratorImpl;
-import org.esupportail.commons.utils.BeanUtils;
 import org.esupportail.commons.utils.strings.StringUtilsWeb;
 import org.esupportail.commons.web.jsf.tags.TagUtils;
-
 import org.springframework.util.StringUtils;
 
 /**
@@ -167,7 +166,7 @@ public class DeepLinkingPhaseListener implements PhaseListener {
 	 */
 	private List<UrlPatternDescriptor> getUrlDescriptor() {
 		//ADD Action
-		Map<String, UrlPatternDescriptor> treatments = BeanUtils.getBeansOfClass(UrlPatternDescriptor.class);
+		Map<String, UrlPatternDescriptor> treatments = ApplicationContextHolder.getContext().getBeansOfType(UrlPatternDescriptor.class);
 		List<UrlPatternDescriptor> urlP = new ArrayList<UrlPatternDescriptor>();
 		for (String name : treatments.keySet()) {
 			if (logger.isDebugEnabled()) {
