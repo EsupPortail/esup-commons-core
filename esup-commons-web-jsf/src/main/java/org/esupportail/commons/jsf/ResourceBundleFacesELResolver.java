@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import javax.el.ELContext;
 import javax.el.ELException;
-import javax.el.PropertyNotFoundException;
 import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;

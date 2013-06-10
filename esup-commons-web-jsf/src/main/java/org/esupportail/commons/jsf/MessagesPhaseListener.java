@@ -3,8 +3,6 @@
  */
 package org.esupportail.commons.jsf;
 
-//see http://learnjsf.com/wp/2006/08/06/a-prg-phase-listener-for-jsf/
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
