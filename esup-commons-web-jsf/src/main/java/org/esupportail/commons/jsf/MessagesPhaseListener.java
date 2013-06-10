@@ -48,8 +48,14 @@ public class MessagesPhaseListener implements PhaseListener {
 	/**
 	 * Constructor.
 	 */
-	public MessagesPhaseListener() {
-		super();
+	private MessagesPhaseListener() {
+	}
+
+	/**
+	 * a static factory method
+	 */
+	public static MessagesPhaseListener createInstance() {
+		return new MessagesPhaseListener();
 	}
 
 	@Override

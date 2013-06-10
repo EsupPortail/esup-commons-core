@@ -9,6 +9,19 @@ import org.springframework.beans.factory.config.Scope;
 
 public class ViewScope implements Scope {
 
+	/**
+	 * Bean constructor.
+	 */
+	private ViewScope() {
+	}
+	
+	/**
+	 * a static factory method
+	 */
+	public static ViewScope createInstance() {
+		return new ViewScope();
+	}
+	
 	public Object get(String name, ObjectFactory<?> objectFactory) {
 		Map<String, Object> viewMap = FacesContext.getCurrentInstance()
 				.getViewRoot().getViewMap();
