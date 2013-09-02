@@ -7,7 +7,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.esupportail.commons.utils.Assert;
-
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 
@@ -27,7 +26,7 @@ public class ResourceBundleMessageSourceI18nServiceImpl extends AbstractI18nServ
 	/**
 	 * The basename of the properties files that holds the bundles.
 	 */
-	private MessageSource messageSource;
+	private ReloadableResourceBundleMessageSource messageSource;
 
 	/**
 	 * Bean constructor.
@@ -40,11 +39,12 @@ public class ResourceBundleMessageSourceI18nServiceImpl extends AbstractI18nServ
 	public void afterPropertiesSet() {
 		Assert.notNull(messageSource,
 				"property messageSource of class " + getClass().getName() + " can not be null");
+		Assert.isInstanceOf(ReloadableResourceBundleMessageSource.class, messageSource, "property messageSource of class " + getClass().getName() + ": ");
 	}
 
 	@Override
 	public Map<String, String> getStrings(final Locale locale) {
-		throw new RuntimeException("getStrings not supported by " + getClass().getName());
+		return messageSource.getStrings(locale);
 	}
 
 	@Override
@@ -71,9 +71,8 @@ public class ResourceBundleMessageSourceI18nServiceImpl extends AbstractI18nServ
 	 * @param messageSource the messageSource to set
 	 */
 	public void setMessageSource(MessageSource messageSource) {
-		this.messageSource = messageSource;
+		this.messageSource = (ReloadableResourceBundleMessageSource) messageSource;
 	}
-
 
 }
 
