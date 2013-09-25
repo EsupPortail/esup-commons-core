@@ -21,7 +21,7 @@ public interface SmtpService extends Serializable {
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	Future<TransportEvent> send(MessageTemplate template);
+	MailStatus<Future<TransportEvent>> send(MessageTemplate template);
 	
 	
 	/**
@@ -31,7 +31,7 @@ public interface SmtpService extends Serializable {
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	Future<TransportEvent> sendDoNotIntercept(MessageTemplate template);
+	MailStatus<Future<TransportEvent>> sendDoNotIntercept(MessageTemplate template);
 	
 	/**
 	 * @return true if the class supports testing. If false, calls to method 
@@ -45,6 +45,6 @@ public interface SmtpService extends Serializable {
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	Future<TransportEvent> test();
+	MailStatus<Future<TransportEvent>> test();
 	
 }

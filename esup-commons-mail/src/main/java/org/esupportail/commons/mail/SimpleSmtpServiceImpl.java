@@ -93,22 +93,33 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 	/**
 	 * Constructor.
 	 */
-	private SimpleSmtpServiceImpl() {
+	protected SimpleSmtpServiceImpl(
+			final InternetAddress fromAddress,
+			final InternetAddress interceptAddress,
+			final InternetAddress testAddress, 
+			final boolean interceptAll,
+			final String charset,
+			final SmtpServer server) {
+		this.fromAddress = fromAddress;
+		this.interceptAddress = interceptAddress;
+		this.testAddress = testAddress;
+		this.interceptAll = interceptAll;
+		this.charset = charset;
+		this.server = server;
 		this.notInterceptedAddresses = new ArrayList<String>();
 	}
 
 	public final static SimpleSmtpServiceImpl createInstance(
 			final InternetAddress fromAddress,
 			final InternetAddress interceptAddress,
-			final InternetAddress testAddress, final boolean interceptAll,
-			final String notInterceptAdresses, final String charset,
+			final InternetAddress testAddress, 
+			final boolean interceptAll,
+			final String notInterceptAdresses, 
+			final String charset,
 			final SmtpServer server) {
-		SimpleSmtpServiceImpl service = new SimpleSmtpServiceImpl()
-				.withFromAddress(fromAddress)
-				.withInterceptAddress(interceptAddress)
-				.withTestAddress(testAddress).withInterceptAll(interceptAll)
-				.withNotInterceptedAddresses(notInterceptAdresses)
-				.withCharset(charset).withServer(server);
+		SimpleSmtpServiceImpl service = new SimpleSmtpServiceImpl(fromAddress,
+				interceptAddress, testAddress, interceptAll, charset, server)
+				.withNotInterceptedAddresses(notInterceptAdresses);
 		assert service.fromAddress != null : "property fromAddress can not be null";
 		if (service.server == null) {
 			final SmtpServer defaultServer = SmtpServer.createInstance();
@@ -130,7 +141,7 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 	}
 
 	@Override
-	public Future<TransportEvent> send(final MessageTemplate messageTemplate) {
+	public MailStatus<Future<TransportEvent>> send(final MessageTemplate messageTemplate) {
 
 		MessageTemplate template = messageTemplate;
 		
@@ -175,7 +186,7 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 			}
 		}
 		
-		final Future<TransportEvent> result = sendMessage(template, server);
+		final MailStatus<Future<TransportEvent>> result = sendMessage(template, server);
 		
 		for (final InternetAddress iAdr : template.getTos()) {
 			logger.info("an email has been sent to '" + iAdr.getAddress() + "'...");
@@ -185,7 +196,7 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 	}
 
 	@Override
-	public Future<TransportEvent> sendDoNotIntercept(final MessageTemplate template) {
+	public MailStatus<Future<TransportEvent>> sendDoNotIntercept(final MessageTemplate template) {
 		return send(template.withIntercept(false));
 	}
 
@@ -195,7 +206,7 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 	}
 
 	@Override
-	public Future<TransportEvent> test() {
+	public MailStatus<Future<TransportEvent>> test() {
 		assert testAddress != null : "can not test the SMTP connection when property testAddress is not set, check your configuration.";
 		final MessageTemplate template = MessageTemplate.createInstance(
 				"SMTP test", "<p>This is a <b>test</b>.</p>",
@@ -229,8 +240,8 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 		return recipient;
 	}
 
-	private Future<TransportEvent> sendMessage(final MessageTemplate template, final SmtpServer smtpServer) {
-		return Executors.newSingleThreadExecutor().submit(
+	private MailStatus<Future<TransportEvent>> sendMessage(final MessageTemplate template, final SmtpServer smtpServer) {
+		return MailStatus.notAlreadySent(Executors.newSingleThreadExecutor().submit(
 				new Callable<TransportEvent>() {
 					@SuppressWarnings("synthetic-access")
 					public TransportEvent call() throws MessagingException {
@@ -328,7 +339,7 @@ public class SimpleSmtpServiceImpl implements SmtpService {
 
 						return events.iterator().next();
 					}
-				});
+				}));
 	}
 
 	/**

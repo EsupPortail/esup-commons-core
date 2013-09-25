@@ -58,7 +58,8 @@ public class SmtpServiceTest {
 	public void testMailwithOneRecipient() throws InterruptedException,
 			ExecutionException {
 		smtpService.setInterceptAll(false);
-		smtpService.send(createInstance(TITLE, HTML_BODY, TEXT_BODY, to)).get();
+		smtpService.send(createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
+				.notAlreadySent().get();
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(TO));
@@ -68,7 +69,8 @@ public class SmtpServiceTest {
 	public void testInterceptedMailwithOneRecipient()
 			throws InterruptedException, ExecutionException {
 		smtpService.setInterceptAll(true);
-		smtpService.send(createInstance(TITLE, HTML_BODY, TEXT_BODY, to)).get();
+		smtpService.send(createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
+				.notAlreadySent().get();
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(INTERCEPT_ADRESSE));
@@ -82,7 +84,7 @@ public class SmtpServiceTest {
 		smtpService.setInterceptAll(false);
 		smtpService.send(
 				createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
-				.withCcs(ccs)).get();
+				.withCcs(ccs)).notAlreadySent().get();
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(TO));
@@ -98,7 +100,7 @@ public class SmtpServiceTest {
 		smtpService.setInterceptAll(true);
 		smtpService.send(
 				createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
-				.withCcs(ccs)).get();
+				.withCcs(ccs)).notAlreadySent().get();
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(INTERCEPT_ADRESSE));
