@@ -88,7 +88,7 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 			HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
 
 			try {
-				e = ExceptionUtils.catchException(result.getCause());
+				e = ExceptionUtils.catchException(result);
 				request.getSession().setAttribute(ExceptionUtils.EXCEPTION_MARKER_NAME, e);
 			} catch (Throwable th) {
 				log.error("problem to catch exception = " + th, th);
@@ -96,7 +96,7 @@ public class EsupExceptionHandler extends ExceptionHandlerWrapper {
 			}
 			NavigationHandler navigation = fc.getApplication().getNavigationHandler();
 			// Redirection vers la page des erreurs
-			String view = e.getExceptionView();
+			String view = e != null ? e.getExceptionView() : null; // handleNavigation's outcome can be null
 			navigation.handleNavigation(fc, null, view);
 			fc.renderResponse();
 		}
