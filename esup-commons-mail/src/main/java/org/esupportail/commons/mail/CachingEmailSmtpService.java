@@ -45,7 +45,11 @@ public final class CachingEmailSmtpService implements SmtpService {
         this.cache = cache;
     }
 
-	@Override
+    public static CachingEmailSmtpService create(SmtpService smtpService, Cache cache) {
+        return new CachingEmailSmtpService(smtpService, cache);
+    }
+
+    @Override
 	public Future<MailStatus> send(final MessageTemplate msg) throws MessagingException {
 		final String cacheKey = getCacheKey(msg);
 		final ValueWrapper value = cache.get(cacheKey);

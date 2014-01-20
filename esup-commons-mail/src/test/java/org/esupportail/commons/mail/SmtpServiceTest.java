@@ -2,16 +2,19 @@ package org.esupportail.commons.mail;
 
 import com.dumbster.smtp.SimpleSmtpServer;
 import com.dumbster.smtp.SmtpMessage;
+import org.esupportail.commons.mail.model.MailStatus;
 import org.esupportail.commons.mail.model.MessageTemplate;
 import org.esupportail.commons.mail.model.SmtpServerData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import static org.junit.Assert.*;
 
@@ -120,5 +123,24 @@ public class SmtpServiceTest {
 		assertTrue(email.getHeaderValue("To").contains(INTERCEPT_ADRESSE));
 		assertNull("Cc must be null", email.getHeaderValue("Cc"));
 	}
+
+    @Test
+    public void testCachingEmail() throws MessagingException, ExecutionException, InterruptedException {
+        final SmtpService smtp = CachingEmailSmtpService.create(
+                SimpleSmtpService
+                        .builder(from, null, null)
+                        .server(SmtpServerData.builder().port(SMTP_PORT).build())
+                        .charset("UTF-8")
+                        .build(),
+                new ConcurrentMapCache("testCachingEmail"));
+        final MessageTemplate message =
+                MessageTemplate.createInstance(TITLE, HTML_BODY, TEXT_BODY, to);
+
+        final MailStatus fstSending = smtp.send(message).get();
+        final MailStatus sndSending = smtp.send(message).get();
+
+        assertEquals(MailStatus.Delivered, fstSending);
+        assertEquals(MailStatus.AlreadySent, sndSending);
+    }
 
 }
