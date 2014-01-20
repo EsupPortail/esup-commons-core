@@ -1,26 +1,21 @@
 package org.esupportail.commons.mail;
 
-import static org.esupportail.commons.mail.MessageTemplate.createInstance;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-
-import java.io.UnsupportedEncodingException;
-import java.util.concurrent.ExecutionException;
-
-import javax.mail.internet.InternetAddress;
-
+import com.dumbster.smtp.SimpleSmtpServer;
+import com.dumbster.smtp.SmtpMessage;
+import org.esupportail.commons.mail.model.MessageTemplate;
+import org.esupportail.commons.mail.model.SmtpServerData;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.dumbster.smtp.SimpleSmtpServer;
-import com.dumbster.smtp.SmtpMessage;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.ExecutionException;
+
+import static org.junit.Assert.*;
 
 public class SmtpServiceTest {
-
-	private SimpleSmtpServiceImpl smtpService;
 
 	private final String TITLE = "Title";
 	private final String HTML_BODY = "<html><body>Hello</body></html>";
@@ -41,12 +36,7 @@ public class SmtpServiceTest {
 		from = new InternetAddress(FROM, FROM);
 		to = new InternetAddress(TO, TO);
 		to2 = new InternetAddress(TO2, TO2);
-		interceptAddress = new InternetAddress(INTERCEPT_ADRESSE,
-				INTERCEPT_ADRESSE);
-
-		smtpService = SimpleSmtpServiceImpl.createInstance(from,
-				interceptAddress, null, true, "").withServer(
-				SmtpServer.createInstance(SmtpServer.DEFAULT_HOST, SMTP_PORT));
+		interceptAddress = new InternetAddress(INTERCEPT_ADRESSE, INTERCEPT_ADRESSE);
 	}
 
 	@After
@@ -55,36 +45,53 @@ public class SmtpServiceTest {
 	}
 
 	@Test
-	public void testMailwithOneRecipient() throws InterruptedException,
-			ExecutionException {
-		smtpService.setInterceptAll(false);
-		smtpService.send(createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
-				.notAlreadySent().get();
+	public void testMailwithOneRecipient() throws InterruptedException, ExecutionException, MessagingException {
+        SimpleSmtpService
+                .builder(from, null, interceptAddress)
+                .server(SmtpServerData.builder().port(SMTP_PORT).build())
+                .interceptAll(false)
+                .charset("UTF-8")
+                .build()
+                .send(MessageTemplate.createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
+                .get();
+
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(TO));
 	}
 
 	@Test
-	public void testInterceptedMailwithOneRecipient()
-			throws InterruptedException, ExecutionException {
-		smtpService.setInterceptAll(true);
-		smtpService.send(createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
-				.notAlreadySent().get();
+	public void testInterceptedMailwithOneRecipient() throws InterruptedException, ExecutionException, MessagingException {
+        SimpleSmtpService
+                .builder(from, null, interceptAddress)
+                .server(SmtpServerData.builder().port(SMTP_PORT).build())
+                .interceptAll(true)
+                .charset("UTF-8")
+                .build()
+                .send(MessageTemplate.createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
+                .get();
+
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(INTERCEPT_ADRESSE));
 	}
 
 	@Test
-	public void testMailwithRecipients() throws InterruptedException,
-			ExecutionException {
+	public void testMailwithRecipients() throws InterruptedException, ExecutionException, MessagingException {
 		InternetAddress[] tos = { to };
 		InternetAddress[] ccs = { to2 };
-		smtpService.setInterceptAll(false);
-		smtpService.send(
-				createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
-				.withCcs(ccs)).notAlreadySent().get();
+
+        SimpleSmtpService
+                .builder(from, null, interceptAddress)
+                .server(SmtpServerData.builder().port(SMTP_PORT).build())
+                .interceptAll(false)
+                .charset("UTF-8")
+                .build()
+                .send(MessageTemplate
+                        .createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
+                        .withCcs(ccs))
+                .get();
+
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(TO));
@@ -93,17 +100,25 @@ public class SmtpServiceTest {
 	}
 
 	@Test
-	public void testInterceptedMailwithRecipients()
-			throws InterruptedException, ExecutionException {
+	public void testInterceptedMailwithRecipients() throws InterruptedException, ExecutionException, MessagingException {
 		InternetAddress[] tos = { to };
 		InternetAddress[] ccs = { to2 };
-		smtpService.setInterceptAll(true);
-		smtpService.send(
-				createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
-				.withCcs(ccs)).notAlreadySent().get();
+
+        SimpleSmtpService
+                .builder(from, null, interceptAddress)
+                .server(SmtpServerData.builder().port(SMTP_PORT).build())
+                .interceptAll(true)
+                .charset("UTF-8")
+                .build()
+                .send(MessageTemplate
+                        .createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
+                        .withCcs(ccs))
+                .get();
+
 		assertEquals(1, server.getReceivedEmailSize());
 		final SmtpMessage email = (SmtpMessage) server.getReceivedEmail().next();
 		assertTrue(email.getHeaderValue("To").contains(INTERCEPT_ADRESSE));
 		assertNull("Cc must be null", email.getHeaderValue("Cc"));
 	}
+
 }

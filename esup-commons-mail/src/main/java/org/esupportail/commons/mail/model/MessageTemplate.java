@@ -1,4 +1,4 @@
-package org.esupportail.commons.mail;
+package org.esupportail.commons.mail.model;
 
 import java.io.File;
 import java.io.Serializable;
@@ -45,7 +45,7 @@ public class MessageTemplate implements Serializable {
 	protected MessageTemplate() {
 	}
 
-	public static final MessageTemplate createInstance(final String subject,
+	public static MessageTemplate createInstance(final String subject,
 			final String htmlBody, final String textBody,
 			final InternetAddress... tos) {
 		assert tos != null : "recipients of the message cannot be null";
@@ -55,7 +55,7 @@ public class MessageTemplate implements Serializable {
 				.withHtmlBody(htmlBody).withTextBody(textBody);
 	}
 
-	public static final MessageTemplate createInstance(
+	public static MessageTemplate createInstance(
 			final Throwable throwable, final InternetAddress... tos) {
 		final Throwable cause = throwable.getCause();
 		final StringBuffer titre = new StringBuffer(getVersion());

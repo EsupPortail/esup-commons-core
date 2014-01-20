@@ -7,3 +7,5 @@ target/
 .project
 bin
 /release.properties
+.idea/
+*.iml
