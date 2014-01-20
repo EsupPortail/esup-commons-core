@@ -44,14 +44,6 @@ import org.esupportail.commons.mail.model.SmtpServerData;
  */
 public final class SimpleSmtpService implements SmtpService {
 
-    /**
-     * The default encoding charset.
-     */
-    private static final String DEFAULT_CHARSET = "utf-8";
-
-    /**
-     * A logger.
-     */
     private final Logger logger = Logger.getLogger(getClass());
 
     /**
@@ -139,9 +131,10 @@ public final class SimpleSmtpService implements SmtpService {
             }
         }
 
-        template = template.withTos(tmpTos.toArray(new InternetAddress[] {}))
-                .withCcs(tmpCcs.toArray(new InternetAddress[] {}))
-                .withBccs(tmpBccs.toArray(new InternetAddress[] {}));
+        template = template
+                .withTos(tmpTos.toArray(new InternetAddress[tmpTos.size()]))
+                .withCcs(tmpCcs.toArray(new InternetAddress[tmpCcs.size()]))
+                .withBccs(tmpBccs.toArray(new InternetAddress[tmpBccs.size()]));
 
         try {
             template = template.withSubject(encodeText(template.getSubject(), charset, null));
@@ -162,8 +155,8 @@ public final class SimpleSmtpService implements SmtpService {
     }
 
     @Override
-    public Future<MailStatus> sendDoNotIntercept(final MessageTemplate template) throws MessagingException {
-        return send(template.withIntercept(false));
+    public Future<MailStatus> sendDoNotIntercept(final MessageTemplate msg) throws MessagingException {
+        return send(msg.withIntercept(false));
     }
 
     @Override
@@ -366,7 +359,7 @@ public final class SimpleSmtpService implements SmtpService {
 
     public static final class Builder {
         private SmtpServerData server = SmtpServerData.builder().build();
-        private String charset = "";
+        private String charset = "UTF-8";
         private final InternetAddress fromAddress;
         private final InternetAddress testAddress;
         private final InternetAddress interceptAddress;

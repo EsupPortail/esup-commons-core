@@ -29,12 +29,13 @@ public interface SmtpService {
 	/**
 	 * Send an email. Email will never be intercepted, even if configured so.
 	 *
+     *
      * @param template
      * @return
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	Future<MailStatus> sendDoNotIntercept(MessageTemplate template) throws MessagingException;
+	Future<MailStatus> sendDoNotIntercept(final MessageTemplate template) throws MessagingException;
 	
 	/**
 	 * @return true if the class supports testing. If false, calls to method 

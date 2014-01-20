@@ -6,10 +6,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.Cache.ValueWrapper;
 
 import javax.mail.MessagingException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 public final class CachingEmailSmtpService implements SmtpService {
 
@@ -51,27 +48,36 @@ public final class CachingEmailSmtpService implements SmtpService {
 
     @Override
 	public Future<MailStatus> send(final MessageTemplate msg) throws MessagingException {
-		final String cacheKey = getCacheKey(msg);
-		final ValueWrapper value = cache.get(cacheKey);
-		if (value == null) {
-			Future<MailStatus> newEvent = smtpService.send(msg);
-			cache.put(cacheKey, msg);
-			return newEvent;
-		}
-		return alreadySent;
+        return innerSend(msg, new SendAction() {
+            public Future<MailStatus> call() throws MessagingException {
+                return smtpService.send(msg);
+            }
+        });
 	}
 
 	@Override
 	public Future<MailStatus> sendDoNotIntercept(final MessageTemplate msg) throws MessagingException {
-		final String cacheKey = getCacheKey(msg);
-		final ValueWrapper value = cache.get(cacheKey);
-		if (value == null) {
-			Future<MailStatus> newEvent = smtpService.sendDoNotIntercept(msg);
-			cache.put(cacheKey, msg);
-			return newEvent;
-		}
-		return alreadySent;
+		return innerSend(msg, new SendAction() {
+            public Future<MailStatus> call() throws MessagingException {
+                return smtpService.sendDoNotIntercept(msg);
+            }
+        });
 	}
+
+    private static abstract class SendAction implements Callable<Future<MailStatus>> {
+        public abstract Future<MailStatus> call() throws MessagingException;
+    }
+
+    private Future<MailStatus> innerSend(MessageTemplate msg, SendAction sendAction) throws MessagingException {
+        final String cacheKey = getCacheKey(msg);
+        final ValueWrapper value = cache.get(cacheKey);
+        if (value == null) {
+            Future<MailStatus> newEvent = sendAction.call();
+            cache.put(cacheKey, msg);
+            return newEvent;
+        }
+        return alreadySent;
+    }
 
     @Override
     public boolean supportsTest() { return false; }

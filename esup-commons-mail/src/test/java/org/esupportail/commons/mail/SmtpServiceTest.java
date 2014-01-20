@@ -53,7 +53,6 @@ public class SmtpServiceTest {
                 .builder(from, null, interceptAddress)
                 .server(SmtpServerData.builder().port(SMTP_PORT).build())
                 .interceptAll(false)
-                .charset("UTF-8")
                 .build()
                 .send(MessageTemplate.createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
                 .get();
@@ -69,7 +68,6 @@ public class SmtpServiceTest {
                 .builder(from, null, interceptAddress)
                 .server(SmtpServerData.builder().port(SMTP_PORT).build())
                 .interceptAll(true)
-                .charset("UTF-8")
                 .build()
                 .send(MessageTemplate.createInstance(TITLE, HTML_BODY, TEXT_BODY, to))
                 .get();
@@ -88,7 +86,6 @@ public class SmtpServiceTest {
                 .builder(from, null, interceptAddress)
                 .server(SmtpServerData.builder().port(SMTP_PORT).build())
                 .interceptAll(false)
-                .charset("UTF-8")
                 .build()
                 .send(MessageTemplate
                         .createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
@@ -111,7 +108,6 @@ public class SmtpServiceTest {
                 .builder(from, null, interceptAddress)
                 .server(SmtpServerData.builder().port(SMTP_PORT).build())
                 .interceptAll(true)
-                .charset("UTF-8")
                 .build()
                 .send(MessageTemplate
                         .createInstance(TITLE, HTML_BODY, TEXT_BODY, tos)
@@ -125,12 +121,11 @@ public class SmtpServiceTest {
 	}
 
     @Test
-    public void testCachingEmail() throws MessagingException, ExecutionException, InterruptedException {
+    public void testCachingEmail() throws Exception, ExecutionException, InterruptedException {
         final SmtpService smtp = CachingEmailSmtpService.create(
                 SimpleSmtpService
                         .builder(from, null, null)
                         .server(SmtpServerData.builder().port(SMTP_PORT).build())
-                        .charset("UTF-8")
                         .build(),
                 new ConcurrentMapCache("testCachingEmail"));
         final MessageTemplate message =
