@@ -3,41 +3,45 @@
  */
 package org.esupportail.commons.mail;
 
-import java.io.Serializable;
+import org.esupportail.commons.mail.model.MailStatus;
+import org.esupportail.commons.mail.model.MessageTemplate;
+
 import java.util.concurrent.Future;
 
 import javax.mail.MessagingException;
-import javax.mail.event.TransportEvent;
 
 /** 
  * The interface of SMTP services, used to send emails.
  */
-public interface SmtpService extends Serializable {
+public interface SmtpService {
 
 	/**
 	 * Send an email. The email may be intercepted depending on the configuration.
-	 * @param template
-	 * @return
+	 *
+     * @param messageTemplate the message to send
+     * @return
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	MailStatus<Future<TransportEvent>> send(MessageTemplate template);
+	Future<MailStatus> send(MessageTemplate messageTemplate) throws MessagingException;
 	
 	
 	/**
 	 * Send an email. Email will never be intercepted, even if configured so.
-	 * @param template
-	 * @return 
+	 *
+     * @param template
+     * @return
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	MailStatus<Future<TransportEvent>> sendDoNotIntercept(MessageTemplate template);
+	Future<MailStatus> sendDoNotIntercept(MessageTemplate template) throws MessagingException;
 	
 	/**
 	 * @return true if the class supports testing. If false, calls to method 
 	 * test() should throw an exception.
 	 */
 	boolean supportsTest();
+
 	
 	/**
 	 * Test the SMTP connection.
@@ -45,6 +49,7 @@ public interface SmtpService extends Serializable {
 	 * 
 	 * May throw a {@link MessagingException}
 	 */
-	MailStatus<Future<TransportEvent>> test();
-	
+	Future<MailStatus> test() throws MessagingException;
+
+    void shutdown();
 }
