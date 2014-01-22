@@ -14,28 +14,21 @@ public final class CachingEmailSmtpService implements SmtpService {
 
 	private final Cache cache;
 
-    private static final Future<MailStatus> alreadySent = new Future<MailStatus>() {
+    private static enum AlreadySent implements Future<MailStatus> {_;
         public boolean cancel(boolean mayInterruptIfRunning) {
             return false;
         }
-
-        public boolean isCancelled() {
-            return false;
-        }
-
-        public boolean isDone() {
-            return false;
-        }
-
+        public boolean isCancelled() { return false; }
+        public boolean isDone() { return true; }
         public MailStatus get() throws InterruptedException, ExecutionException {
             return MailStatus.AlreadySent;
         }
-
+        @SuppressWarnings("NullableProblems")
         public MailStatus get(long timeout, TimeUnit unit)
                 throws InterruptedException, ExecutionException, TimeoutException {
             return get();
         }
-    };
+    }
 
     private CachingEmailSmtpService(SmtpService smtpService, Cache cache) {
         this.smtpService = smtpService;
@@ -44,6 +37,10 @@ public final class CachingEmailSmtpService implements SmtpService {
 
     public static CachingEmailSmtpService create(SmtpService smtpService, Cache cache) {
         return new CachingEmailSmtpService(smtpService, cache);
+    }
+
+    private static abstract class SendAction implements Callable<Future<MailStatus>> {
+        public abstract Future<MailStatus> call() throws MessagingException;
     }
 
     @Override
@@ -56,17 +53,13 @@ public final class CachingEmailSmtpService implements SmtpService {
 	}
 
 	@Override
-	public Future<MailStatus> sendDoNotIntercept(final MessageTemplate msg) throws MessagingException {
+	public Future<MailStatus> send(final MessageTemplate msg, final Interception interception) throws MessagingException {
 		return innerSend(msg, new SendAction() {
             public Future<MailStatus> call() throws MessagingException {
-                return smtpService.sendDoNotIntercept(msg);
+                return smtpService.send(msg, interception);
             }
         });
 	}
-
-    private static abstract class SendAction implements Callable<Future<MailStatus>> {
-        public abstract Future<MailStatus> call() throws MessagingException;
-    }
 
     private Future<MailStatus> innerSend(MessageTemplate msg, SendAction sendAction) throws MessagingException {
         final String cacheKey = getCacheKey(msg);
@@ -76,7 +69,7 @@ public final class CachingEmailSmtpService implements SmtpService {
             cache.put(cacheKey, msg);
             return newEvent;
         }
-        return alreadySent;
+        return AlreadySent._;
     }
 
     @Override

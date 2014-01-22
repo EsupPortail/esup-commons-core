@@ -7,17 +7,6 @@ package org.esupportail.commons.mail.model;
  * A class that encapsulates data representing an SMTP server.
  */
 public final class SmtpServerData {
-
-	/**
-	 * The default host.
-	 */
-	public static final String DEFAULT_HOST = "localhost";
-
-	/**
-	 * The default port.
-	 */
-	public static final int DEFAULT_PORT = 25;
-
 	/**
 	 * The host name or IP number of the server.
 	 */

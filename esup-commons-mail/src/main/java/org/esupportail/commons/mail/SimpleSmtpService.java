@@ -103,38 +103,13 @@ public final class SimpleSmtpService implements SmtpService {
     }
 
     @Override
-    public Future<MailStatus> send(final MessageTemplate messageTemplate) throws MessagingException {
-
+    public Future<MailStatus> send(final MessageTemplate messageTemplate, Interception interception) throws MessagingException {
         MessageTemplate template = messageTemplate;
 
-        // Interception of messages
-        List<InternetAddress> tmpTos = new ArrayList<>();
-        for (InternetAddress to : template.getTos()) {
-            InternetAddress recipient = getRealRecipient(to, template.isIntercept());
-            tmpTos.add(recipient);
-            if (template.isIntercept()) break;
-        }
-
-        List<InternetAddress> tmpCcs = new ArrayList<>();
-        if (template.getCcs() != null && !interceptAll) {
-            for (InternetAddress to : template.getCcs()) {
-                InternetAddress recipient = getRealRecipient(to, template.isIntercept());
-                tmpCcs.add(recipient);
-            }
-        }
-
-        List<InternetAddress> tmpBccs = new ArrayList<>();
-        if (template.getBccs() != null && !interceptAll) {
-            for (InternetAddress to : template.getBccs()) {
-                InternetAddress recipient = getRealRecipient(to, template.isIntercept());
-                tmpBccs.add(recipient);
-            }
-        }
-
         template = template
-                .withTos(tmpTos.toArray(new InternetAddress[tmpTos.size()]))
-                .withCcs(tmpCcs.toArray(new InternetAddress[tmpCcs.size()]))
-                .withBccs(tmpBccs.toArray(new InternetAddress[tmpBccs.size()]));
+                .withTos(getRealRecipients(template.getTos(), interception))
+                .withCcs(getRealRecipients(template.getCcs(), interception))
+                .withBccs(getRealRecipients(template.getBccs(), interception));
 
         try {
             template = template.withSubject(encodeText(template.getSubject(), charset, null));
@@ -155,8 +130,8 @@ public final class SimpleSmtpService implements SmtpService {
     }
 
     @Override
-    public Future<MailStatus> sendDoNotIntercept(final MessageTemplate msg) throws MessagingException {
-        return send(msg.withIntercept(false));
+    public Future<MailStatus> send(final MessageTemplate msg) throws MessagingException {
+        return send(msg, Interception.AsConfigured);
     }
 
     @Override
@@ -166,30 +141,40 @@ public final class SimpleSmtpService implements SmtpService {
 
     @Override
     public Future<MailStatus> test() throws MessagingException {
-        assert testAddress != null : "can not test the SMTP connection when property testAddress is not set, check your configuration.";
-        final MessageTemplate template = MessageTemplate.createInstance(
-                "SMTP test", "<p>This is a <b>test</b>.</p>",
-                "This is a test.", testAddress);
-        return sendDoNotIntercept(template);
+        assert testAddress != null : "can not test the SMTP connection when property testAddress is not set, " +
+                "check your configuration.";
+        final MessageTemplate template =
+                MessageTemplate.create("SMTP test", "<p>This is a <b>test</b>.</p>", "This is a test.", testAddress);
+        return send(template);
+    }
+
+    private InternetAddress[] getRealRecipients(InternetAddress[] addresses, Interception interception) {
+        final List<InternetAddress> tmpTos = new ArrayList<>();
+        for (InternetAddress to : addresses) {
+            InternetAddress recipient = getRealRecipient(to, interception);
+            tmpTos.add(recipient);
+        }
+        return tmpTos.toArray(new InternetAddress[tmpTos.size()]);
     }
 
     /**
      * @return the real recipient of an email.
      */
-    private InternetAddress getRealRecipient(final InternetAddress to, final boolean intercept) {
+    private InternetAddress getRealRecipient(InternetAddress to, Interception interception) {
+        final boolean intercept =
+                interception == Interception.AsConfigured ?
+                        interceptAll
+                                && interceptAddress != null
+                                && !notInterceptedAddresses.contains(to.getAddress().toLowerCase()) :
+                        interception == Interception.Forced;
         InternetAddress recipient;
-        if (intercept
-                && interceptAll
-                && interceptAddress != null
-                && !notInterceptedAddresses.contains(to.getAddress()
-                .toLowerCase())) {
+        if (intercept) {
             try {
-                recipient = new InternetAddress(interceptAddress.getAddress(),
-                        interceptAddress.getPersonal() + " (normally sent to "
-                                + to.getAddress() + ")");
+                recipient = new InternetAddress(
+                        interceptAddress.getAddress(),
+                        interceptAddress.getPersonal() + " (normally sent to " + to.getAddress() + ")");
             } catch (UnsupportedEncodingException e) {
-                throw new SmtpException("could not send mail to '"
-                        + to.getAddress() + "'", e);
+                throw new SmtpException("could not send mail to '" + to.getAddress() + "'", e);
             }
         } else {
             recipient = to;

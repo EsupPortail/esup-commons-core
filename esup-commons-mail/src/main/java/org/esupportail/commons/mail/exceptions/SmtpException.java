@@ -4,7 +4,7 @@
 package org.esupportail.commons.mail.exceptions;
 
 /**
- * An class to represent the exceptions thrown when sending mails.
+ * A class to represent the exceptions thrown when sending mails.
  */
 public class SmtpException extends RuntimeException {
 
