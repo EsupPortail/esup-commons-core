@@ -124,7 +124,7 @@ public class SmtpUtils {
 				
 				//	if files not null send multipart
 				if (files != null) {
-					Multipart multipart = addFilesAttach(htmlBody, textBody, files);
+					Multipart multipart = addFilesAttach(htmlBody, textBody, files, charset);
 					//	 Associate multi-part with message and attach
 					message.setContent(multipart);
 				} else {
@@ -133,8 +133,8 @@ public class SmtpUtils {
 						// Create a multi-part to combine the parts
 						Multipart multipart = new MimeMultipart("alternative");
 						// Create your text message part
-						BodyPart textBodyPart = new MimeBodyPart();
-						textBodyPart.setText(textBody);
+						MimeBodyPart textBodyPart = new MimeBodyPart();
+						textBodyPart.setText(textBody, charset);
 						multipart.addBodyPart(textBodyPart);
 						// Create your html message part
 						BodyPart htmlBodyPart = new MimeBodyPart();
@@ -146,7 +146,7 @@ public class SmtpUtils {
 					} else if (htmlBody != null) {
 						message.setContent(htmlBody, "text/html; charset=\"" + charset + "\"");
 					} else {
-						message.setText(textBody);
+						message.setText(textBody, charset);
 					}
 				}
 				// Fill in header
@@ -208,7 +208,8 @@ public class SmtpUtils {
 	private static Multipart addFilesAttach(
 			final String htmlBody,
 			final String textBody,
-			final List<File> files) throws MessagingException {
+			final List<File> files,
+			String charset) throws MessagingException {
 		
 		Multipart multipart;
 			// fill in the content
@@ -216,8 +217,8 @@ public class SmtpUtils {
 				// Create a multi-part to combine the parts
 				multipart = new MimeMultipart("mixed");
 				// Create your text message part
-				BodyPart textBodyPart = new MimeBodyPart();
-				textBodyPart.setText(textBody);
+				MimeBodyPart textBodyPart = new MimeBodyPart();
+				textBodyPart.setText(textBody, charset);
 				multipart.addBodyPart(textBodyPart);
 				// Create your html message part
 				BodyPart htmlBodyPart = new MimeBodyPart();
@@ -234,8 +235,8 @@ public class SmtpUtils {
 			} else {
 				multipart = new MimeMultipart("mixed");
 				//Create your text message part
-				BodyPart textBodyPart = new MimeBodyPart();
-				textBodyPart.setText(textBody);
+				MimeBodyPart textBodyPart = new MimeBodyPart();
+				textBodyPart.setText(textBody, charset);
 				multipart.addBodyPart(textBodyPart);
 			}
 			
@@ -338,7 +339,7 @@ public class SmtpUtils {
 				
 				//	if files not null send multipart
 				if (files != null) {
-					Multipart multipart = addFilesAttach(htmlBody, textBody, files);
+					Multipart multipart = addFilesAttach(htmlBody, textBody, files, charset);
 					//	 Associate multi-part with message and attach
 					message.setContent(multipart);
 				} else {
@@ -347,8 +348,8 @@ public class SmtpUtils {
 						// Create a multi-part to combine the parts
 						Multipart multipart = new MimeMultipart("alternative");
 						// Create your text message part
-						BodyPart textBodyPart = new MimeBodyPart();
-						textBodyPart.setText(textBody);
+						MimeBodyPart textBodyPart = new MimeBodyPart();
+						textBodyPart.setText(textBody, charset);
 						multipart.addBodyPart(textBodyPart);
 						// Create your html message part
 						BodyPart htmlBodyPart = new MimeBodyPart();
@@ -359,7 +360,7 @@ public class SmtpUtils {
 					} else if (htmlBody != null) {
 						message.setContent(htmlBody, "text/html; charset=\"" + charset + "\""); 
 					} else {
-						message.setText(textBody);
+						message.setText(textBody, charset);
 					}
 				}
 				// Fill in header
