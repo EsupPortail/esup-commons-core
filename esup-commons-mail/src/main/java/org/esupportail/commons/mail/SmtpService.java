@@ -28,7 +28,7 @@ public interface SmtpService {
 	
 	/**
 	 * Send an email. Interception can be forced, regardless of the configuration,
-     * with <code>forceInterception = true</code>
+     * using @link{Interception#Forced} as the value of the <code>interception</code> parameter
      *
      * @return a {@link Future} representing the sending in progress
 	 * @throws MessagingException
