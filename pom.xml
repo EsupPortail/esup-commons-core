@@ -4,13 +4,14 @@
 	<groupId>org.esupportail</groupId>
 	<artifactId>esup-commons2-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.6-SNAPSHOT</version>
+	<version>0.3.6</version>
 	<name>esup-commons-parent</name>
 	<url>https://sourcesup.cru.fr/projects/esup-commons/</url>
 	<scm>
 		<developerConnection>scm:git:ssh://git@github.com/EsupPortail/esup-commons-core</developerConnection>
 		<url>https://sourcesup.cru.fr/scm/?group_id=244</url>
-	</scm>
+	  <tag>V2-0.3.6</tag>
+  </scm>
 	<modules>
 		<module>esup-commons-core</module>
 		<module>esup-commons-jsf-parent</module>
