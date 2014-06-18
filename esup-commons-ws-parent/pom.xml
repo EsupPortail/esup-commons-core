@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>esup-commons2-parent</artifactId>
 		<groupId>org.esupportail</groupId>
-		<version>0.3.5-SNAPSHOT</version>
+		<version>0.3.6-SNAPSHOT</version>
 	</parent>
 	<artifactId>esup-commons2-ws-parent</artifactId>
 	<packaging>pom</packaging>
