@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.esupportail</groupId>
 		<artifactId>esup-commons2-jsf-parent</artifactId>
-		<version>0.3.6</version>
+		<version>0.3.7-SNAPSHOT</version>
 	</parent>
 	<artifactId>esup-commons2-jsf-primeFaces</artifactId>
 	<packaging>pom</packaging>
